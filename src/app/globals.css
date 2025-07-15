@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/barlow-semi-condensed/index.css';
+@import '@fontsource/exo-2/index.css';
+
+@layer base {
+    :root {
+        --font-inter: 'Inter', system-ui, sans-serif;
+        --font-barlow: 'Barlow Semi Condensed', 'Barlow_Semi_Condensed', sans-serif;
+        --font-exo2: 'Exo 2', 'Exo_2', sans-serif;
+    }
+
+    body {
+        background: #000000;
+        color: #FFFFFF;
+        font-family: var(--font-barlow);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer components {
+    .container {
+        @apply max-w-[1200px] mx-auto px-6 md:px-8 lg:px-16;
+    }
+
+    .section-padding {
+        @apply py-24;
+    }
+
+    .hero-heading {
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 120%;
+        color: #FFFFFF;
+        font-family: var(--font-barlow);
+    }
+
+    .subheading {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 150%;
+        color: rgba(255, 255, 255, 0.75);
+        font-family: var(--font-inter);
+    }
+
+    .button-text {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 140%;
+        color: #FFFFFF;
+    }
+
+    .annotation-label {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 140%;
+        color: #00B2E3;
+    }
+
+    .annotation-note {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 140%;
+        color: rgba(255, 255, 255, 0.75);
+    }
+
+    .feature-text {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 150%;
+        color: #FFFFFF;
+    }
+
+    .btn-primary {
+        @apply bg-[#007D9E] hover:bg-[#006B85] text-white font-semibold px-6 py-3 rounded-md shadow-md transition-all duration-200;
+    }
+
+    .btn-secondary {
+        @apply bg-transparent hover:bg-white/10 text-white font-medium py-2 px-4 rounded transition-colors duration-200;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}

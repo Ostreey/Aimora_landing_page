@@ -1,0 +1,185 @@
+{
+  "elementStyling": {
+    "backgrounds": {
+      "page": {
+        "selector": "body",
+        "type": "radial-gradient",
+        "gradient": {
+          "shape": "ellipse at top right",
+          "stops": [
+            { "color": "#1A1A1A", "position": "0%" },
+            { "color": "#000000", "position": "100%" }
+          ]
+        }
+      }
+    },
+    "typography": {
+      "heading": {
+        "selector": ".hero h1",
+        "fontSize": "3rem",
+        "fontWeight": "700",
+        "lineHeight": "1.2",
+        "color": "#FFFFFF",
+        "textDecoration": "underline",
+        "textDecorationColor": "#00B2E3",
+        "textDecorationThickness": "2px",
+        "textUnderlineOffset": "4px"
+      },
+      "subheading": {
+        "selector": ".hero p",
+        "fontSize": "1.125rem",
+        "fontWeight": "400",
+        "lineHeight": "1.5",
+        "color": "rgba(255,255,255,0.75)"
+      },
+      "annotationTitle": {
+        "selector": ".annotation .title",
+        "fontSize": "1rem",
+        "fontWeight": "600",
+        "color": "#00B2E3"
+      },
+      "annotationText": {
+        "selector": ".annotation .description",
+        "fontSize": "0.875rem",
+        "fontWeight": "400",
+        "color": "rgba(255,255,255,0.60)"
+      }
+    },
+    "navigation": {
+      "link": {
+        "selector": "nav a",
+        "fontSize": "1rem",
+        "fontWeight": "500",
+        "padding": "0.5rem 1rem",
+        "default": {
+          "color": "rgba(255,255,255,0.85)"
+        },
+        "hover": {
+          "color": "#00A6D6"
+        },
+        "active": {
+          "color": "#00B2E3",
+          "borderBottom": "2px solid #00B2E3"
+        }
+      }
+    },
+    "buttons": {
+      "primary": {
+        "selector": ".btn--primary",
+        "fontSize": "1rem",
+        "fontWeight": "600",
+        "padding": "0.75rem 1.5rem",
+        "border": "none",
+        "borderRadius": "4px",
+        "background": "#007D9E",
+        "color": "#FFFFFF",
+        "boxShadow": "0 2px 8px rgba(0,0,0,0.20)",
+        "hover": {
+          "background": "#006B85",
+          "boxShadow": "0 4px 12px rgba(0,0,0,0.30)"
+        },
+        "active": {
+          "background": "#005A6C"
+        },
+        "disabled": {
+          "background": "#005A6C",
+          "opacity": 0.50,
+          "cursor": "not-allowed"
+        },
+        "focus": {
+          "outline": "2px solid #00B2E3",
+          "outlineOffset": "2px"
+        }
+      }
+    },
+    "cards": {
+      "container": {
+        "selector": ".card",
+        "background": "none",
+        "border": "none",
+        "boxShadow": "none",
+        "borderRadius": "4px"
+      }
+    },
+    "icons": {
+      "default": {
+        "selector": "svg.icon",
+        "fill": "#FFFFFF",
+        "background": "none"
+      },
+      "annotationArrow": {
+        "selector": ".annotation-arrow",
+        "stroke": "#FFFFFF",
+        "strokeOpacity": 0.80,
+        "strokeWidth": "1.5px"
+      }
+    },
+    "visualEffects": {
+      "shadows": [
+        {
+          "selector": ".btn--primary",
+          "boxShadow": "0 2px 8px rgba(0,0,0,0.20)"
+        },
+        {
+          "selector": ".btn--primary:hover",
+          "boxShadow": "0 4px 12px rgba(0,0,0,0.30)"
+        }
+      ],
+      "borderRadius": [
+        {
+          "selector": ".btn--primary, .card",
+          "value": "4px"
+        }
+      ],
+      "gradients": [
+        {
+          "selector": "body",
+          "value": "radial-gradient(ellipse at top right, #1A1A1A 0%, #000000 100%)"
+        }
+      ]
+    },
+    "componentStates": {
+      "btn--primary": {
+        "default": {
+          "background": "#007D9E",
+          "color": "#FFFFFF",
+          "boxShadow": "0 2px 8px rgba(0,0,0,0.20)"
+        },
+        "hover": {
+          "background": "#006B85",
+          "boxShadow": "0 4px 12px rgba(0,0,0,0.30)"
+        },
+        "active": {
+          "background": "#005A6C"
+        },
+        "focus": {
+          "outline": "2px solid #00B2E3"
+        },
+        "disabled": {
+          "background": "#005A6C",
+          "opacity": 0.50,
+          "cursor": "not-allowed"
+        }
+      },
+      "nav-link": {
+        "default": {
+          "color": "rgba(255,255,255,0.85)"
+        },
+        "hover": {
+          "color": "#00A6D6"
+        },
+        "active": {
+          "color": "#00B2E3",
+          "borderBottom": "2px solid #00B2E3"
+        }
+      }
+    }
+  },
+  "guidelines": [
+    "DO NOT apply background gradients from the page or hero to icon containers; icons must use solid fills or strokes only.",
+    "DO NOT swap button background colors (#007D9E) with navigation accent (#00B2E3) or text colors.",
+    "DO NOT add box‐shadows to text blocks or annotation text; shadows are reserved for interactive containers (buttons).",
+    "DO NOT use the page’s radial gradient as a card background; cards remain flat/transparent or solid only.",
+    "Ensure all text-on-background combinations meet WCAG AA contrast ratios (minimum 4.5:1 for normal text)."
+  ]
+}
