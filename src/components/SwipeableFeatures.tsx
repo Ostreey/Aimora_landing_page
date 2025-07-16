@@ -27,13 +27,16 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
     // Spring animation for the cards container
     const [{ x }, api] = useSpring(() => ({ x: 0 }));
 
+    // Calculate the percentage to move for each card
+    const cardWidthPercent = 100 / features.length;
+
     // Update position when currentIndex changes
     useEffect(() => {
         api.start({
-            x: -currentIndex * 100,
+            x: -currentIndex * cardWidthPercent,
             config: { tension: 300, friction: 30 }
         });
-    }, [currentIndex, api]);
+    }, [currentIndex, cardWidthPercent, api]);
 
     // Drag gesture handler
     const bind = useDrag(
@@ -60,8 +63,8 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
             }
 
             // Animate the container with proper transform
-            const dragPercent = (mx / containerWidth) * 100;
-            const targetX = active ? (-currentIndex * 100) + dragPercent : -currentIndex * 100;
+            const dragPercent = (mx / containerWidth) * cardWidthPercent;
+            const targetX = active ? (-currentIndex * cardWidthPercent) + dragPercent : -currentIndex * cardWidthPercent;
             
             api.start({
                 x: targetX,
@@ -99,7 +102,7 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
                         <div
                             key={feature.id}
                             className="flex-shrink-0 px-4"
-                            style={{ width: `${100 / features.length}%` }}
+                            style={{ width: `${cardWidthPercent}%` }}
                         >
                             <SwipeableFeatureCard
                                 feature={feature}
@@ -125,12 +128,7 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
                 ))}
             </div>
 
-            {/* Swipe hint */}
-            <div className="text-center mt-4">
-                <p className="text-xs text-white/50">
-                    👈 Przesuń palcem, aby zobaczyć więcej
-                </p>
-            </div>
+
         </div>
     );
 }

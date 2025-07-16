@@ -130,7 +130,7 @@ export function FeatureSection() {
 
     return (
         <>
-            <section className="relative w-full flex flex-col items-center py-4 sm:py-8 md:py-16 lg:py-32 bg-black overflow-hidden min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[1024px] -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-32 shadow-2xl z-20">
+            <section className="relative w-full flex flex-col items-center py-4 sm:py-8 md:py-16 lg:py-32 bg-black overflow-hidden min-h-[500px] sm:min-h-[600px] md:min-h-[600px] lg:min-h-[1024px] -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-32 shadow-2xl z-20">
                 {/* Top gradient fade from black for smooth transition */}
                 <div
                     className="absolute top-0 left-0 w-full h-8 sm:h-16 md:h-32 pointer-events-none z-30"
@@ -184,9 +184,11 @@ export function FeatureSection() {
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* Mobile: Swipeable feature cards */}
-                    <div className="w-full" data-aos="fade-up" data-aos-delay="100">
+                {/* Mobile: Swipeable feature cards positioned over the background image */}
+                <div className="block md:hidden absolute inset-0 z-20 flex items-center justify-center -mt-[25%]">
+                    <div className="w-full px-4" data-aos="fade-up" data-aos-delay="100">
                         <SwipeableFeatures
                             features={features}
                             onFeatureClick={handleFeatureClick}
