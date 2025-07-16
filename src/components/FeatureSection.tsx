@@ -270,7 +270,7 @@ function FeatureCard({ feature, onClick }: { feature: Feature; onClick: () => vo
                         >
                             {feature.description}
                         </p>
-                        <p className="text-xs text-cyan-400/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p className="text-xs text-orange-400/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             Kliknij aby dowiedzieć się więcej
                         </p>
                     </div>

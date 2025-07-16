@@ -89,7 +89,7 @@ export function CTA() {
                             className="absolute -bottom-6 -left-6 bg-black/80 backdrop-blur-sm p-6 rounded-lg border border-white/20"
                         >
                             <div className="text-center">
-                                <div className="text-2xl font-bold text-[#00B2E3] mb-1">10,000+</div>
+                                <div className="text-2xl font-bold text-orange-400 mb-1">10,000+</div>
                                 <div className="annotation-note">Zadowolonych klientów</div>
                             </div>
                         </motion.div>
@@ -100,7 +100,7 @@ export function CTA() {
                             className="absolute -top-6 -right-6 bg-black/80 backdrop-blur-sm p-6 rounded-lg border border-white/20"
                         >
                             <div className="text-center">
-                                <div className="text-2xl font-bold text-[#00B2E3] mb-1">99.9%</div>
+                                <div className="text-2xl font-bold text-orange-400 mb-1">99.9%</div>
                                 <div className="annotation-note">Czasu pracy</div>
                             </div>
                         </motion.div>
