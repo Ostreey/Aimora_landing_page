@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { RippleButton } from './RippleButton'
 
 export function Hero() {
     return (
@@ -29,9 +30,12 @@ export function Hero() {
                 <p className="font-exo2 font-normal text-[36px] leading-[47px] tracking-[0.0002em] text-white/80 mb-10 max-w-2xl">
                     Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego
                 </p>
-                <button className="font-inter font-bold text-[24px] leading-[36px] tracking-[-0.02em] uppercase bg-[#0096bd] hover:bg-[#007fa3] text-white px-[3.9rem] py-4 rounded-full shadow-2xl transition-all duration-200 w-fit">
+                <RippleButton
+                    className="font-inter font-bold text-[24px] leading-[36px] tracking-[-0.02em] uppercase bg-orange-500 hover:bg-orange-600 text-white px-[3.9rem] py-4 rounded-full shadow-2xl transition-all duration-200 w-fit"
+                    onClick={() => console.log('Zamów clicked')}
+                >
                     ZAMÓW
-                </button>
+                </RippleButton>
             </div>
             {/* Mobile content: below image */}
             <div className="block md:hidden w-full px-4 pt-6 text-center">
@@ -41,9 +45,12 @@ export function Hero() {
                 <p className="font-exo2 font-normal text-lg leading-[28px] tracking-[0.0002em] text-white/80 mb-6">
                     Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego
                 </p>
-                <button className="font-inter font-bold text-lg leading-[28px] tracking-[-0.02em] uppercase bg-[#0096bd] hover:bg-[#007fa3] text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-200 w-fit mx-auto">
+                <RippleButton
+                    className="font-inter font-bold text-lg leading-[28px] tracking-[-0.02em] uppercase bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-200 w-fit mx-auto"
+                    onClick={() => console.log('Zamów clicked')}
+                >
                     ZAMÓW
-                </button>
+                </RippleButton>
             </div>
         </section>
     )

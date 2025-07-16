@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 import Image from 'next/image'
+import { RippleButton } from './RippleButton'
 
 export function CTA() {
     return (
@@ -40,7 +41,7 @@ export function CTA() {
                                     viewport={{ once: true }}
                                     className="flex items-center gap-3"
                                 >
-                                    <CheckCircle className="w-5 h-5 text-[#00B2E3] flex-shrink-0" />
+                                    <CheckCircle className="w-5 h-5 text-[#00B2E3] flex-shrink-0 animate-pulse-glow" />
                                     <span className="annotation-note">
                                         {benefit}
                                     </span>
@@ -55,10 +56,13 @@ export function CTA() {
                             viewport={{ once: true }}
                             className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                         >
-                            <button className="btn-primary flex items-center justify-center gap-2 group">
+                            <RippleButton
+                                className="btn-primary flex items-center justify-center gap-2 group"
+                                onClick={() => console.log('Zamów teraz clicked')}
+                            >
                                 Zamów teraz
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </button>
+                            </RippleButton>
                             <button className="btn-secondary">
                                 Dowiedz się więcej
                             </button>
@@ -84,23 +88,21 @@ export function CTA() {
 
                         {/* Stats overlay */}
                         <motion.div
-                            animate={{ y: [-5, 5, -5] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -bottom-6 -left-6 bg-black/80 backdrop-blur-sm p-6 rounded-lg border border-white/20"
+                            className="absolute -bottom-6 -left-6 bg-black/80 backdrop-blur-sm p-6 rounded-lg border border-white/20 animate-float"
+                            style={{ animationDelay: '0s' }}
                         >
                             <div className="text-center">
-                                <div className="text-2xl font-bold text-[#00B2E3] mb-1">10,000+</div>
+                                <div className="text-2xl font-bold text-orange-400 mb-1">10,000+</div>
                                 <div className="annotation-note">Zadowolonych klientów</div>
                             </div>
                         </motion.div>
 
                         <motion.div
-                            animate={{ y: [5, -5, 5] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                            className="absolute -top-6 -right-6 bg-black/80 backdrop-blur-sm p-6 rounded-lg border border-white/20"
+                            className="absolute -top-6 -right-6 bg-black/80 backdrop-blur-sm p-6 rounded-lg border border-white/20 animate-float"
+                            style={{ animationDelay: '1.5s' }}
                         >
                             <div className="text-center">
-                                <div className="text-2xl font-bold text-[#00B2E3] mb-1">99.9%</div>
+                                <div className="text-2xl font-bold text-orange-400 mb-1">99.9%</div>
                                 <div className="annotation-note">Czasu pracy</div>
                             </div>
                         </motion.div>
