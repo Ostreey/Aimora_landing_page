@@ -32,7 +32,7 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
             setIsDragging(active);
 
             // If dragging more than threshold, trigger swipe
-            if (active && distance > 50) {
+            if (active && Math.abs(mx) > 50) {
                 const newIndex = Math.max(
                     0,
                     Math.min(features.length - 1, currentIndex + (xDir > 0 ? -1 : 1))
