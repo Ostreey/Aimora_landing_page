@@ -20,6 +20,7 @@ export function Hero() {
                 className="absolute left-0 bottom-0 w-full h-24 sm:h-32 md:h-48 pointer-events-none z-20"
                 style={{
                     background: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)"
+
                 }}
             />
             {/* Overlay content: desktop only */}
