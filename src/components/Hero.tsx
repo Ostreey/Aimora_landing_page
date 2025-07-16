@@ -1,19 +1,43 @@
 'use client'
 
-import Image from 'next/image'
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export function Hero() {
+    const [scrollY, setScrollY] = useState(0);
+
+    // Parallax scroll effect
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Calculate parallax offset (very subtle for hero)
+    const parallaxOffset = scrollY * 0.1;
+
     return (
-        <section className="relative w-full flex flex-col items-center min-h-[768px]">
-            {/* Main hero image, centered, no zoom, no blur, no overlay */}
-            <Image
-                src="/images/Hero_image.png"
-                alt="ShootAI Hero Background"
-                width={1440}
-                height={1024}
-                className="max-w-full h-auto"
-                priority
-            />
+        <section className="relative w-full flex flex-col items-center min-h-[768px] overflow-hidden">
+            {/* Main hero image with parallax effect */}
+            <div
+                className="transform transition-transform duration-75 ease-out"
+                style={{
+                    transform: `translateY(${parallaxOffset}px)`,
+                    willChange: 'transform'
+                }}
+            >
+                <Image
+                    src="/images/Hero_image.png"
+                    alt="ShootAI Hero Background"
+                    width={1440}
+                    height={1024}
+                    className="max-w-full h-auto"
+                    priority
+                />
+            </div>
             {/* Bottom fade overlay */}
             <div
                 className="absolute left-0 bottom-0 w-full h-48 pointer-events-none z-20"

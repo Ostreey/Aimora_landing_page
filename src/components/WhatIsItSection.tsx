@@ -1,18 +1,43 @@
+'use client';
+
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export function WhatIsItSection() {
+    const [scrollY, setScrollY] = useState(0);
+
+    // Parallax scroll effect
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Calculate parallax offset (subtle movement)
+    const parallaxOffset = scrollY * 0.08;
+
     return (
-        <section className="relative flex justify-center items-start min-h-[1180px] bg-black">
+        <section className="relative flex justify-center items-start min-h-[1180px] bg-black overflow-hidden">
             <div className="absolute inset-0 w-full h-full bg-black z-0" />
-            {/* Main image, centered, no crop */}
-            <Image
-                src="/images/What_is_it.png"
-                alt="Jak to działa?"
-                width={1440}
-                height={1026}
-                className="z-10"
-                priority
-            />
+            {/* Main image with parallax effect */}
+            <div
+                className="z-10 transform transition-transform duration-75 ease-out"
+                style={{
+                    transform: `translateY(${parallaxOffset}px)`,
+                    willChange: 'transform'
+                }}
+            >
+                <Image
+                    src="/images/What_is_it.png"
+                    alt="Jak to działa?"
+                    width={1440}
+                    height={1026}
+                    priority
+                />
+            </div>
 
             <div
                 className="absolute left-0 top-0 w-full h-48 pointer-events-none z-20"

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Tilt from 'react-parallax-tilt';
 import { FeatureModal } from './FeatureModal';
 
 interface Feature {
@@ -114,6 +115,17 @@ const features: Feature[] = [
 export function FeatureSection() {
     const [selectedFeature, setSelectedFeature] = useState<Feature | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [scrollY, setScrollY] = useState(0);
+
+    // Parallax scroll effect
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleFeatureClick = (feature: Feature) => {
         setSelectedFeature(feature);
@@ -126,6 +138,9 @@ export function FeatureSection() {
         setTimeout(() => setSelectedFeature(null), 300);
     };
 
+    // Calculate parallax offset (subtle movement)
+    const parallaxOffset = scrollY * 0.15;
+
     return (
         <>
             <section className="relative w-full flex flex-col items-center py-16 sm:py-32 bg-black overflow-hidden min-h-[600px] sm:min-h-[1024px] -mt-8 sm:-mt-16 md:-mt-32 shadow-2xl z-20">
@@ -136,13 +151,23 @@ export function FeatureSection() {
                         background: "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0) 100%)"
                     }}
                 />
-                {/* Background image - not stretched, responsive */}
-                <img
-                    src="/images/Features_image.png"
-                    alt="Features background"
-                    className="absolute left-1/2 top-0 -translate-x-1/2 object-contain max-w-full h-auto z-0 select-none pointer-events-none hidden md:block"
-                    style={{ maxHeight: '100%', width: 'auto', height: '100%' }}
-                />
+                {/* Background image with parallax - desktop */}
+                <div
+                    className="absolute left-1/2 top-0 -translate-x-1/2 object-contain max-w-full h-auto z-0 select-none pointer-events-none hidden md:block transition-transform duration-75 ease-out"
+                    style={{
+                        maxHeight: '120%',
+                        width: 'auto',
+                        height: '120%',
+                        transform: `translateX(-50%) translateY(${parallaxOffset}px)`
+                    }}
+                >
+                    <img
+                        src="/images/Features_image.png"
+                        alt="Features background"
+                        className="w-full h-full object-contain"
+                    />
+                </div>
+                {/* Background image - mobile (no parallax for performance) */}
                 <img
                     src="/images/Features_image.png"
                     alt="Features background"
@@ -195,87 +220,112 @@ export function FeatureSection() {
 }
 
 function FeatureCard({ feature, onClick }: { feature: Feature; onClick: () => void }) {
-    return (
-        <div
-            className="relative flex flex-col justify-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer group w-full max-w-[500px] mx-auto"
-            style={{ height: '160px' }}
-            onClick={onClick}
-        >
-            {/* Card background rectangle with hover effects */}
-            <div
-                className="absolute top-0 left-0 w-full h-full transition-all duration-300 ease-out group-hover:shadow-[0_0_30px_rgba(0,200,255,0.3)]"
-                style={{
-                    background: 'rgba(0,0,0,0.4)',
-                    border: '1px solid rgba(255,255,255,0.26)',
-                    borderRadius: '8px',
-                    zIndex: 0,
-                }}
-            />
-            {/* Enhanced border glow on hover */}
-            <div
-                className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none"
-                style={{
-                    background: 'linear-gradient(135deg, rgba(0,200,255,0.1) 0%, rgba(0,200,255,0.05) 100%)',
-                    border: '1px solid rgba(0,200,255,0.4)',
-                    borderRadius: '8px',
-                    zIndex: 1,
-                }}
-            />
+    // Disable tilt on mobile devices
+    const [isMobile, setIsMobile] = useState(false);
 
-            {/* Card content, vertically centered */}
-            <div className="relative z-10 flex flex-col justify-center h-full px-4 sm:px-0">
-                {/* Content container - centered as a group */}
-                <div className="flex flex-col">
-                    {/* Icon */}
-                    <div className="flex items-center ml-4 sm:ml-11 mb-1">
-                        <img
-                            src={feature.icon}
-                            alt={feature.title}
-                            width={40}
-                            height={40}
-                            className="w-8 h-8 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110"
-                        />
-                    </div>
-                    {/* Title */}
-                    <div className="ml-4 sm:ml-[47px] mb-1">
-                        <h3
-                            className="transition-colors duration-300 ease-out group-hover:text-[rgba(0,200,255,0.8)] text-base sm:text-xl"
-                            style={{
-                                color: 'rgba(0,200,255,0.65)',
-                                fontFamily: 'Inter, sans-serif',
-                                fontWeight: 600,
-                                fontSize: 20,
-                                lineHeight: '1.2em',
-                                marginBottom: 0,
-                                marginTop: 0,
-                            }}
-                        >
-                            {feature.title}
-                        </h3>
-                    </div>
-                    {/* Description */}
-                    <div className="ml-4 sm:ml-[47px] pr-4 sm:pr-8">
-                        <p
-                            className="transition-colors duration-300 ease-out group-hover:text-gray-100 text-sm sm:text-[15px] max-w-full sm:max-w-[409px]"
-                            style={{
-                                color: '#fff',
-                                fontFamily: 'Inter, sans-serif',
-                                fontWeight: 700,
-                                fontSize: 15,
-                                lineHeight: '1.47em',
-                                marginTop: 0,
-                                marginBottom: 4,
-                                whiteSpace: 'pre-line',
-                            }}
-                        >
-                            {feature.description}
-                        </p>
-                        <p className="text-xs text-orange-400/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            Kliknij aby dowiedzieć się więcej
-                        </p>
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    return (
+        <Tilt
+            className="w-full max-w-[500px] mx-auto"
+            tiltMaxAngleX={5}
+            tiltMaxAngleY={5}
+            scale={1.02}
+            transitionSpeed={1000}
+            tiltEnable={!isMobile}
+            gyroscope={false}
+            glareEnable={false}
+        >
+            <div
+                className="relative flex flex-col justify-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer group w-full"
+                style={{ height: '170px' }}
+                onClick={onClick}
+            >
+                {/* Card background rectangle with hover effects */}
+                <div
+                    className="absolute top-0 left-0 w-full h-full transition-all duration-300 ease-out group-hover:shadow-[0_0_30px_rgba(0,200,255,0.3)]"
+                    style={{
+                        background: 'rgba(0,0,0,0.4)',
+                        border: '1px solid rgba(255,255,255,0.26)',
+                        borderRadius: '8px',
+                        zIndex: 0,
+                    }}
+                />
+                {/* Enhanced border glow on hover */}
+                <div
+                    className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none"
+                    style={{
+                        background: 'linear-gradient(135deg, rgba(0,200,255,0.1) 0%, rgba(0,200,255,0.05) 100%)',
+                        border: '1px solid rgba(0,200,255,0.4)',
+                        borderRadius: '8px',
+                        zIndex: 1,
+                    }}
+                />
+
+                {/* Card content, vertically centered */}
+                <div className="relative z-10 flex flex-col justify-center h-full px-4 sm:px-0">
+                    {/* Content container - centered as a group */}
+                    <div className="flex flex-col">
+                        {/* Icon */}
+                        <div className="flex items-center ml-4 sm:ml-11 mb-1">
+                            <img
+                                src={feature.icon}
+                                alt={feature.title}
+                                width={40}
+                                height={40}
+                                className="w-8 h-8 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110"
+                            />
+                        </div>
+                        {/* Title */}
+                        <div className="ml-4 sm:ml-[47px] mb-1">
+                            <h3
+                                className="transition-colors duration-300 ease-out group-hover:text-[rgba(0,200,255,0.8)] text-base sm:text-xl"
+                                style={{
+                                    color: 'rgba(0,200,255,0.65)',
+                                    fontFamily: 'Inter, sans-serif',
+                                    fontWeight: 600,
+                                    fontSize: 20,
+                                    lineHeight: '1.2em',
+                                    marginBottom: 0,
+                                    marginTop: 0,
+                                }}
+                            >
+                                {feature.title}
+                            </h3>
+                        </div>
+                        {/* Description */}
+                        <div className="ml-4 sm:ml-[47px] pr-4 sm:pr-8">
+                            <p
+                                className="transition-colors duration-300 ease-out group-hover:text-gray-100 text-sm sm:text-[15px] max-w-full sm:max-w-[409px]"
+                                style={{
+                                    color: '#fff',
+                                    fontFamily: 'Inter, sans-serif',
+                                    fontWeight: 700,
+                                    fontSize: 15,
+                                    lineHeight: '1.47em',
+                                    marginTop: 0,
+                                    marginBottom: 4,
+                                    whiteSpace: 'pre-line',
+                                }}
+                            >
+                                {feature.description}
+                            </p>
+                            <p className="text-xs text-orange-400/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                Kliknij aby dowiedzieć się więcej
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Tilt>
     );
 } 
