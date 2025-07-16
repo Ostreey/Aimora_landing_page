@@ -62,14 +62,24 @@ export function FeatureSection() {
                 <div className="flex flex-col md:flex-row justify-center items-center w-full gap-8 sm:gap-12 md:gap-32">
                     {/* Left column: 3 cards stacked */}
                     <div className="flex flex-col gap-8 sm:gap-12 items-center w-full md:w-auto">
-                        <FeatureCard feature={features[0]} />
-                        <FeatureCard feature={features[2]} />
-                        <FeatureCard feature={features[4]} />
+                        <div data-aos="fade-up" data-aos-delay="100">
+                            <FeatureCard feature={features[0]} />
+                        </div>
+                        <div data-aos="fade-up" data-aos-delay="200">
+                            <FeatureCard feature={features[2]} />
+                        </div>
+                        <div data-aos="fade-up" data-aos-delay="300">
+                            <FeatureCard feature={features[4]} />
+                        </div>
                     </div>
                     {/* Right column: 2 cards stacked, centered vertically */}
                     <div className="flex flex-col gap-8 sm:gap-12 items-center justify-center md:mt-24 w-full md:w-auto">
-                        <FeatureCard feature={features[1]} />
-                        <FeatureCard feature={features[3]} />
+                        <div data-aos="fade-up" data-aos-delay="400">
+                            <FeatureCard feature={features[1]} />
+                        </div>
+                        <div data-aos="fade-up" data-aos-delay="500">
+                            <FeatureCard feature={features[3]} />
+                        </div>
                     </div>
                 </div>
             </div>

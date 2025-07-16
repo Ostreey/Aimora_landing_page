@@ -1,3 +1,4 @@
+import { AOSInit } from '@/components/AOSInit';
 import { NavBar } from '@/components/NavBar';
 import '@fontsource/barlow-semi-condensed/index.css';
 import '@fontsource/exo-2/index.css';
@@ -43,6 +44,7 @@ export default function RootLayout({
     return (
         <html lang="pl" className="font-barlow">
             <body className="font-barlow antialiased">
+                <AOSInit />
                 <NavBar />
                 <main>{children}</main>
             </body>
