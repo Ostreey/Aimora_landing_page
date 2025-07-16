@@ -29,10 +29,10 @@ const features = [
 
 export function FeatureSection() {
     return (
-        <section className="relative w-full flex flex-col items-center py-32 bg-black overflow-hidden min-h-[1024px] -mt-16 md:-mt-32 shadow-2xl z-20">
+        <section className="relative w-full flex flex-col items-center py-16 sm:py-32 bg-black overflow-hidden min-h-[600px] sm:min-h-[1024px] -mt-8 sm:-mt-16 md:-mt-32 shadow-2xl z-20">
             {/* Top gradient fade from black for smooth transition */}
             <div
-                className="absolute top-0 left-0 w-full h-32 pointer-events-none z-30"
+                className="absolute top-0 left-0 w-full h-16 sm:h-32 pointer-events-none z-30"
                 style={{
                     background: "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0) 100%)"
                 }}
@@ -52,22 +52,22 @@ export function FeatureSection() {
             />
             {/* Bottom gradient fade to black for smooth transition to next section */}
             <div
-                className="absolute bottom-0 left-0 w-full h-32 pointer-events-none z-30"
+                className="absolute bottom-0 left-0 w-full h-16 sm:h-32 pointer-events-none z-30"
                 style={{
                     background: "linear-gradient(to top, #000000 0%, rgba(0,0,0,0) 100%)"
                 }}
             />
-            <div className="relative z-10 w-full max-w-7xl px-4 flex flex-col items-center mt-24">
+            <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-4 flex flex-col items-center mt-12 sm:mt-24">
                 {/* Figma-like two-column layout */}
-                <div className="flex flex-col md:flex-row justify-center items-center w-full gap-12 md:gap-32">
+                <div className="flex flex-col md:flex-row justify-center items-center w-full gap-8 sm:gap-12 md:gap-32">
                     {/* Left column: 3 cards stacked */}
-                    <div className="flex flex-col gap-12 items-center">
+                    <div className="flex flex-col gap-8 sm:gap-12 items-center w-full md:w-auto">
                         <FeatureCard feature={features[0]} />
                         <FeatureCard feature={features[2]} />
                         <FeatureCard feature={features[4]} />
                     </div>
                     {/* Right column: 2 cards stacked, centered vertically */}
-                    <div className="flex flex-col gap-12 items-center justify-center md:mt-24">
+                    <div className="flex flex-col gap-8 sm:gap-12 items-center justify-center md:mt-24 w-full md:w-auto">
                         <FeatureCard feature={features[1]} />
                         <FeatureCard feature={features[3]} />
                     </div>
@@ -80,12 +80,12 @@ export function FeatureSection() {
 function FeatureCard({ feature }: { feature: { icon: string; title: string; description: string } }) {
     return (
         <div
-            className="relative flex flex-col justify-center"
-            style={{ width: '500px', height: '170px' }}
+            className="relative flex flex-col justify-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer group w-full max-w-[500px] mx-auto"
+            style={{ height: '170px' }}
         >
-            {/* Card background rectangle */}
+            {/* Card background rectangle with hover effects */}
             <div
-                className="absolute top-0 left-0 w-full h-full"
+                className="absolute top-0 left-0 w-full h-full transition-all duration-300 ease-out group-hover:shadow-[0_0_30px_rgba(0,200,255,0.3)]"
                 style={{
                     background: 'rgba(0,0,0,0.4)',
                     border: '1px solid rgba(255,255,255,0.26)',
@@ -93,18 +93,34 @@ function FeatureCard({ feature }: { feature: { icon: string; title: string; desc
                     zIndex: 0,
                 }}
             />
+            {/* Enhanced border glow on hover */}
+            <div
+                className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none"
+                style={{
+                    background: 'linear-gradient(135deg, rgba(0,200,255,0.1) 0%, rgba(0,200,255,0.05) 100%)',
+                    border: '1px solid rgba(0,200,255,0.4)',
+                    borderRadius: '8px',
+                    zIndex: 1,
+                }}
+            />
             {/* Card content, vertically centered */}
-            <div className="relative z-10 flex flex-col justify-center h-full" style={{ gap: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', height: '50px', marginLeft: 44, marginTop: 0, marginBottom: 0 }}>
-                    <img src={feature.icon} alt={feature.title} width={50} height={50} style={{ display: 'block' }} />
+            <div className="relative z-10 flex flex-col justify-center h-full px-4 sm:px-0" style={{ gap: 0 }}>
+                <div className="flex items-center h-[50px] ml-4 sm:ml-11 mt-0 mb-0">
+                    <img
+                        src={feature.icon}
+                        alt={feature.title}
+                        width={40}
+                        height={40}
+                        className="w-8 h-8 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110"
+                    />
                 </div>
-                <div style={{ marginLeft: 47, marginTop: 0, marginBottom: 0 }}>
+                <div className="ml-4 sm:ml-[47px] mt-0 mb-0">
                     <h3
+                        className="transition-colors duration-300 ease-out group-hover:text-[rgba(0,200,255,0.8)] text-base sm:text-xl"
                         style={{
                             color: 'rgba(0,200,255,0.65)',
                             fontFamily: 'Inter, sans-serif',
                             fontWeight: 600,
-                            fontSize: 20,
                             lineHeight: '2.35em',
                             marginBottom: 0,
                             marginTop: 0,
@@ -113,17 +129,16 @@ function FeatureCard({ feature }: { feature: { icon: string; title: string; desc
                         {feature.title}
                     </h3>
                 </div>
-                <div style={{ marginLeft: 47, marginTop: 0 }}>
+                <div className="ml-4 sm:ml-[47px] mt-0 pr-4 sm:pr-0">
                     <p
+                        className="transition-colors duration-300 ease-out group-hover:text-gray-100 text-sm sm:text-[15px] max-w-full sm:max-w-[409px]"
                         style={{
                             color: '#fff',
                             fontFamily: 'Inter, sans-serif',
                             fontWeight: 700,
-                            fontSize: 15,
                             lineHeight: '1.47em',
                             marginTop: 0,
                             marginBottom: 0,
-                            maxWidth: 409,
                             whiteSpace: 'pre-line',
                         }}
                     >
