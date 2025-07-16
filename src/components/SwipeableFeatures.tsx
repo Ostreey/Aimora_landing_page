@@ -40,41 +40,45 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
 
     // Drag gesture handler
     const bind = useDrag(
-        ({ active, movement: [mx], direction: [xDir], cancel }) => {
+        ({ active, movement: [mx], direction: [xDir], cancel, last }) => {
             setIsDragging(active);
 
             if (!containerRef.current) return;
 
             const containerWidth = containerRef.current.offsetWidth;
-            const threshold = containerWidth * 0.2; // 20% of container width
+            const threshold = containerWidth * 0.15; // 15% of container width
 
-            // If dragging more than threshold, trigger swipe
-            if (active && Math.abs(mx) > threshold) {
+            // When drag ends, check if we should swipe to next/prev
+            if (last && Math.abs(mx) > threshold) {
                 const newIndex = Math.max(
                     0,
                     Math.min(features.length - 1, currentIndex + (xDir > 0 ? -1 : 1))
                 );
-
-                if (newIndex !== currentIndex) {
-                    setCurrentIndex(newIndex);
-                    cancel();
-                    return;
-                }
+                setCurrentIndex(newIndex);
+                return;
             }
 
-            // Animate the container with proper transform
-            const dragPercent = (mx / containerWidth) * cardWidthPercent;
-            const targetX = active ? (-currentIndex * cardWidthPercent) + dragPercent : -currentIndex * cardWidthPercent;
-            
-            api.start({
-                x: targetX,
-                immediate: active,
-                config: { tension: 300, friction: 30 }
-            });
+            // During drag, show visual feedback
+            if (active) {
+                const dragPercent = (mx / containerWidth) * cardWidthPercent;
+                const targetX = (-currentIndex * cardWidthPercent) + dragPercent;
+                
+                api.start({
+                    x: targetX,
+                    immediate: true,
+                });
+            } else {
+                // Snap back to current position when drag ends without threshold
+                api.start({
+                    x: -currentIndex * cardWidthPercent,
+                    config: { tension: 300, friction: 30 }
+                });
+            }
         },
         {
             axis: 'x',
-            rubberband: true
+            rubberband: true,
+            pointer: { touch: true }
         }
     );
 
