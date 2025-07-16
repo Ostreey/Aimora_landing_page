@@ -83,6 +83,76 @@
     .btn-secondary {
         @apply bg-transparent hover:bg-white/10 text-white font-medium py-2 px-4 rounded transition-colors duration-200;
     }
+
+    /* Ripple animation */
+    .animate-ripple {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: ripple 0.6s ease-out forwards;
+    }
+
+    @keyframes ripple {
+        0% {
+            transform: scale(0);
+            opacity: 0.8;
+        }
+
+        100% {
+            transform: scale(20);
+            opacity: 0;
+        }
+    }
+
+    /* Icon hover animations */
+    .animate-bounce-gentle {
+        animation: bounce-gentle 0.5s ease-out;
+    }
+
+    @keyframes bounce-gentle {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-4px);
+        }
+    }
+
+    .animate-pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+
+        0%,
+        100% {
+            opacity: 1;
+            filter: brightness(1);
+        }
+
+        50% {
+            opacity: 0.8;
+            filter: brightness(1.2);
+        }
+    }
+
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
+    }
 }
 
 @layer utilities {

@@ -115,17 +115,6 @@ const features: Feature[] = [
 export function FeatureSection() {
     const [selectedFeature, setSelectedFeature] = useState<Feature | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [scrollY, setScrollY] = useState(0);
-
-    // Parallax scroll effect
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollY(window.scrollY);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     const handleFeatureClick = (feature: Feature) => {
         setSelectedFeature(feature);
@@ -138,9 +127,6 @@ export function FeatureSection() {
         setTimeout(() => setSelectedFeature(null), 300);
     };
 
-    // Calculate parallax offset (subtle movement)
-    const parallaxOffset = scrollY * 0.15;
-
     return (
         <>
             <section className="relative w-full flex flex-col items-center py-16 sm:py-32 bg-black overflow-hidden min-h-[600px] sm:min-h-[1024px] -mt-8 sm:-mt-16 md:-mt-32 shadow-2xl z-20">
@@ -151,23 +137,13 @@ export function FeatureSection() {
                         background: "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0) 100%)"
                     }}
                 />
-                {/* Background image with parallax - desktop */}
-                <div
-                    className="absolute left-1/2 top-0 -translate-x-1/2 object-contain max-w-full h-auto z-0 select-none pointer-events-none hidden md:block transition-transform duration-75 ease-out"
-                    style={{
-                        maxHeight: '120%',
-                        width: 'auto',
-                        height: '120%',
-                        transform: `translateX(-50%) translateY(${parallaxOffset}px)`
-                    }}
-                >
-                    <img
-                        src="/images/Features_image.png"
-                        alt="Features background"
-                        className="w-full h-full object-contain"
-                    />
-                </div>
-                {/* Background image - mobile (no parallax for performance) */}
+                {/* Background image - not stretched, responsive */}
+                <img
+                    src="/images/Features_image.png"
+                    alt="Features background"
+                    className="absolute left-1/2 top-0 -translate-x-1/2 object-contain max-w-full h-auto z-0 select-none pointer-events-none hidden md:block"
+                    style={{ maxHeight: '100%', width: 'auto', height: '100%' }}
+                />
                 <img
                     src="/images/Features_image.png"
                     alt="Features background"
@@ -282,7 +258,7 @@ function FeatureCard({ feature, onClick }: { feature: Feature; onClick: () => vo
                                 alt={feature.title}
                                 width={40}
                                 height={40}
-                                className="w-8 h-8 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110"
+                                className="w-8 h-8 sm:w-[50px] sm:h-[50px] transition-all duration-300 ease-out group-hover:scale-110 group-hover:brightness-110 group-hover:animate-bounce-gentle"
                             />
                         </div>
                         {/* Title */}
