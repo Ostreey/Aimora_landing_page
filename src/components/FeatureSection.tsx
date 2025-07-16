@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import { FeatureModal } from './FeatureModal';
+import { SwipeableFeatures } from './SwipeableFeatures';
 
 interface Feature {
     id: string;
@@ -157,9 +158,10 @@ export function FeatureSection() {
                         background: "linear-gradient(to top, #000000 0%, rgba(0,0,0,0) 100%)"
                     }}
                 />
+
                 <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-4 flex flex-col items-center mt-12 sm:mt-24">
-                    {/* Figma-like two-column layout */}
-                    <div className="flex flex-col md:flex-row justify-center items-center w-full gap-8 sm:gap-12 md:gap-32">
+                    {/* Desktop: Original two-column layout */}
+                    <div className="hidden md:flex flex-col md:flex-row justify-center items-center w-full gap-8 sm:gap-12 md:gap-32">
                         {/* Left column: 3 cards stacked */}
                         <div className="flex flex-col gap-8 sm:gap-12 items-center w-full md:w-auto">
                             <div data-aos="fade-up" data-aos-delay="100">
@@ -181,6 +183,14 @@ export function FeatureSection() {
                                 <FeatureCard feature={features[3]} onClick={() => handleFeatureClick(features[3])} />
                             </div>
                         </div>
+                    </div>
+
+                    {/* Mobile: Swipeable feature cards */}
+                    <div className="w-full" data-aos="fade-up" data-aos-delay="100">
+                        <SwipeableFeatures
+                            features={features}
+                            onFeatureClick={handleFeatureClick}
+                        />
                     </div>
                 </div>
             </section>
