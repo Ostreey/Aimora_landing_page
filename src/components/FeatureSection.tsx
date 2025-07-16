@@ -1,5 +1,6 @@
 'use client';
 
+import { trackFeatureClick, trackModalClose } from '@/lib/firebase';
 import { useEffect, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import { FeatureModal } from './FeatureModal';
@@ -118,11 +119,21 @@ export function FeatureSection() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleFeatureClick = (feature: Feature) => {
+        // Track feature card click (which also opens modal)
+        trackFeatureClick(feature.id, feature.title);
+        
         setSelectedFeature(feature);
         setIsModalOpen(true);
+        
+        // Note: No separate modal open tracking since clicking feature = opening modal
     };
 
     const handleCloseModal = () => {
+        // Track modal close
+        if (selectedFeature) {
+            trackModalClose(selectedFeature.id);
+        }
+        
         setIsModalOpen(false);
         // Wait for animation to complete before clearing selectedFeature
         setTimeout(() => setSelectedFeature(null), 300);

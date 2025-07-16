@@ -1,5 +1,6 @@
 'use client'
 
+import { trackCTAClick } from '@/lib/firebase'
 import Image from 'next/image'
 import { RippleButton } from './RippleButton'
 
@@ -33,7 +34,10 @@ export function Hero() {
                 </p>
                 <RippleButton
                     className="font-inter font-bold text-[24px] leading-[36px] tracking-[-0.02em] uppercase bg-orange-500 hover:bg-orange-600 text-white px-[3.9rem] py-4 rounded-full shadow-2xl transition-all duration-200 w-fit"
-                    onClick={() => console.log('Zamów clicked')}
+                    onClick={() => {
+                        trackCTAClick('hero_section_desktop_order');
+                        console.log('Zamów clicked');
+                    }}
                 >
                     ZAMÓW
                 </RippleButton>
@@ -48,7 +52,10 @@ export function Hero() {
                 </p>
                 <RippleButton
                     className="font-inter font-bold text-lg leading-[28px] tracking-[-0.02em] uppercase bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-200 w-fit mx-auto"
-                    onClick={() => console.log('Zamów clicked')}
+                    onClick={() => {
+                        trackCTAClick('hero_section_mobile_order');
+                        console.log('Zamów clicked');
+                    }}
                 >
                     ZAMÓW
                 </RippleButton>

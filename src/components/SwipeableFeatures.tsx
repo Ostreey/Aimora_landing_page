@@ -1,5 +1,6 @@
 'use client';
 
+import { trackSwipeInteraction } from '@/lib/firebase';
 import { animated, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { useEffect, useRef, useState } from 'react';
@@ -54,6 +55,12 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
                     0,
                     Math.min(features.length - 1, currentIndex + (xDir > 0 ? -1 : 1))
                 );
+                
+                // Track swipe interaction
+                const direction = xDir > 0 ? 'left' : 'right';
+                const currentFeature = features[currentIndex];
+                trackSwipeInteraction(direction, currentFeature.id, currentFeature.title);
+                
                 setCurrentIndex(newIndex);
                 return;
             }

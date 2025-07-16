@@ -1,5 +1,6 @@
 'use client'
 
+import { trackCTAClick } from '@/lib/firebase'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 import Image from 'next/image'
@@ -58,12 +59,18 @@ export function CTA() {
                         >
                             <RippleButton
                                 className="btn-primary flex items-center justify-center gap-2 group"
-                                onClick={() => console.log('Zamów teraz clicked')}
+                                onClick={() => {
+                                    trackCTAClick('cta_section_order_now');
+                                    console.log('Zamów teraz clicked');
+                                }}
                             >
                                 Zamów teraz
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </RippleButton>
-                            <button className="btn-secondary">
+                            <button 
+                                className="btn-secondary"
+                                onClick={() => trackCTAClick('cta_section_learn_more')}
+                            >
                                 Dowiedz się więcej
                             </button>
                         </motion.div>
