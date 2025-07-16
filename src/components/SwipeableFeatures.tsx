@@ -2,7 +2,7 @@
 
 import { animated, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Feature {
     id: string;
@@ -22,17 +22,31 @@ interface SwipeableFeaturesProps {
 export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeaturesProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     // Spring animation for the cards container
     const [{ x }, api] = useSpring(() => ({ x: 0 }));
 
+    // Update position when currentIndex changes
+    useEffect(() => {
+        api.start({
+            x: -currentIndex * 100,
+            config: { tension: 300, friction: 30 }
+        });
+    }, [currentIndex, api]);
+
     // Drag gesture handler
     const bind = useDrag(
-        ({ active, movement: [mx], direction: [xDir], distance, cancel, velocity }) => {
+        ({ active, movement: [mx], direction: [xDir], cancel }) => {
             setIsDragging(active);
 
+            if (!containerRef.current) return;
+
+            const containerWidth = containerRef.current.offsetWidth;
+            const threshold = containerWidth * 0.2; // 20% of container width
+
             // If dragging more than threshold, trigger swipe
-            if (active && Math.abs(mx) > 50) {
+            if (active && Math.abs(mx) > threshold) {
                 const newIndex = Math.max(
                     0,
                     Math.min(features.length - 1, currentIndex + (xDir > 0 ? -1 : 1))
@@ -41,19 +55,22 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
                 if (newIndex !== currentIndex) {
                     setCurrentIndex(newIndex);
                     cancel();
+                    return;
                 }
             }
 
-            // Animate the container
+            // Animate the container with proper transform
+            const dragPercent = (mx / containerWidth) * 100;
+            const targetX = active ? (-currentIndex * 100) + dragPercent : -currentIndex * 100;
+            
             api.start({
-                x: active ? mx : -currentIndex * 100,
-                immediate: false,
+                x: targetX,
+                immediate: active,
                 config: { tension: 300, friction: 30 }
             });
         },
         {
             axis: 'x',
-            bounds: { left: -(features.length - 1) * 100, right: 0 },
             rubberband: true
         }
     );
@@ -61,30 +78,27 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
     // Handle dot navigation
     const goToSlide = (index: number) => {
         setCurrentIndex(index);
-        api.start({
-            x: -index * 100,
-            config: { tension: 300, friction: 30 }
-        });
     };
 
     return (
         <div className="block md:hidden w-full">
             {/* Swipeable container */}
-            <div className="relative w-full overflow-hidden">
+            <div ref={containerRef} className="relative w-full overflow-hidden">
                 <animated.div
                     {...bind()}
-                    className="flex transition-opacity duration-200"
+                    className="flex"
                     style={{
-                        x: x.to(x => `${x}%`),
+                        transform: x.to(x => `translateX(${x}%)`),
                         width: `${features.length * 100}%`,
                         cursor: isDragging ? 'grabbing' : 'grab',
-                        opacity: isDragging ? 0.9 : 1
+                        opacity: isDragging ? 0.9 : 1,
+                        touchAction: 'pan-x'
                     }}
                 >
                     {features.map((feature, index) => (
                         <div
                             key={feature.id}
-                            className="w-full px-4"
+                            className="flex-shrink-0 px-4"
                             style={{ width: `${100 / features.length}%` }}
                         >
                             <SwipeableFeatureCard
@@ -149,6 +163,18 @@ function SwipeableFeatureCard({
                 }}
             />
 
+            {/* Enhanced border glow when active */}
+            <div
+                className={`absolute top-0 left-0 w-full h-full transition-opacity duration-300 ease-out pointer-events-none ${isActive ? 'opacity-100' : 'opacity-0'
+                    }`}
+                style={{
+                    background: 'linear-gradient(135deg, rgba(0,200,255,0.1) 0%, rgba(0,200,255,0.05) 100%)',
+                    border: '1px solid rgba(0,200,255,0.4)',
+                    borderRadius: '8px',
+                    zIndex: 1,
+                }}
+            />
+
             {/* Card content */}
             <div className="relative z-10 flex flex-col justify-center h-full px-4">
                 <div className="flex flex-col">
@@ -159,19 +185,19 @@ function SwipeableFeatureCard({
                             alt={feature.title}
                             width={40}
                             height={40}
-                            className={`w-8 h-8 transition-all duration-300 ease-out ${isActive ? 'brightness-110 scale-110' : ''
+                            className={`w-8 h-8 transition-all duration-300 ease-out ${isActive ? 'scale-110 brightness-110' : ''
                                 }`}
                         />
                     </div>
                     {/* Title */}
                     <div className="ml-4 mb-1">
                         <h3
-                            className={`transition-colors duration-300 ease-out text-base ${isActive ? 'text-cyan-400' : 'text-cyan-400/70'
+                            className={`transition-colors duration-300 ease-out text-base ${isActive ? 'text-[rgba(0,200,255,0.8)]' : 'text-[rgba(0,200,255,0.65)]'
                                 }`}
                             style={{
                                 fontFamily: 'Inter, sans-serif',
                                 fontWeight: 600,
-                                fontSize: 18,
+                                fontSize: 20,
                                 lineHeight: '1.2em',
                                 marginBottom: 0,
                                 marginTop: 0,
@@ -183,12 +209,12 @@ function SwipeableFeatureCard({
                     {/* Description */}
                     <div className="ml-4 pr-4">
                         <p
-                            className={`transition-colors duration-300 ease-out text-sm ${isActive ? 'text-white' : 'text-white/80'
+                            className={`transition-colors duration-300 ease-out text-sm ${isActive ? 'text-gray-100' : 'text-white'
                                 }`}
                             style={{
                                 fontFamily: 'Inter, sans-serif',
                                 fontWeight: 700,
-                                fontSize: 14,
+                                fontSize: 15,
                                 lineHeight: '1.47em',
                                 marginTop: 0,
                                 marginBottom: 4,
@@ -197,9 +223,9 @@ function SwipeableFeatureCard({
                         >
                             {feature.description}
                         </p>
-                        <p className={`text-xs transition-opacity duration-300 ${isActive ? 'text-orange-400/80 opacity-100' : 'text-orange-400/60 opacity-0'
+                        <p className={`text-xs text-orange-400/80 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'
                             }`}>
-                            Dotknij aby dowiedzieć się więcej
+                            Kliknij aby dowiedzieć się więcej
                         </p>
                     </div>
                 </div>
