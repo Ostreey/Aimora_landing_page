@@ -5,7 +5,7 @@ import { RippleButton } from './RippleButton'
 
 export function Hero() {
     return (
-        <section className="relative w-full flex flex-col items-center min-h-[768px]">
+        <section className="relative w-full flex flex-col items-center min-h-[500px] sm:min-h-[600px] md:min-h-[768px]">
             {/* Main hero image, centered, no zoom, no blur, no overlay */}
             <Image
                 src="/images/Hero_image.png"
@@ -17,7 +17,7 @@ export function Hero() {
             />
             {/* Bottom fade overlay */}
             <div
-                className="absolute left-0 bottom-0 w-full h-48 pointer-events-none z-20"
+                className="absolute left-0 bottom-0 w-full h-24 sm:h-32 md:h-48 pointer-events-none z-20"
                 style={{
                     background: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)"
                 }}
@@ -38,11 +38,11 @@ export function Hero() {
                 </RippleButton>
             </div>
             {/* Mobile content: below image */}
-            <div className="block md:hidden w-full px-4 pt-6 text-center">
-                <h1 className="text-white font-barlow font-black text-3xl leading-tight tracking-[0.01em] mb-4 drop-shadow-lg font-[900]">
+            <div className="block md:hidden w-full px-4 -mt-12 pb-1 text-center relative z-30">
+                <h1 className="text-white font-barlow font-black text-3xl leading-tight tracking-[0.01em] mb-3 drop-shadow-lg font-[900]">
                     Wprowadź strzelanie w nową erę
                 </h1>
-                <p className="font-exo2 font-normal text-lg leading-[28px] tracking-[0.0002em] text-white/80 mb-6">
+                <p className="font-exo2 font-normal text-lg leading-[28px] tracking-[0.0002em] text-white/80 mb-3">
                     Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego
                 </p>
                 <RippleButton

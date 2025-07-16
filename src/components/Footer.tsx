@@ -46,7 +46,7 @@ const contactInfo = [
 export function Footer() {
     return (
         <footer className="border-t border-white/10">
-            <div className="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-16 py-16">
+            <div className="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-16 py-8 sm:py-12 md:py-16">
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-12">
                     {/* Company Info */}
                     <motion.div

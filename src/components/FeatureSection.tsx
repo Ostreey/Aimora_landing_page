@@ -130,10 +130,10 @@ export function FeatureSection() {
 
     return (
         <>
-            <section className="relative w-full flex flex-col items-center py-16 sm:py-32 bg-black overflow-hidden min-h-[600px] sm:min-h-[1024px] -mt-8 sm:-mt-16 md:-mt-32 shadow-2xl z-20">
+            <section className="relative w-full flex flex-col items-center py-4 sm:py-8 md:py-16 lg:py-32 bg-black overflow-hidden min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[1024px] -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-32 shadow-2xl z-20">
                 {/* Top gradient fade from black for smooth transition */}
                 <div
-                    className="absolute top-0 left-0 w-full h-16 sm:h-32 pointer-events-none z-30"
+                    className="absolute top-0 left-0 w-full h-8 sm:h-16 md:h-32 pointer-events-none z-30"
                     style={{
                         background: "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0) 100%)"
                     }}
@@ -153,13 +153,13 @@ export function FeatureSection() {
                 />
                 {/* Bottom gradient fade to black for smooth transition to next section */}
                 <div
-                    className="absolute bottom-0 left-0 w-full h-16 sm:h-32 pointer-events-none z-30"
+                    className="absolute bottom-0 left-0 w-full h-8 sm:h-16 md:h-32 pointer-events-none z-30"
                     style={{
                         background: "linear-gradient(to top, #000000 0%, rgba(0,0,0,0) 100%)"
                     }}
                 />
 
-                <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-4 flex flex-col items-center mt-12 sm:mt-24">
+                <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-4 flex flex-col items-center mt-2 sm:mt-6 md:mt-12 lg:mt-24">
                     {/* Desktop: Original two-column layout */}
                     <div className="hidden md:flex flex-col md:flex-row justify-center items-center w-full gap-8 sm:gap-12 md:gap-32">
                         {/* Left column: 3 cards stacked */}
