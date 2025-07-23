@@ -27,10 +27,10 @@ export function Hero() {
             {/* Overlay content: desktop only */}
             <div className="hidden md:block absolute left-[15vw] top-[32vh] max-w-[550px] z-10">
                 <h1 className="text-white font-barlow font-black text-[60px] leading-[54px] tracking-[0.01em] mb-8 drop-shadow-lg font-[900]">
-                    Wprowadź strzelanie w nową erę
+                    Wprowadź swój trening strzelecki w nową erę
                 </h1>
                 <p className="font-exo2 font-normal text-[36px] leading-[47px] tracking-[0.0002em] text-white/80 mb-10 max-w-2xl">
-                    Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego
+                    Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego.
                 </p>
                 <RippleButton
                     className="font-inter font-bold text-[24px] leading-[36px] tracking-[-0.02em] uppercase bg-orange-500 hover:bg-orange-600 text-white px-[3.9rem] py-4 rounded-full shadow-2xl transition-all duration-200 w-fit"
