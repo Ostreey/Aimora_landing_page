@@ -23,17 +23,17 @@ export function ProductDescriptionSection() {
                     <div className="lg:col-span-3 space-y-8">
                         <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/40 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 shadow-2xl">
                             <div className="space-y-6">
-                                <p className="text-white/90 font-exo2 text-xl leading-relaxed font-medium">
-                                    Aimora to system inteligentnych detektorów trafień i wskaźników LED, który zamienia zwykłe stalowe tarcze w <span className="text-[#017da0] font-semibold">interaktywne cele treningowe</span>.
+                                <p className="text-white/90 font-inter text-2xl leading-relaxed font-bold">
+                                    Aimora to system inteligentnych detektorów trafień i wskaźników LED, który zamienia zwykłe stalowe tarcze w <span className="text-[#017da0] font-bold">interaktywne cele treningowe</span>.
                                 </p>
-                                <p className="text-white/80 font-exo2 text-lg leading-relaxed">
+                                <p className="text-white/80 font-inter text-xl leading-relaxed font-bold">
                                     Nasze moduły wykrywają trafienia w czasie rzeczywistym i bezprzewodowo komunikują się z aplikacją mobilną, która oferuje różnorodne tryby rozgrywki, statystyki trafień, rankingi i dynamiczne scenariusze.
                                 </p>
-                                <p className="text-white/80 font-exo2 text-lg leading-relaxed">
+                                <p className="text-white/80 font-inter text-xl leading-relaxed font-bold">
                                     Wskaźniki LED wskazują, w który cel należy trafić, a kompatybilność z ASG, wiatrówkami i bronią palną sprawia, że Aimora sprawdzi się w każdej sytuacji — niezależnie od poziomu zaawansowania.
                                 </p>
                                 <div className="pt-4 border-t border-gray-600/30">
-                                    <p className="text-[#017da0] font-exo2 text-xl leading-relaxed font-semibold italic">
+                                    <p className="text-[#017da0] font-inter text-xl leading-relaxed font-bold italic">
                                         Wszystko po to, by trening był nie tylko skuteczny, ale też wciągający.
                                     </p>
                                 </div>
@@ -129,7 +129,7 @@ export function ProductDescriptionSection() {
                                 marginBottom: 4,
                                 whiteSpace: 'pre-line',
                             }}>
-                                Statystyki, feedback audio, rankingi i tryby gry – wszystko w Twoim telefonie.
+                                Statystyki, stan baterii, rankingi i tryby gry – wszystko w Twoim telefonie.
                             </p>
                         </div>
                     </div>
