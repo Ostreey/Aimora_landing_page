@@ -121,10 +121,10 @@ export function FeatureSection() {
     const handleFeatureClick = (feature: Feature) => {
         // Track feature card click (which also opens modal)
         trackFeatureClick(feature.id, feature.title);
-        
+
         setSelectedFeature(feature);
         setIsModalOpen(true);
-        
+
         // Note: No separate modal open tracking since clicking feature = opening modal
     };
 
@@ -133,7 +133,7 @@ export function FeatureSection() {
         if (selectedFeature) {
             trackModalClose(selectedFeature.id);
         }
-        
+
         setIsModalOpen(false);
         // Wait for animation to complete before clearing selectedFeature
         setTimeout(() => setSelectedFeature(null), 300);
@@ -144,7 +144,7 @@ export function FeatureSection() {
             <section className="relative w-full flex flex-col items-center py-4 sm:py-8 md:py-16 lg:py-32 bg-black overflow-hidden min-h-[500px] sm:min-h-[600px] md:min-h-[600px] lg:min-h-[1024px] -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-32 shadow-2xl z-20">
                 {/* Top gradient fade from black for smooth transition */}
                 <div
-                    className="absolute top-0 left-0 w-full h-8 sm:h-16 md:h-32 pointer-events-none z-30"
+                    className="absolute top-0 left-0 w-full h-8 sm:h-16 md:h-32 pointer-events-none z-5"
                     style={{
                         background: "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0) 100%)"
                     }}
@@ -164,7 +164,7 @@ export function FeatureSection() {
                 />
                 {/* Bottom gradient fade to black for smooth transition to next section */}
                 <div
-                    className="absolute bottom-0 left-0 w-full h-8 sm:h-16 md:h-32 pointer-events-none z-30"
+                    className="absolute bottom-0 left-0 w-full h-8 sm:h-16 md:h-32 pointer-events-none z-5"
                     style={{
                         background: "linear-gradient(to top, #000000 0%, rgba(0,0,0,0) 100%)"
                     }}
@@ -198,8 +198,8 @@ export function FeatureSection() {
                 </div>
 
                 {/* Mobile: Swipeable feature cards positioned over the background image */}
-                <div className="block md:hidden absolute inset-0 z-20 flex items-center justify-center -mt-[25%]">
-                    <div className="w-full px-4" data-aos="fade-up" data-aos-delay="100">
+                <div className="block md:hidden relative z-20 flex items-center justify-center px-4 mt-8">
+                    <div className="w-full" data-aos="fade-up" data-aos-delay="100">
                         <SwipeableFeatures
                             features={features}
                             onFeatureClick={handleFeatureClick}
