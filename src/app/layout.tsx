@@ -14,20 +14,20 @@ const inter = Inter({
 
 export const metadata: Metadata = {
     metadataBase: new URL('http://localhost:3000'),
-    title: 'ShootAI - Smart Battery Solutions',
-    description: 'Revolutionary battery technology for the modern world',
-    keywords: ['battery', 'technology', 'smart', 'energy', 'innovation', 'shootai'],
-    authors: [{ name: 'ShootAI' }],
+    title: 'Aimora - Smart Shooting Training System',
+    description: 'Revolutionary intelligent target detection system for shooting training',
+    keywords: ['shooting', 'training', 'targets', 'smart', 'technology', 'aimora'],
+    authors: [{ name: 'Aimora' }],
     robots: 'index, follow',
     openGraph: {
-        title: 'ShootAI - Smart Battery Solutions',
-        description: 'Revolutionary battery technology for the modern world',
+        title: 'Aimora - Smart Shooting Training System',
+        description: 'Revolutionary intelligent target detection system for shooting training',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'ShootAI - Smart Battery Solutions',
-        description: 'Revolutionary battery technology for the modern world',
+        title: 'Aimora - Smart Shooting Training System',
+        description: 'Revolutionary intelligent target detection system for shooting training',
     },
 }
 

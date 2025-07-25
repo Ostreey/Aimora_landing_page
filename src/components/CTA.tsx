@@ -23,8 +23,8 @@ export function CTA() {
                             Gotowy na doświadczenie przyszłości?
                         </h2>
                         <p className="subheading mb-8 max-w-2xl mx-auto lg:mx-0">
-                            Dołącz do tysięcy użytkowników, którzy już ulepszyli się do inteligentnej technologii baterii.
-                            Zacznij już dziś i nigdy więcej nie martw się o życie baterii.
+                            Dołącz do tysięcy strzelców, którzy już ulepszyły swój trening dzięki inteligentnym detektorom Aimora.
+                            Zacznij już dziś i zobacz jak Twoje umiejętności strzeleckie rosną z każdą sesją.
                         </p>
 
                         <div className="space-y-4 mb-8">
@@ -67,7 +67,7 @@ export function CTA() {
                                 Zamów teraz
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </RippleButton>
-                            <button 
+                            <button
                                 className="btn-secondary"
                                 onClick={() => trackCTAClick('cta_section_learn_more')}
                             >
@@ -87,7 +87,7 @@ export function CTA() {
                         <div className="relative w-full h-[500px] rounded-lg overflow-hidden">
                             <Image
                                 src="/images/second_image.png"
-                                alt="ShootAI Technology"
+                                alt="Aimora Technology"
                                 fill
                                 className="object-cover"
                             />

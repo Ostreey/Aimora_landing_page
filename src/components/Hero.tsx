@@ -10,7 +10,7 @@ export function Hero() {
             {/* Main hero image, centered, no zoom, no blur, no overlay */}
             <Image
                 src="/images/Hero_image.png"
-                alt="ShootAI Hero Background"
+                alt="Aimora Hero Background"
                 width={1440}
                 height={1024}
                 className="max-w-full h-auto"
