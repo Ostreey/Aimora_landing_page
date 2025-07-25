@@ -15,7 +15,7 @@ export function VideoSection() {
     };
 
     return (
-        <section className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <section className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-32">
             {/* Background pattern */}
             <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-10 right-20 w-64 h-64 bg-[#017da0] rounded-full blur-3xl"></div>
@@ -30,7 +30,8 @@ export function VideoSection() {
                     </h2>
                     <div className="w-32 h-1 bg-[#017da0] mx-auto mb-8 rounded-full"></div>
                     <p className="text-white/80 font-inter text-xl leading-relaxed max-w-3xl mx-auto">
-                        Przekonaj się, jak łatwo i szybko system Aimora przekształca zwykły trening strzelecki w nowoczesne, interaktywne doświadczenie.
+
+
                     </p>
                 </div>
 
@@ -81,43 +82,7 @@ export function VideoSection() {
                         )}
                     </div>
 
-                    {/* Video description */}
-                    <div className="mt-6 text-center">
-                        <h3 className="text-white font-inter text-xl font-bold mb-3">
-                            Demonstracja systemu Aimora
-                        </h3>
-                        <p className="text-white/70 font-inter text-base leading-relaxed max-w-2xl mx-auto">
-                            Zobacz jak łatwo zamontować czujniki, skonfigurować aplikację i rozpocząć trening.
-                            Wszystko w kilka prostych kroków.
-                        </p>
-                    </div>
-                </div>
 
-                {/* Key points */}
-                <div className="grid md:grid-cols-3 gap-6 mt-12">
-                    <div className="text-center p-6 bg-gradient-to-br from-gray-900/40 to-gray-800/20 rounded-xl border border-gray-700/30">
-                        <div className="w-12 h-12 bg-[#017da0] rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span className="text-white text-xl">⚡</span>
-                        </div>
-                        <h4 className="text-white font-inter font-bold text-lg mb-2">Szybki montaż</h4>
-                        <p className="text-white/70 font-inter text-sm">Zamontuj system w mniej niż minutę</p>
-                    </div>
-
-                    <div className="text-center p-6 bg-gradient-to-br from-gray-900/40 to-gray-800/20 rounded-xl border border-gray-700/30">
-                        <div className="w-12 h-12 bg-[#017da0] rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span className="text-white text-xl">📱</span>
-                        </div>
-                        <h4 className="text-white font-inter font-bold text-lg mb-2">Łatwa konfiguracja</h4>
-                        <p className="text-white/70 font-inter text-sm">Intuicyjna aplikacja prowadzi przez każdy krok</p>
-                    </div>
-
-                    <div className="text-center p-6 bg-gradient-to-br from-gray-900/40 to-gray-800/20 rounded-xl border border-gray-700/30">
-                        <div className="w-12 h-12 bg-[#017da0] rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span className="text-white text-xl">🎯</span>
-                        </div>
-                        <h4 className="text-white font-inter font-bold text-lg mb-2">Natychmiastowe wyniki</h4>
-                        <p className="text-white/70 font-inter text-sm">Precyzyjne wykrywanie trafień w czasie rzeczywistym</p>
-                    </div>
                 </div>
             </div>
         </section>

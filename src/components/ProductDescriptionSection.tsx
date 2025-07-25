@@ -1,5 +1,7 @@
 'use client';
 
+import { Crosshair, Lightbulb, Magnet, Radar, Smartphone } from 'lucide-react';
+
 export function ProductDescriptionSection() {
     return (
         <section className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -45,7 +47,9 @@ export function ProductDescriptionSection() {
                     <div className="lg:col-span-2 space-y-4">
                         <div className="bg-gradient-to-br from-blue-900/20 to-blue-800/10 backdrop-blur-sm rounded-xl p-6 border border-blue-500/20 hover:border-[#017da0] transition-all duration-300 group">
                             <div className="flex items-center space-x-4 mb-3">
-                                <div className="text-3xl bg-[#017da0] p-3 rounded-xl">🎯</div>
+                                <div className="w-12 h-12 bg-[#017da0]/20 rounded-xl flex items-center justify-center shadow-md group-hover:ring-2 group-hover:ring-cyan-400/40 group-hover:bg-[#017da0]/30 transition-all duration-300">
+                                    <Radar className="w-6 h-6 text-white group-hover:scale-110 group-hover:text-cyan-300 transition-all duration-300" />
+                                </div>
                                 <h3 className="text-white font-barlow font-bold text-xl group-hover:text-[#017da0] transition-colors">Reakcja w czasie rzeczywistym</h3>
                             </div>
                             <p className="text-[#017da0] font-inter font-bold text-sm sm:text-[15px] pl-16" style={{
@@ -57,13 +61,15 @@ export function ProductDescriptionSection() {
                                 marginBottom: 4,
                                 whiteSpace: 'pre-line',
                             }}>
-                                Każde trafienie rejestrowane natychmiast, bez opóźnień.
+                                Każde trafienie rejestrowane jest natychmiast, z dokladnościa do ułamka sekundy.
                             </p>
                         </div>
 
                         <div className="bg-gradient-to-br from-blue-900/20 to-blue-800/10 backdrop-blur-sm rounded-xl p-6 border border-blue-500/20 hover:border-[#017da0] transition-all duration-300 group">
                             <div className="flex items-center space-x-4 mb-3">
-                                <div className="text-3xl bg-[#017da0] p-3 rounded-xl">🧲</div>
+                                <div className="w-12 h-12 bg-[#017da0]/20 rounded-xl flex items-center justify-center shadow-md group-hover:ring-2 group-hover:ring-cyan-400/40 group-hover:bg-[#017da0]/30 transition-all duration-300">
+                                    <Magnet className="w-6 h-6 text-white group-hover:scale-110 group-hover:text-cyan-300 transition-all duration-300" />
+                                </div>
                                 <h3 className="text-white font-barlow font-bold text-xl group-hover:text-[#017da0] transition-colors">Montaż w kilka sekund</h3>
                             </div>
                             <p className="text-[#017da0] font-inter font-bold text-sm sm:text-[15px] pl-16" style={{
@@ -81,7 +87,9 @@ export function ProductDescriptionSection() {
 
                         <div className="bg-gradient-to-br from-blue-900/20 to-blue-800/10 backdrop-blur-sm rounded-xl p-6 border border-blue-500/20 hover:border-[#017da0] transition-all duration-300 group">
                             <div className="flex items-center space-x-4 mb-3">
-                                <div className="text-3xl bg-[#017da0] p-3 rounded-xl">💡</div>
+                                <div className="w-12 h-12 bg-[#017da0]/20 rounded-xl flex items-center justify-center shadow-md group-hover:ring-2 group-hover:ring-cyan-400/40 group-hover:bg-[#017da0]/30 transition-all duration-300">
+                                    <Lightbulb className="w-6 h-6 text-white group-hover:scale-110 group-hover:text-cyan-300 transition-all duration-300" />
+                                </div>
                                 <h3 className="text-white font-barlow font-bold text-xl group-hover:text-[#017da0] transition-colors">Podświetlane cele LED</h3>
                             </div>
                             <p className="text-[#017da0] font-inter font-bold text-sm sm:text-[15px] pl-16" style={{
@@ -99,7 +107,9 @@ export function ProductDescriptionSection() {
 
                         <div className="bg-gradient-to-br from-blue-900/20 to-blue-800/10 backdrop-blur-sm rounded-xl p-6 border border-blue-500/20 hover:border-[#017da0] transition-all duration-300 group">
                             <div className="flex items-center space-x-4 mb-3">
-                                <div className="text-3xl bg-[#017da0] p-3 rounded-xl">🔫</div>
+                                <div className="w-12 h-12 bg-[#017da0]/20 rounded-xl flex items-center justify-center shadow-md group-hover:ring-2 group-hover:ring-cyan-400/40 group-hover:bg-[#017da0]/30 transition-all duration-300">
+                                    <Crosshair className="w-6 h-6 text-white group-hover:scale-110 group-hover:text-cyan-300 transition-all duration-300" />
+                                </div>
                                 <h3 className="text-white font-barlow font-bold text-xl group-hover:text-[#017da0] transition-colors">Działa z każdą bronią</h3>
                             </div>
                             <p className="text-[#017da0] font-inter font-bold text-sm sm:text-[15px] pl-16" style={{
@@ -117,7 +127,9 @@ export function ProductDescriptionSection() {
 
                         <div className="bg-gradient-to-br from-blue-900/20 to-blue-800/10 backdrop-blur-sm rounded-xl p-6 border border-blue-500/20 hover:border-[#017da0] transition-all duration-300 group">
                             <div className="flex items-center space-x-4 mb-3">
-                                <div className="text-3xl bg-[#017da0] p-3 rounded-xl">📱</div>
+                                <div className="w-12 h-12 bg-[#017da0]/20 rounded-xl flex items-center justify-center shadow-md group-hover:ring-2 group-hover:ring-cyan-400/40 group-hover:bg-[#017da0]/30 transition-all duration-300">
+                                    <Smartphone className="w-6 h-6 text-white group-hover:scale-110 group-hover:text-cyan-300 transition-all duration-300" />
+                                </div>
                                 <h3 className="text-white font-barlow font-bold text-xl group-hover:text-[#017da0] transition-colors">Pełna kontrola w aplikacji</h3>
                             </div>
                             <p className="text-[#017da0] font-inter font-bold text-sm sm:text-[15px] pl-16" style={{

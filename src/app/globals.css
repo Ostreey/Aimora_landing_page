@@ -29,15 +29,13 @@
     }
 
     .section-padding {
-        @apply py-24;
+        @apply py-24 sm:py-28 lg:py-32;
     }
 
     .hero-heading {
-        font-size: 36px;
-        font-weight: 700;
-        line-height: 120%;
-        color: #FFFFFF;
-        font-family: var(--font-barlow);
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 900;
+        letter-spacing: -0.01em;
     }
 
     .subheading {

@@ -144,9 +144,9 @@ export function FeatureSection() {
             <section className="relative w-full flex flex-col items-center py-4 sm:py-8 md:py-16 lg:py-32 bg-black overflow-hidden min-h-[500px] sm:min-h-[600px] md:min-h-[600px] lg:min-h-[1024px] -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-32 shadow-2xl z-20">
                 {/* Top gradient fade from black for smooth transition */}
                 <div
-                    className="absolute top-0 left-0 w-full h-8 sm:h-16 md:h-32 pointer-events-none z-5"
+                    className="absolute top-0 left-0 w-full h-16 sm:h-24 md:h-48 pointer-events-none z-10"
                     style={{
-                        background: "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0) 100%)"
+                        background: "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0) 100%)"
                     }}
                 />
                 {/* Background image - not stretched, responsive */}
@@ -159,8 +159,7 @@ export function FeatureSection() {
                 <img
                     src="/images/Features_image.png"
                     alt="Features background"
-                    className="w-full h-auto z-0 select-none pointer-events-none block md:hidden"
-                    style={{ objectFit: 'contain' }}
+                    className="absolute top-0 left-0 w-full h-full object-cover z-0 select-none pointer-events-none block md:hidden opacity-30"
                 />
                 {/* Bottom gradient fade to black for smooth transition to next section */}
                 <div
@@ -198,8 +197,8 @@ export function FeatureSection() {
                 </div>
 
                 {/* Mobile: Swipeable feature cards positioned over the background image */}
-                <div className="block md:hidden relative z-20 flex items-center justify-center px-4 mt-8">
-                    <div className="w-full" data-aos="fade-up" data-aos-delay="100">
+                <div className="block md:hidden w-full relative z-20 flex flex-col items-center justify-center px-4" style={{ minHeight: '400px' }}>
+                    <div className="w-full max-w-sm mx-auto" data-aos="fade-up" data-aos-delay="100">
                         <SwipeableFeatures
                             features={features}
                             onFeatureClick={handleFeatureClick}

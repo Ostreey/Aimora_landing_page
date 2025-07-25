@@ -55,12 +55,12 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
                     0,
                     Math.min(features.length - 1, currentIndex + (xDir > 0 ? -1 : 1))
                 );
-                
+
                 // Track swipe interaction
                 const direction = xDir > 0 ? 'left' : 'right';
                 const currentFeature = features[currentIndex];
                 trackSwipeInteraction(direction, currentFeature.id, currentFeature.title);
-                
+
                 setCurrentIndex(newIndex);
                 return;
             }
@@ -69,7 +69,7 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
             if (active) {
                 const dragPercent = (mx / containerWidth) * cardWidthPercent;
                 const targetX = (-currentIndex * cardWidthPercent) + dragPercent;
-                
+
                 api.start({
                     x: targetX,
                     immediate: true,
@@ -95,9 +95,9 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
     };
 
     return (
-        <div className="block md:hidden w-full">
+        <div className="block md:hidden w-full min-h-[200px]">
             {/* Swipeable container */}
-            <div ref={containerRef} className="relative w-full overflow-hidden">
+            <div ref={containerRef} className="relative w-full overflow-hidden min-h-[170px]">
                 <animated.div
                     {...bind()}
                     className="flex"
@@ -132,8 +132,8 @@ export function SwipeableFeatures({ features, onFeatureClick }: SwipeableFeature
                         key={index}
                         onClick={() => goToSlide(index)}
                         className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                                ? 'bg-orange-400 w-6'
-                                : 'bg-white/30 hover:bg-white/50'
+                            ? 'bg-orange-400 w-6'
+                            : 'bg-white/30 hover:bg-white/50'
                             }`}
                     />
                 ))}
