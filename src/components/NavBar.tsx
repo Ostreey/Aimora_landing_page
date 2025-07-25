@@ -75,6 +75,15 @@ export function NavBar() {
             {/* Mobile Menu Overlay - visible only when menu is open */}
             <div className={`md:hidden fixed inset-0 bg-black/90 backdrop-blur-sm transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                 <div className={`absolute top-0 right-0 w-full h-full bg-black/95 transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                    {/* Close button - X in top right */}
+                    <button
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="absolute top-6 right-6 text-white/70 hover:text-white text-3xl font-light transition-colors duration-200 w-10 h-10 flex items-center justify-center"
+                        aria-label="Zamknij menu"
+                    >
+                        ×
+                    </button>
+
                     {/* Mobile Menu Content */}
                     <div className="flex flex-col items-center justify-center h-full space-y-6">
                         <button
@@ -106,14 +115,6 @@ export function NavBar() {
                             className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
                         >
                             Kluczowe funkcje
-                        </button>
-
-                        {/* Close button */}
-                        <button
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="mt-8 text-white/70 text-sm hover:text-white transition-colors duration-200"
-                        >
-                            Zamknij Menu
                         </button>
                     </div>
                 </div>

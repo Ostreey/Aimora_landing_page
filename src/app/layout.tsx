@@ -14,20 +14,20 @@ const inter = Inter({
 
 export const metadata: Metadata = {
     metadataBase: new URL('http://localhost:3000'),
-    title: 'Aimora - Smart Shooting Training System',
-    description: 'Revolutionary intelligent target detection system for shooting training',
-    keywords: ['shooting', 'training', 'targets', 'smart', 'technology', 'aimora'],
+    title: 'Aimora – Interaktywne Cele Strzeleckie z Aplikacją',
+    description: 'Rewolucyjny system inteligentnych detektorów trafień do treningu strzeleckiego',
+    keywords: ['strzelanie', 'trening', 'cele', 'smart', 'technologia', 'aimora', 'ASG', 'wiatrówka'],
     authors: [{ name: 'Aimora' }],
     robots: 'index, follow',
     openGraph: {
-        title: 'Aimora - Smart Shooting Training System',
-        description: 'Revolutionary intelligent target detection system for shooting training',
+        title: 'Aimora – Interaktywne Cele Strzeleckie z Aplikacją',
+        description: 'Rewolucyjny system inteligentnych detektorów trafień do treningu strzeleckiego',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Aimora - Smart Shooting Training System',
-        description: 'Revolutionary intelligent target detection system for shooting training',
+        title: 'Aimora – Interaktywne Cele Strzeleckie z Aplikacją',
+        description: 'Rewolucyjny system inteligentnych detektorów trafień do treningu strzeleckiego',
     },
 }
 
