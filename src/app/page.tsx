@@ -11,14 +11,14 @@ export default function Home() {
             <section id="home">
                 <Hero />
             </section>
-            <section id="co-to-jest">
-                <ProductDescriptionSection />
+            <section id="aimora-w-akcji">
+                <VideoSection />
             </section>
             <section id="jak-to-dziala">
                 <WhatIsItSection />
             </section>
-            <section id="aimora-w-akcji">
-                <VideoSection />
+            <section id="co-to-jest">
+                <ProductDescriptionSection />
             </section>
             <section id="kluczowe-funkcje">
                 <FeatureSection />

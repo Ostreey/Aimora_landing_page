@@ -70,7 +70,7 @@ export function ProductDescriptionSection() {
                                 <div className="w-12 h-12 bg-[#017da0]/20 rounded-xl flex items-center justify-center shadow-md group-hover:ring-2 group-hover:ring-cyan-400/40 group-hover:bg-[#017da0]/30 transition-all duration-300">
                                     <Magnet className="w-6 h-6 text-white group-hover:scale-110 group-hover:text-cyan-300 transition-all duration-300" />
                                 </div>
-                                <h3 className="text-white font-barlow font-bold text-xl group-hover:text-[#017da0] transition-colors">Montaż w kilka sekund</h3>
+                                <h3 className="text-white font-barlow font-bold text-xl group-hover:text-[#017da0] transition-colors">Montaż magnetyczny w kilka sekund</h3>
                             </div>
                             <p className="text-[#017da0] font-inter font-bold text-sm sm:text-[15px] pl-16" style={{
                                 fontFamily: 'Inter, sans-serif',

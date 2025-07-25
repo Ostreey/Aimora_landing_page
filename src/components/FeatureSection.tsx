@@ -141,7 +141,7 @@ export function FeatureSection() {
 
     return (
         <>
-            <section className="relative w-full flex flex-col items-center py-4 sm:py-8 md:py-16 lg:py-32 bg-black overflow-hidden min-h-[500px] sm:min-h-[600px] md:min-h-[600px] lg:min-h-[1024px] -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-32 shadow-2xl z-20">
+            <section className="relative w-full flex flex-col items-center py-4 sm:py-8 md:py-16 lg:py-32 bg-black overflow-hidden min-h-[500px] sm:min-h-[600px] md:min-h-[600px] lg:min-h-[1024px] shadow-2xl z-20">
                 {/* Top gradient fade from black for smooth transition */}
                 <div
                     className="absolute top-0 left-0 w-full h-16 sm:h-24 md:h-48 pointer-events-none z-10"

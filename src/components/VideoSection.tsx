@@ -44,11 +44,11 @@ export function VideoSection() {
 
             <div className="max-w-6xl mx-auto relative z-10">
                 {/* Header */}
-                <div className="text-center mb-12">
-                    <h2 className="text-white font-barlow font-black text-4xl sm:text-5xl md:text-6xl leading-tight mb-6">
+                <div className="text-center mb-6 sm:mb-8 md:mb-12">
+                    <h2 className="text-white font-barlow font-black text-4xl sm:text-5xl md:text-6xl leading-tight mb-4 sm:mb-6">
                         Zobacz <span className="text-[#017da0]">Aimora</span> w akcji
                     </h2>
-                    <div className="w-32 h-1 bg-[#017da0] mx-auto mb-8 rounded-full"></div>
+                    <div className="w-32 h-1 bg-[#017da0] mx-auto mb-4 sm:mb-6 md:mb-8 rounded-full"></div>
                     <p className="text-white/80 font-inter text-xl leading-relaxed max-w-3xl mx-auto">
 
 
@@ -56,7 +56,7 @@ export function VideoSection() {
                 </div>
 
                 {/* Video Container */}
-                <div className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/40 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700/50 shadow-2xl">
+                <div className="relative">
                     <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black">
                         {/* Loading placeholder */}
                         {!isLoaded && (
@@ -105,8 +105,6 @@ export function VideoSection() {
                             </button>
                         )}
                     </div>
-
-
                 </div>
             </div>
         </section>
