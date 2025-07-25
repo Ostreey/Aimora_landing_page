@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function VideoSection() {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -13,6 +13,26 @@ export function VideoSection() {
     const handleVideoLoad = () => {
         setIsLoaded(true);
     };
+
+    const handleCanPlay = () => {
+        setIsLoaded(true);
+    };
+
+    const handleLoadedMetadata = () => {
+        setIsLoaded(true);
+    };
+
+    // Fallback timeout to prevent infinite loading
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (!isLoaded) {
+                console.log('Video loading timeout - forcing loaded state');
+                setIsLoaded(true);
+            }
+        }, 5000); // 5 seconds timeout
+
+        return () => clearTimeout(timeout);
+    }, [isLoaded]);
 
     return (
         <section className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-32">
@@ -54,11 +74,15 @@ export function VideoSection() {
                             controls={isPlaying}
                             preload="metadata"
                             onLoadedData={handleVideoLoad}
+                            onCanPlay={handleCanPlay}
+                            onLoadedMetadata={handleLoadedMetadata}
                             onPlay={handlePlay}
-                            poster="/images/video-thumbnail.jpg" // Optional: add a thumbnail image
+                            onError={(e) => {
+                                console.error('Video loading error:', e);
+                                setIsLoaded(true); // Show video element even if there's an error
+                            }}
                         >
                             <source src="/videos/vid.mp4" type="video/mp4" />
-                            <source src="/videos/vid.webm" type="video/webm" />
                             Twoja przeglądarka nie obsługuje odtwarzania wideo.
                         </video>
 

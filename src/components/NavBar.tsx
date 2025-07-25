@@ -1,6 +1,17 @@
 'use client'
 import { useEffect, useState } from 'react';
 
+// Smooth scroll to section function
+const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+};
+
 export function NavBar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,8 +23,9 @@ export function NavBar() {
     }, []);
 
     // Close mobile menu when clicking on a link
-    const handleMobileMenuClick = () => {
+    const handleMobileMenuClick = (elementId: string) => {
         setMobileMenuOpen(false);
+        scrollToSection(elementId);
     };
 
     // Prevent body scroll when mobile menu is open
@@ -39,10 +51,12 @@ export function NavBar() {
                     </div>
 
                     {/* Desktop Navigation - hidden on mobile */}
-                    <div className="hidden md:flex items-center space-x-8">
-                        <a href="#" className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Home</a>
-                        <a href="#how" className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">How it works</a>
-                        <a href="#contact" className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Contact</a>
+                    <div className="hidden md:flex items-center space-x-6">
+                        <button onClick={() => scrollToSection('home')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Home</button>
+                        <button onClick={() => scrollToSection('co-to-jest')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Co to jest?</button>
+                        <button onClick={() => scrollToSection('jak-to-dziala')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Jak to działa?</button>
+                        <button onClick={() => scrollToSection('aimora-w-akcji')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Aimora w akcji</button>
+                        <button onClick={() => scrollToSection('kluczowe-funkcje')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Kluczowe funkcje</button>
                     </div>
 
                     {/* Mobile Menu Button - visible only on mobile */}
@@ -62,35 +76,44 @@ export function NavBar() {
             <div className={`md:hidden fixed inset-0 bg-black/90 backdrop-blur-sm transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                 <div className={`absolute top-0 right-0 w-full h-full bg-black/95 transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                     {/* Mobile Menu Content */}
-                    <div className="flex flex-col items-center justify-center h-full space-y-8">
-                        <a 
-                            href="#" 
-                            onClick={handleMobileMenuClick}
+                    <div className="flex flex-col items-center justify-center h-full space-y-6">
+                        <button
+                            onClick={() => handleMobileMenuClick('home')}
                             className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
                         >
                             Home
-                        </a>
-                        <a 
-                            href="#how" 
-                            onClick={handleMobileMenuClick}
+                        </button>
+                        <button
+                            onClick={() => handleMobileMenuClick('co-to-jest')}
                             className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
                         >
-                            How it works
-                        </a>
-                        <a 
-                            href="#contact" 
-                            onClick={handleMobileMenuClick}
+                            Co to jest?
+                        </button>
+                        <button
+                            onClick={() => handleMobileMenuClick('jak-to-dziala')}
                             className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
                         >
-                            Contact
-                        </a>
-                        
+                            Jak to działa?
+                        </button>
+                        <button
+                            onClick={() => handleMobileMenuClick('aimora-w-akcji')}
+                            className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
+                        >
+                            Aimora w akcji
+                        </button>
+                        <button
+                            onClick={() => handleMobileMenuClick('kluczowe-funkcje')}
+                            className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
+                        >
+                            Kluczowe funkcje
+                        </button>
+
                         {/* Close button */}
                         <button
                             onClick={() => setMobileMenuOpen(false)}
                             className="mt-8 text-white/70 text-sm hover:text-white transition-colors duration-200"
                         >
-                            Close Menu
+                            Zamknij Menu
                         </button>
                     </div>
                 </div>
