@@ -15,10 +15,40 @@ const scrollToSection = (elementId: string) => {
 export function NavBar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState('home');
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 10);
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 10);
+
+            // Detect active section based on scroll position
+            const sections = ['home', 'aimora-w-akcji', 'jak-to-dziala', 'co-to-jest', 'kluczowe-funkcje'];
+            const scrollPosition = window.scrollY + window.innerHeight / 2; // Use middle of viewport
+
+            let currentSection = 'home'; // Default to home
+
+            for (const sectionId of sections) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+
+                    // Check if current scroll position is within this section
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        currentSection = sectionId;
+                        break;
+                    }
+                }
+            }
+
+            setActiveSection(currentSection);
+        };
+
         window.addEventListener('scroll', handleScroll);
+
+        // Initial check
+        handleScroll();
+
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -26,6 +56,18 @@ export function NavBar() {
     const handleMobileMenuClick = (elementId: string) => {
         setMobileMenuOpen(false);
         scrollToSection(elementId);
+    };
+
+    // Helper function to get button classes based on active state
+    const getNavButtonClass = (sectionId: string) => {
+        const baseClass = "font-semibold text-lg py-2 px-2 border-b-2 transition-all duration-200 font-barlow";
+        const isActive = activeSection === sectionId;
+
+        if (isActive) {
+            return `${baseClass} text-[#00B2E3] border-[#00B2E3]`;
+        } else {
+            return `${baseClass} text-white/90 hover:text-[#00B2E3] border-transparent hover:border-[#00B2E3]`;
+        }
     };
 
     // Prevent body scroll when mobile menu is open
@@ -53,11 +95,11 @@ export function NavBar() {
 
                         {/* Desktop Navigation - hidden on mobile */}
                         <div className="hidden md:flex items-center space-x-6">
-                            <button onClick={() => scrollToSection('home')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Home</button>
-                            <button onClick={() => scrollToSection('co-to-jest')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Co to jest?</button>
-                            <button onClick={() => scrollToSection('jak-to-dziala')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Jak to działa?</button>
-                            <button onClick={() => scrollToSection('aimora-w-akcji')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Aimora w akcji</button>
-                            <button onClick={() => scrollToSection('kluczowe-funkcje')} className="text-white/90 hover:text-[#00B2E3] font-semibold text-lg py-2 px-2 border-b-2 border-transparent hover:border-[#00B2E3] transition-all duration-200 font-barlow">Kluczowe funkcje</button>
+                            <button onClick={() => { setActiveSection('home'); scrollToSection('home'); }} className={getNavButtonClass('home')}>Home</button>
+                            <button onClick={() => { setActiveSection('aimora-w-akcji'); scrollToSection('aimora-w-akcji'); }} className={getNavButtonClass('aimora-w-akcji')}>Aimora w akcji</button>
+                            <button onClick={() => { setActiveSection('jak-to-dziala'); scrollToSection('jak-to-dziala'); }} className={getNavButtonClass('jak-to-dziala')}>Jak to działa?</button>
+                            <button onClick={() => { setActiveSection('co-to-jest'); scrollToSection('co-to-jest'); }} className={getNavButtonClass('co-to-jest')}>Co to jest?</button>
+                            <button onClick={() => { setActiveSection('kluczowe-funkcje'); scrollToSection('kluczowe-funkcje'); }} className={getNavButtonClass('kluczowe-funkcje')}>Kluczowe funkcje</button>
                         </div>
 
                         {/* Mobile Menu Button - visible only on mobile */}
@@ -96,10 +138,10 @@ export function NavBar() {
                             Home
                         </button>
                         <button
-                            onClick={() => handleMobileMenuClick('co-to-jest')}
+                            onClick={() => handleMobileMenuClick('aimora-w-akcji')}
                             className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
                         >
-                            Co to jest?
+                            Aimora w akcji
                         </button>
                         <button
                             onClick={() => handleMobileMenuClick('jak-to-dziala')}
@@ -108,10 +150,10 @@ export function NavBar() {
                             Jak to działa?
                         </button>
                         <button
-                            onClick={() => handleMobileMenuClick('aimora-w-akcji')}
+                            onClick={() => handleMobileMenuClick('co-to-jest')}
                             className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
                         >
-                            Aimora w akcji
+                            Co to jest?
                         </button>
                         <button
                             onClick={() => handleMobileMenuClick('kluczowe-funkcje')}
