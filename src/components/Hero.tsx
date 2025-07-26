@@ -45,7 +45,7 @@ export function Hero() {
             {/* Mobile content: below image */}
             <div className="block md:hidden w-full px-4 -mt-12 pb-1 text-center relative z-30">
                 <h1 className="text-white font-barlow font-black text-3xl leading-tight tracking-[0.01em] mb-3 drop-shadow-md text-white/90">
-                    Wprowadź strzelanie w nową erę
+                    Wprowadź swój trening strzelecki w nową erę
                 </h1>
                 <p className="font-exo2 font-normal text-lg leading-[28px] tracking-[0.0002em] text-white/80 mb-3">
                     Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego

@@ -104,7 +104,7 @@ export function MobileAppSection() {
                                             <h5 className="text-white font-barlow font-bold text-lg mb-1">Zarządzanie celami</h5>
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
                                                 Każdy szczegół pod kontrolą. Sprawdzaj stan baterii każdego czujnika, reguluj intensywność świecenia diod,
-                                                nazywaj urządzenia według własnych preferencji - "Snajper", "Okno" czy "Tarcza Alpha"
+                                                nazywaj urządzenia według własnych preferencji - &quot;Snajper&quot;, &quot;Okno&quot; czy &quot;Tarcza Alpha&quot;
                                             </p>
                                         </div>
                                     </div>
