@@ -22,7 +22,7 @@ export function NavBar() {
             setScrolled(window.scrollY > 10);
 
             // Detect active section based on scroll position
-            const sections = ['home', 'aimora-w-akcji', 'jak-to-dziala', 'co-to-jest', 'kluczowe-funkcje'];
+            const sections = ['home', 'aimora-w-akcji', 'jak-to-dziala', 'co-to-jest', 'kluczowe-funkcje', 'aplikacja-mobilna'];
             const scrollPosition = window.scrollY + window.innerHeight / 2; // Use middle of viewport
 
             let currentSection = 'home'; // Default to home
@@ -99,7 +99,8 @@ export function NavBar() {
                             <button onClick={() => { setActiveSection('aimora-w-akcji'); scrollToSection('aimora-w-akcji'); }} className={getNavButtonClass('aimora-w-akcji')}>Aimora w akcji</button>
                             <button onClick={() => { setActiveSection('jak-to-dziala'); scrollToSection('jak-to-dziala'); }} className={getNavButtonClass('jak-to-dziala')}>Jak to działa?</button>
                             <button onClick={() => { setActiveSection('co-to-jest'); scrollToSection('co-to-jest'); }} className={getNavButtonClass('co-to-jest')}>Co to jest?</button>
-                            <button onClick={() => { setActiveSection('kluczowe-funkcje'); scrollToSection('kluczowe-funkcje'); }} className={getNavButtonClass('kluczowe-funkcje')}>Kluczowe funkcje</button>
+                            <button onClick={() => { setActiveSection('kluczowe-funkcje'); scrollToSection('kluczowe-funkcje'); }} className={getNavButtonClass('kluczowe-funkcje')}>Co wyróżnia Aimora</button>
+                            <button onClick={() => { setActiveSection('aplikacja-mobilna'); scrollToSection('aplikacja-mobilna'); }} className={getNavButtonClass('aplikacja-mobilna')}>Aplikacja mobilna</button>
                         </div>
 
                         {/* Mobile Menu Button - visible only on mobile */}
@@ -159,7 +160,13 @@ export function NavBar() {
                             onClick={() => handleMobileMenuClick('kluczowe-funkcje')}
                             className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
                         >
-                            Kluczowe funkcje
+                            Co wyróżnia Aimora
+                        </button>
+                        <button
+                            onClick={() => handleMobileMenuClick('aplikacja-mobilna')}
+                            className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
+                        >
+                            Aplikacja mobilna
                         </button>
                     </div>
                 </div>

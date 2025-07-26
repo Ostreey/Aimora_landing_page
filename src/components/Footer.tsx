@@ -7,8 +7,7 @@ const footerLinks = {
     product: [
         { name: 'Inteligentne detektory', href: '#' },
         { name: 'Aplikacja mobilna', href: '#' },
-        { name: 'Systemy treningowe', href: '#' },
-        { name: 'Dostęp do API', href: '#' }
+
     ],
     legal: [
         { name: 'Polityka prywatności', href: '#' },

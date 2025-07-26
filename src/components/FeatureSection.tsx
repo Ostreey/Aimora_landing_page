@@ -41,22 +41,20 @@ const features: Feature[] = [
     {
         id: 'housing',
         icon: Shield,
-        title: 'Obudowa z poliuretanu',
-        shortDescription: 'Trwała obudowa z termoplastycznego poliuretanu zapewniająca ochronę IP65',
-        detailedDescription: 'Wysokiej jakości termoplastyczny poliuretan (TPU) zapewnia doskonałą ochronę przed uderzeniami, wilgocią i kurzem. Elastyczna konstrukcja idealnie dopasowuje się do kształtu, zachowując pełną funkcjonalność podczas intensywnego użytkowania.',
+        title: 'Obudowa LED-ów z poliuretanu',
+        shortDescription: 'Elastyczna osłona z poliuretanu chroniąca diody LED przed kulkami ASG, metalowymi kulkami i śrutem',
+        detailedDescription: 'Specjalna obudowa z termoplastycznego poliuretanu (CR-TPU) zapewnia pełną ochronę diod LED przed uszkodzeniami podczas strzałów. Zaawansowany materiał CR-TPU absorbuje uderzenia kulek ASG, metalowych kulek oraz śrutu z wiatrówek, zachowując pełną funkcjonalność wskaźników świetlnych.',
         specs: [
-            { label: 'Materiał', value: 'TPU (Termoplastyczny Poliuretan)' },
-            { label: 'Odporność', value: 'IP65' },
+            { label: 'Materiał', value: 'CR-TPU ' },
+            { label: 'Wymiary osłony LED', value: '60mm x 14mm' },
+            { label: 'Typ ochrony', value: 'Kulki metalowe, ASG, śrut' },
             { label: 'Temperatura pracy', value: '-20°C do +60°C' },
-            { label: 'Elastyczność', value: '300% rozciągnięcia' },
-            { label: 'Waga', value: '~150g' },
-            { label: 'Wymiary', value: '80 x 60 x 25mm' }
+            { label: 'Przepuszczalność światła', value: 'Wysoka' }
         ],
         benefits: [
-            'Ochrona przed uderzeniami i upadkami',
-            'Wodoodporność i pyłoszczelność',
-            'Długotrwała żywotność',
-            'Ergonomiczny kształt'
+            'Ochrona LED-ów przed uszkodzeniem',
+            'Zachowanie pełnej widoczności wskaźników',
+            'Długotrwała odporność na uderzenia'
         ],
         technicalDetails: 'Obudowa została zaprojektowana z uwzględnieniem analizy uderzeń i wibracji. Specjalne wzmocnienia w kluczowych miejscach zapewniają maksymalną ochronę komponentów elektronicznych podczas intensywnego użytkowania.'
     },
@@ -64,21 +62,13 @@ const features: Feature[] = [
         id: 'firmware-updates',
         icon: Settings,
         title: 'Aktualizacje oprogramowania',
-        shortDescription: 'Automatyczne aktualizacje OTA z ulepszeniami algorytmów i nowymi funkcjami',
-        detailedDescription: 'System automatycznych aktualizacji zapewnia, że Twoje urządzenie zawsze działa z najnowszym oprogramowaniem. Regularne ulepszenia algorytmów zwiększają precyzję pomiarów i dodają nowe funkcjonalności bez konieczności wymiany sprzętu.',
+        shortDescription: 'Aktualizacje zarówno aplikacji mobilnej jak i oprogramowania czujnika z nowymi grami i funkcjami',
+        detailedDescription: 'System automatycznych aktualizacji OTA obejmuje zarówno aplikację mobilną jak i oprogramowanie każdego czujnika. Aktualizacja czujników wykonuje się wygodnie za pomocą aplikacji mobilnej - wystarczy jedno kliknięcie. Nawet po zakupie urządzenia otrzymujesz nowe gry, tryby treningowe i funkcjonalności. Regularne ulepszenia algorytmów zwiększają precyzję pomiarów, a nowe tryby gry utrzymują świeżość treningu.',
         specs: [
-            { label: 'Częstotliwość', value: 'co 2-4 tygodnie' },
-            { label: 'Typ', value: 'OTA (Over-The-Air)' },
-            { label: 'Rozmiar', value: 'średnio 2-5MB' },
-            { label: 'Czas instalacji', value: '3-5 minut' },
-            { label: 'Bezpieczeństwo', value: 'Podpis cyfrowy' },
-            { label: 'Rollback', value: 'Automatyczny' }
+            { label: 'Typ', value: 'Bezprzewodowo' },
         ],
         benefits: [
-            'Stale rosnąca precyzja pomiarów',
-            'Nowe funkcje bez kosztów',
-            'Automatyczne ulepszenia',
-            'Długoterminowe wsparcie'
+            'Nowe gry i tryby treningowe po zakupie'
         ],
         technicalDetails: 'System OTA wykorzystuje podpis cyfrowy do weryfikacji integralności aktualizacji. Implementuje mechanizm rollback w przypadku nieudanej aktualizacji, zapewniając ciągłość działania urządzenia.'
     },

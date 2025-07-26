@@ -170,8 +170,7 @@ export function ProductDescriptionSection() {
                             </div>
                         </div>
 
-                        {/* Interactive Stats */}
-                        <InteractiveStats />
+
                     </div>
 
                     {/* Enhanced Benefits sidebar with staggered animations */}
