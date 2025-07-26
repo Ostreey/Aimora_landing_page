@@ -1,6 +1,7 @@
 import { FeatureSection } from '@/components/FeatureSection';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
+import { MobileAppSection } from '@/components/MobileAppSection';
 import { ProductDescriptionSection } from '@/components/ProductDescriptionSection';
 import { VideoSection } from '@/components/VideoSection';
 import { WhatIsItSection } from '@/components/WhatIsItSection';
@@ -22,6 +23,9 @@ export default function Home() {
             </section>
             <section id="kluczowe-funkcje">
                 <FeatureSection />
+            </section>
+            <section id="aplikacja-mobilna">
+                <MobileAppSection />
             </section>
             <Footer />
         </main>

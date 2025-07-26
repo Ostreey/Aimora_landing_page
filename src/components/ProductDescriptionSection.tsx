@@ -102,7 +102,7 @@ export function ProductDescriptionSection() {
         {
             id: 'magnetic',
             icon: Magnet,
-            title: 'Montaż w kilka sekund',
+            title: 'Szybki montaż magnetyczny',
             description: 'Przyłóż moduł do stalowej blachy i graj – bez wiercenia i narzędzi.',
             delay: 100
         },
@@ -184,8 +184,8 @@ export function ProductDescriptionSection() {
                                 <div
                                     key={benefit.id}
                                     className={`bg-gradient-to-br from-blue-900/20 to-blue-800/10 backdrop-blur-sm rounded-xl p-6 border transition-all duration-500 group cursor-pointer transform hover:scale-105 hover:shadow-xl hover:shadow-[#017da0]/20 ${isHovered
-                                            ? 'border-[#017da0] ring-2 ring-[#017da0]/50 shadow-lg shadow-[#017da0]/30'
-                                            : 'border-blue-500/20 hover:border-[#017da0]'
+                                        ? 'border-[#017da0] ring-2 ring-[#017da0]/50 shadow-lg shadow-[#017da0]/30'
+                                        : 'border-blue-500/20 hover:border-[#017da0]'
                                         } ${isMainContentVisible
                                             ? 'opacity-100 translate-x-0'
                                             : 'opacity-0 translate-x-8'
@@ -203,28 +203,28 @@ export function ProductDescriptionSection() {
                                 >
                                     <div className="flex items-center space-x-4 mb-3">
                                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-md transition-all duration-500 ${isHovered
-                                                ? 'bg-[#017da0]/40 ring-2 ring-cyan-400/50 scale-110'
-                                                : 'bg-[#017da0]/20 group-hover:bg-[#017da0]/30'
+                                            ? 'bg-[#017da0]/40 ring-2 ring-cyan-400/50 scale-110'
+                                            : 'bg-[#017da0]/20 group-hover:bg-[#017da0]/30'
                                             }`}>
                                             <IconComponent className={`w-6 h-6 transition-all duration-500 ${isHovered
-                                                    ? 'text-cyan-300 scale-125'
-                                                    : 'text-white group-hover:text-cyan-300 group-hover:scale-110'
+                                                ? 'text-cyan-300 scale-125'
+                                                : 'text-white group-hover:text-cyan-300 group-hover:scale-110'
                                                 }`} />
                                         </div>
                                         <h3 className={`font-barlow font-bold text-xl transition-colors duration-300 ${isHovered
-                                                ? 'text-[#017da0]'
-                                                : 'text-white group-hover:text-[#017da0]'
+                                            ? 'text-[#017da0]'
+                                            : 'text-white group-hover:text-[#017da0]'
                                             }`}>
                                             {benefit.title}
                                         </h3>
                                         <ChevronRight className={`w-5 h-5 transition-all duration-300 ${isHovered
-                                                ? 'text-[#017da0] translate-x-1'
-                                                : 'text-white/40 group-hover:text-[#017da0] group-hover:translate-x-1'
+                                            ? 'text-[#017da0] translate-x-1'
+                                            : 'text-white/40 group-hover:text-[#017da0] group-hover:translate-x-1'
                                             }`} />
                                     </div>
                                     <p className={`font-inter font-bold text-sm sm:text-[15px] pl-16 transition-colors duration-300 ${isHovered
-                                            ? 'text-cyan-400'
-                                            : 'text-[#017da0] group-hover:text-cyan-400'
+                                        ? 'text-cyan-400'
+                                        : 'text-[#017da0] group-hover:text-cyan-400'
                                         }`} style={{
                                             fontFamily: 'Inter, sans-serif',
                                             fontWeight: 700,

@@ -27,8 +27,8 @@ const socialLinks = [
 
 const contactInfo = [
     { icon: Mail, text: 'wsparcie@aimora.com' },
-    { icon: Phone, text: '+48 (555) 123-4567' },
-    { icon: MapPin, text: 'ul. Bateryjna 123, Warszawa, 00-001' }
+    { icon: Phone, text: '+48 605 048 487' },
+    { icon: MapPin, text: 'ul. Górczewska 200, Warszawa, 01-460' }
 ]
 
 export function Footer() {
