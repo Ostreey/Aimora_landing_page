@@ -1,3 +1,4 @@
+import { CTA } from '@/components/CTA';
 import { FeatureSection } from '@/components/FeatureSection';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
@@ -26,6 +27,9 @@ export default function Home() {
             </section>
             <section id="aplikacja-mobilna">
                 <MobileAppSection />
+            </section>
+            <section id="cta">
+                <CTA />
             </section>
             <Footer />
         </main>
