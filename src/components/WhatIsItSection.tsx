@@ -6,13 +6,22 @@ export function WhatIsItSection() {
     return (
         <section className="relative flex justify-center items-start min-h-[400px] sm:min-h-[600px] md:min-h-[1180px] bg-black -mt-6 sm:-mt-8 md:-mt-0">
             <div className="absolute inset-0 w-full h-full bg-black z-0" />
-            {/* Main image, centered, no crop */}
+            {/* Desktop image */}
             <Image
                 src="/images/What_is_it.png"
                 alt="Jak to działa?"
                 width={1440}
                 height={1026}
-                className="z-10"
+                className="z-10 hidden md:block"
+                priority
+            />
+            {/* Mobile image */}
+            <Image
+                src="/images/what_is_it_mobile.png"
+                alt="Jak to działa?"
+                width={1355}
+                height={1024}
+                className="z-10 block md:hidden"
                 priority
             />
 
