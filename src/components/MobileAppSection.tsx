@@ -90,7 +90,7 @@ export function MobileAppSection() {
                                         <div className="flex-1">
                                             <h5 className="text-white font-barlow font-bold text-lg mb-1">Różnorodne tryby treningowe</h5>
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
-                                                Gra na czas, Rewolwerowiec, Memmory shot, Duel - każdy znajdzie coś dla siebie.
+                                                Gra na czas, Rewolwerowiec, Memory shot, Duel i wiele innych - każdy znajdzie coś dla siebie.
                                                 Dynamiczny licznik i wizualizacja postępów motywują do lepszych wyników
                                             </p>
                                         </div>
