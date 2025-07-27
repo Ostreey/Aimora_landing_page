@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronRight, Clock, Crosshair, Lightbulb, Magnet, Radar, Smartphone, Target, Zap } from 'lucide-react';
+import { Clock, Crosshair, Lightbulb, Magnet, Radar, Smartphone, Target, Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 // Simple counter animation hook
@@ -216,10 +216,6 @@ export function ProductDescriptionSection() {
                                             }`}>
                                             {benefit.title}
                                         </h3>
-                                        <ChevronRight className={`w-5 h-5 transition-all duration-300 ${isHovered
-                                            ? 'text-[#017da0] translate-x-1'
-                                            : 'text-white/40 group-hover:text-[#017da0] group-hover:translate-x-1'
-                                            }`} />
                                     </div>
                                     <p className={`font-inter font-bold text-sm sm:text-[15px] pl-16 transition-colors duration-300 ${isHovered
                                         ? 'text-cyan-400'
