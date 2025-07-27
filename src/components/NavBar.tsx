@@ -22,7 +22,7 @@ export function NavBar() {
             setScrolled(window.scrollY > 10);
 
             // Detect active section based on scroll position
-            const sections = ['home', 'aimora-w-akcji', 'jak-to-dziala', 'co-to-jest', 'kluczowe-funkcje', 'aplikacja-mobilna'];
+            const sections = ['home', 'aimora-w-akcji', 'jak-to-dziala', 'co-to-jest', 'kluczowe-funkcje', 'aplikacja-mobilna', 'mapa-rozwoju'];
             const scrollPosition = window.scrollY + window.innerHeight / 2; // Use middle of viewport
 
             let currentSection = 'home'; // Default to home
@@ -35,7 +35,12 @@ export function NavBar() {
 
                     // Check if current scroll position is within this section
                     if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        currentSection = sectionId;
+                        // Map sections that aren't in navigation to the appropriate nav item
+                        if (sectionId === 'co-to-jest' || sectionId === 'kluczowe-funkcje') {
+                            currentSection = 'jak-to-dziala';
+                        } else {
+                            currentSection = sectionId;
+                        }
                         break;
                     }
                 }
@@ -88,19 +93,25 @@ export function NavBar() {
             <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${scrolled ? 'bg-black/80 backdrop-blur' : 'bg-transparent'}`}>
                 <div className="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-16">
                     <div className="flex items-center justify-between w-full h-20">
-                        {/* Logo/Brand - visible on all screens */}
+                        {/* Logo/Brand - clickable to go to home */}
                         <div className="flex items-center">
-                            <span className="text-white text-xl font-bold font-barlow">Aimora</span>
+                            <button
+                                onClick={() => { setActiveSection('home'); scrollToSection('home'); }}
+                                className={`text-xl font-bold font-barlow transition-all duration-200 ${activeSection === 'home'
+                                        ? 'text-[#00B2E3] border-b-2 border-[#00B2E3] pb-1'
+                                        : 'text-white hover:text-[#00B2E3]'
+                                    }`}
+                            >
+                                Aimora
+                            </button>
                         </div>
 
                         {/* Desktop Navigation - hidden on mobile */}
                         <div className="hidden md:flex items-center space-x-6">
-                            <button onClick={() => { setActiveSection('home'); scrollToSection('home'); }} className={getNavButtonClass('home')}>Home</button>
                             <button onClick={() => { setActiveSection('aimora-w-akcji'); scrollToSection('aimora-w-akcji'); }} className={getNavButtonClass('aimora-w-akcji')}>Aimora w akcji</button>
                             <button onClick={() => { setActiveSection('jak-to-dziala'); scrollToSection('jak-to-dziala'); }} className={getNavButtonClass('jak-to-dziala')}>Jak to działa?</button>
-                            <button onClick={() => { setActiveSection('co-to-jest'); scrollToSection('co-to-jest'); }} className={getNavButtonClass('co-to-jest')}>Co to jest?</button>
-                            <button onClick={() => { setActiveSection('kluczowe-funkcje'); scrollToSection('kluczowe-funkcje'); }} className={getNavButtonClass('kluczowe-funkcje')}>Co wyróżnia Aimora</button>
                             <button onClick={() => { setActiveSection('aplikacja-mobilna'); scrollToSection('aplikacja-mobilna'); }} className={getNavButtonClass('aplikacja-mobilna')}>Aplikacja mobilna</button>
+                            <button onClick={() => { setActiveSection('mapa-rozwoju'); scrollToSection('mapa-rozwoju'); }} className={getNavButtonClass('mapa-rozwoju')}>Roadmap</button>
                         </div>
 
                         {/* Mobile Menu Button - visible only on mobile */}
@@ -133,12 +144,6 @@ export function NavBar() {
                     {/* Mobile Menu Content */}
                     <div className="flex flex-col items-center justify-center h-full space-y-6 z-[10000] relative">
                         <button
-                            onClick={() => handleMobileMenuClick('home')}
-                            className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
-                        >
-                            Home
-                        </button>
-                        <button
                             onClick={() => handleMobileMenuClick('aimora-w-akcji')}
                             className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
                         >
@@ -151,22 +156,16 @@ export function NavBar() {
                             Jak to działa?
                         </button>
                         <button
-                            onClick={() => handleMobileMenuClick('co-to-jest')}
-                            className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
-                        >
-                            Co to jest?
-                        </button>
-                        <button
-                            onClick={() => handleMobileMenuClick('kluczowe-funkcje')}
-                            className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
-                        >
-                            Co wyróżnia Aimora
-                        </button>
-                        <button
                             onClick={() => handleMobileMenuClick('aplikacja-mobilna')}
                             className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
                         >
                             Aplikacja mobilna
+                        </button>
+                        <button
+                            onClick={() => handleMobileMenuClick('mapa-rozwoju')}
+                            className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow"
+                        >
+                            Roadmap
                         </button>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
 import { MobileAppSection } from '@/components/MobileAppSection';
 import { ProductDescriptionSection } from '@/components/ProductDescriptionSection';
+import { Roadmap } from '@/components/Roadmap';
 import { VideoSection } from '@/components/VideoSection';
 import { WhatIsItSection } from '@/components/WhatIsItSection';
 
@@ -27,6 +28,9 @@ export default function Home() {
             </section>
             <section id="aplikacja-mobilna">
                 <MobileAppSection />
+            </section>
+            <section id="mapa-rozwoju">
+                <Roadmap />
             </section>
             <section id="cta">
                 <CTA />
