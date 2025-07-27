@@ -57,7 +57,7 @@ export function Roadmap() {
         },
         {
             date: '01.2026',
-            title: 'Zwiększenie zasięgu do 100m',
+            title: 'Zwiększenie zasięgu łączności',
             description: 'Rozszerzona łączność bezprzewodowa umożliwiająca treningi na większych dystansach',
             icon: Wifi,
             status: 'planned',
