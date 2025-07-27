@@ -102,11 +102,11 @@ export function Roadmap() {
                 {/* Roadmap Timeline */}
                 <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '300ms' }}>
                     <div className="relative">
-                        {/* Timeline line */}
-                        <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#017da0] via-blue-500 to-purple-500"></div>
+                        {/* Timeline line - visible on both mobile and desktop */}
+                        <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#017da0] via-blue-500 to-purple-500"></div>
 
                         {/* Timeline items */}
-                        <div className="space-y-12">
+                        <div className="space-y-8 md:space-y-12">
                             {roadmapItems.map((item, index) => (
                                 <motion.div
                                     key={item.date}
@@ -114,20 +114,20 @@ export function Roadmap() {
                                     whileInView={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 0.6, delay: index * 0.1 }}
                                     viewport={{ once: true }}
-                                    className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col md:space-x-8`}
+                                    className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col`}
                                 >
-                                    {/* Timeline node */}
-                                    <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-r from-[#017da0] to-cyan-400 border-4 border-black z-10"></div>
+                                    {/* Timeline node - positioned differently for mobile vs desktop */}
+                                    <div className={`absolute left-3.5 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full border-4 border-black z-10 ${item.status === 'current' ? 'bg-gradient-to-r from-orange-500 to-orange-400' : 'bg-gradient-to-r from-[#017da0] to-cyan-400'}`}></div>
 
-                                    {/* Content card */}
-                                    <div className={`w-full md:w-5/12 ml-20 md:ml-0 ${index % 2 === 0 ? '' : 'md:text-right'}`}>
-                                        <div className={`p-6 bg-gradient-to-br from-gray-900/80 to-gray-800/40 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:shadow-[0_0_40px_rgba(1,125,160,0.2)] transition-all duration-500 ${item.status === 'current' ? 'ring-2 ring-[#017da0]/50' : ''}`}>
+                                    {/* Content card - full width on mobile, 5/12 on desktop */}
+                                    <div className={`w-full md:w-5/12 pl-12 md:pl-0 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8 md:text-right'}`}>
+                                        <div className={`p-4 md:p-6 bg-gradient-to-br from-gray-900/80 to-gray-800/40 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:shadow-[0_0_40px_rgba(1,125,160,0.2)] transition-all duration-500 ${item.status === 'current' ? 'ring-2 ring-[#017da0]/50' : ''}`}>
                                             {/* Icon and date */}
                                             <div className={`flex items-center gap-3 mb-4 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
-                                                <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center shadow-lg`}>
-                                                    <item.icon className="w-6 h-6 text-white" />
+                                                <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center shadow-lg flex-shrink-0`}>
+                                                    <item.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                                                 </div>
-                                                <div>
+                                                <div className="min-w-0 flex-1">
                                                     <span className="text-[#017da0] font-barlow font-bold text-sm uppercase tracking-wide">
                                                         {item.date}
                                                     </span>
@@ -140,7 +140,7 @@ export function Roadmap() {
                                             </div>
 
                                             {/* Title and description */}
-                                            <h4 className="text-white font-barlow font-bold text-xl mb-3 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
+                                            <h4 className="text-white font-barlow font-bold text-lg md:text-xl mb-3 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
                                                 {item.title}
                                             </h4>
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
@@ -149,7 +149,7 @@ export function Roadmap() {
                                         </div>
                                     </div>
 
-                                    {/* Spacer for alternating layout */}
+                                    {/* Spacer for alternating layout - only on desktop */}
                                     <div className="hidden md:block w-5/12"></div>
                                 </motion.div>
                             ))}
