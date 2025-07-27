@@ -1,121 +1,143 @@
-'use client'
+'use client';
 
-import { trackCTAClick } from '@/lib/firebase'
-import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle } from 'lucide-react'
-import Image from 'next/image'
-import { RippleButton } from './RippleButton'
+import { trackCTAClick } from '@/lib/firebase';
+import { motion } from 'framer-motion';
+import { ArrowRight, Shield, Target, Zap } from 'lucide-react';
+import { useState } from 'react';
+import { ContactForm } from './ContactForm';
+import { RippleButton } from './RippleButton';
 
 export function CTA() {
-    return (
-        <section className="section-padding">
-            <div className="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-16">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Content */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                        className="text-center lg:text-left"
-                    >
-                        <h2 className="hero-heading mb-6">
-                            Gotowy na doświadczenie przyszłości?
-                        </h2>
-                        <p className="subheading mb-8 max-w-2xl mx-auto lg:mx-0">
-                            Dołącz do tysięcy strzelców, którzy już ulepszyły swój trening dzięki inteligentnym detektorom Aimora.
-                            Zacznij już dziś i zobacz jak Twoje umiejętności strzeleckie rosną z każdą sesją.
-                        </p>
+    const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
-                        <div className="space-y-4 mb-8">
-                            {[
-                                '30-dniowa gwarancja zwrotu pieniędzy',
-                                'Darmowa wysyłka na całym świecie',
-                                'Wsparcie klienta 24/7',
-                                '2-letnia gwarancja w zestawie'
-                            ].map((benefit, index) => (
+    const benefits = [
+        {
+            icon: Target,
+            title: "Precyzja na najwyższym poziomie",
+            description: "Każdy strzał jest mierzony z dokładnością do milimetra"
+        },
+        {
+            icon: Zap,
+            title: "Natychmiastowy feedback",
+            description: "Otrzymuj analizę swojego treningu w czasie rzeczywistym"
+        },
+        {
+            icon: Shield,
+            title: "Jakość na lata",
+            description: "Wodoodporna konstrukcja przeznaczona do intensywnego użytkowania"
+        }
+    ];
+
+    return (
+        <>
+            <section className="relative bg-black py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+                {/* Background decoration */}
+                <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-20 right-10 w-72 h-72 bg-[#017da0] rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-20 left-10 w-96 h-96 bg-[#017da0] rounded-full blur-3xl"></div>
+                </div>
+
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                        {/* Left content */}
+                        <div>
+                            <motion.h2
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6 }}
+                                viewport={{ once: true }}
+                                className="text-4xl sm:text-5xl lg:text-6xl font-barlow font-black text-white mb-6"
+                            >
+                                Gotowy na <span className="text-[#017da0]">następny poziom</span>?
+                            </motion.h2>
+
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.1 }}
+                                viewport={{ once: true }}
+                                className="text-xl text-white/80 mb-8 font-inter leading-relaxed"
+                            >
+                                Dołącz do setek strzelców, którzy już zrewolucjonizowali swój trening z Aimora.
+                            </motion.p>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                                viewport={{ once: true }}
+                                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                            >
+                                <RippleButton
+                                    className="btn-primary flex items-center justify-center gap-2 group"
+                                    onClick={() => {
+                                        trackCTAClick('cta_section_order_now');
+                                        setIsContactFormOpen(true);
+                                    }}
+                                >
+                                    Zamów teraz
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </RippleButton>
+                                <button
+                                    className="btn-secondary"
+                                    onClick={() => trackCTAClick('cta_section_learn_more')}
+                                >
+                                    Dowiedz się więcej
+                                </button>
+                            </motion.div>
+                        </div>
+
+                        {/* Right content - Benefits */}
+                        <div className="space-y-6">
+                            {benefits.map((benefit, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, x: -20 }}
+                                    initial={{ opacity: 0, x: 20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                                    transition={{ duration: 0.6, delay: index * 0.1 }}
                                     viewport={{ once: true }}
-                                    className="flex items-center gap-3"
+                                    className="flex items-start gap-4 p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10"
                                 >
-                                    <CheckCircle className="w-5 h-5 text-[#00B2E3] flex-shrink-0 animate-pulse-glow" />
-                                    <span className="annotation-note">
-                                        {benefit}
-                                    </span>
+                                    <div className="flex-shrink-0 w-12 h-12 bg-[#017da0] rounded-xl flex items-center justify-center">
+                                        <benefit.icon className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-white font-barlow font-bold text-lg mb-2">
+                                            {benefit.title}
+                                        </h3>
+                                        <p className="text-white/70 font-inter">
+                                            {benefit.description}
+                                        </p>
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>
+                    </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            viewport={{ once: true }}
-                            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-                        >
-                            <RippleButton
-                                className="btn-primary flex items-center justify-center gap-2 group"
-                                onClick={() => {
-                                    trackCTAClick('cta_section_order_now');
-                                    console.log('Zamów teraz clicked');
-                                }}
-                            >
-                                Zamów teraz
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </RippleButton>
-                            <button
-                                className="btn-secondary"
-                                onClick={() => trackCTAClick('cta_section_learn_more')}
-                            >
-                                Dowiedz się więcej
-                            </button>
-                        </motion.div>
-                    </motion.div>
-
-                    {/* Image */}
+                    {/* Bottom CTA bar */}
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.6 }}
                         viewport={{ once: true }}
-                        className="relative"
+                        className="mt-16 text-center"
                     >
-                        <div className="relative w-full h-[500px] rounded-lg overflow-hidden">
-                            <Image
-                                src="/images/second_image.png"
-                                alt="Aimora Technology"
-                                fill
-                                className="object-cover"
-                            />
+                        <div className="inline-flex items-center gap-2 bg-[#017da0]/20 text-[#017da0] px-6 py-2 rounded-full text-sm font-medium mb-4">
+                            <div className="w-2 h-2 bg-[#017da0] rounded-full animate-pulse"></div>
+                            Ograniczona dostępność
                         </div>
-
-                        {/* Stats overlay */}
-                        <motion.div
-                            className="absolute -bottom-6 -left-6 bg-black/80 backdrop-blur-sm p-6 rounded-lg border border-white/20 animate-float"
-                            style={{ animationDelay: '0s' }}
-                        >
-                            <div className="text-center">
-                                <div className="text-2xl font-bold text-orange-400 mb-1">10,000+</div>
-                                <div className="annotation-note">Zadowolonych klientów</div>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            className="absolute -top-6 -right-6 bg-black/80 backdrop-blur-sm p-6 rounded-lg border border-white/20 animate-float"
-                            style={{ animationDelay: '1.5s' }}
-                        >
-                            <div className="text-center">
-                                <div className="text-2xl font-bold text-orange-400 mb-1">99.9%</div>
-                                <div className="annotation-note">Czasu pracy</div>
-                            </div>
-                        </motion.div>
+                        <p className="text-white/60 text-sm">
+                            Skontaktuj się z nami już dziś i zacznij trenować na profesjonalnym poziomie
+                        </p>
                     </motion.div>
                 </div>
-            </div>
-        </section>
-    )
+            </section>
+
+            {/* Contact Form Modal */}
+            <ContactForm
+                isOpen={isContactFormOpen}
+                onClose={() => setIsContactFormOpen(false)}
+            />
+        </>
+    );
 } 
