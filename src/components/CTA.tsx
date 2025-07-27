@@ -42,6 +42,7 @@ export function CTA() {
                             Przekształć swój trening w profesjonalne doświadczenie pełne emocji.
                         </motion.p>
 
+
                         {/* CTA Buttons */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
