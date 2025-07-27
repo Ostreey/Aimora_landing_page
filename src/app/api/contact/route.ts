@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
         console.log('Email sent successfully:', data);
 
         return NextResponse.json(
-            { message: 'Email wysłany pomyślnie', id: data.id },
+            { message: 'Email wysłany pomyślnie', id: (data as any).id },
             { status: 200 }
         );
 

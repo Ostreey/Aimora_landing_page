@@ -1,6 +1,7 @@
 'use client';
 
-import { trackFeatureClick, trackModalClose } from '@/lib/firebase';
+
+import { trackModalUnfold } from '@/lib/firebase';
 import { Battery, ChevronDown, ChevronUp, Settings, Shield, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -117,13 +118,12 @@ export function FeatureSection() {
     }, []);
 
     const toggleFeature = (featureId: string) => {
-        trackFeatureClick(featureId, features.find(f => f.id === featureId)?.title || '');
-
         if (expandedFeature === featureId) {
             setExpandedFeature(null);
-            trackModalClose(featureId);
         } else {
             setExpandedFeature(featureId);
+            // Track modal unfold event
+            trackModalUnfold(featureId);
         }
     };
 

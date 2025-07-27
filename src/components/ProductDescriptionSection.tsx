@@ -1,7 +1,8 @@
 'use client';
 
+import { trackCTAClick, trackScrollToProductDescription } from '@/lib/firebase';
 import { ArrowRight, Clock, Crosshair, Lightbulb, Magnet, Radar, Smartphone, Target, Zap } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ContactForm } from './ContactForm';
 import { RippleButton } from './RippleButton';
 
@@ -87,12 +88,46 @@ export function ProductDescriptionSection() {
     const [hoveredBenefit, setHoveredBenefit] = useState<string | null>(null);
     const [isMainContentVisible, setIsMainContentVisible] = useState(false);
     const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+    const [hasTrackedScroll, setHasTrackedScroll] = useState(false);
+    const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         // Simple entrance animation
         const timer = setTimeout(() => setIsMainContentVisible(true), 100);
         return () => clearTimeout(timer);
     }, []);
+
+    // Scroll tracking with delay to prevent immediate triggering
+    useEffect(() => {
+        // Add a delay to ensure page has fully loaded and settled
+        const delayTimer = setTimeout(() => {
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting && !hasTrackedScroll) {
+                        // Additional delay to ensure this is actual scrolling, not initial page load
+                        setTimeout(() => {
+                            if (!hasTrackedScroll) {
+                                trackScrollToProductDescription();
+                                setHasTrackedScroll(true);
+                            }
+                        }, 500);
+                    }
+                },
+                {
+                    threshold: 0.5, // Require 50% of the section to be visible
+                    rootMargin: '-100px 0px' // Only trigger when section is 100px into viewport
+                }
+            );
+
+            if (sectionRef.current) {
+                observer.observe(sectionRef.current);
+            }
+
+            return () => observer.disconnect();
+        }, 2000); // Wait 2 seconds after component mount before setting up observer
+
+        return () => clearTimeout(delayTimer);
+    }, [hasTrackedScroll]);
 
     const benefitCards = [
         {
@@ -134,7 +169,7 @@ export function ProductDescriptionSection() {
 
     return (
         <>
-            <section className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <section ref={sectionRef} className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
                 {/* Enhanced animated background */}
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl animate-pulse"></div>
@@ -252,7 +287,10 @@ export function ProductDescriptionSection() {
                             </p>
                             <RippleButton
                                 className="btn-primary flex items-center justify-center gap-2 group mx-auto"
-                                onClick={() => setIsContactFormOpen(true)}
+                                onClick={() => {
+                                    trackCTAClick('product_description_section_order');
+                                    setIsContactFormOpen(true);
+                                }}
                             >
                                 Zamów Aimora
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

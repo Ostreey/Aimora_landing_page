@@ -1,5 +1,6 @@
 'use client';
 
+import { trackVideoFinished, trackVideoStarted } from '@/lib/firebase';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function VideoSection() {
@@ -8,6 +9,7 @@ export function VideoSection() {
     const [isLoading, setIsLoading] = useState(true);
     const [loadProgress, setLoadProgress] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
+    const [hasTrackedVideoStart, setHasTrackedVideoStart] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -32,12 +34,22 @@ export function VideoSection() {
 
     const handlePlay = () => {
         setIsPlaying(true);
+        // Track video started event only on first click
+        if (!hasTrackedVideoStart) {
+            trackVideoStarted();
+            setHasTrackedVideoStart(true);
+        }
         // Actually start playing the video when the blue button is clicked
         if (videoRef.current) {
             videoRef.current.play().catch((error) => {
                 console.error('Error playing video:', error);
             });
         }
+    };
+
+    const handleVideoEnded = () => {
+        // Track video finished event
+        trackVideoFinished();
     };
 
     const handleVideoLoad = () => {
@@ -177,6 +189,7 @@ export function VideoSection() {
                                     setIsLoaded(true);
                                     setIsLoading(false);
                                 }}
+                                onEnded={handleVideoEnded}
                             >
                                 <source src="/videos/vid.mp4" type="video/mp4" />
                                 Twoja przeglądarka nie obsługuje odtwarzania wideo.

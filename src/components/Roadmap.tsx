@@ -1,17 +1,24 @@
 'use client';
 
+import { trackScrollToRoadmap } from '@/lib/firebase';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Target, Users, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function Roadmap() {
     const [isVisible, setIsVisible] = useState(false);
+    const [hasTrackedScroll, setHasTrackedScroll] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
+                    // Track scroll to roadmap event (once)
+                    if (!hasTrackedScroll) {
+                        trackScrollToRoadmap();
+                        setHasTrackedScroll(true);
+                    }
                 }
             },
             { threshold: 0.1 }
@@ -21,7 +28,7 @@ export function Roadmap() {
         if (element) observer.observe(element);
 
         return () => observer.disconnect();
-    }, []);
+    }, [hasTrackedScroll]);
 
     const roadmapItems = [
         {

@@ -1,6 +1,6 @@
 'use client';
 
-import { logEvent } from '@/lib/firebase';
+import { trackFormSend } from '@/lib/firebase';
 import { useState } from 'react';
 
 interface ContactFormData {
@@ -70,13 +70,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
             if (response.ok) {
                 setIsSuccess(true);
                 // Track successful form submission
-                logEvent('contact_form_submitted', {
-                    name_provided: !!formData.name,
-                    phone_provided: !!formData.phone,
-                    message_length: formData.message.length,
-                    event_category: 'lead_generation'
-                });
-
+                trackFormSend();
                 // Reset form after 3 seconds and close modal
                 setTimeout(() => {
                     setFormData({ name: '', email: '', phone: '', message: '' });
