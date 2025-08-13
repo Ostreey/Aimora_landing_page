@@ -3,10 +3,13 @@
 import { trackFormSend } from '@/lib/firebase';
 import { useState } from 'react';
 
+const PROMO_PRICE_PLN = 150;
+
 interface ContactFormData {
     name: string;
     email: string;
     phone: string;
+    quantity: number;
     message: string;
 }
 
@@ -20,14 +23,15 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
         name: '',
         email: '',
         phone: '',
+        quantity: 1,
         message: ''
     });
-    const [errors, setErrors] = useState<Partial<ContactFormData>>({});
+    const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
     const validateForm = (): boolean => {
-        const newErrors: Partial<ContactFormData> = {};
+        const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
 
         if (!formData.name.trim()) {
             newErrors.name = 'Imię jest wymagane';
@@ -41,8 +45,12 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
 
         if (!formData.message.trim()) {
             newErrors.message = 'Treść zapytania jest wymagana';
-        } else if (formData.message.trim().length < 10) {
-            newErrors.message = 'Treść zapytania musi mieć co najmniej 10 znaków';
+        } else if (formData.message.trim().length < 5) {
+            newErrors.message = 'Treść zapytania musi mieć co najmniej 5 znaków';
+        }
+
+        if (!Number.isFinite(formData.quantity) || formData.quantity < 1) {
+            newErrors.quantity = 'Podaj liczbę kompletów (min. 1)';
         }
 
         setErrors(newErrors);
@@ -73,7 +81,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 trackFormSend();
                 // Reset form after 3 seconds and close modal
                 setTimeout(() => {
-                    setFormData({ name: '', email: '', phone: '', message: '' });
+                    setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
                     setIsSuccess(false);
                     onClose();
                 }, 3000);
@@ -103,7 +111,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
             onClose();
             // Reset form when closing
             setTimeout(() => {
-                setFormData({ name: '', email: '', phone: '', message: '' });
+                setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
                 setErrors({});
                 setIsSuccess(false);
             }, 300);
@@ -130,6 +138,17 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                             ×
                         </button>
                     </div>
+                    {/* Promo badge */}
+                    <div className="mt-4">
+                        <span className="inline-block">
+                            {/* use the same style as other sections */}
+                            {/* lightweight import avoidance: reusing markup would require importing component, but it's fine to keep here minimal */}
+                            <span className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 border border-gray-200 shadow-sm px-4 py-2 text-sm font-semibold">
+                                <span className="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-bold bg-[#017da0] text-black">PROMOCJA</span>
+                                <span className="text-gray-700">150 zł / komplet — detektor + wskaźnik LED (dla pierwszych klientów)</span>
+                            </span>
+                        </span>
+                    </div>
                 </div>
 
                 {/* Success State */}
@@ -148,6 +167,39 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 {/* Form */}
                 {!isSuccess && (
                     <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                        {/* Quantity Field */}
+                        <div>
+                            <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
+                                Ilość kompletów <span className="text-red-500">*</span>
+                            </label>
+                            <div className="flex items-center gap-3">
+                                <input
+                                    type="number"
+                                    id="quantity"
+                                    name="quantity"
+                                    min={1}
+                                    step={1}
+                                    value={formData.quantity}
+                                    onChange={(e) => {
+                                        const val = parseInt(e.target.value, 10);
+                                        setFormData(prev => ({ ...prev, quantity: Number.isFinite(val) ? Math.max(1, val) : 1 }));
+                                        if (errors.quantity) setErrors(prev => ({ ...prev, quantity: '' }));
+                                    }}
+                                    className={`w-28 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.quantity ? 'border-red-500' : 'border-gray-300'}`}
+                                    placeholder="1"
+                                    disabled={isSubmitting}
+                                />
+                                <div className="text-sm text-gray-700">
+                                    <div>
+                                        Cena promocyjna: <span className="font-semibold">{PROMO_PRICE_PLN} zł</span> / komplet
+                                    </div>
+                                    <div>
+                                        Razem: <span className="font-semibold">{PROMO_PRICE_PLN} zł × {formData.quantity} = {PROMO_PRICE_PLN * (Number.isFinite(formData.quantity) ? formData.quantity : 1)} zł</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
+                        </div>
                         {/* Name Field */}
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -227,7 +279,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full bg-[#017da0] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#015a7a] focus:ring-2 focus:ring-[#017da0] focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full bg-orange-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-600 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {isSubmitting ? (
                                     <div className="flex items-center justify-center">

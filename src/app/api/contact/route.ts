@@ -4,28 +4,32 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
-    try {
-        const { name, email, phone, message } = await request.json();
+  try {
+    const { name, email, phone, quantity, message } = await request.json();
 
-        // Validation
-        if (!name || !email || !message) {
-            return NextResponse.json(
-                { error: 'Wymagane pola: imię, email, treść zapytania' },
-                { status: 400 }
-            );
-        }
+    // Validation
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { error: 'Wymagane pola: imię, email, treść zapytania' },
+        { status: 400 }
+      );
+    }
 
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return NextResponse.json(
-                { error: 'Nieprawidłowy format adresu email' },
-                { status: 400 }
-            );
-        }
+    const qty = Number.isFinite(Number(quantity)) ? Math.max(1, Number(quantity)) : 1;
+    const unitPrice = 150; // PLN
+    const total = unitPrice * qty;
 
-        // Prepare email content
-        const emailHtml = `
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Nieprawidłowy format adresu email' },
+        { status: 400 }
+      );
+    }
+
+    // Prepare email content
+    const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #017da0, #0299bb); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
           <h1 style="margin: 0; font-size: 24px;">Nowe zapytanie - Aimora</h1>
@@ -60,6 +64,15 @@ export async function POST(request: NextRequest) {
               <p style="margin: 0; line-height: 1.6; color: #333;">${message.replace(/\n/g, '<br>')}</p>
             </div>
           </div>
+
+          <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-top: 16px;">
+            <h2 style="color: #017da0; margin-top: 0;">Szczegóły zamówienia:</h2>
+            <div style="margin: 15px 0; color: #333;">
+              <div><strong>Ilość kompletów:</strong> <span style="margin-left: 8px; color: #666;">${qty}</span></div>
+              <div><strong>Cena promocyjna:</strong> <span style="margin-left: 8px; color: #666;">${unitPrice} zł / komplet</span></div>
+              <div><strong>Suma:</strong> <span style="margin-left: 8px; color: #666; font-weight: 700;">${total} zł</span></div>
+            </div>
+          </div>
           
           <div style="text-align: center; margin-top: 25px; color: #666; font-size: 12px;">
             <p>Email wysłany automatycznie z formularza kontaktowego Aimora</p>
@@ -69,28 +82,28 @@ export async function POST(request: NextRequest) {
       </div>
     `;
 
-        // Send email using Resend
-        const data = await resend.emails.send({
-            from: 'Aimora Website <onboarding@resend.dev>',
-            to: [process.env.CONTACT_EMAIL || 'your-email@example.com'],
-            subject: `Nowe zapytanie Aimora - ${name}`,
-            html: emailHtml,
-            replyTo: email,
-        });
+    // Send email using Resend
+    const data = await resend.emails.send({
+      from: 'Aimora Website <onboarding@resend.dev>',
+      to: [process.env.CONTACT_EMAIL || 'your-email@example.com'],
+      subject: `Nowe zapytanie Aimora - ${name}`,
+      html: emailHtml,
+      replyTo: email,
+    });
 
-        console.log('Email sent successfully:', data);
+    console.log('Email sent successfully:', data);
 
-        return NextResponse.json(
-            { message: 'Email wysłany pomyślnie', id: (data as any).id },
-            { status: 200 }
-        );
+    return NextResponse.json(
+      { message: 'Email wysłany pomyślnie', id: (data as any).id },
+      { status: 200 }
+    );
 
-    } catch (error) {
-        console.error('Error sending email:', error);
+  } catch (error) {
+    console.error('Error sending email:', error);
 
-        return NextResponse.json(
-            { error: 'Błąd podczas wysyłania emaila' },
-            { status: 500 }
-        );
-    }
+    return NextResponse.json(
+      { error: 'Błąd podczas wysyłania emaila' },
+      { status: 500 }
+    );
+  }
 } 

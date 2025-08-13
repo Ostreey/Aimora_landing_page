@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { ContactForm } from './ContactForm';
+import { PromoBadge } from './PromoBadge';
 import { RippleButton } from './RippleButton';
 
 export function CTA() {
@@ -41,6 +42,17 @@ export function CTA() {
                         >
                             Przekształć swój trening w profesjonalne doświadczenie pełne emocji.
                         </motion.p>
+
+                        {/* Promo strip */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.15 }}
+                            viewport={{ once: true }}
+                            className="mb-6"
+                        >
+                            <PromoBadge variant="onDark" text="150 zł / komplet — detektor + wskaźnik LED (limitowana pula)" />
+                        </motion.div>
 
 
                         {/* CTA Buttons */}
