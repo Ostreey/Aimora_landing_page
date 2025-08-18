@@ -1,5 +1,7 @@
 'use client'
+import { trackGAEvent } from '@/lib/firebase';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 // Smooth scroll to section function
@@ -19,6 +21,7 @@ export function NavBar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
+    const pathname = usePathname();
 
     // This effect now only cares about setting the active section on scroll
     useEffect(() => {
@@ -55,18 +58,35 @@ export function NavBar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Close mobile menu when clicking on a link
-    const handleMobileMenuClick = () => {
-        setMobileMenuOpen(false);
-    };
-
     const getNavButtonClass = (sectionId: string) => {
         const baseClass = "font-semibold text-lg py-2 px-2 border-b-2 transition-all duration-200 font-barlow";
+        // If we are on a subpage, don't highlight scroll-based links
+        if (pathname !== '/') {
+            return `${baseClass} text-white/90 hover:text-[#00B2E3] border-transparent hover:border-[#00B2E3]`;
+        }
         const isActive = activeSection === sectionId;
         if (isActive) {
             return `${baseClass} text-[#00B2E3] border-[#00B2E3]`;
         }
         return `${baseClass} text-white/90 hover:text-[#00B2E3] border-transparent hover:border-[#00B2E3]`;
+    };
+
+    const getSubpageNavClass = (path: string, isMobile = false) => {
+        const baseClass = isMobile
+            ? "text-white text-2xl font-semibold py-4 px-6 border-b-2 transition-all duration-200 font-barlow"
+            : "font-semibold text-lg py-2 px-2 border-b-2 transition-all duration-200 font-barlow";
+
+        const isActive = pathname === path;
+
+        if (isActive) {
+            return `${baseClass} text-[#00B2E3] border-[#00B2E3]`;
+        }
+        return `${baseClass} text-white/90 hover:text-[#00B2E3] border-transparent hover:border-[#00B2E3]`;
+    };
+
+    // Close mobile menu when clicking on a link
+    const handleMobileMenuClick = () => {
+        setMobileMenuOpen(false);
     };
 
     useEffect(() => {
@@ -104,8 +124,8 @@ export function NavBar() {
                             <Link href="/#jak-to-dziala" onClick={() => scrollToSection('jak-to-dziala')} className={getNavButtonClass('jak-to-dziala')}>Jak to działa?</Link>
                             <Link href="/#aplikacja-mobilna" onClick={() => scrollToSection('aplikacja-mobilna')} className={getNavButtonClass('aplikacja-mobilna')}>Aplikacja mobilna</Link>
                             <Link href="/#mapa-rozwoju" onClick={() => scrollToSection('mapa-rozwoju')} className={getNavButtonClass('mapa-rozwoju')}>Roadmap</Link>
-                            <Link href="/eventy" className="font-semibold text-lg py-2 px-2 border-b-2 transition-all duration-200 font-barlow text-white/90 hover:text-[#00B2E3] border-transparent hover:border-[#00B2E3]">
-                                Eventy
+                            <Link href="/wypozyczenie" className={getSubpageNavClass('/wypozyczenie')} onClick={() => trackGAEvent('clicked_rental_page')}>
+                                Wypożyczenie
                             </Link>
                         </div>
 
@@ -147,8 +167,8 @@ export function NavBar() {
                         <Link href="/#mapa-rozwoju" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
                             Roadmap
                         </Link>
-                        <Link href="/eventy" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Eventy
+                        <Link href="/wypozyczenie" onClick={() => { handleMobileMenuClick(); trackGAEvent('clicked_rental_page'); }} className={getSubpageNavClass('/wypozyczenie', true)}>
+                            Wypożyczenie
                         </Link>
                     </div>
                 </div>
