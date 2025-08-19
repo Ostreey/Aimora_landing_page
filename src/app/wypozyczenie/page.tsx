@@ -199,7 +199,7 @@ export default function WypozyczeniePage() {
                     {/* Opinia klienta */}
                     <div className="max-w-3xl mx-auto text-center">
                         <blockquote className="text-xl italic text-gray-300 border-l-4 border-[#00B2E3] pl-6">
-                            <p>"Aimora okazała się strzałem w dziesiątkę na naszym pikniku firmowym. Uczestnicy byli zachwyceni, a profesjonalna obsługa zadbała o wszystko. To atrakcja, która naprawdę angażuje i integruje!"</p>
+                            <p>&quot;Aimora okazała się strzałem w dziesiątkę na naszym pikniku firmowym. Uczestnicy byli zachwyceni, a profesjonalna obsługa zadbała o wszystko. To atrakcja, która naprawdę angażuje i integruje!&quot;</p>
                         </blockquote>
                         <cite className="block mt-4 text-gray-400 not-italic">
                             - Jan Kowalski, Event Manager, Firma XYZ

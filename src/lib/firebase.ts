@@ -95,20 +95,18 @@ export const logEvent = (eventName: string, parameters?: Record<string, any>) =>
 // CTA tracking function
 export const trackCTAClick = (ctaName: string) => {
   if (typeof window !== 'undefined') {
-    const analytics = getAnalytics(app);
-    logEvent(analytics, 'cta_click', {
+    logEvent('cta_click', {
       name: ctaName,
     });
   }
 };
 
 export const trackGAEvent = (eventName: string, params?: { [key: string]: any }) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, params);
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', eventName, params);
   } else if (typeof window !== 'undefined') {
     // Fallback for Firebase Analytics if gtag is not present
-    const analytics = getAnalytics(app);
-    logEvent(analytics, eventName, params);
+    logEvent(eventName, params);
   }
 };
 
