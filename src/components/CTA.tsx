@@ -51,7 +51,7 @@ export function CTA() {
                             viewport={{ once: true }}
                             className="mb-6"
                         >
-                            <PromoBadge variant="onDark" text="150 zł / komplet — detektor + wskaźnik LED (limitowana pula)" />
+                            <PromoBadge variant="onDark" text="199 zł / komplet — detektor + wskaźnik LED (limitowana pula)" />
                         </motion.div>
 
 
