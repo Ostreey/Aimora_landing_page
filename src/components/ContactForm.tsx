@@ -149,7 +149,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                             {/* lightweight import avoidance: reusing markup would require importing component, but it's fine to keep here minimal */}
                             <span className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 border border-gray-200 shadow-sm px-4 py-2 text-sm font-semibold">
                                 <span className="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-bold bg-[#017da0] text-black">PROMOCJA</span>
-                                <span className="text-gray-700">150 zł / komplet — detektor + wskaźnik LED (dla pierwszych klientów)</span>
+                                <span className="text-gray-700">{PROMO_PRICE_PLN} zł / komplet — detektor + wskaźnik LED  (ilość ograniczona)</span>
                             </span>
                         </span>
                     </div>
