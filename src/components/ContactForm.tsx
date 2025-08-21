@@ -9,7 +9,7 @@ interface ContactFormData {
     name: string;
     email: string;
     phone: string;
-    quantity: number;
+    quantity: number | string;
     message: string;
 }
 
@@ -26,6 +26,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
         quantity: 1,
         message: ''
     });
+    const [quantityInput, setQuantityInput] = useState<string>('1');
     const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -49,7 +50,8 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
             newErrors.message = 'Treść zapytania musi mieć co najmniej 5 znaków';
         }
 
-        if (!Number.isFinite(formData.quantity) || formData.quantity < 1) {
+        const quantity = typeof formData.quantity === 'string' ? parseInt(formData.quantity, 10) : formData.quantity;
+        if (!Number.isFinite(quantity) || quantity < 1) {
             newErrors.quantity = 'Podaj liczbę kompletów (min. 1)';
         }
 
@@ -82,6 +84,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 // Reset form after 3 seconds and close modal
                 setTimeout(() => {
                     setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
+                    setQuantityInput('1');
                     setIsSuccess(false);
                     onClose();
                 }, 3000);
@@ -112,6 +115,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
             // Reset form when closing
             setTimeout(() => {
                 setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
+                setQuantityInput('1');
                 setErrors({});
                 setIsSuccess(false);
             }, 300);
@@ -179,22 +183,43 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                     name="quantity"
                                     min={1}
                                     step={1}
-                                    value={formData.quantity}
+                                    value={quantityInput}
                                     onChange={(e) => {
-                                        const val = parseInt(e.target.value, 10);
-                                        setFormData(prev => ({ ...prev, quantity: Number.isFinite(val) ? Math.max(1, val) : 1 }));
+                                        const inputValue = e.target.value;
+                                        setQuantityInput(inputValue);
+
+                                        // Update form data only if it's a valid number
+                                        if (inputValue === '') {
+                                            setFormData(prev => ({ ...prev, quantity: 1 }));
+                                        } else {
+                                            const val = parseInt(inputValue, 10);
+                                            if (Number.isFinite(val) && val >= 1) {
+                                                setFormData(prev => ({ ...prev, quantity: val }));
+                                            }
+                                        }
+
                                         if (errors.quantity) setErrors(prev => ({ ...prev, quantity: '' }));
                                     }}
+                                    onBlur={(e) => {
+                                        // Ensure minimum value of 1 when user leaves the field
+                                        const val = parseInt(e.target.value, 10);
+                                        if (!Number.isFinite(val) || val < 1) {
+                                            setQuantityInput('1');
+                                            setFormData(prev => ({ ...prev, quantity: 1 }));
+                                        }
+                                    }}
                                     className={`w-28 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.quantity ? 'border-red-500' : 'border-gray-300'}`}
-                                    placeholder="1"
+                                    placeholder="Podaj ilość"
                                     disabled={isSubmitting}
+                                    inputMode="numeric"
+                                    pattern="[0-9]*"
                                 />
                                 <div className="text-sm text-gray-700">
                                     <div>
                                         Cena promocyjna: <span className="font-semibold">{PROMO_PRICE_PLN} zł</span> / komplet
                                     </div>
                                     <div>
-                                        Razem: <span className="font-semibold">{PROMO_PRICE_PLN} zł × {formData.quantity} = {PROMO_PRICE_PLN * (Number.isFinite(formData.quantity) ? formData.quantity : 1)} zł</span>
+                                        Razem: <span className="font-semibold">{PROMO_PRICE_PLN} zł × {formData.quantity} = {PROMO_PRICE_PLN * (typeof formData.quantity === 'number' ? formData.quantity : 1)} zł</span>
                                     </div>
                                 </div>
                             </div>
