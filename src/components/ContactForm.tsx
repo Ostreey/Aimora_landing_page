@@ -3,7 +3,7 @@
 import { trackFormSend } from '@/lib/firebase';
 import { useState } from 'react';
 
-const PROMO_PRICE_PLN = 199;
+const PROMO_PRICE_PLN = 250;
 
 interface ContactFormData {
     name: string;

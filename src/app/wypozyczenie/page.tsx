@@ -138,6 +138,7 @@ export default function WypozyczeniePage() {
             </section>
 
             {/* Sekcja "Galeria" */}
+            {/*
             <section className="py-12 bg-black">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Zobacz Aimora w akcji!</h2>
@@ -181,32 +182,9 @@ export default function WypozyczeniePage() {
                     </div>
                 </div>
             </section>
+            */}
 
-            {/* Sekcja "Zaufali nam" */}
-            <section className="py-12 bg-black relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black"></div>
-                <div className="container mx-auto px-4 relative">
-                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Zaufali nam organizatorzy</h2>
 
-                    {/* Logotypy partnerów */}
-                    <div className="flex justify-center items-center space-x-8 md:space-x-12 opacity-60 mb-12">
-                        <img src="https://via.placeholder.com/150x50.png/334155/ffffff?text=Logo+Klienta+1" alt="Logo klienta 1" className="h-10" />
-                        <img src="https://via.placeholder.com/150x50.png/334155/ffffff?text=Logo+Klienta+2" alt="Logo klienta 2" className="h-10" />
-                        <img src="https://via.placeholder.com/150x50.png/334155/ffffff?text=Logo+Klienta+3" alt="Logo klienta 3" className="h-10 hidden sm:block" />
-                        <img src="https://via.placeholder.com/150x50.png/334155/ffffff?text=Logo+Klienta+4" alt="Logo klienta 4" className="h-10 hidden md:block" />
-                    </div>
-
-                    {/* Opinia klienta */}
-                    <div className="max-w-3xl mx-auto text-center">
-                        <blockquote className="text-xl italic text-gray-300 border-l-4 border-[#00B2E3] pl-6">
-                            <p>&quot;Aimora okazała się strzałem w dziesiątkę na naszym pikniku firmowym. Uczestnicy byli zachwyceni, a profesjonalna obsługa zadbała o wszystko. To atrakcja, która naprawdę angażuje i integruje!&quot;</p>
-                        </blockquote>
-                        <cite className="block mt-4 text-gray-400 not-italic">
-                            - Jan Kowalski, Event Manager, Firma XYZ
-                        </cite>
-                    </div>
-                </div>
-            </section>
 
             {/* Sekcja FAQ */}
             <section className="py-12 bg-black">

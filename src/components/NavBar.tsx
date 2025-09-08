@@ -28,7 +28,7 @@ export function NavBar() {
         const handleScroll = () => {
             setScrolled(window.scrollY > 10);
 
-            const sections = ['home', 'aimora-w-akcji', 'jak-to-dziala', 'co-to-jest', 'kluczowe-funkcje', 'aplikacja-mobilna', 'mapa-rozwoju'];
+            const sections = ['home', 'aimora-w-akcji', 'testy-na-strzelnicy', 'jak-to-dziala', 'co-to-jest', 'kluczowe-funkcje', 'aplikacja-mobilna', 'mapa-rozwoju'];
             const scrollPosition = window.scrollY + window.innerHeight / 2;
 
             let currentSection = 'home';
@@ -121,6 +121,7 @@ export function NavBar() {
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center space-x-6">
                             <Link href="/#aimora-w-akcji" onClick={() => scrollToSection('aimora-w-akcji')} className={getNavButtonClass('aimora-w-akcji')}>Aimora w akcji</Link>
+                            <Link href="/#testy-na-strzelnicy" onClick={() => scrollToSection('testy-na-strzelnicy')} className={getNavButtonClass('testy-na-strzelnicy')}>Testy na strzelnicy</Link>
                             <Link href="/#jak-to-dziala" onClick={() => scrollToSection('jak-to-dziala')} className={getNavButtonClass('jak-to-dziala')}>Jak to działa?</Link>
                             <Link href="/#aplikacja-mobilna" onClick={() => scrollToSection('aplikacja-mobilna')} className={getNavButtonClass('aplikacja-mobilna')}>Aplikacja mobilna</Link>
                             <Link href="/#mapa-rozwoju" onClick={() => scrollToSection('mapa-rozwoju')} className={getNavButtonClass('mapa-rozwoju')}>Roadmap</Link>
@@ -157,6 +158,9 @@ export function NavBar() {
                     <div className="flex flex-col items-center justify-center h-full space-y-6 z-[10000] relative">
                         <Link href="/#aimora-w-akcji" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
                             Aimora w akcji
+                        </Link>
+                        <Link href="/#testy-na-strzelnicy" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                            Testy na strzelnicy
                         </Link>
                         <Link href="/#jak-to-dziala" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
                             Jak to działa?

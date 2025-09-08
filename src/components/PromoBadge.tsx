@@ -27,7 +27,7 @@ export function PromoBadge({ className, variant = 'onDark', text }: PromoBadgePr
                 PROMOCJA
             </span>
             <span className={cn('tracking-tight', isDark ? 'text-white/90' : 'text-gray-800')}>
-                {text ?? '199 zł / komplet — detektor + wskaźnik LED'}
+                {text ?? '250 zł / komplet — detektor + wskaźnik LED'}
             </span>
         </div>
     )

@@ -105,9 +105,6 @@ export function VideoSection() {
                         Zobacz <span className="text-[#017da0]">Aimora</span> w akcji
                     </h2>
                     <div className="w-32 h-1 bg-[#017da0] mx-auto mb-4 sm:mb-6 md:mb-8 rounded-full"></div>
-                    <p className="text-white/80 font-inter text-xl leading-relaxed max-w-3xl mx-auto">
-                        Zobacz jak Aimora zmienia sposób trenowania strzelectwa
-                    </p>
                 </div>
 
                 {/* Video Container */}

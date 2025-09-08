@@ -2,7 +2,7 @@ import { Analytics, logEvent as firebaseLogEvent, getAnalytics } from 'firebase/
 import { initializeApp } from 'firebase/app';
 
 // 🔧 DEBUG FLAG - Set to false to disable all debug output
-const ENABLE_DEBUG_MODE = false;
+const ENABLE_DEBUG_MODE = true;
 
 // Your web app's Firebase configuration (complete config from "landing page 2" stream)
 const firebaseConfig = {
@@ -110,11 +110,12 @@ export const trackGAEvent = (eventName: string, params?: { [key: string]: any })
   }
 };
 
-// Video tracking functions
+// Video tracking functions (for local video)
 export const trackVideoStarted = () => {
   logEvent('video_started', {
     device_type: getDeviceType(),
     event_category: 'engagement',
+    video_type: 'local',
   });
 };
 
@@ -122,6 +123,59 @@ export const trackVideoFinished = () => {
   logEvent('video_finished', {
     device_type: getDeviceType(),
     event_category: 'engagement',
+    video_type: 'local',
+  });
+};
+
+// YouTube Video tracking functions
+export const trackYouTubeVideoStarted = (videoId: string, videoTitle?: string) => {
+  logEvent('youtube_video_started', {
+    video_id: videoId,
+    video_title: videoTitle || `YouTube Video ${videoId}`,
+    device_type: getDeviceType(),
+    event_category: 'engagement',
+    video_type: 'youtube',
+  });
+};
+
+export const trackYouTubeVideoFinished = (videoId: string, duration: number, videoTitle?: string) => {
+  logEvent('youtube_video_finished', {
+    video_id: videoId,
+    video_title: videoTitle || `YouTube Video ${videoId}`,
+    video_duration: duration,
+    device_type: getDeviceType(),
+    event_category: 'engagement',
+    video_type: 'youtube',
+  });
+};
+
+export const trackYouTubeVideoProgress = (videoId: string, currentTime: number, duration: number, percentWatched: number, videoTitle?: string) => {
+  // Track progress at 25%, 50%, 75% milestones
+  const milestone = Math.floor(percentWatched / 25) * 25;
+
+  logEvent('youtube_video_progress', {
+    video_id: videoId,
+    video_title: videoTitle || `YouTube Video ${videoId}`,
+    current_time: Math.round(currentTime),
+    video_duration: Math.round(duration),
+    percent_watched: Math.round(percentWatched),
+    milestone: milestone,
+    device_type: getDeviceType(),
+    event_category: 'engagement',
+    video_type: 'youtube',
+  });
+};
+
+export const trackYouTubeVideoStopped = (videoId: string, currentTime: number, duration: number, percentWatched: number, videoTitle?: string) => {
+  logEvent('youtube_video_stopped', {
+    video_id: videoId,
+    video_title: videoTitle || `YouTube Video ${videoId}`,
+    stopped_at: Math.round(currentTime),
+    video_duration: Math.round(duration),
+    percent_watched: Math.round(percentWatched),
+    device_type: getDeviceType(),
+    event_category: 'engagement',
+    video_type: 'youtube',
   });
 };
 

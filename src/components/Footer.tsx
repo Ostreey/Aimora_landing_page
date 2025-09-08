@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from 'lucide-react'
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from 'lucide-react'
 
 const footerLinks = {
     product: [
@@ -18,8 +18,8 @@ const footerLinks = {
 }
 
 const socialLinks = [
-    { name: 'Facebook', icon: Facebook, href: '#' },
-    { name: 'Twitter', icon: Twitter, href: '#' },
+    { name: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61579315053188' },
+    { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/channel/UC2SS91L5WncZ48WJM1x72Qg' },
     { name: 'Instagram', icon: Instagram, href: '#' },
     { name: 'LinkedIn', icon: Linkedin, href: '#' }
 ]

@@ -116,4 +116,34 @@ Unlike traditional GA4 setups, Firebase SDK uses the built-in configuration, so:
 - **`select_promotion`** - When users click promotional CTAs
 - **Custom events** - App-specific interactions like swipes
 
-This creates a much more consistent and powerful analytics setup that works seamlessly with your existing mobile app analytics! 🎉 
+This creates a much more consistent and powerful analytics setup that works seamlessly with your existing mobile app analytics! 🎉
+
+## 📺 **Advanced YouTube Video Tracking**
+
+The website now includes comprehensive YouTube video analytics:
+
+### **Tracked Events:**
+- `youtube_video_started` - When YouTube video begins playing
+- `youtube_video_progress` - Milestone tracking (25%, 50%, 75% completion)
+- `youtube_video_stopped` - When user pauses/stops video
+- `youtube_video_finished` - When YouTube video completes
+
+### **Data Collected:**
+- `video_id` - YouTube video ID (e.g., "6n6qWvT0Uzs")
+- `video_title` - Descriptive title
+- `current_time` / `stopped_at` - Timestamp in seconds where event occurred
+- `video_duration` - Total video length in seconds
+- `percent_watched` - Percentage of video completed
+- `milestone` - Progress milestone (25, 50, 75 for progress events)
+- `device_type` - mobile/desktop
+
+### **YouTube Player API Integration:**
+- Uses official YouTube Player API for precise tracking
+- Tracks viewing behavior without interrupting user experience
+- Compatible with all YouTube features (fullscreen, quality selection, etc.)
+
+This allows you to analyze:
+- 📊 **Engagement**: How much of your videos people actually watch
+- ⏱️ **Drop-off Points**: Where users typically stop watching
+- 📱 **Device Preferences**: Mobile vs desktop video consumption
+- 🎯 **Content Performance**: Which videos drive the most engagement 
