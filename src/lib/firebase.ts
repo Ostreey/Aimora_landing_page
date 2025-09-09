@@ -2,7 +2,7 @@ import { Analytics, logEvent as firebaseLogEvent, getAnalytics } from 'firebase/
 import { initializeApp } from 'firebase/app';
 
 // 🔧 DEBUG FLAG - Set to false to disable all debug output
-const ENABLE_DEBUG_MODE = true;
+const ENABLE_DEBUG_MODE = false;
 
 // Your web app's Firebase configuration (complete config from "landing page 2" stream)
 const firebaseConfig = {
