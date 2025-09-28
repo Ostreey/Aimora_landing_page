@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     } else {
       // Build email for Purchase Inquiry (original logic)
       const qty = Number.isFinite(Number(quantity)) ? Math.max(1, Number(quantity)) : 1;
-      const unitPrice = 250; // PLN
+      const unitPrice = 350; // PLN
       const total = unitPrice * qty;
 
       emailHtml = `

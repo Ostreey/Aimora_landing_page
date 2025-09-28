@@ -40,7 +40,7 @@ export function Roadmap() {
             color: 'from-[#017da0] to-cyan-400'
         },
         {
-            date: '08.2025',
+            date: '10.2025',
             title: 'Nowa seria gier',
             description: 'Dodanie rozszerzonych trybów treningowych i zaawansowanych scenariuszy gier',
             icon: Calendar,
@@ -48,15 +48,15 @@ export function Roadmap() {
             color: 'from-blue-500 to-blue-400'
         },
         {
-            date: '11.2025',
-            title: 'Funkcja multiplayer',
-            description: 'Możliwość rozgrywek z innymi graczami znajdującymi się w zupełnie innym miejscu w czasie rzeczywistym',
+            date: '12.2025',
+            title: 'System kont dla strzelnic',
+            description: 'Dedykowane konta klientów strzelnic z zapisywaniem statystyk gier, porównywaniem osiągnięć i rankingami dla całej strzelnicy',
             icon: Users,
             status: 'planned',
             color: 'from-purple-500 to-purple-400'
         },
         {
-            date: '01.2026',
+            date: '02.2026',
             title: 'Zwiększenie zasięgu łączności',
             description: 'Rozszerzona łączność bezprzewodowa umożliwiająca treningi na większych dystansach',
             icon: Wifi,
@@ -64,7 +64,7 @@ export function Roadmap() {
             color: 'from-green-500 to-green-400'
         },
         {
-            date: '05.2026',
+            date: '07.2026',
             title: 'Dedykowana tarcza z precyzyjną lokalizacją',
             description: 'Zaawansowana tarcza z dokładną lokalizacją trafień wyświetlaną w czasie rzeczywistym w aplikacji. Koniec z chodzeniem do celu lub instalowaniem kamer - wszystkie szczegóły widoczne natychmiast na ekranie telefonu',
             icon: MapPin,

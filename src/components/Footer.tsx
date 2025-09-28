@@ -25,7 +25,7 @@ const socialLinks = [
 ]
 
 const contactInfo = [
-    { icon: Mail, text: 'davosmartsolutions@gmail.com' },
+    { icon: Mail, text: 'biuro@aimora.pl' },
     { icon: Phone, text: '+48 605 048 487' },
     { icon: MapPin, text: 'ul. Górczewska 200, Warszawa, 01-460' }
 ]

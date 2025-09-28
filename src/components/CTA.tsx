@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { ContactForm } from './ContactForm';
-import { PromoBadge } from './PromoBadge';
 import { RippleButton } from './RippleButton';
 
 export function CTA() {
@@ -51,7 +50,9 @@ export function CTA() {
                             viewport={{ once: true }}
                             className="mb-6"
                         >
-                            <PromoBadge variant="onDark" text="250 zł / komplet — detektor + wskaźnik LED (limitowana pula)" />
+                            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full text-lg font-semibold">
+                                <span>350 zł / komplet — detektor + wskaźnik LED</span>
+                            </div>
                         </motion.div>
 
 
@@ -91,7 +92,7 @@ export function CTA() {
                         >
                             <div className="inline-flex items-center gap-2 bg-[#017da0]/20 text-[#017da0] px-6 py-2 rounded-full text-sm font-medium mb-4">
                                 <Clock className="w-4 h-4" />
-                                Ograniczona dostępność
+                                Dostępne od zaraz
                             </div>
                             <p className="text-white/60 text-sm">
                                 Skontaktuj się z nami już dziś i zacznij trenować na profesjonalnym poziomie
