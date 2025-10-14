@@ -2,6 +2,7 @@
 
 import { Play, Settings, Trophy } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { DownloadButton } from './DownloadButton';
 
 export function MobileAppSection() {
     const [isVisible, setIsVisible] = useState(false);
@@ -123,6 +124,24 @@ export function MobileAppSection() {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Download Section */}
+                <div className={`mt-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms' }}>
+                    <div className="text-center">
+                        <h3 className="text-white font-barlow font-bold text-2xl mb-6 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
+                            Pobierz aplikację Aimora
+                        </h3>
+
+                        <div className="flex justify-center">
+                            <DownloadButton
+                                apkUrl="/apk/app-release.apk"
+                                fileName="app-release.apk"
+                                version="1.0.0"
+                                className="max-w-sm"
+                            />
                         </div>
                     </div>
                 </div>
