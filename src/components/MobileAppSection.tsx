@@ -137,7 +137,7 @@ export function MobileAppSection() {
 
                         <div className="flex justify-center">
                             <DownloadButton
-                                apkUrl="/apk/app-release.apk"
+                                apkUrl={`/apk/app-release.apk?v=${new Date().getTime()}`}
                                 fileName="app-release.apk"
                                 version="1.0.0"
                                 className="max-w-sm"
