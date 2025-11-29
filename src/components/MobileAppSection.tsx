@@ -139,7 +139,7 @@ export function MobileAppSection() {
                             <DownloadButton
                                 apkUrl={`/apk/app-release.apk?v=${new Date().getTime()}`}
                                 fileName="app-release.apk"
-                                version="1.2"
+                                version="1.3"
                                 className="max-w-sm"
                             />
                         </div>
