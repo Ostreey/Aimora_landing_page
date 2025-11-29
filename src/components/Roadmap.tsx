@@ -2,7 +2,7 @@
 
 import { trackScrollToRoadmap } from '@/lib/firebase';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Target, Users, Wifi } from 'lucide-react';
+import { Calendar, MapPin, Target, Trophy, Users, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function Roadmap() {
@@ -36,35 +36,43 @@ export function Roadmap() {
             title: 'Pierwsza wersja',
             description: 'Podstawowa funkcjonalność systemu treningowego z mobilną aplikacją i bezprzewodowymi celami',
             icon: Target,
-            status: 'current',
+            status: 'completed',
             color: 'from-[#017da0] to-cyan-400'
         },
         {
-            date: '10.2025',
+            date: '11.2025',
             title: 'Nowa seria gier',
-            description: 'Dodanie rozszerzonych trybów treningowych i zaawansowanych scenariuszy gier',
+            description: 'Dodanie nowej serii gier multiplayer - Zakładnik, Pojedynek oraz popularna na zawodach rozgrywka Shoot-off',
             icon: Calendar,
-            status: 'planned',
+            status: 'completed',
             color: 'from-blue-500 to-blue-400'
         },
         {
-            date: '12.2025',
+            date: '02.2026',
             title: 'System kont dla strzelnic',
             description: 'Dedykowane konta klientów strzelnic z zapisywaniem statystyk gier, porównywaniem osiągnięć i rankingami dla całej strzelnicy',
             icon: Users,
-            status: 'planned',
+            status: 'current',
             color: 'from-purple-500 to-purple-400'
         },
         {
-            date: '02.2026',
-            title: 'Zwiększenie zasięgu łączności',
-            description: 'Rozszerzona łączność bezprzewodowa umożliwiająca treningi na większych dystansach',
+            date: '05.2026',
+            title: 'Zwiekszenie zasięgu oraz liczba podłączonych detektorów',
+            description: 'Zwiększenie zasięgu detektorów do 200 metrów oraz możliwość podłączenia do 100 detektorów jednocześnie',
             icon: Wifi,
             status: 'planned',
             color: 'from-green-500 to-green-400'
         },
         {
-            date: '07.2026',
+            date: '09.2026',
+            title: 'Tryb turniejowy',
+            description: 'Stworzenie trybu turniejowego dzięki któremu zautomatyzujesz swoje zawody strzeleckie, wszystkie statystyki i wyniki przechowasz bezpiecznie w chmurze oraz będziesz mógł konkurować z innymi organizacjami porównując swoje wyniki. Uczestnicy zawodów będą mogli śledzić na bieżąco przebieg zawodów w aplikacji na swoich telefonach',
+            icon: Trophy,
+            status: 'planned',
+            color: 'from-yellow-500 to-yellow-400'
+        },
+        {
+            date: '01.2027',
             title: 'Dedykowana tarcza z precyzyjną lokalizacją',
             description: 'Zaawansowana tarcza z dokładną lokalizacją trafień wyświetlaną w czasie rzeczywistym w aplikacji. Koniec z chodzeniem do celu lub instalowaniem kamer - wszystkie szczegóły widoczne natychmiast na ekranie telefonu',
             icon: MapPin,
@@ -124,7 +132,7 @@ export function Roadmap() {
                                     className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col`}
                                 >
                                     {/* Timeline node - positioned differently for mobile vs desktop */}
-                                    <div className={`absolute left-3.5 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full border-4 border-black z-10 ${item.status === 'current' ? 'bg-gradient-to-r from-orange-500 to-orange-400' : 'bg-gradient-to-r from-[#017da0] to-cyan-400'}`}></div>
+                                    <div className={`absolute left-3.5 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full border-4 border-black z-10 ${item.status === 'current' ? 'bg-gradient-to-r from-orange-500 to-orange-400' : item.status === 'completed' ? 'bg-gradient-to-r from-green-500 to-green-400' : 'bg-gradient-to-r from-[#017da0] to-cyan-400'}`}></div>
 
                                     {/* Content card - full width on mobile, 5/12 on desktop */}
                                     <div className={`w-full md:w-5/12 pl-12 md:pl-0 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8 md:text-right'}`}>
@@ -139,8 +147,13 @@ export function Roadmap() {
                                                         {item.date}
                                                     </span>
                                                     {item.status === 'current' && (
-                                                        <span className="ml-2 px-2 py-1 bg-[#017da0]/20 text-[#017da0] text-xs rounded-full">
+                                                        <span className="ml-2 px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded-full">
                                                             Aktualnie
+                                                        </span>
+                                                    )}
+                                                    {item.status === 'completed' && (
+                                                        <span className="ml-2 px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">
+                                                            Ukończone
                                                         </span>
                                                     )}
                                                 </div>
