@@ -2,7 +2,7 @@
 
 
 import { trackModalUnfold } from '@/lib/firebase';
-import { Battery, ChevronDown, ChevronUp, Settings, Shield, Wifi } from 'lucide-react';
+import { Battery, ChevronDown, ChevronUp, Gamepad2, Settings, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface Feature {
@@ -40,24 +40,28 @@ const features: Feature[] = [
         technicalDetails: 'Akumulator wykorzystuje zaawansowane algorytmy zarządzania energią, które automatycznie dostosowują pobór mocy w zależności od intensywności użytkowania. System deep sleep redukuje zużycie energii do minimum podczas bezczynności.'
     },
     {
-        id: 'housing',
-        icon: Shield,
-        title: 'Obudowa LED-ów z poliuretanu',
-        shortDescription: 'Elastyczna osłona z poliuretanu chroniąca diody LED przed kulkami ASG, metalowymi kulkami i śrutem',
-        detailedDescription: 'Specjalna obudowa z termoplastycznego poliuretanu (CR-TPU) zapewnia pełną ochronę diod LED przed uszkodzeniami podczas strzałów. Zaawansowany materiał CR-TPU absorbuje uderzenia kulek ASG, metalowych kulek oraz śrutu z wiatrówek, zachowując pełną funkcjonalność wskaźników świetlnych.',
+        id: 'games-software',
+        icon: Gamepad2,
+        title: 'Rozbudowane gry i funkcje',
+        shortDescription: 'Typy gier: single player i multiplayer, rozgrywki turniejowe typu Shoot-off, tryb turniejowy oraz czasy split trafień',
+        detailedDescription: 'Aimora oferuje szeroki wybór gier zarówno dla pojedynczych graczy jak i w trybie multiplayer, gdzie dwóch graczy może grać jednocześnie. System zawiera rozgrywki turniejowe typu Shoot-off, które mogą zautomatyzować zawody strzeleckie, eliminując potrzebę ręcznego liczenia punktów i czasów.. Dodatkowo, system oferuje pomiar czasów split trafień, pozwalając na szczegółową analizę sesji strzeleckiej pomagając w ciągłym doskonaleniu umiejętności.',
         specs: [
-            { label: 'Materiał', value: 'CR-TPU ' },
-            { label: 'Wymiary osłony LED', value: '60mm x 14mm' },
-            { label: 'Typ ochrony', value: 'Kulki metalowe, ASG, śrut' },
-            { label: 'Temperatura pracy', value: '-20°C do +60°C' },
-            { label: 'Przepuszczalność światła', value: 'Wysoka' }
+            { label: 'Wolny trening', value: 'Single player' },
+            { label: 'Czasówka', value: 'Single player' },
+            { label: 'Max trafień', value: 'Single player' },
+            { label: 'Pojedynek', value: 'Tryb multiplayer' },
+            { label: 'Zakładnik', value: 'Single/Multiplayer' },
+            { label: 'Shoot-off', value: 'Tryb turniejowy' },
+            { label: 'Zombie', value: 'Single/Multiplayer' },
+            { label: 'Rewolwerowiec', value: 'Single/Multiplayer' }
         ],
         benefits: [
-            'Ochrona LED-ów przed uszkodzeniem',
-            'Zachowanie pełnej widoczności wskaźników',
-            'Długotrwała odporność na uderzenia'
+            'Świetna zabawa zarówno w pojedynkę jak i rywalizując z innymi graczami',
+            'Wsparcie dla sędziów, organizatorów zawodów oraz trenerów strzeleckich',
+            'Możliwość doskonalenia umiejętności dzięki statystykom i analizie sesji',
+            'Automatyczne zliczanie wyników i rankingi'
         ],
-        technicalDetails: 'Obudowa została zaprojektowana z uwzględnieniem analizy uderzeń i wibracji. Specjalne wzmocnienia w kluczowych miejscach zapewniają maksymalną ochronę komponentów elektronicznych podczas intensywnego użytkowania.'
+        technicalDetails: 'Oprogramowanie wykorzystuje zaawansowane algorytmy do analizy trafień i czasu reakcji. System automatycznie rejestruje każdy strzał z dokładnością do milisekundy, umożliwiając precyzyjny pomiar czasów split. Tryb turniejowy integruje się z systemem rankingowym, automatycznie generując wyniki i klasyfikacje. Rozgrywki ShootOff są w pełni zautomatyzowane, eliminując błędy ludzkie i zapewniając sprawiedliwe warunki dla wszystkich uczestników. Oprogramowanie oferuje szczegółowe statystyki, wizualizacje i raporty, które pomagają graczom w identyfikacji obszarów do poprawy.'
     },
     {
         id: 'firmware-updates',
@@ -81,7 +85,7 @@ const features: Feature[] = [
         detailedDescription: 'Zaawansowana komunikacja Bluetooth Low Energy 5.0 zapewnia stabilne połączenie w czasie rzeczywistym. System obsługuje jednoczesną komunikację z wieloma celami, przesyłając dane o trafieniach z minimalnym opóźnieniem.',
         specs: [
             { label: 'Standard', value: 'Bluetooth Low Energy 5.0' },
-            { label: 'Zasięg', value: 'do 30 metrów' },
+            { label: 'Zasięg', value: 'do 60 metrów' },
             { label: 'Opóźnienie', value: '<100ms' },
             { label: 'Jednoczesne cele', value: 'do 8 urządzeń' },
             { label: 'Częstotliwość', value: '2.4 GHz' },

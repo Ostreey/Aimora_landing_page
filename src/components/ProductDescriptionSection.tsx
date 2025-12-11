@@ -147,8 +147,8 @@ export function ProductDescriptionSection() {
         {
             id: 'led',
             icon: Lightbulb,
-            title: 'Podświetlane cele LED',
-            description: 'Dzięki diodom LED wiesz, który cel jest aktywny – idealne do trybów refleksowych i turniejowych.',
+            title: 'Podświetlane aktywnych celów RGB ',
+            description: 'Kolorowe diody umożliwia różnego typu gry w tym Multiplayer.',
             delay: 200
         },
         {
@@ -199,7 +199,7 @@ export function ProductDescriptionSection() {
                                         Nasze moduły wykrywają trafienia w czasie rzeczywistym i bezprzewodowo komunikują się z aplikacją mobilną, która oferuje różnorodne tryby rozgrywki, statystyki trafień, rankingi i dynamiczne scenariusze.
                                     </p>
                                     <p className="text-white/80 font-inter text-xl leading-relaxed font-bold group-hover:text-white/90 transition-colors duration-500">
-                                        Wskaźniki LED wskazują, w który cel należy trafić, a kompatybilność z ASG, wiatrówkami i bronią palną sprawia, że Aimora sprawdzi się w każdej sytuacji — niezależnie od poziomu zaawansowania.
+                                        Wskaźniki LED RGB z wymiennym odblaskiem, w pełni schowane za metalową tarczą, wskazują, w który cel należy trafić. Moduł LED nie ulega uszkodzeniu nawet przy odstrzeleniu odblasku - odblaski są tanie i bardzo łatwe w wymianie. Diody RGB umożliwiają zróżnicowanie gier poprzez różne kolory oraz rozgrywki, w których dwóch graczy może grać jednocześnie, każdy z własnym kolorem celu. Kompatybilność z ASG, wiatrówkami i bronią palną sprawia, że Aimora sprawdzi się w każdej sytuacji — niezależnie od poziomu zaawansowania.
                                     </p>
                                     <div className="pt-4 border-t border-gray-600/30 group-hover:border-[#017da0]/70 transition-all duration-500">
                                         <p className="text-[#017da0] font-inter text-xl leading-relaxed font-bold italic group-hover:text-cyan-400 transition-colors duration-500">
