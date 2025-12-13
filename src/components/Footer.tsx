@@ -1,5 +1,6 @@
 'use client'
 
+import type { Locale } from '@/lib/i18n'
 import { motion } from 'framer-motion'
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from 'lucide-react'
 
@@ -30,7 +31,20 @@ const contactInfo = [
     { icon: MapPin, text: 'ul. Górczewska 200, Warszawa, 01-460' }
 ]
 
-export function Footer() {
+export function Footer({ locale = 'pl' }: { locale?: Locale }) {
+    const links = locale === 'en' ? {
+        product: [
+            { name: 'Smart detectors', href: '#' },
+            { name: 'Mobile app', href: '#' },
+        ],
+        legal: [
+            { name: 'Privacy policy', href: '#' },
+            { name: 'Terms of use', href: '#' },
+            { name: 'Cookie policy', href: '#' },
+            { name: 'GDPR', href: '#' }
+        ]
+    } : footerLinks
+
     return (
         <footer className="border-t border-white/10">
             <div className="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-16 py-8 sm:py-12 md:py-16">
@@ -45,8 +59,9 @@ export function Footer() {
                     >
                         <h3 className="text-xl font-bold text-white mb-4">Aimora</h3>
                         <p className="annotation-note mb-6">
-                            Rewolucjonizujemy trening strzelecki dzięki inteligentnym detektorom trafień.
-                            Precyzyjne, interaktywne i innowacyjne rozwiązania treningowe.
+                            {locale === 'en'
+                                ? 'We revolutionize shooting training with smart hit detectors. Precise, interactive and innovative training solutions.'
+                                : 'Rewolucjonizujemy trening strzelecki dzięki inteligentnym detektorom trafień.\n                            Precyzyjne, interaktywne i innowacyjne rozwiązania treningowe.'}
                         </p>
 
                         <div className="space-y-3">
@@ -76,10 +91,10 @@ export function Footer() {
                         viewport={{ once: true }}
                     >
                         <h4 className="annotation-label mb-4">
-                            Produkt
+                            {locale === 'en' ? 'Product' : 'Produkt'}
                         </h4>
                         <ul className="space-y-3">
-                            {footerLinks.product.map((link, index) => (
+                            {links.product.map((link, index) => (
                                 <motion.li
                                     key={index}
                                     initial={{ opacity: 0, x: -20 }}
@@ -106,10 +121,10 @@ export function Footer() {
                         viewport={{ once: true }}
                     >
                         <h4 className="annotation-label mb-4">
-                            Informacje prawne
+                            {locale === 'en' ? 'Legal' : 'Informacje prawne'}
                         </h4>
                         <ul className="space-y-3">
-                            {footerLinks.legal.map((link, index) => (
+                            {links.legal.map((link, index) => (
                                 <motion.li
                                     key={index}
                                     initial={{ opacity: 0, x: -20 }}
@@ -139,7 +154,7 @@ export function Footer() {
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="annotation-note">
-                            © 2024 Aimora. Wszystkie prawa zastrzeżone.
+                            {locale === 'en' ? '© 2024 Aimora. All rights reserved.' : '© 2024 Aimora. Wszystkie prawa zastrzeżone.'}
                         </p>
 
                         <div className="flex items-center gap-4">

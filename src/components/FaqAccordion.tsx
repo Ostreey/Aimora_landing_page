@@ -1,8 +1,9 @@
 'use client';
 
+import type { Locale } from '@/lib/i18n';
 import { useState } from 'react';
 
-const faqData = [
+const faqDataPl = [
     {
         question: 'Ile czasu przed eventem muszę zarezerwować Aimorę?',
         answer: 'Im wcześniej, tym lepiej, szczególnie w sezonie letnim. Rekomendujemy rezerwację na 2-3 tygodnie przed terminem, ale zawsze warto zapytać o dostępne terminy last-minute.'
@@ -22,6 +23,29 @@ const faqData = [
     {
         question: 'Jaki jest koszt wynajmu?',
         answer: 'Koszt zależy od czasu trwania imprezy, liczby celów oraz zakresu obsługi. Każde zapytanie wyceniamy indywidualnie. Skontaktuj się z nami, a przygotujemy ofertę idealnie dopasowaną do Twojego wydarzenia.'
+    }
+];
+
+const faqDataEn = [
+    {
+        question: 'How far in advance should I book Aimora for an event?',
+        answer: 'The sooner, the better, especially during the summer season. We recommend booking 2–3 weeks in advance, but it is always worth asking about last‑minute availability.'
+    },
+    {
+        question: 'Is the attraction safe for children?',
+        answer: 'Yes. Safety is our priority. We use professional airsoft replicas shooting plastic BBs, and our instructors ensure all participants wear eye protection. The attraction is suitable for participants aged 10+.'
+    },
+    {
+        question: 'How many people can play at the same time?',
+        answer: 'A standard setup allows several people to play with smooth rotation, serving around 30 participants per hour. We can adapt the number of lanes to the size of your event.'
+    },
+    {
+        question: 'Do we need any special permits?',
+        answer: 'No. Aimora is treated as a recreational attraction and does not require any special firearms permits. It is quiet and fully mobile.'
+    },
+    {
+        question: 'What is the rental cost?',
+        answer: 'Pricing depends on the event duration, number of targets and the service scope. We quote each request individually. Contact us and we will prepare an offer tailored to your event.'
     }
 ];
 
@@ -48,8 +72,9 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: { question: string
     );
 };
 
-export function FaqAccordion() {
+export function FaqAccordion({ locale = 'pl' }: { locale?: Locale }) {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const faqData = locale === 'en' ? faqDataEn : faqDataPl;
 
     const handleClick = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);

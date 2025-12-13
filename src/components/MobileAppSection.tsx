@@ -1,10 +1,11 @@
 'use client';
 
 import { Play, Settings, Trophy } from 'lucide-react';
+import type { Locale } from '@/lib/i18n';
 import { useEffect, useState } from 'react';
 import { DownloadButton } from './DownloadButton';
 
-export function MobileAppSection() {
+export function MobileAppSection({ locale = 'pl' }: { locale?: Locale }) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -36,10 +37,12 @@ export function MobileAppSection() {
                 {/* Header */}
                 <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <h2 className="text-white font-barlow font-black text-4xl sm:text-5xl md:text-6xl leading-tight mb-8 bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
-                        Aplikacja mobilna
+                        {locale === 'en' ? 'Mobile app' : 'Aplikacja mobilna'}
                     </h2>
                     <p className="text-white/80 font-inter text-xl max-w-3xl mx-auto mb-8">
-                        Intuicyjny interfejs dla pełnej kontroli nad treningiem strzeleckim
+                        {locale === 'en'
+                            ? 'An intuitive interface for full control of your shooting training'
+                            : 'Intuicyjny interfejs dla pełnej kontroli nad treningiem strzeleckim'}
                     </p>
                     <div className="w-32 h-1 bg-[#017da0] mx-auto rounded-full"></div>
                 </div>
@@ -75,11 +78,12 @@ export function MobileAppSection() {
                             <div className="lg:col-span-3 space-y-8">
                                 <div className="mb-8">
                                     <h4 className="text-white font-barlow font-bold text-2xl mb-3 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-                                        Doświadczenie użytkownika
+                                        {locale === 'en' ? 'User experience' : 'Doświadczenie użytkownika'}
                                     </h4>
                                     <p className="text-white/80 font-inter text-lg leading-relaxed">
-                                        Zaprojektowana z myślą o maksymalnej wygodzie podczas treningu -
-                                        od szybkiego połączenia z celami po precyzyjną analizę wyników
+                                        {locale === 'en'
+                                            ? 'Designed for maximum comfort during training — from fast target pairing to precise performance analysis.'
+                                            : 'Zaprojektowana z myślą o maksymalnej wygodzie podczas treningu -\n                                        od szybkiego połączenia z celami po precyzyjną analizę wyników'}
                                     </p>
                                 </div>
 
@@ -89,10 +93,13 @@ export function MobileAppSection() {
                                             <Play className="w-6 h-6 text-white" />
                                         </div>
                                         <div className="flex-1">
-                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">Różnorodne tryby treningowe</h5>
+                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">
+                                                {locale === 'en' ? 'Varied training modes' : 'Różnorodne tryby treningowe'}
+                                            </h5>
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
-                                                Gra na czas, Rewolwerowiec, Pojedynek, Shoo-off i wiele innych - każdy znajdzie coś dla siebie.
-                                                Dynamiczny licznik i wizualizacja postępów motywują do lepszych wyników
+                                                {locale === 'en'
+                                                    ? 'Time trials, Gunslinger, Duel, Shoot-off and more — there’s something for everyone. A dynamic timer and progress visualization keep you pushing for better results.'
+                                                    : 'Gra na czas, Rewolwerowiec, Pojedynek, Shoo-off i wiele innych - każdy znajdzie coś dla siebie.\n                                                Dynamiczny licznik i wizualizacja postępów motywują do lepszych wyników'}
                                             </p>
                                         </div>
                                     </div>
@@ -102,10 +109,13 @@ export function MobileAppSection() {
                                             <Settings className="w-6 h-6 text-white" />
                                         </div>
                                         <div className="flex-1">
-                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">Zarządzanie celami</h5>
+                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">
+                                                {locale === 'en' ? 'Target management' : 'Zarządzanie celami'}
+                                            </h5>
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
-                                                Każdy szczegół pod kontrolą. Sprawdzaj stan baterii każdego czujnika, reguluj intensywność świecenia diod,
-                                                nazywaj urządzenia według własnych preferencji - &quot;Snajper&quot;, &quot;Okno&quot; czy &quot;Tarcza Alpha&quot;
+                                                {locale === 'en'
+                                                    ? 'Keep every detail under control. Check each sensor’s battery, adjust LED brightness and name devices your way — “Sniper”, “Window” or “Target Alpha”.'
+                                                    : 'Każdy szczegół pod kontrolą. Sprawdzaj stan baterii każdego czujnika, reguluj intensywność świecenia diod,\n                                                nazywaj urządzenia według własnych preferencji - &quot;Snajper&quot;, &quot;Okno&quot; czy &quot;Tarcza Alpha&quot;'}
                                             </p>
                                         </div>
                                     </div>
@@ -115,10 +125,13 @@ export function MobileAppSection() {
                                             <Trophy className="w-6 h-6 text-white" />
                                         </div>
                                         <div className="flex-1">
-                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">Analiza i postęp</h5>
+                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">
+                                                {locale === 'en' ? 'Analysis and progress' : 'Analiza i postęp'}
+                                            </h5>
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
-                                                Szczegółowe statystyki sesji, historia treningów i porównanie wyników.
-                                                Śledź swój rozwój i wyznaczaj nowe cele treningowe
+                                                {locale === 'en'
+                                                    ? 'Detailed session stats, training history and performance comparisons. Track your progress and set new goals.'
+                                                    : 'Szczegółowe statystyki sesji, historia treningów i porównanie wyników.\n                                                Śledź swój rozwój i wyznaczaj nowe cele treningowe'}
                                             </p>
                                         </div>
                                     </div>
@@ -132,7 +145,7 @@ export function MobileAppSection() {
                 <div className={`mt-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms' }}>
                     <div className="text-center">
                         <h3 className="text-white font-barlow font-bold text-2xl mb-6 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-                            Pobierz aplikację Aimora
+                            {locale === 'en' ? 'Download the Aimora app' : 'Pobierz aplikację Aimora'}
                         </h3>
 
                         <div className="flex justify-center">
@@ -141,6 +154,7 @@ export function MobileAppSection() {
                                 fileName="app-release.apk"
                                 version="1.3"
                                 className="max-w-sm"
+                                locale={locale}
                             />
                         </div>
                     </div>

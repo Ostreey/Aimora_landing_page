@@ -1,6 +1,7 @@
 'use client';
 
 import { trackCTAClick, trackScrollToProductDescription } from '@/lib/firebase';
+import type { Locale } from '@/lib/i18n';
 import { ArrowRight, Clock, Crosshair, Lightbulb, Magnet, Radar, Smartphone, Target, Zap } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { ContactForm } from './ContactForm';
@@ -32,7 +33,7 @@ function useCounter(end: number, duration: number = 2000) {
 }
 
 // Interactive stats component
-function InteractiveStats() {
+function InteractiveStats({ locale }: { locale: Locale }) {
     const { count: accuracy, startCounter: startAccuracy } = useCounter(99);
     const { count: responseTime, startCounter: startResponse } = useCounter(50);
     const { count: batteryLife, startCounter: startBattery } = useCounter(5);
@@ -64,27 +65,27 @@ function InteractiveStats() {
                     <Target className="w-full h-full" />
                 </div>
                 <div className="text-3xl font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">{accuracy}%</div>
-                <div className="text-xs text-white/60 group-hover:text-white/80 transition-colors">Dokładność</div>
+                <div className="text-xs text-white/60 group-hover:text-white/80 transition-colors">{locale === 'en' ? 'Accuracy' : 'Dokładność'}</div>
             </div>
             <div className="text-center p-4 bg-gradient-to-br from-[#017da0]/20 to-[#017da0]/5 rounded-xl border border-[#017da0]/30 hover:border-[#017da0] transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-[#017da0]/20">
                 <div className="w-8 h-8 mx-auto mb-2 text-[#017da0] group-hover:scale-125 group-hover:text-cyan-300 transition-all duration-300">
                     <Zap className="w-full h-full" />
                 </div>
                 <div className="text-3xl font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">{responseTime}ms</div>
-                <div className="text-xs text-white/60 group-hover:text-white/80 transition-colors">Czas reakcji</div>
+                <div className="text-xs text-white/60 group-hover:text-white/80 transition-colors">{locale === 'en' ? 'Response time' : 'Czas reakcji'}</div>
             </div>
             <div className="text-center p-4 bg-gradient-to-br from-[#017da0]/20 to-[#017da0]/5 rounded-xl border border-[#017da0]/30 hover:border-[#017da0] transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-[#017da0]/20">
                 <div className="w-8 h-8 mx-auto mb-2 text-[#017da0] group-hover:scale-125 group-hover:text-cyan-300 transition-all duration-300">
                     <Clock className="w-full h-full" />
                 </div>
                 <div className="text-3xl font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">{batteryLife}h</div>
-                <div className="text-xs text-white/60 group-hover:text-white/80 transition-colors">Czas pracy</div>
+                <div className="text-xs text-white/60 group-hover:text-white/80 transition-colors">{locale === 'en' ? 'Battery life' : 'Czas pracy'}</div>
             </div>
         </div>
     );
 }
 
-export function ProductDescriptionSection() {
+export function ProductDescriptionSection({ locale = 'pl' }: { locale?: Locale }) {
     const [hoveredBenefit, setHoveredBenefit] = useState<string | null>(null);
     const [isMainContentVisible, setIsMainContentVisible] = useState(false);
     const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -129,7 +130,43 @@ export function ProductDescriptionSection() {
         return () => clearTimeout(delayTimer);
     }, [hasTrackedScroll]);
 
-    const benefitCards = [
+    const benefitCards = locale === 'en' ? [
+        {
+            id: 'realtime',
+            icon: Radar,
+            title: 'Real-time response',
+            description: 'Every hit is registered instantly, with accuracy down to 10 ms.',
+            delay: 0
+        },
+        {
+            id: 'magnetic',
+            icon: Magnet,
+            title: 'Fast magnetic mounting',
+            description: 'Attach the module to a steel plate and play — no drilling, no tools.',
+            delay: 100
+        },
+        {
+            id: 'led',
+            icon: Lightbulb,
+            title: 'RGB-lit active targets',
+            description: 'Color LEDs enable multiple game types, including multiplayer.',
+            delay: 200
+        },
+        {
+            id: 'weapon',
+            icon: Crosshair,
+            title: 'Works with any platform',
+            description: 'Airsoft, air rifles, firearms — no calibration, no limitations.',
+            delay: 300
+        },
+        {
+            id: 'app',
+            icon: Smartphone,
+            title: 'Full control in the app',
+            description: 'Stats, battery status, leaderboards and game modes — all on your phone.',
+            delay: 400
+        }
+    ] : [
         {
             id: 'realtime',
             icon: Radar,
@@ -181,8 +218,9 @@ export function ProductDescriptionSection() {
                     {/* Header with entrance animation */}
                     <div className={`text-center mb-16 transition-all duration-1000 ${isMainContentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         <h2 className="text-white font-barlow font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-8 bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500 cursor-default">
-                            Zmień tarcze w grę.<br />
-                            <span className="text-[#017da0] hover:text-cyan-400 transition-colors duration-300">Dosłownie.</span>
+                            {locale === 'en'
+                                ? <>Turn targets into a game.<br /><span className="text-[#017da0] hover:text-cyan-400 transition-colors duration-300">Literally.</span></>
+                                : <>Zmień tarcze w grę.<br /><span className="text-[#017da0] hover:text-cyan-400 transition-colors duration-300">Dosłownie.</span></>}
                         </h2>
                         <div className="w-32 h-1 bg-[#017da0] mx-auto mb-8 rounded-full hover:w-40 transition-all duration-500"></div>
                     </div>
@@ -193,22 +231,29 @@ export function ProductDescriptionSection() {
                             <div className={`bg-gradient-to-br from-gray-900/80 to-gray-800/40 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 shadow-2xl hover:shadow-[0_0_40px_rgba(1,125,160,0.3)] transition-all duration-700 group cursor-pointer transform hover:scale-[1.02] ${isMainContentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
                                 <div className="space-y-6">
                                     <p className="text-white/90 font-inter text-2xl leading-relaxed font-bold group-hover:text-white transition-colors duration-500">
-                                        Aimora to system inteligentnych detektorów trafień i wskaźników LED, który zamienia zwykłe stalowe tarcze w <span className="text-[#017da0] font-bold group-hover:text-cyan-400 transition-colors duration-500 cursor-pointer">interaktywne cele treningowe</span>.
+                                        {locale === 'en'
+                                            ? <>Aimora is a system of smart hit detectors and LED indicators that turns ordinary steel plates into <span className="text-[#017da0] font-bold group-hover:text-cyan-400 transition-colors duration-500 cursor-pointer">interactive training targets</span>.</>
+                                            : <>Aimora to system inteligentnych detektorów trafień i wskaźników LED, który zamienia zwykłe stalowe tarcze w <span className="text-[#017da0] font-bold group-hover:text-cyan-400 transition-colors duration-500 cursor-pointer">interaktywne cele treningowe</span>.</>}
                                     </p>
                                     <p className="text-white/80 font-inter text-xl leading-relaxed font-bold group-hover:text-white/90 transition-colors duration-500">
-                                        Nasze moduły wykrywają trafienia w czasie rzeczywistym i bezprzewodowo komunikują się z aplikacją mobilną, która oferuje różnorodne tryby rozgrywki, statystyki trafień, rankingi i dynamiczne scenariusze.
+                                        {locale === 'en'
+                                            ? 'Our modules detect hits in real time and communicate wirelessly with a mobile app that offers multiple game modes, hit statistics, leaderboards and dynamic scenarios.'
+                                            : 'Nasze moduły wykrywają trafienia w czasie rzeczywistym i bezprzewodowo komunikują się z aplikacją mobilną, która oferuje różnorodne tryby rozgrywki, statystyki trafień, rankingi i dynamiczne scenariusze.'}
                                     </p>
                                     <p className="text-white/80 font-inter text-xl leading-relaxed font-bold group-hover:text-white/90 transition-colors duration-500">
-                                        Wskaźniki LED RGB z wymiennym odblaskiem, w pełni schowane za metalową tarczą, wskazują, w który cel należy trafić. Moduł LED nie ulega uszkodzeniu nawet przy odstrzeleniu odblasku - odblaski są tanie i bardzo łatwe w wymianie. Diody RGB umożliwiają zróżnicowanie gier poprzez różne kolory oraz rozgrywki, w których dwóch graczy może grać jednocześnie, każdy z własnym kolorem celu. Kompatybilność z ASG, wiatrówkami i bronią palną sprawia, że Aimora sprawdzi się w każdej sytuacji — niezależnie od poziomu zaawansowania.
+                                        {locale === 'en'
+                                            ? 'RGB LED indicators with a replaceable reflector, fully protected behind the metal target, show which target to hit. The LED module stays safe even if the reflector gets shot off — reflectors are inexpensive and very easy to replace. RGB LEDs also unlock more varied games with different colors, including modes where two players compete at the same time, each with their own target color. Compatibility with airsoft, air rifles and firearms makes Aimora a great fit in any scenario — regardless of skill level.'
+                                            : 'Wskaźniki LED RGB z wymiennym odblaskiem, w pełni schowane za metalową tarczą, wskazują, w który cel należy trafić. Moduł LED nie ulega uszkodzeniu nawet przy odstrzeleniu odblasku - odblaski są tanie i bardzo łatwe w wymianie. Diody RGB umożliwiają zróżnicowanie gier poprzez różne kolory oraz rozgrywki, w których dwóch graczy może grać jednocześnie, każdy z własnym kolorem celu. Kompatybilność z ASG, wiatrówkami i bronią palną sprawia, że Aimora sprawdzi się w każdej sytuacji — niezależnie od poziomu zaawansowania.'}
                                     </p>
                                     <div className="pt-4 border-t border-gray-600/30 group-hover:border-[#017da0]/70 transition-all duration-500">
                                         <p className="text-[#017da0] font-inter text-xl leading-relaxed font-bold italic group-hover:text-cyan-400 transition-colors duration-500">
-                                            Wszystko po to, by trening był nie tylko skuteczny, ale też wciągający.
+                                            {locale === 'en'
+                                                ? 'So training is not only effective, but genuinely engaging.'
+                                                : 'Wszystko po to, by trening był nie tylko skuteczny, ale też wciągający.'}
                                         </p>
                                     </div>
                                 </div>
                             </div>
-
 
                         </div>
 
@@ -280,10 +325,12 @@ export function ProductDescriptionSection() {
                     <div className={`mt-16 text-center transition-all duration-1000 ${isMainContentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         <div className="bg-gradient-to-br from-[#017da0]/20 to-[#017da0]/5 backdrop-blur-sm rounded-2xl p-8 border border-[#017da0]/30">
                             <h3 className="text-white font-barlow font-bold text-2xl mb-4">
-                                Gotowy na rewolucję w treningu?
+                                {locale === 'en' ? 'Ready for a training revolution?' : 'Gotowy na rewolucję w treningu?'}
                             </h3>
                             <p className="text-white/80 font-inter text-lg mb-6 max-w-2xl mx-auto">
-                                Zamień nudny trening w ekscytującą grę pełną wyzwań
+                                {locale === 'en'
+                                    ? 'Turn boring practice into an exciting game full of challenges'
+                                    : 'Zamień nudny trening w ekscytującą grę pełną wyzwań'}
                             </p>
                             <RippleButton
                                 className="btn-primary flex items-center justify-center gap-2 group mx-auto"
@@ -292,7 +339,7 @@ export function ProductDescriptionSection() {
                                     setIsContactFormOpen(true);
                                 }}
                             >
-                                Zamów Aimora
+                                {locale === 'en' ? 'Order Aimora' : 'Zamów Aimora'}
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </RippleButton>
                         </div>
@@ -304,6 +351,7 @@ export function ProductDescriptionSection() {
             <ContactForm
                 isOpen={isContactFormOpen}
                 onClose={() => setIsContactFormOpen(false)}
+                locale={locale}
             />
         </>
     );

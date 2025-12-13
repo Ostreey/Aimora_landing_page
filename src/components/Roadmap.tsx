@@ -1,11 +1,12 @@
 'use client';
 
 import { trackScrollToRoadmap } from '@/lib/firebase';
+import type { Locale } from '@/lib/i18n';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Target, Trophy, Users, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-export function Roadmap() {
+export function Roadmap({ locale = 'pl' }: { locale?: Locale }) {
     const [isVisible, setIsVisible] = useState(false);
     const [hasTrackedScroll, setHasTrackedScroll] = useState(false);
 
@@ -30,7 +31,56 @@ export function Roadmap() {
         return () => observer.disconnect();
     }, [hasTrackedScroll]);
 
-    const roadmapItems = [
+    const roadmapItems = locale === 'en' ? [
+        {
+            date: '07.2025',
+            title: 'First release',
+            description: 'Core training system with a mobile app and wireless targets',
+            icon: Target,
+            status: 'completed',
+            color: 'from-[#017da0] to-cyan-400'
+        },
+        {
+            date: '11.2025',
+            title: 'New game series',
+            description: 'New multiplayer games — Hostage, Duel and the popular Shoot-off competition mode',
+            icon: Calendar,
+            status: 'completed',
+            color: 'from-blue-500 to-blue-400'
+        },
+        {
+            date: '02.2026',
+            title: 'Accounts for shooting ranges',
+            description: 'Dedicated range customer accounts with saved game stats, achievements comparisons and leaderboards for the whole range',
+            icon: Users,
+            status: 'current',
+            color: 'from-purple-500 to-purple-400'
+        },
+        {
+            date: '05.2026',
+            title: 'Extended range and more detectors',
+            description: 'Increase detector range to 200 meters and enable up to 100 detectors connected at the same time',
+            icon: Wifi,
+            status: 'planned',
+            color: 'from-green-500 to-green-400'
+        },
+        {
+            date: '09.2026',
+            title: 'Tournament mode',
+            description: 'A tournament mode that automates competitions. All stats and results are stored safely in the cloud, and organizations can compare performance. Participants will be able to follow the event live in the app on their phones.',
+            icon: Trophy,
+            status: 'planned',
+            color: 'from-yellow-500 to-yellow-400'
+        },
+        {
+            date: '01.2027',
+            title: 'Dedicated target with precise hit localization',
+            description: 'An advanced target with real-time hit location displayed in the app. No more walking to the target or setting up cameras — everything is visible instantly on your phone.',
+            icon: MapPin,
+            status: 'planned',
+            color: 'from-orange-500 to-orange-400'
+        }
+    ] : [
         {
             date: '07.2025',
             title: 'Pierwsza wersja',
@@ -109,7 +159,9 @@ export function Roadmap() {
                         viewport={{ once: true }}
                         className="text-white/80 font-inter text-xl max-w-3xl mx-auto mb-8"
                     >
-                        Zobacz, jak system Aimora będzie się rozwijał w nadchodzących miesiącach
+                        {locale === 'en'
+                            ? 'See how the Aimora system will evolve over the coming months'
+                            : 'Zobacz, jak system Aimora będzie się rozwijał w nadchodzących miesiącach'}
                     </motion.p>
                     <div className="w-32 h-1 bg-[#017da0] mx-auto rounded-full"></div>
                 </div>
@@ -148,12 +200,12 @@ export function Roadmap() {
                                                     </span>
                                                     {item.status === 'current' && (
                                                         <span className="ml-2 px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded-full">
-                                                            Aktualnie
+                                                            {locale === 'en' ? 'Current' : 'Aktualnie'}
                                                         </span>
                                                     )}
                                                     {item.status === 'completed' && (
                                                         <span className="ml-2 px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">
-                                                            Ukończone
+                                                            {locale === 'en' ? 'Completed' : 'Ukończone'}
                                                         </span>
                                                     )}
                                                 </div>

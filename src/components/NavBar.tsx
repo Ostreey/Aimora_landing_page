@@ -1,5 +1,6 @@
 'use client'
 import { trackGAEvent } from '@/lib/firebase';
+import { getAlternateLocalePath, getLocaleFromPathname, getLocalizedHomePath, getLocalizedRentalPath, isLocaleHomePath } from '@/lib/i18n';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -22,6 +23,11 @@ export function NavBar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
     const pathname = usePathname();
+    const locale = getLocaleFromPathname(pathname);
+    const homePath = getLocalizedHomePath(locale);
+    const rentalPath = getLocalizedRentalPath(locale);
+    const plPath = getAlternateLocalePath(pathname, 'pl');
+    const enPath = getAlternateLocalePath(pathname, 'en');
 
     // This effect now only cares about setting the active section on scroll
     useEffect(() => {
@@ -61,7 +67,7 @@ export function NavBar() {
     const getNavButtonClass = (sectionId: string) => {
         const baseClass = "font-semibold text-lg py-2 px-2 border-b-2 transition-all duration-200 font-barlow";
         // If we are on a subpage, don't highlight scroll-based links
-        if (pathname !== '/') {
+        if (!isLocaleHomePath(pathname)) {
             return `${baseClass} text-white/90 hover:text-[#00B2E3] border-transparent hover:border-[#00B2E3]`;
         }
         const isActive = activeSection === sectionId;
@@ -107,7 +113,7 @@ export function NavBar() {
                     <div className="flex items-center justify-between w-full h-20">
                         <div className="flex items-center">
                             <Link
-                                href="/#home"
+                                href={`${homePath}#home`}
                                 onClick={() => { setActiveSection('home'); scrollToSection('home'); }}
                                 className={`text-xl font-bold font-barlow transition-all duration-200 ${activeSection === 'home'
                                     ? 'text-[#00B2E3] border-b-2 border-[#00B2E3] pb-1'
@@ -120,14 +126,41 @@ export function NavBar() {
 
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center space-x-6">
-                            <Link href="/#aimora-w-akcji" onClick={() => scrollToSection('aimora-w-akcji')} className={getNavButtonClass('aimora-w-akcji')}>Aimora w akcji</Link>
-                            <Link href="/#testy-na-strzelnicy" onClick={() => scrollToSection('testy-na-strzelnicy')} className={getNavButtonClass('testy-na-strzelnicy')}>Testy na strzelnicy</Link>
-                            <Link href="/#jak-to-dziala" onClick={() => scrollToSection('jak-to-dziala')} className={getNavButtonClass('jak-to-dziala')}>Jak to działa?</Link>
-                            <Link href="/#aplikacja-mobilna" onClick={() => scrollToSection('aplikacja-mobilna')} className={getNavButtonClass('aplikacja-mobilna')}>Aplikacja mobilna</Link>
-                            <Link href="/#mapa-rozwoju" onClick={() => scrollToSection('mapa-rozwoju')} className={getNavButtonClass('mapa-rozwoju')}>Roadmap</Link>
-                            <Link href="/wypozyczenie" className={getSubpageNavClass('/wypozyczenie')} onClick={() => trackGAEvent('clicked_rental_page')}>
-                                Wypożyczenie
+                            <Link href={`${homePath}#aimora-w-akcji`} onClick={() => scrollToSection('aimora-w-akcji')} className={getNavButtonClass('aimora-w-akcji')}>
+                                {locale === 'en' ? 'Aimora in action' : 'Aimora w akcji'}
                             </Link>
+                            <Link href={`${homePath}#testy-na-strzelnicy`} onClick={() => scrollToSection('testy-na-strzelnicy')} className={getNavButtonClass('testy-na-strzelnicy')}>
+                                {locale === 'en' ? 'Range tests' : 'Testy na strzelnicy'}
+                            </Link>
+                            <Link href={`${homePath}#jak-to-dziala`} onClick={() => scrollToSection('jak-to-dziala')} className={getNavButtonClass('jak-to-dziala')}>
+                                {locale === 'en' ? 'How it works' : 'Jak to działa?'}
+                            </Link>
+                            <Link href={`${homePath}#aplikacja-mobilna`} onClick={() => scrollToSection('aplikacja-mobilna')} className={getNavButtonClass('aplikacja-mobilna')}>
+                                {locale === 'en' ? 'Mobile app' : 'Aplikacja mobilna'}
+                            </Link>
+                            <Link href={`${homePath}#mapa-rozwoju`} onClick={() => scrollToSection('mapa-rozwoju')} className={getNavButtonClass('mapa-rozwoju')}>
+                                Roadmap
+                            </Link>
+                            <Link href={rentalPath} className={getSubpageNavClass(rentalPath)} onClick={() => trackGAEvent('clicked_rental_page')}>
+                                {locale === 'en' ? 'Rental' : 'Wypożyczenie'}
+                            </Link>
+                            <div className="flex items-center gap-2 pl-2 border-l border-white/15">
+                                <Link
+                                    href={plPath}
+                                    className={`text-sm font-semibold transition-colors ${locale === 'pl' ? 'text-[#00B2E3]' : 'text-white/70 hover:text-white'}`}
+                                    aria-label="Przełącz na język polski"
+                                >
+                                    PL
+                                </Link>
+                                <span className="text-white/30">|</span>
+                                <Link
+                                    href={enPath}
+                                    className={`text-sm font-semibold transition-colors ${locale === 'en' ? 'text-[#00B2E3]' : 'text-white/70 hover:text-white'}`}
+                                    aria-label="Switch to English"
+                                >
+                                    EN
+                                </Link>
+                            </div>
                         </div>
 
                         {/* Mobile Menu Button */}
@@ -150,30 +183,49 @@ export function NavBar() {
                     <button
                         onClick={() => setMobileMenuOpen(false)}
                         className="absolute top-4 right-4 text-white/90 hover:text-white text-4xl font-light transition-colors duration-200 w-12 h-12 flex items-center justify-center z-[10001] bg-black/20 rounded-full backdrop-blur-sm"
-                        aria-label="Zamknij menu"
+                        aria-label={locale === 'en' ? 'Close menu' : 'Zamknij menu'}
                     >
                         ×
                     </button>
 
                     <div className="flex flex-col items-center justify-center h-full space-y-6 z-[10000] relative">
-                        <Link href="/#aimora-w-akcji" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Aimora w akcji
+                        <Link href={`${homePath}#aimora-w-akcji`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                            {locale === 'en' ? 'Aimora in action' : 'Aimora w akcji'}
                         </Link>
-                        <Link href="/#testy-na-strzelnicy" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Testy na strzelnicy
+                        <Link href={`${homePath}#testy-na-strzelnicy`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                            {locale === 'en' ? 'Range tests' : 'Testy na strzelnicy'}
                         </Link>
-                        <Link href="/#jak-to-dziala" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Jak to działa?
+                        <Link href={`${homePath}#jak-to-dziala`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                            {locale === 'en' ? 'How it works' : 'Jak to działa?'}
                         </Link>
-                        <Link href="/#aplikacja-mobilna" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Aplikacja mobilna
+                        <Link href={`${homePath}#aplikacja-mobilna`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                            {locale === 'en' ? 'Mobile app' : 'Aplikacja mobilna'}
                         </Link>
-                        <Link href="/#mapa-rozwoju" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                        <Link href={`${homePath}#mapa-rozwoju`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
                             Roadmap
                         </Link>
-                        <Link href="/wypozyczenie" onClick={() => { handleMobileMenuClick(); trackGAEvent('clicked_rental_page'); }} className={getSubpageNavClass('/wypozyczenie', true)}>
-                            Wypożyczenie
+                        <Link href={rentalPath} onClick={() => { handleMobileMenuClick(); trackGAEvent('clicked_rental_page'); }} className={getSubpageNavClass(rentalPath, true)}>
+                            {locale === 'en' ? 'Rental' : 'Wypożyczenie'}
                         </Link>
+                        <div className="flex items-center gap-2 pt-2">
+                            <Link
+                                href={plPath}
+                                onClick={handleMobileMenuClick}
+                                className={`text-white text-xl font-semibold ${locale === 'pl' ? 'text-[#00B2E3]' : 'text-white/70 hover:text-white'} transition-colors`}
+                                aria-label="Przełącz na język polski"
+                            >
+                                PL
+                            </Link>
+                            <span className="text-white/30 text-xl">|</span>
+                            <Link
+                                href={enPath}
+                                onClick={handleMobileMenuClick}
+                                className={`text-white text-xl font-semibold ${locale === 'en' ? 'text-[#00B2E3]' : 'text-white/70 hover:text-white'} transition-colors`}
+                                aria-label="Switch to English"
+                            >
+                                EN
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

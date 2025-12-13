@@ -1,6 +1,7 @@
 'use client';
 
 import { trackYouTubeVideoFinished, trackYouTubeVideoProgress, trackYouTubeVideoStarted, trackYouTubeVideoStopped } from '@/lib/firebase';
+import type { Locale } from '@/lib/i18n';
 import { useEffect, useState } from 'react';
 
 // YouTube Player API types
@@ -11,7 +12,7 @@ declare global {
     }
 }
 
-export function ClientTestVideoSection() {
+export function ClientTestVideoSection({ locale = 'pl' }: { locale?: Locale }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [player, setPlayer] = useState<any>(null);
     const [isAPIReady, setIsAPIReady] = useState(false);
@@ -109,7 +110,9 @@ export function ClientTestVideoSection() {
                 {/* Header */}
                 <div className="text-center mb-6 sm:mb-8 md:mb-12">
                     <h2 className="text-white font-barlow font-black text-4xl sm:text-5xl md:text-6xl leading-tight mb-4 sm:mb-6">
-                        Testy na <span className="text-[#017da0]">Strzelnicy</span>
+                        {locale === 'en'
+                            ? <>Range <span className="text-[#017da0]">tests</span></>
+                            : <>Testy na <span className="text-[#017da0]">Strzelnicy</span></>}
                     </h2>
                     <div className="w-32 h-1 bg-[#017da0] mx-auto mb-4 sm:mb-6 md:mb-8 rounded-full"></div>
                 </div>
@@ -122,7 +125,7 @@ export function ClientTestVideoSection() {
                             <div className="relative w-full h-full">
                                 <img
                                     src="https://img.youtube.com/vi/6n6qWvT0Uzs/maxresdefault.jpg"
-                                    alt="Testy Aimora na strzelnicy"
+                                    alt={locale === 'en' ? 'Aimora range tests' : 'Testy Aimora na strzelnicy'}
                                     className="w-full h-full object-cover"
                                 />
                                 {/* Dark overlay */}
@@ -132,7 +135,7 @@ export function ClientTestVideoSection() {
                                 <button
                                     className="absolute inset-0 flex items-center justify-center group"
                                     onClick={handlePlay}
-                                    aria-label="Odtwórz wideo z testów"
+                                    aria-label={locale === 'en' ? 'Play test video' : 'Odtwórz wideo z testów'}
                                 >
                                     <div className="w-20 h-20 bg-[#017da0] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                                         <svg
@@ -169,10 +172,13 @@ export function ClientTestVideoSection() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
-                            <h4 className="text-white font-barlow font-bold text-lg mb-2">Sprawdzony w praktyce
+                            <h4 className="text-white font-barlow font-bold text-lg mb-2">
+                                {locale === 'en' ? 'Proven in real-world testing' : 'Sprawdzony w praktyce'}
                             </h4>
                             <p className="text-white/70 font-inter text-sm">
-                                System został juz przetestowany na profesjonalnej strzelnicy oraz zawodach strzeleckich.
+                                {locale === 'en'
+                                    ? 'The system has already been tested at a professional shooting range and during competitions.'
+                                    : 'System został juz przetestowany na profesjonalnej strzelnicy oraz zawodach strzeleckich.'}
                             </p>
                         </div>
 
@@ -182,9 +188,13 @@ export function ClientTestVideoSection() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
-                            <h4 className="text-white font-barlow font-bold text-lg mb-2">Pełna kontrola z aplikacji</h4>
+                            <h4 className="text-white font-barlow font-bold text-lg mb-2">
+                                {locale === 'en' ? 'Full control from the app' : 'Pełna kontrola z aplikacji'}
+                            </h4>
                             <p className="text-white/70 font-inter text-sm">
-                                Steruj celami bez odchodzenia od stanowiska. Uruchamiaj gry, sprawdzaj trafienia i konfiguruj system
+                                {locale === 'en'
+                                    ? 'Control targets without leaving your lane. Start games, review hits and configure the system.'
+                                    : 'Steruj celami bez odchodzenia od stanowiska. Uruchamiaj gry, sprawdzaj trafienia i konfiguruj system'}
                             </p>
                         </div>
 
@@ -194,9 +204,13 @@ export function ClientTestVideoSection() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-4-6V4a4 4 0 118 0v6M3 14h18v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8z" />
                                 </svg>
                             </div>
-                            <h4 className="text-white font-barlow font-bold text-lg mb-2">Łatwy Montaż</h4>
+                            <h4 className="text-white font-barlow font-bold text-lg mb-2">
+                                {locale === 'en' ? 'Easy setup' : 'Łatwy Montaż'}
+                            </h4>
                             <p className="text-white/70 font-inter text-sm">
-                                Prosty proces instalacji i konfiguracji na torze strzeleckim
+                                {locale === 'en'
+                                    ? 'A simple installation and setup process on the shooting lane.'
+                                    : 'Prosty proces instalacji i konfiguracji na torze strzeleckim'}
                             </p>
                         </div>
                     </div>

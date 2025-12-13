@@ -7,6 +7,12 @@ export const metadata: Metadata = {
     title: 'Wypożyczenie Aimora | Mobilna Strzelnica i Atrakcje na Eventy',
     description: 'Szukasz wyjątkowej atrakcji na imprezę firmową, festyn lub piknik? Wypożycz interaktywną strzelnicę Aimora i zapewnij niezapomniane wrażenia uczestnikom!',
     keywords: ['wypożyczenie atrakcji', 'atrakcje na eventy', 'mobilna strzelnica wynajem', 'strzelnica ASG wynajem', 'atrakcje na imprezy firmowe', 'atrakcje na festyn', 'atrakcje na piknik', 'team building', 'imprezy integracyjne', 'aimora na wypożyczenie'],
+    alternates: {
+        languages: {
+            pl: '/wypozyczenie',
+            en: '/en/rental',
+        },
+    },
 };
 
 export default function WypozyczeniePage() {

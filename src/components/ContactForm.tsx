@@ -1,6 +1,7 @@
 'use client';
 
 import { trackFormSend } from '@/lib/firebase';
+import type { Locale } from '@/lib/i18n';
 import { useState } from 'react';
 
 const PROMO_PRICE_PLN = 350;
@@ -16,9 +17,10 @@ interface ContactFormData {
 interface ContactFormProps {
     isOpen: boolean;
     onClose: () => void;
+    locale?: Locale;
 }
 
-export function ContactForm({ isOpen, onClose }: ContactFormProps) {
+export function ContactForm({ isOpen, onClose, locale = 'pl' }: ContactFormProps) {
     const [formData, setFormData] = useState<ContactFormData>({
         name: '',
         email: '',
@@ -31,28 +33,94 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
+    const copy = locale === 'en' ? {
+        title: 'Order Aimora',
+        subtitle: 'Get in touch with us',
+        promo: `${PROMO_PRICE_PLN} PLN / set — detector + LED indicator`,
+        successTitle: 'Thank you!',
+        successText: 'Your inquiry has been sent. We will get back to you shortly.',
+        quantityLabel: 'Number of sets',
+        quantityPlaceholder: 'Enter quantity',
+        promoPrice: 'Promo price',
+        total: 'Total',
+        nameLabel: 'Name',
+        namePlaceholder: 'Enter your name',
+        emailLabel: 'Email address',
+        emailPlaceholder: 'you@email.com',
+        phoneLabel: 'Phone number',
+        phoneOptional: '(optional)',
+        phonePlaceholder: '+48 123 456 789',
+        messageLabel: 'Message',
+        messagePlaceholder: 'Tell us what you need and what questions you have...',
+        sending: 'Sending...',
+        submit: 'Send inquiry',
+        footerInfo: 'We will respond within 24 hours',
+        close: 'Close',
+        errors: {
+            nameRequired: 'Name is required',
+            emailRequired: 'Email address is required',
+            emailInvalid: 'Invalid email address',
+            messageRequired: 'Message is required',
+            messageMin: 'Message must be at least 5 characters long',
+            quantityInvalid: 'Enter the number of sets (min. 1)',
+            submitFailed: 'Something went wrong while sending. Please try again.',
+        }
+    } : {
+        title: 'Zamów Aimora',
+        subtitle: 'Skontaktuj się z nami',
+        promo: `${PROMO_PRICE_PLN} zł / komplet — detektor + wskaźnik LED`,
+        successTitle: 'Dziękujemy!',
+        successText: 'Twoje zapytanie zostało wysłane. Skontaktujemy się z Tobą wkrótce.',
+        quantityLabel: 'Ilość kompletów',
+        quantityPlaceholder: 'Podaj ilość',
+        promoPrice: 'Cena promocyjna',
+        total: 'Razem',
+        nameLabel: 'Imię',
+        namePlaceholder: 'Wpisz swoje imię',
+        emailLabel: 'Adres email',
+        emailPlaceholder: 'twoj@email.com',
+        phoneLabel: 'Numer telefonu',
+        phoneOptional: '(opcjonalne)',
+        phonePlaceholder: '+48 123 456 789',
+        messageLabel: 'Treść zapytania',
+        messagePlaceholder: 'Opisz swoje pytania lub wymagania dotyczące Aimora...',
+        sending: 'Wysyłanie...',
+        submit: 'Wyślij zapytanie',
+        footerInfo: 'Skontaktujemy się z Tobą w ciągu 24 godzin',
+        close: 'Zamknij',
+        errors: {
+            nameRequired: 'Imię jest wymagane',
+            emailRequired: 'Adres email jest wymagany',
+            emailInvalid: 'Nieprawidłowy format adresu email',
+            messageRequired: 'Treść zapytania jest wymagana',
+            messageMin: 'Treść zapytania musi mieć co najmniej 5 znaków',
+            quantityInvalid: 'Podaj liczbę kompletów (min. 1)',
+            submitFailed: 'Wystąpił błąd podczas wysyłania. Spróbuj ponownie.',
+        }
+    };
+
     const validateForm = (): boolean => {
         const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
 
         if (!formData.name.trim()) {
-            newErrors.name = 'Imię jest wymagane';
+            newErrors.name = copy.errors.nameRequired;
         }
 
         if (!formData.email.trim()) {
-            newErrors.email = 'Adres email jest wymagany';
+            newErrors.email = copy.errors.emailRequired;
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = 'Nieprawidłowy format adresu email';
+            newErrors.email = copy.errors.emailInvalid;
         }
 
         if (!formData.message.trim()) {
-            newErrors.message = 'Treść zapytania jest wymagana';
+            newErrors.message = copy.errors.messageRequired;
         } else if (formData.message.trim().length < 5) {
-            newErrors.message = 'Treść zapytania musi mieć co najmniej 5 znaków';
+            newErrors.message = copy.errors.messageMin;
         }
 
         const quantity = typeof formData.quantity === 'string' ? parseInt(formData.quantity, 10) : formData.quantity;
         if (!Number.isFinite(quantity) || quantity < 1) {
-            newErrors.quantity = 'Podaj liczbę kompletów (min. 1)';
+            newErrors.quantity = copy.errors.quantityInvalid;
         }
 
         setErrors(newErrors);
@@ -93,7 +161,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-            setErrors({ message: 'Wystąpił błąd podczas wysyłania. Spróbuj ponownie.' });
+            setErrors({ message: copy.errors.submitFailed });
         } finally {
             setIsSubmitting(false);
         }
@@ -131,13 +199,14 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 <div className="bg-gradient-to-r from-[#017da0] to-[#0299bb] text-white p-6 rounded-t-2xl">
                     <div className="flex justify-between items-center">
                         <div>
-                            <h2 className="text-2xl font-barlow font-bold">Zamów Aimora</h2>
-                            <p className="text-white/90 text-sm mt-1">Skontaktuj się z nami</p>
+                            <h2 className="text-2xl font-barlow font-bold">{copy.title}</h2>
+                            <p className="text-white/90 text-sm mt-1">{copy.subtitle}</p>
                         </div>
                         <button
                             onClick={handleClose}
                             disabled={isSubmitting}
                             className="text-white/80 hover:text-white text-2xl leading-none disabled:opacity-50"
+                            aria-label={copy.close}
                         >
                             ×
                         </button>
@@ -148,7 +217,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                             {/* use the same style as other sections */}
                             {/* lightweight import avoidance: reusing markup would require importing component, but it's fine to keep here minimal */}
                             <span className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 border border-gray-200 shadow-sm px-4 py-2 text-sm font-semibold">
-                                <span className="text-gray-700">{PROMO_PRICE_PLN} zł / komplet — detektor + wskaźnik LED</span>
+                                <span className="text-gray-700">{copy.promo}</span>
                             </span>
                         </span>
                     </div>
@@ -162,8 +231,8 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <h3 className="text-xl font-barlow font-bold text-gray-900 mb-2">Dziękujemy!</h3>
-                        <p className="text-gray-600">Twoje zapytanie zostało wysłane. Skontaktujemy się z Tobą wkrótce.</p>
+                        <h3 className="text-xl font-barlow font-bold text-gray-900 mb-2">{copy.successTitle}</h3>
+                        <p className="text-gray-600">{copy.successText}</p>
                     </div>
                 )}
 
@@ -173,7 +242,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                         {/* Quantity Field */}
                         <div>
                             <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
-                                Ilość kompletów <span className="text-red-500">*</span>
+                                {copy.quantityLabel} <span className="text-red-500">*</span>
                             </label>
                             <div className="flex items-center gap-3">
                                 <input
@@ -208,17 +277,17 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                         }
                                     }}
                                     className={`w-28 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.quantity ? 'border-red-500' : 'border-gray-300'}`}
-                                    placeholder="Podaj ilość"
+                                    placeholder={copy.quantityPlaceholder}
                                     disabled={isSubmitting}
                                     inputMode="numeric"
                                     pattern="[0-9]*"
                                 />
                                 <div className="text-sm text-gray-700">
                                     <div>
-                                        Cena promocyjna: <span className="font-semibold">{PROMO_PRICE_PLN} zł</span> / komplet
+                                        {copy.promoPrice}: <span className="font-semibold">{PROMO_PRICE_PLN} {locale === 'en' ? 'PLN' : 'zł'}</span> / {locale === 'en' ? 'set' : 'komplet'}
                                     </div>
                                     <div>
-                                        Razem: <span className="font-semibold">{PROMO_PRICE_PLN} zł × {formData.quantity} = {PROMO_PRICE_PLN * (typeof formData.quantity === 'number' ? formData.quantity : 1)} zł</span>
+                                        {copy.total}: <span className="font-semibold">{PROMO_PRICE_PLN} {locale === 'en' ? 'PLN' : 'zł'} × {formData.quantity} = {PROMO_PRICE_PLN * (typeof formData.quantity === 'number' ? formData.quantity : 1)} {locale === 'en' ? 'PLN' : 'zł'}</span>
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +296,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                         {/* Name Field */}
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                Imię <span className="text-red-500">*</span>
+                                {copy.nameLabel} <span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="text"
@@ -237,7 +306,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 onChange={handleChange}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.name ? 'border-red-500' : 'border-gray-300'
                                     }`}
-                                placeholder="Wpisz swoje imię"
+                                placeholder={copy.namePlaceholder}
                                 disabled={isSubmitting}
                             />
                             {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
@@ -246,7 +315,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                         {/* Email Field */}
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                Adres email <span className="text-red-500">*</span>
+                                {copy.emailLabel} <span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="email"
@@ -256,7 +325,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 onChange={handleChange}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.email ? 'border-red-500' : 'border-gray-300'
                                     }`}
-                                placeholder="twoj@email.com"
+                                placeholder={copy.emailPlaceholder}
                                 disabled={isSubmitting}
                             />
                             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
@@ -265,7 +334,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                         {/* Phone Field */}
                         <div>
                             <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                                Numer telefonu <span className="text-gray-400">(opcjonalne)</span>
+                                {copy.phoneLabel} <span className="text-gray-400">{copy.phoneOptional}</span>
                             </label>
                             <input
                                 type="tel"
@@ -274,7 +343,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 value={formData.phone}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500"
-                                placeholder="+48 123 456 789"
+                                placeholder={copy.phonePlaceholder}
                                 disabled={isSubmitting}
                             />
                         </div>
@@ -282,7 +351,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                         {/* Message Field */}
                         <div>
                             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                                Treść zapytania <span className="text-red-500">*</span>
+                                {copy.messageLabel} <span className="text-red-500">*</span>
                             </label>
                             <textarea
                                 id="message"
@@ -292,7 +361,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 rows={4}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors resize-none text-gray-900 placeholder-gray-500 ${errors.message ? 'border-red-500' : 'border-gray-300'
                                     }`}
-                                placeholder="Opisz swoje pytania lub wymagania dotyczące Aimora..."
+                                placeholder={copy.messagePlaceholder}
                                 disabled={isSubmitting}
                             />
                             {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
@@ -308,17 +377,17 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 {isSubmitting ? (
                                     <div className="flex items-center justify-center">
                                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                                        Wysyłanie...
+                                        {copy.sending}
                                     </div>
                                 ) : (
-                                    'Wyślij zapytanie'
+                                    copy.submit
                                 )}
                             </button>
                         </div>
 
                         {/* Info */}
                         <p className="text-xs text-gray-500 text-center mt-4">
-                            Skontaktujemy się z Tobą w ciągu 24 godzin
+                            {copy.footerInfo}
                         </p>
                     </form>
                 )}

@@ -1,15 +1,16 @@
 'use client';
 
+import type { Locale } from '@/lib/i18n';
 import Image from 'next/image';
 
-export function WhatIsItSection() {
+export function WhatIsItSection({ locale = 'pl' }: { locale?: Locale }) {
     return (
         <section className="relative flex justify-center items-start min-h-[400px] sm:min-h-[600px] md:min-h-[1180px] bg-black -mt-2 sm:-mt-4 md:-mt-0">
             <div className="absolute inset-0 w-full h-full bg-black z-0" />
             {/* Desktop image */}
             <Image
                 src="/images/What_is_it.png"
-                alt="Jak to działa?"
+                alt={locale === 'en' ? 'How it works' : 'Jak to działa?'}
                 width={1440}
                 height={1026}
                 className="z-10 hidden md:block"
@@ -18,7 +19,7 @@ export function WhatIsItSection() {
             {/* Mobile image */}
             <Image
                 src="/images/what_is_it_mobile.png"
-                alt="Jak to działa?"
+                alt={locale === 'en' ? 'How it works' : 'Jak to działa?'}
                 width={1355}
                 height={1024}
                 className="z-10 block md:hidden"

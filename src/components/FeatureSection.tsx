@@ -2,6 +2,7 @@
 
 
 import { trackModalUnfold } from '@/lib/firebase';
+import type { Locale } from '@/lib/i18n';
 import { Battery, ChevronDown, ChevronUp, Gamepad2, Settings, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -101,9 +102,95 @@ const features: Feature[] = [
     }
 ];
 
-export function FeatureSection() {
+const featuresEn: Feature[] = [
+    {
+        id: 'battery',
+        icon: Battery,
+        title: '5 hours of continuous operation',
+        shortDescription: 'Built-in Li-Ion battery with fast, universal USB-C charging',
+        detailedDescription: 'A built-in 750mAh lithium-ion battery keeps the device running throughout your training session. Fast charging via USB-C brings it to 90% in just 30 minutes.',
+        specs: [
+            { label: 'Capacity', value: '750mAh' },
+            { label: 'Runtime', value: 'up to 5 hours' },
+            { label: 'Charge time', value: '30 min (0–90%)' },
+            { label: 'Connector', value: 'USB-C' },
+            { label: 'Voltage', value: '3.7V' },
+            { label: 'Cycle life', value: '500+ charges' }
+        ],
+        benefits: [
+            'All-day training without interruptions',
+            'Fast top-ups between sessions',
+            'Universal USB-C connector',
+            'Smart power management'
+        ],
+        technicalDetails: 'The battery uses advanced power-management algorithms that automatically adjust consumption based on usage intensity. Deep sleep minimizes energy use when idle.'
+    },
+    {
+        id: 'games-software',
+        icon: Gamepad2,
+        title: 'Advanced games and features',
+        shortDescription: 'Single player and multiplayer, Shoot-off tournament matches, tournament mode and split times',
+        detailedDescription: 'Aimora offers a wide selection of games for solo practice and multiplayer, where two players can compete at the same time. It includes Shoot-off tournament matches that can automate competitions by removing manual scoring and timing. The system also measures split times, enabling detailed session analysis and continuous improvement.',
+        specs: [
+            { label: 'Free practice', value: 'Single player' },
+            { label: 'Time trial', value: 'Single player' },
+            { label: 'Max hits', value: 'Single player' },
+            { label: 'Duel', value: 'Multiplayer' },
+            { label: 'Hostage', value: 'Single/Multiplayer' },
+            { label: 'Shoot-off', value: 'Tournament mode' },
+            { label: 'Zombie', value: 'Single/Multiplayer' },
+            { label: 'Gunslinger', value: 'Single/Multiplayer' }
+        ],
+        benefits: [
+            'Great fun solo or competing with others',
+            'Support for referees, match organizers and shooting coaches',
+            'Improve skills with stats and session analysis',
+            'Automatic scoring and leaderboards'
+        ],
+        technicalDetails: 'Software uses advanced algorithms to analyze hits and reaction times. Every shot is timestamped to the millisecond, enabling precise split-time measurement. Tournament mode integrates with leaderboards and automatically generates results and classifications.'
+    },
+    {
+        id: 'firmware-updates',
+        icon: Settings,
+        title: 'Software updates',
+        shortDescription: 'Updates for both the mobile app and sensor firmware with new games and features',
+        detailedDescription: 'Automatic OTA updates cover both the mobile app and each sensor’s firmware. Updating sensors is done conveniently from the mobile app with a single tap. Even after purchase, you get new games, training modes and functionality. Regular algorithm improvements also increase measurement precision.',
+        specs: [
+            { label: 'Type', value: 'Wireless (OTA)' },
+        ],
+        benefits: [
+            'New games and training modes after purchase'
+        ],
+        technicalDetails: 'The OTA system uses digital signatures to verify update integrity and supports rollback in case an update fails, ensuring uninterrupted operation.'
+    },
+    {
+        id: 'ble-communication',
+        icon: Wifi,
+        title: 'BLE wireless communication',
+        shortDescription: 'Reliable Bluetooth Low Energy communication with multi-target support',
+        detailedDescription: 'Advanced Bluetooth Low Energy 5.0 provides a stable real-time connection. The system supports simultaneous communication with multiple targets, sending hit data with minimal delay.',
+        specs: [
+            { label: 'Standard', value: 'Bluetooth Low Energy 5.0' },
+            { label: 'Range', value: 'up to 60 meters' },
+            { label: 'Latency', value: '<100ms' },
+            { label: 'Simultaneous targets', value: 'up to 8 devices' },
+            { label: 'Frequency', value: '2.4 GHz' },
+            { label: 'Protocol', value: 'GATT' }
+        ],
+        benefits: [
+            'Instant hit notifications',
+            'Multiple targets at once',
+            'Reliable connection',
+            'Low power consumption'
+        ],
+        technicalDetails: 'Uses GATT with dedicated characteristics for hit data, battery state and device control. Adaptive transmit power helps maintain optimal connectivity in different conditions.'
+    }
+];
+
+export function FeatureSection({ locale = 'pl' }: { locale?: Locale }) {
     const [expandedFeature, setExpandedFeature] = useState<string | null>(null);
     const [isVisible, setIsVisible] = useState(false);
+    const list = locale === 'en' ? featuresEn : features;
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -144,7 +231,7 @@ export function FeatureSection() {
                 {/* Header */}
                 <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <h2 className="text-white font-barlow font-black text-4xl sm:text-5xl md:text-6xl leading-tight mb-8 bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
-                        Co wyróżnia Aimora
+                        {locale === 'en' ? 'What sets Aimora apart' : 'Co wyróżnia Aimora'}
                     </h2>
 
                     <div className="w-32 h-1 bg-[#017da0] mx-auto rounded-full"></div>
@@ -152,7 +239,7 @@ export function FeatureSection() {
 
                 {/* Features Grid */}
                 <div className="grid lg:grid-cols-2 gap-8 mb-16">
-                    {features.map((feature, index) => {
+                    {list.map((feature, index) => {
                         const IconComponent = feature.icon;
                         const isExpanded = expandedFeature === feature.id;
 
@@ -216,14 +303,14 @@ export function FeatureSection() {
                                             {/* Left Column - Description & Benefits */}
                                             <div className="space-y-6">
                                                 <div>
-                                                    <h4 className="text-white font-barlow font-bold text-lg mb-3">Opis szczegółowy</h4>
+                                                    <h4 className="text-white font-barlow font-bold text-lg mb-3">{locale === 'en' ? 'Detailed overview' : 'Opis szczegółowy'}</h4>
                                                     <p className="text-white/80 font-inter leading-relaxed">
                                                         {feature.detailedDescription}
                                                     </p>
                                                 </div>
 
                                                 <div>
-                                                    <h4 className="text-white font-barlow font-bold text-lg mb-3">Korzyści</h4>
+                                                    <h4 className="text-white font-barlow font-bold text-lg mb-3">{locale === 'en' ? 'Benefits' : 'Korzyści'}</h4>
                                                     <ul className="space-y-2">
                                                         {feature.benefits.map((benefit, idx) => (
                                                             <li key={idx} className="flex items-center space-x-3">
@@ -239,7 +326,7 @@ export function FeatureSection() {
 
                                             {/* Right Column - Specifications */}
                                             <div>
-                                                <h4 className="text-white font-barlow font-bold text-lg mb-4">Specyfikacje</h4>
+                                                <h4 className="text-white font-barlow font-bold text-lg mb-4">{locale === 'en' ? 'Specifications' : 'Specyfikacje'}</h4>
                                                 <div className="space-y-3">
                                                     {feature.specs.map((spec, idx) => (
                                                         <div key={idx} className="flex justify-between items-center py-2 px-3 bg-gray-800/30 rounded-lg border border-gray-700/30">

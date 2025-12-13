@@ -1,6 +1,7 @@
 'use client';
 
 import { Download, Smartphone } from 'lucide-react';
+import type { Locale } from '@/lib/i18n';
 import { useState } from 'react';
 
 interface DownloadButtonProps {
@@ -9,6 +10,7 @@ interface DownloadButtonProps {
     version?: string;
     size?: string;
     className?: string;
+    locale?: Locale;
 }
 
 export function DownloadButton({
@@ -16,7 +18,8 @@ export function DownloadButton({
     fileName,
     version,
     size,
-    className = ''
+    className = '',
+    locale = 'pl'
 }: DownloadButtonProps) {
     const [isDownloading, setIsDownloading] = useState(false);
 
@@ -37,7 +40,7 @@ export function DownloadButton({
             window.URL.revokeObjectURL(url);
         } catch (error) {
             console.error('Download failed:', error);
-            alert('Pobieranie nie powiodło się. Spróbuj ponownie.');
+            alert(locale === 'en' ? 'Download failed. Please try again.' : 'Pobieranie nie powiodło się. Spróbuj ponownie.');
         } finally {
             setIsDownloading(false);
         }
@@ -57,7 +60,9 @@ export function DownloadButton({
                         <Download className="w-6 h-6" />
                     )}
                     <span>
-                        {isDownloading ? 'Pobieranie...' : 'Pobierz aplikację'}
+                        {isDownloading
+                            ? (locale === 'en' ? 'Downloading...' : 'Pobieranie...')
+                            : (locale === 'en' ? 'Download the app' : 'Pobierz aplikację')}
                     </span>
                     <Smartphone className="w-5 h-5" />
                 </div>
@@ -67,12 +72,12 @@ export function DownloadButton({
                 <div className="mt-3 text-center">
                     {version && (
                         <p className="text-white/70 font-inter text-sm">
-                            Wersja: {version}
+                            {locale === 'en' ? 'Version' : 'Wersja'}: {version}
                         </p>
                     )}
                     {size && (
                         <p className="text-white/70 font-inter text-sm">
-                            Rozmiar: {size}
+                            {locale === 'en' ? 'Size' : 'Rozmiar'}: {size}
                         </p>
                     )}
                 </div>

@@ -1,13 +1,14 @@
 'use client';
 
 import { trackCTAClick } from '@/lib/firebase';
+import type { Locale } from '@/lib/i18n';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { ContactForm } from './ContactForm';
 import { RippleButton } from './RippleButton';
 
-export function CTA() {
+export function CTA({ locale = 'pl' }: { locale?: Locale }) {
     const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
     return (
@@ -29,7 +30,9 @@ export function CTA() {
                             viewport={{ once: true }}
                             className="text-4xl sm:text-5xl lg:text-6xl font-barlow font-black text-white mb-6"
                         >
-                            Gotowy na <span className="text-[#017da0]">następny poziom</span>?
+                            {locale === 'en'
+                                ? <>Ready for the <span className="text-[#017da0]">next level</span>?</>
+                                : <>Gotowy na <span className="text-[#017da0]">następny poziom</span>?</>}
                         </motion.h2>
 
                         <motion.p
@@ -39,7 +42,9 @@ export function CTA() {
                             viewport={{ once: true }}
                             className="text-xl text-white/80 mb-12 font-inter leading-relaxed"
                         >
-                            Przekształć swój trening w profesjonalne doświadczenie pełne emocji.
+                            {locale === 'en'
+                                ? 'Turn your training into a professional, excitement-packed experience.'
+                                : 'Przekształć swój trening w profesjonalne doświadczenie pełne emocji.'}
                         </motion.p>
 
                         {/* Promo strip */}
@@ -51,7 +56,7 @@ export function CTA() {
                             className="mb-6"
                         >
                             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full text-lg font-semibold">
-                                <span>350 zł / komplet — detektor + wskaźnik LED</span>
+                                <span>{locale === 'en' ? '350 PLN / set — detector + LED indicator' : '350 zł / komplet — detektor + wskaźnik LED'}</span>
                             </div>
                         </motion.div>
 
@@ -71,14 +76,14 @@ export function CTA() {
                                     setIsContactFormOpen(true);
                                 }}
                             >
-                                Zamów teraz
+                                {locale === 'en' ? 'Order now' : 'Zamów teraz'}
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </RippleButton>
                             <button
                                 className="btn-secondary text-lg px-8 py-4"
                                 onClick={() => trackCTAClick('cta_section_learn_more')}
                             >
-                                Dowiedz się więcej
+                                {locale === 'en' ? 'Learn more' : 'Dowiedz się więcej'}
                             </button>
                         </motion.div>
 
@@ -92,10 +97,12 @@ export function CTA() {
                         >
                             <div className="inline-flex items-center gap-2 bg-[#017da0]/20 text-[#017da0] px-6 py-2 rounded-full text-sm font-medium mb-4">
                                 <Clock className="w-4 h-4" />
-                                Dostępne od zaraz
+                                {locale === 'en' ? 'Available now' : 'Dostępne od zaraz'}
                             </div>
                             <p className="text-white/60 text-sm">
-                                Skontaktuj się z nami już dziś i zacznij trenować na profesjonalnym poziomie
+                                {locale === 'en'
+                                    ? 'Get in touch today and start training at a professional level'
+                                    : 'Skontaktuj się z nami już dziś i zacznij trenować na profesjonalnym poziomie'}
                             </p>
                         </motion.div>
                     </div>
@@ -106,6 +113,7 @@ export function CTA() {
             <ContactForm
                 isOpen={isContactFormOpen}
                 onClose={() => setIsContactFormOpen(false)}
+                locale={locale}
             />
         </>
     );

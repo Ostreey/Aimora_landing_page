@@ -1,9 +1,10 @@
 'use client';
 
 import { trackVideoFinished, trackVideoStarted } from '@/lib/firebase';
+import type { Locale } from '@/lib/i18n';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-export function VideoSection() {
+export function VideoSection({ locale = 'pl' }: { locale?: Locale }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -102,7 +103,9 @@ export function VideoSection() {
                 {/* Header */}
                 <div className="text-center mb-6 sm:mb-8 md:mb-12">
                     <h2 className="text-white font-barlow font-black text-4xl sm:text-5xl md:text-6xl leading-tight mb-4 sm:mb-6">
-                        Zobacz <span className="text-[#017da0]">Aimora</span> w akcji
+                        {locale === 'en'
+                            ? <>See <span className="text-[#017da0]">Aimora</span> in action</>
+                            : <>Zobacz <span className="text-[#017da0]">Aimora</span> w akcji</>}
                     </h2>
                     <div className="w-32 h-1 bg-[#017da0] mx-auto mb-4 sm:mb-6 md:mb-8 rounded-full"></div>
                 </div>
@@ -136,10 +139,10 @@ export function VideoSection() {
                                     {/* Loading text with animation */}
                                     <div className="space-y-2">
                                         <p className="text-white/80 font-inter text-lg font-medium">
-                                            Przygotowujemy wideo...
+                                            {locale === 'en' ? 'Preparing the video...' : 'Przygotowujemy wideo...'}
                                         </p>
                                         <p className="text-white/60 font-inter text-sm">
-                                            Ładowanie wideo może potrwać kilka sekund
+                                            {locale === 'en' ? 'The video may take a few seconds to load' : 'Ładowanie wideo może potrwać kilka sekund'}
                                         </p>
                                     </div>
 
@@ -153,7 +156,7 @@ export function VideoSection() {
                                                 ></div>
                                             </div>
                                             <p className="text-white/50 font-inter text-xs">
-                                                {Math.round(loadProgress)}% załadowane
+                                                {locale === 'en' ? `${Math.round(loadProgress)}% loaded` : `${Math.round(loadProgress)}% załadowane`}
                                             </p>
                                         </div>
                                     )}
@@ -161,7 +164,9 @@ export function VideoSection() {
                                     {/* Loading tips */}
                                     <div className="mt-6 p-4 bg-white/5 rounded-lg">
                                         <p className="text-white/50 font-inter text-xs">
-                                            💡 Wskazówka: Wideo automatycznie się załaduje gdy będzie gotowe
+                                            {locale === 'en'
+                                                ? 'Tip: The video will load automatically when it is ready'
+                                                : '💡 Wskazówka: Wideo automatycznie się załaduje gdy będzie gotowe'}
                                         </p>
                                     </div>
                                 </div>
@@ -189,7 +194,9 @@ export function VideoSection() {
                                 onEnded={handleVideoEnded}
                             >
                                 <source src="/videos/vid.mp4" type="video/mp4" />
-                                Twoja przeglądarka nie obsługuje odtwarzania wideo.
+                                {locale === 'en'
+                                    ? 'Your browser does not support video playback.'
+                                    : 'Twoja przeglądarka nie obsługuje odtwarzania wideo.'}
                             </video>
                         )}
 
@@ -198,7 +205,7 @@ export function VideoSection() {
                             <button
                                 className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/60 transition-all duration-300 group"
                                 onClick={handlePlay}
-                                aria-label="Odtwórz wideo"
+                                aria-label={locale === 'en' ? 'Play video' : 'Odtwórz wideo'}
                             >
                                 <div className="w-20 h-20 bg-[#017da0] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                                     <svg

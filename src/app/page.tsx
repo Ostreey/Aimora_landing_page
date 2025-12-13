@@ -8,6 +8,16 @@ import { ProductDescriptionSection } from '@/components/ProductDescriptionSectio
 import { Roadmap } from '@/components/Roadmap';
 import { VideoSection } from '@/components/VideoSection';
 import { WhatIsItSection } from '@/components/WhatIsItSection';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    alternates: {
+        languages: {
+            pl: '/',
+            en: '/en',
+        },
+    },
+};
 
 export default function Home() {
     return (
