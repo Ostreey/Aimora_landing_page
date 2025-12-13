@@ -4,7 +4,7 @@ import '@fontsource/barlow-semi-condensed/index.css';
 import '@fontsource/exo-2/index.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
+import '../globals.css';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -14,29 +14,29 @@ const inter = Inter({
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aimora.pl'),
-    title: 'Aimora – Interaktywne Cele Strzeleckie z Aplikacją',
-    description: 'Rewolucyjny system inteligentnych detektorów trafień do treningu strzeleckiego',
-    keywords: ['strzelanie', 'trening', 'cele', 'militaria', 'technologia', 'aimora', 'ASG', 'wiatrówka', 'airsoft', 'strzelectwo', 'broń', 'cele strzeleckie', 'gong strzelecki', 'tarcze strzeleckie'],
+    title: 'Aimora – Interactive Shooting Targets with Mobile App',
+    description: 'Revolutionary smart hit detector system for shooting training',
+    keywords: ['shooting', 'training', 'targets', 'military', 'technology', 'aimora', 'airsoft', 'air gun', 'shooting sports', 'steel targets', 'shooting gong', 'target systems'],
     authors: [{ name: 'Aimora' }],
     robots: 'index, follow',
     alternates: {
-        canonical: '/',
+        canonical: '/en',
         languages: {
             'pl': '/',
             'en': '/en',
         },
     },
     openGraph: {
-        title: 'Aimora – Interaktywne Cele Strzeleckie z aplikacją mobilną',
-        description: 'Rewolucyjny system inteligentnych detektorów trafień do treningu strzeleckiego',
+        title: 'Aimora – Interactive Shooting Targets with Mobile App',
+        description: 'Revolutionary smart hit detector system for shooting training',
         type: 'website',
-        locale: 'pl_PL',
+        locale: 'en_US',
         images: ['/images/what_is_it_mobile.png'],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Aimora – Interaktywne Cele Strzeleckie z aplikacją mobilną',
-        description: 'Rewolucyjny system inteligentnych detektorów trafień do treningu strzeleckiego',
+        title: 'Aimora – Interactive Shooting Targets with Mobile App',
+        description: 'Revolutionary smart hit detector system for shooting training',
         images: ['/images/what_is_it_mobile.png'],
     },
 }
@@ -46,13 +46,13 @@ export const viewport = {
     initialScale: 1,
 }
 
-export default function RootLayout({
+export default function EnglishLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
     return (
-        <html lang="pl" className="font-barlow">
+        <html lang="en" className="font-barlow">
             <head>
                 <link rel="alternate" hrefLang="pl" href="https://aimora.pl/" />
                 <link rel="alternate" hrefLang="en" href="https://aimora.pl/en" />
@@ -60,9 +60,9 @@ export default function RootLayout({
             </head>
             <body className="font-barlow antialiased">
                 <AOSInit />
-                <NavBar locale="pl" />
+                <NavBar locale="en" />
                 <main>{children}</main>
             </body>
         </html>
     )
-} 
+}
