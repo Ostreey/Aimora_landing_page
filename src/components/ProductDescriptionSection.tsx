@@ -134,7 +134,7 @@ export function ProductDescriptionSection() {
             id: 'realtime',
             icon: Radar,
             title: 'Reakcja w czasie rzeczywistym',
-            description: 'Każde trafienie rejestrowane jest natychmiast, z dokładnością do ułamka sekundy.',
+            description: 'Każde trafienie rejestrowane jest natychmiast, z dokładnością do 10 ms.',
             delay: 0
         },
         {

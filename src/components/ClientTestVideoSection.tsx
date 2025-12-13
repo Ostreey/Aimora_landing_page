@@ -172,7 +172,7 @@ export function ClientTestVideoSection() {
                             <h4 className="text-white font-barlow font-bold text-lg mb-2">Sprawdzony w praktyce
                             </h4>
                             <p className="text-white/70 font-inter text-sm">
-                                Testy przeprowadzone przez naszego klienta na profesjonalnej strzelnicy.
+                                System został juz przetestowany na profesjonalnej strzelnicy oraz zawodach strzeleckich.
                             </p>
                         </div>
 
