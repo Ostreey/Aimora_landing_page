@@ -38,6 +38,12 @@ export const translations = {
             easySetup: 'Łatwy Montaż',
             easySetupDesc: 'Prosty proces instalacji i konfiguracji na torze strzeleckim'
         },
+        competitionVideoSection: {
+            title: 'Testy klienta',
+            titleHighlight: 'Nocne zawody',
+            titleEnd: 'w akcji',
+            playCompetitionVideo: 'Odtwórz wideo z zawodów'
+        },
         whatIsIt: {
             altDesktop: 'Jak to działa?',
             altMobile: 'Jak to działa?'
@@ -376,6 +382,11 @@ export const translations = {
             appControlDesc: 'Control targets without leaving your station. Start games, check hits, and configure the system',
             easySetup: 'Easy Installation',
             easySetupDesc: 'Simple setup and configuration process on any shooting range'
+        },
+        competitionVideoSection: {
+            title: 'Night competition',
+            titleHighlight: 'client field tests',
+            playCompetitionVideo: 'Play competition video'
         },
         whatIsIt: {
             altDesktop: 'How does it work?',

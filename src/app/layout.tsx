@@ -1,4 +1,5 @@
 import { AOSInit } from '@/components/AOSInit';
+import { LangSetter } from '@/components/LangSetter';
 import { NavBar } from '@/components/NavBar';
 import '@fontsource/barlow-semi-condensed/index.css';
 import '@fontsource/exo-2/index.css';
@@ -59,8 +60,9 @@ export default function RootLayout({
                 <link rel="alternate" hrefLang="x-default" href="https://aimora.pl/" />
             </head>
             <body className="font-barlow antialiased">
+                <LangSetter />
                 <AOSInit />
-                <NavBar locale="pl" />
+                <NavBar />
                 <main>{children}</main>
             </body>
         </html>

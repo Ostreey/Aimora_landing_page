@@ -1,4 +1,5 @@
 import { CTA } from '@/components/CTA';
+import { ClientCompetitionVideoSection } from '@/components/ClientCompetitionVideoSection';
 import { ClientTestVideoSection } from '@/components/ClientTestVideoSection';
 import { FeatureSection } from '@/components/FeatureSection';
 import { Footer } from '@/components/Footer';
@@ -15,11 +16,14 @@ export default function Home() {
             <section id="home">
                 <Hero />
             </section>
-            <section id="aimora-w-akcji">
-                <VideoSection />
-            </section>
             <section id="testy-na-strzelnicy">
                 <ClientTestVideoSection />
+            </section>
+            <section id="nonce-zawody">
+                <ClientCompetitionVideoSection />
+            </section>
+            <section id="aimora-w-akcji">
+                <VideoSection />
             </section>
             <section id="jak-to-dziala">
                 <WhatIsItSection />

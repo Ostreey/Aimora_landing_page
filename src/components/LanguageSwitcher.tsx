@@ -14,6 +14,9 @@ export function LanguageSwitcher({ currentLocale, className = '' }: LanguageSwit
 
     const getAlternateUrl = (targetLocale: Locale): string => {
         if (targetLocale === 'en') {
+            if (pathname === '/en' || pathname === '/en/' || pathname.startsWith('/en/')) {
+                return '/en';
+            }
             if (pathname === '/') {
                 return '/en';
             }
@@ -37,32 +40,36 @@ export function LanguageSwitcher({ currentLocale, className = '' }: LanguageSwit
             if (pathname.startsWith('/en/')) {
                 return pathname.substring(3);
             }
+            if (pathname === '/' || !pathname.startsWith('/en')) {
+                return pathname;
+            }
             return pathname;
         }
     };
 
     return (
-        <div className={`flex items-center gap-1 ${className}`}>
+        <div className={`flex items-center gap-2 ${className}`}>
             <Link
                 href={getAlternateUrl('pl')}
-                className={`px-2 py-1 text-sm font-semibold transition-all duration-200 rounded ${
+                className={`px-3 py-1.5 text-lg transition-all duration-200 rounded flex items-center justify-center ${
                     currentLocale === 'pl'
-                        ? 'text-[#00B2E3] bg-[#00B2E3]/10'
-                        : 'text-white/70 hover:text-white hover:bg-white/10'
+                        ? 'bg-[#00B2E3]/20 border-2 border-[#00B2E3]'
+                        : 'bg-white/5 border-2 border-transparent hover:bg-white/10 hover:border-white/20'
                 }`}
+                title="Polski"
             >
-                PL
+                🇵🇱
             </Link>
-            <span className="text-white/30">|</span>
             <Link
                 href={getAlternateUrl('en')}
-                className={`px-2 py-1 text-sm font-semibold transition-all duration-200 rounded ${
+                className={`px-3 py-1.5 text-lg transition-all duration-200 rounded flex items-center justify-center ${
                     currentLocale === 'en'
-                        ? 'text-[#00B2E3] bg-[#00B2E3]/10'
-                        : 'text-white/70 hover:text-white hover:bg-white/10'
+                        ? 'bg-[#00B2E3]/20 border-2 border-[#00B2E3]'
+                        : 'bg-white/5 border-2 border-transparent hover:bg-white/10 hover:border-white/20'
                 }`}
+                title="English"
             >
-                EN
+                🇬🇧
             </Link>
         </div>
     );

@@ -1,3 +1,4 @@
+import { ClientCompetitionVideoSectionLocalized } from '@/components/ClientCompetitionVideoSectionLocalized';
 import { ClientTestVideoSectionLocalized } from '@/components/ClientTestVideoSectionLocalized';
 import { CTALocalized } from '@/components/CTALocalized';
 import { FeatureSectionLocalized } from '@/components/FeatureSectionLocalized';
@@ -28,11 +29,14 @@ export default function EnglishHome() {
             <section id="home">
                 <HeroLocalized locale="en" />
             </section>
-            <section id="aimora-w-akcji">
-                <VideoSectionLocalized locale="en" />
-            </section>
             <section id="testy-na-strzelnicy">
                 <ClientTestVideoSectionLocalized locale="en" />
+            </section>
+            <section id="nonce-zawody">
+                <ClientCompetitionVideoSectionLocalized locale="en" />
+            </section>
+            <section id="aimora-w-akcji">
+                <VideoSectionLocalized locale="en" />
             </section>
             <section id="jak-to-dziala">
                 <WhatIsItSection />
