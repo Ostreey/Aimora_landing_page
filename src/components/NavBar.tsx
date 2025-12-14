@@ -1,13 +1,12 @@
 'use client'
 import { trackGAEvent } from '@/lib/firebase';
+import { getTranslations, Locale } from '@/lib/translations';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
-// Smooth scroll to section function
 const scrollToSection = (elementId: string) => {
-    // If on a different page, this won't work, but the Link component will navigate first.
-    // This is for same-page smooth scrolling.
     const element = document.getElementById(elementId);
     if (element) {
         element.scrollIntoView({
@@ -17,18 +16,27 @@ const scrollToSection = (elementId: string) => {
     }
 };
 
-export function NavBar() {
+interface NavBarProps {
+    locale?: Locale;
+}
+
+export function NavBar({ locale: propLocale }: NavBarProps) {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
     const pathname = usePathname();
 
-    // This effect now only cares about setting the active section on scroll
+    const locale: Locale = propLocale || (pathname.startsWith('/en') ? 'en' : 'pl');
+    const t = getTranslations(locale);
+    const basePath = locale === 'en' ? '/en' : '';
+    const rentalPath = locale === 'en' ? '/en/rental' : '/wypozyczenie';
+    const homePath = locale === 'en' ? '/en' : '/';
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 10);
 
-            const sections = ['home', 'aimora-w-akcji', 'testy-na-strzelnicy', 'jak-to-dziala', 'co-to-jest', 'kluczowe-funkcje', 'aplikacja-mobilna', 'mapa-rozwoju'];
+            const sections = ['home', 'testy-na-strzelnicy', 'jak-to-dziala', 'co-to-jest', 'kluczowe-funkcje', 'aplikacja-mobilna', 'mapa-rozwoju'];
             const scrollPosition = window.scrollY + window.innerHeight / 2;
 
             let currentSection = 'home';
@@ -53,15 +61,16 @@ export function NavBar() {
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Initial check
+        handleScroll();
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const isHomePage = pathname === '/' || pathname === '/en' || pathname === '/en/';
+
     const getNavButtonClass = (sectionId: string) => {
         const baseClass = "font-semibold text-lg py-2 px-2 border-b-2 transition-all duration-200 font-barlow";
-        // If we are on a subpage, don't highlight scroll-based links
-        if (pathname !== '/') {
+        if (!isHomePage) {
             return `${baseClass} text-white/90 hover:text-[#00B2E3] border-transparent hover:border-[#00B2E3]`;
         }
         const isActive = activeSection === sectionId;
@@ -84,7 +93,6 @@ export function NavBar() {
         return `${baseClass} text-white/90 hover:text-[#00B2E3] border-transparent hover:border-[#00B2E3]`;
     };
 
-    // Close mobile menu when clicking on a link
     const handleMobileMenuClick = () => {
         setMobileMenuOpen(false);
     };
@@ -107,9 +115,9 @@ export function NavBar() {
                     <div className="flex items-center justify-between w-full h-20">
                         <div className="flex items-center">
                             <Link
-                                href="/#home"
+                                href={`${homePath}#home`}
                                 onClick={() => { setActiveSection('home'); scrollToSection('home'); }}
-                                className={`text-xl font-bold font-barlow transition-all duration-200 ${activeSection === 'home'
+                                className={`text-xl font-bold font-barlow transition-all duration-200 ${activeSection === 'home' && isHomePage
                                     ? 'text-[#00B2E3] border-b-2 border-[#00B2E3] pb-1'
                                     : 'text-white hover:text-[#00B2E3]'
                                     }`}
@@ -118,19 +126,19 @@ export function NavBar() {
                             </Link>
                         </div>
 
-                        {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center space-x-6">
-                            <Link href="/#aimora-w-akcji" onClick={() => scrollToSection('aimora-w-akcji')} className={getNavButtonClass('aimora-w-akcji')}>Aimora w akcji</Link>
-                            <Link href="/#testy-na-strzelnicy" onClick={() => scrollToSection('testy-na-strzelnicy')} className={getNavButtonClass('testy-na-strzelnicy')}>Testy na strzelnicy</Link>
-                            <Link href="/#jak-to-dziala" onClick={() => scrollToSection('jak-to-dziala')} className={getNavButtonClass('jak-to-dziala')}>Jak to działa?</Link>
-                            <Link href="/#aplikacja-mobilna" onClick={() => scrollToSection('aplikacja-mobilna')} className={getNavButtonClass('aplikacja-mobilna')}>Aplikacja mobilna</Link>
-                            <Link href="/#mapa-rozwoju" onClick={() => scrollToSection('mapa-rozwoju')} className={getNavButtonClass('mapa-rozwoju')}>Roadmap</Link>
-                            <Link href="/wypozyczenie" className={getSubpageNavClass('/wypozyczenie')} onClick={() => trackGAEvent('clicked_rental_page')}>
-                                Wypożyczenie
+                            <Link href={`${homePath}#testy-na-strzelnicy`} onClick={() => scrollToSection('testy-na-strzelnicy')} className={getNavButtonClass('testy-na-strzelnicy')}>{t.nav.rangeTests}</Link>
+                            <Link href={`${homePath}#jak-to-dziala`} onClick={() => scrollToSection('jak-to-dziala')} className={getNavButtonClass('jak-to-dziala')}>{t.nav.howItWorks}</Link>
+                            <Link href={`${homePath}#aplikacja-mobilna`} onClick={() => scrollToSection('aplikacja-mobilna')} className={getNavButtonClass('aplikacja-mobilna')}>{t.nav.mobileApp}</Link>
+                            <Link href={`${homePath}#mapa-rozwoju`} onClick={() => scrollToSection('mapa-rozwoju')} className={getNavButtonClass('mapa-rozwoju')}>{t.nav.roadmap}</Link>
+                            <Link href={rentalPath} className={getSubpageNavClass(rentalPath)} onClick={() => trackGAEvent('clicked_rental_page')}>
+                                {t.nav.rental}
                             </Link>
+                            <div className="ml-8">
+                                <LanguageSwitcher currentLocale={locale} />
+                            </div>
                         </div>
 
-                        {/* Mobile Menu Button */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="md:hidden flex flex-col items-center justify-center w-8 h-8 space-y-1.5 focus:outline-none"
@@ -144,39 +152,38 @@ export function NavBar() {
                 </div>
             </nav>
 
-            {/* Mobile Menu Overlay */}
             <div className={`md:hidden fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                 <div className={`absolute top-0 right-0 w-full h-full bg-black/95 transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                     <button
                         onClick={() => setMobileMenuOpen(false)}
                         className="absolute top-4 right-4 text-white/90 hover:text-white text-4xl font-light transition-colors duration-200 w-12 h-12 flex items-center justify-center z-[10001] bg-black/20 rounded-full backdrop-blur-sm"
-                        aria-label="Zamknij menu"
+                        aria-label={t.nav.closeMenu}
                     >
                         ×
                     </button>
 
                     <div className="flex flex-col items-center justify-center h-full space-y-6 z-[10000] relative">
-                        <Link href="/#aimora-w-akcji" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Aimora w akcji
+                        <Link href={`${homePath}#testy-na-strzelnicy`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                            {t.nav.rangeTests}
                         </Link>
-                        <Link href="/#testy-na-strzelnicy" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Testy na strzelnicy
+                        <Link href={`${homePath}#jak-to-dziala`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                            {t.nav.howItWorks}
                         </Link>
-                        <Link href="/#jak-to-dziala" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Jak to działa?
+                        <Link href={`${homePath}#aplikacja-mobilna`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                            {t.nav.mobileApp}
                         </Link>
-                        <Link href="/#aplikacja-mobilna" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Aplikacja mobilna
+                        <Link href={`${homePath}#mapa-rozwoju`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
+                            {t.nav.roadmap}
                         </Link>
-                        <Link href="/#mapa-rozwoju" onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
-                            Roadmap
+                        <Link href={rentalPath} onClick={() => { handleMobileMenuClick(); trackGAEvent('clicked_rental_page'); }} className={getSubpageNavClass(rentalPath, true)}>
+                            {t.nav.rental}
                         </Link>
-                        <Link href="/wypozyczenie" onClick={() => { handleMobileMenuClick(); trackGAEvent('clicked_rental_page'); }} className={getSubpageNavClass('/wypozyczenie', true)}>
-                            Wypożyczenie
-                        </Link>
+                        <div className="pt-4">
+                            <LanguageSwitcher currentLocale={locale} />
+                        </div>
                     </div>
                 </div>
             </div>
         </>
     );
-} 
+}
