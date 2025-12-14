@@ -57,6 +57,7 @@ export function LanguageSwitcher({ currentLocale, className = '' }: LanguageSwit
                         : 'bg-white/5 border-2 border-transparent hover:bg-white/10 hover:border-white/20'
                 }`}
                 title="Polski"
+                style={{ fontFamily: 'system-ui, -apple-system, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif' }}
             >
                 🇵🇱
             </Link>
@@ -68,8 +69,9 @@ export function LanguageSwitcher({ currentLocale, className = '' }: LanguageSwit
                         : 'bg-white/5 border-2 border-transparent hover:bg-white/10 hover:border-white/20'
                 }`}
                 title="English"
+                style={{ fontFamily: 'system-ui, -apple-system, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif' }}
             >
-                🇬🇧
+                🇺🇸
             </Link>
         </div>
     );

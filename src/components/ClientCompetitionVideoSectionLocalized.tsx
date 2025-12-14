@@ -118,9 +118,15 @@ export function ClientCompetitionVideoSectionLocalized({ locale }: ClientCompeti
                         {!isPlaying ? (
                             <div className="relative w-full h-full">
                                 <img
-                                    src="https://img.youtube.com/vi/t9rCzW0eKvE/maxresdefault.jpg"
+                                    src="https://img.youtube.com/vi/t9rCzW0eKvE/hqdefault.jpg"
                                     alt={t.competitionVideoSection.playCompetitionVideo}
                                     className="w-full h-full object-cover"
+                                    onError={(e) => {
+                                        const target = e.target as HTMLImageElement;
+                                        if (target.src.includes('hqdefault')) {
+                                            target.src = 'https://img.youtube.com/vi/t9rCzW0eKvE/sddefault.jpg';
+                                        }
+                                    }}
                                 />
                                 <div className="absolute inset-0 bg-black/40"></div>
 
