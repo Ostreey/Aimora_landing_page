@@ -132,9 +132,7 @@ export function MobileAppSectionLocalized({ locale }: MobileAppSectionLocalizedP
                         <div className="flex justify-center">
                             <DownloadButtonLocalized
                                 locale={locale}
-                                apkUrl={`/apk/app-release.apk?v=${new Date().getTime()}`}
-                                fileName="app-release.apk"
-                                version="1.3"
+                                playStoreUrl={`https://play.google.com/store/apps/details?id=com.aimora.shootingbuddy&hl=${locale}`}
                                 className="max-w-sm"
                             />
                         </div>

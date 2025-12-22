@@ -137,9 +137,7 @@ export function MobileAppSection() {
 
                         <div className="flex justify-center">
                             <DownloadButton
-                                apkUrl={`/apk/app-release.apk?v=${new Date().getTime()}`}
-                                fileName="app-release.apk"
-                                version="1.3"
+                                playStoreUrl="https://play.google.com/store/apps/details?id=com.aimora.shootingbuddy&hl=pl"
                                 className="max-w-sm"
                             />
                         </div>

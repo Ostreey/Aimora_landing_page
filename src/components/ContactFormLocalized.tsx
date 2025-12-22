@@ -47,9 +47,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
             newErrors.email = t.contactForm.emailInvalid;
         }
 
-        if (!formData.message.trim()) {
-            newErrors.message = t.contactForm.messageRequired;
-        } else if (formData.message.trim().length < 5) {
+        if (formData.message.trim() && formData.message.trim().length < 5) {
             newErrors.message = t.contactForm.messageMinLength;
         }
 
@@ -267,7 +265,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
 
                         <div>
                             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                                {t.contactForm.messageLabel} <span className="text-red-500">{t.contactForm.required}</span>
+                                {t.contactForm.messageLabel} <span className="text-gray-400">{t.contactForm.messageOptional}</span>
                             </label>
                             <textarea
                                 id="message"
