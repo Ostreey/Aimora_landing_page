@@ -51,7 +51,7 @@ export function CTA() {
                             className="mb-6"
                         >
                             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full text-lg font-semibold">
-                                <span>350 zł / komplet — detektor + wskaźnik LED</span>
+                                <span>350 zł / komplet — detektor + wskaźnik LED + 2 odbłyski</span>
                             </div>
                         </motion.div>
 

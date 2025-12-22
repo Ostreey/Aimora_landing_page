@@ -44,10 +44,8 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
             newErrors.email = 'Nieprawidłowy format adresu email';
         }
 
-        if (!formData.message.trim()) {
-            newErrors.message = 'Treść zapytania jest wymagana';
-        } else if (formData.message.trim().length < 5) {
-            newErrors.message = 'Treść zapytania musi mieć co najmniej 5 znaków';
+        if (formData.message.trim() && formData.message.trim().length < 5) {
+            newErrors.message = 'Uwagi do zamówienia muszą mieć co najmniej 5 znaków';
         }
 
         const quantity = typeof formData.quantity === 'string' ? parseInt(formData.quantity, 10) : formData.quantity;
@@ -148,7 +146,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                             {/* use the same style as other sections */}
                             {/* lightweight import avoidance: reusing markup would require importing component, but it's fine to keep here minimal */}
                             <span className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 border border-gray-200 shadow-sm px-4 py-2 text-sm font-semibold">
-                                <span className="text-gray-700">{PROMO_PRICE_PLN} zł / komplet — detektor + wskaźnik LED</span>
+                                <span className="text-gray-700">{PROMO_PRICE_PLN} zł / komplet — detektor + wskaźnik LED + 2 odbłyski</span>
                             </span>
                         </span>
                     </div>
@@ -163,7 +161,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                             </svg>
                         </div>
                         <h3 className="text-xl font-barlow font-bold text-gray-900 mb-2">Dziękujemy!</h3>
-                        <p className="text-gray-600">Twoje zapytanie zostało wysłane. Skontaktujemy się z Tobą wkrótce.</p>
+                        <p className="text-gray-600">Twoje zamówienie zostało wysłane. Skontaktujemy się z Tobą wkrótce.</p>
                     </div>
                 )}
 
@@ -282,7 +280,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                         {/* Message Field */}
                         <div>
                             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                                Treść zapytania <span className="text-red-500">*</span>
+                                Uwagi do zamówienia <span className="text-gray-400">(opcjonalne)</span>
                             </label>
                             <textarea
                                 id="message"
@@ -311,7 +309,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                         Wysyłanie...
                                     </div>
                                 ) : (
-                                    'Wyślij zapytanie'
+                                    'Wyślij zamówienie'
                                 )}
                             </button>
                         </div>
