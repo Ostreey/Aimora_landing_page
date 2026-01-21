@@ -1,7 +1,7 @@
 'use client';
 
 import { trackYouTubeVideoFinished, trackYouTubeVideoProgress, trackYouTubeVideoStarted, trackYouTubeVideoStopped } from '@/lib/firebase';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // YouTube Player API types
 declare global {
@@ -21,53 +21,14 @@ export function ClientTestVideoSection() {
     const videoId = '6n6qWvT0Uzs';
     const videoTitle = 'Testy Aimora na strzelnicy - profesjonalne testy strzeleckie';
 
-    // Load YouTube API
-    useEffect(() => {
-        if (typeof window !== 'undefined' && !window.YT) {
-            const tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-
-            window.onYouTubeIframeAPIReady = () => {
-                setIsAPIReady(true);
-            };
-        } else if (window.YT) {
-            setIsAPIReady(true);
-        }
-    }, []);
-
-    // Initialize YouTube player when API is ready and user clicks play
-    useEffect(() => {
-        if (isAPIReady && isPlaying && !player) {
-            const newPlayer = new window.YT.Player('youtube-player', {
-                height: '100%',
-                width: '100%',
-                videoId: videoId,
-                playerVars: {
-                    autoplay: 1,
-                    rel: 0,
-                    modestbranding: 1,
-                    controls: 1,
-                },
-                events: {
-                    onReady: onPlayerReady,
-                    onStateChange: onPlayerStateChange,
-                },
-            });
-            setPlayer(newPlayer);
-        }
-    }, [isAPIReady, isPlaying, player]);
-
-    const onPlayerReady = (event: any) => {
-        // Player is ready
+    const onPlayerReady = useCallback((event: any) => {
         if (!hasStartedTracking) {
             trackYouTubeVideoStarted(videoId, videoTitle);
             setHasStartedTracking(true);
         }
-    };
+    }, [hasStartedTracking, videoId, videoTitle]);
 
-    const onPlayerStateChange = (event: any) => {
+    const onPlayerStateChange = useCallback((event: any) => {
         const state = event.data;
         const currentTime = event.target.getCurrentTime();
         const duration = event.target.getDuration();
@@ -75,11 +36,15 @@ export function ClientTestVideoSection() {
 
         switch (state) {
             case window.YT.PlayerState.PLAYING:
-                // Track progress milestones (25%, 50%, 75%)
                 const milestone = Math.floor(percentWatched / 25) * 25;
-                if (milestone > 0 && milestone <= 75 && !progressMilestones.has(milestone)) {
-                    trackYouTubeVideoProgress(videoId, currentTime, duration, percentWatched, videoTitle);
-                    setProgressMilestones(prev => new Set(Array.from(prev).concat([milestone])));
+                if (milestone > 0 && milestone <= 75) {
+                    setProgressMilestones(prev => {
+                        if (!prev.has(milestone)) {
+                            trackYouTubeVideoProgress(videoId, currentTime, duration, percentWatched, videoTitle);
+                            return new Set(Array.from(prev).concat([milestone]));
+                        }
+                        return prev;
+                    });
                 }
                 break;
 
@@ -91,7 +56,82 @@ export function ClientTestVideoSection() {
                 trackYouTubeVideoFinished(videoId, duration, videoTitle);
                 break;
         }
-    };
+    }, [videoId, videoTitle]);
+
+    useEffect(() => {
+        const checkAPIReady = () => {
+            if (window.YT && window.YT.Player) {
+                setIsAPIReady(true);
+                return true;
+            }
+            return false;
+        };
+
+        if (typeof window === 'undefined') return;
+
+        if (checkAPIReady()) {
+            return;
+        }
+
+        if (window.YT && window.YT.loaded) {
+            setIsAPIReady(true);
+            return;
+        }
+
+        const existingCallback = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = () => {
+            if (existingCallback) {
+                existingCallback();
+            }
+            setIsAPIReady(true);
+        };
+
+        if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            tag.async = true;
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            if (firstScriptTag && firstScriptTag.parentNode) {
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            }
+        } else {
+            const checkInterval = setInterval(() => {
+                if (checkAPIReady()) {
+                    clearInterval(checkInterval);
+                }
+            }, 100);
+
+            return () => clearInterval(checkInterval);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (isAPIReady && isPlaying && !player) {
+            const playerElement = document.getElementById('youtube-player-test');
+            if (playerElement && window.YT && window.YT.Player) {
+                try {
+                    const newPlayer = new window.YT.Player('youtube-player-test', {
+                        height: '100%',
+                        width: '100%',
+                        videoId: videoId,
+                        playerVars: {
+                            autoplay: 1,
+                            rel: 0,
+                            modestbranding: 1,
+                            controls: 1,
+                        },
+                        events: {
+                            onReady: onPlayerReady,
+                            onStateChange: onPlayerStateChange,
+                        },
+                    });
+                    setPlayer(newPlayer);
+                } catch (error) {
+                    console.error('Error initializing YouTube player:', error);
+                }
+            }
+        }
+    }, [isAPIReady, isPlaying, player, onPlayerReady, onPlayerStateChange]);
 
     const handlePlay = () => {
         setIsPlaying(true);
@@ -152,9 +192,8 @@ export function ClientTestVideoSection() {
                                 </div>
                             </div>
                         ) : (
-                            /* YouTube Player with API */
                             <div
-                                id="youtube-player"
+                                id="youtube-player-test"
                                 className="w-full h-full rounded-xl"
                                 style={{ minHeight: '100%' }}
                             ></div>
