@@ -1,7 +1,7 @@
 'use client';
 
 import { trackYouTubeVideoFinished, trackYouTubeVideoProgress, trackYouTubeVideoStarted, trackYouTubeVideoStopped } from '@/lib/firebase';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 // YouTube Player API types
 declare global {
@@ -17,6 +17,7 @@ export function ClientTestVideoSection() {
     const [isAPIReady, setIsAPIReady] = useState(false);
     const [hasStartedTracking, setHasStartedTracking] = useState(false);
     const [progressMilestones, setProgressMilestones] = useState<Set<number>>(new Set());
+    const playerContainerRef = useRef<HTMLDivElement>(null);
 
     const videoId = '6n6qWvT0Uzs';
     const videoTitle = 'Testy Aimora na strzelnicy - profesjonalne testy strzeleckie';
@@ -107,31 +108,60 @@ export function ClientTestVideoSection() {
 
     useEffect(() => {
         if (isAPIReady && isPlaying && !player) {
-            const playerElement = document.getElementById('youtube-player-test');
-            if (playerElement && window.YT && window.YT.Player) {
-                try {
-                    const newPlayer = new window.YT.Player('youtube-player-test', {
-                        height: '100%',
-                        width: '100%',
-                        videoId: videoId,
-                        playerVars: {
-                            autoplay: 1,
-                            rel: 0,
-                            modestbranding: 1,
-                            controls: 1,
-                        },
-                        events: {
-                            onReady: onPlayerReady,
-                            onStateChange: onPlayerStateChange,
-                        },
-                    });
-                    setPlayer(newPlayer);
-                } catch (error) {
-                    console.error('Error initializing YouTube player:', error);
+            let attempts = 0;
+            const maxAttempts = 50;
+            let timeoutId: NodeJS.Timeout | null = null;
+
+            const initPlayer = () => {
+                attempts++;
+                const playerElement = playerContainerRef.current;
+
+                if (playerElement && window.YT && window.YT.Player) {
+                    try {
+                        if (playerElement.querySelector('iframe')) {
+                            return;
+                        }
+
+                        const newPlayer = new window.YT.Player(playerElement, {
+                            height: '100%',
+                            width: '100%',
+                            videoId: videoId,
+                            playerVars: {
+                                autoplay: 1,
+                                rel: 0,
+                                modestbranding: 1,
+                                controls: 1,
+                            },
+                            events: {
+                                onReady: onPlayerReady,
+                                onStateChange: onPlayerStateChange,
+                            },
+                        });
+                        setPlayer(newPlayer);
+                    } catch (error) {
+                        console.error('Error initializing YouTube player:', error);
+                        if (attempts < maxAttempts) {
+                            timeoutId = setTimeout(initPlayer, 100);
+                        }
+                    }
+                } else if (playerElement && window.YT && !window.YT.Player && attempts < maxAttempts) {
+                    timeoutId = setTimeout(initPlayer, 100);
+                } else if (!playerElement && attempts < maxAttempts) {
+                    timeoutId = setTimeout(initPlayer, 50);
                 }
-            }
+            };
+
+            requestAnimationFrame(() => {
+                timeoutId = setTimeout(initPlayer, 50);
+            });
+
+            return () => {
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+            };
         }
-    }, [isAPIReady, isPlaying, player, onPlayerReady, onPlayerStateChange]);
+    }, [isAPIReady, isPlaying, player, onPlayerReady, onPlayerStateChange, videoId]);
 
     const handlePlay = () => {
         setIsPlaying(true);
@@ -193,6 +223,7 @@ export function ClientTestVideoSection() {
                             </div>
                         ) : (
                             <div
+                                ref={playerContainerRef}
                                 id="youtube-player-test"
                                 className="w-full h-full rounded-xl"
                                 style={{ minHeight: '100%' }}
