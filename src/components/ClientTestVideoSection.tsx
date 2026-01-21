@@ -1,39 +1,18 @@
 'use client';
 
 import { trackYouTubeVideoFinished, trackYouTubeVideoProgress, trackYouTubeVideoStarted, trackYouTubeVideoStopped } from '@/lib/firebase';
+import { useYouTubeAPI } from '@/lib/useYouTubeAPI';
 import { useEffect, useState } from 'react';
-
-declare global {
-    interface Window {
-        onYouTubeIframeAPIReady: () => void;
-        YT: any;
-    }
-}
 
 export function ClientTestVideoSection() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [player, setPlayer] = useState<any>(null);
-    const [isAPIReady, setIsAPIReady] = useState(false);
+    const isAPIReady = useYouTubeAPI();
     const [hasStartedTracking, setHasStartedTracking] = useState(false);
     const [progressMilestones, setProgressMilestones] = useState<Set<number>>(new Set());
 
     const videoId = '6n6qWvT0Uzs';
     const videoTitle = 'Testy Aimora na strzelnicy - profesjonalne testy strzeleckie';
-
-    useEffect(() => {
-        if (typeof window !== 'undefined' && !window.YT) {
-            const tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-
-            window.onYouTubeIframeAPIReady = () => {
-                setIsAPIReady(true);
-            };
-        } else if (window.YT) {
-            setIsAPIReady(true);
-        }
-    }, []);
 
     useEffect(() => {
         if (isAPIReady && isPlaying && !player) {
