@@ -1,6 +1,7 @@
 'use client';
 
 import { trackFormSend } from '@/lib/firebase';
+import { getTranslations, Locale } from '@/lib/translations';
 import { useState } from 'react';
 
 const PROMO_PRICE_PLN = 350;
@@ -13,12 +14,14 @@ interface ContactFormData {
     message: string;
 }
 
-interface ContactFormProps {
+interface ContactFormLocalizedProps {
+    locale: Locale;
     isOpen: boolean;
     onClose: () => void;
 }
 
-export function ContactForm({ isOpen, onClose }: ContactFormProps) {
+export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLocalizedProps) {
+    const t = getTranslations(locale);
     const [formData, setFormData] = useState<ContactFormData>({
         name: '',
         email: '',
@@ -35,22 +38,22 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
         const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
 
         if (!formData.name.trim()) {
-            newErrors.name = 'Imię jest wymagane';
+            newErrors.name = t.contactForm.nameRequired;
         }
 
         if (!formData.email.trim()) {
-            newErrors.email = 'Adres email jest wymagany';
+            newErrors.email = t.contactForm.emailRequired;
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = 'Nieprawidłowy format adresu email';
+            newErrors.email = t.contactForm.emailInvalid;
         }
 
         if (formData.message.trim() && formData.message.trim().length < 5) {
-            newErrors.message = 'Uwagi do zamówienia muszą mieć co najmniej 5 znaków';
+            newErrors.message = t.contactForm.messageMinLength;
         }
 
         const quantity = typeof formData.quantity === 'string' ? parseInt(formData.quantity, 10) : formData.quantity;
         if (!Number.isFinite(quantity) || quantity < 1) {
-            newErrors.quantity = 'Podaj liczbę kompletów (min. 1)';
+            newErrors.quantity = t.contactForm.quantityRequired;
         }
 
         setErrors(newErrors);
@@ -77,9 +80,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
 
             if (response.ok) {
                 setIsSuccess(true);
-                // Track successful form submission
                 trackFormSend();
-                // Reset form after 3 seconds and close modal
                 setTimeout(() => {
                     setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
                     setQuantityInput('1');
@@ -87,11 +88,11 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                     onClose();
                 }, 3000);
             } else {
-                throw new Error('Błąd podczas wysyłania formularza');
+                throw new Error('Form submission error');
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-            setErrors({ message: 'Wystąpił błąd podczas wysyłania. Spróbuj ponownie.' });
+            setErrors({ message: t.contactForm.errorMessage });
         } finally {
             setIsSubmitting(false);
         }
@@ -101,7 +102,6 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
 
-        // Clear error when user starts typing
         if (errors[name as keyof ContactFormData]) {
             setErrors(prev => ({ ...prev, [name]: '' }));
         }
@@ -110,7 +110,6 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
     const handleClose = () => {
         if (!isSubmitting) {
             onClose();
-            // Reset form when closing
             setTimeout(() => {
                 setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
                 setQuantityInput('1');
@@ -125,12 +124,11 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-                {/* Header */}
                 <div className="bg-gradient-to-r from-[#017da0] to-[#0299bb] text-white p-6 rounded-t-2xl">
                     <div className="flex justify-between items-center">
                         <div>
-                            <h2 className="text-2xl font-barlow font-bold">Zamów Aimora</h2>
-                            <p className="text-white/90 text-sm mt-1">Skontaktuj się z nami</p>
+                            <h2 className="text-2xl font-barlow font-bold">{t.contactForm.title}</h2>
+                            <p className="text-white/90 text-sm mt-1">{t.contactForm.subtitle}</p>
                         </div>
                         <button
                             onClick={handleClose}
@@ -140,19 +138,15 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                             ×
                         </button>
                     </div>
-                    {/* Promo badge */}
                     <div className="mt-4">
                         <span className="inline-block">
-                            {/* use the same style as other sections */}
-                            {/* lightweight import avoidance: reusing markup would require importing component, but it's fine to keep here minimal */}
                             <span className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 border border-gray-200 shadow-sm px-4 py-2 text-sm font-semibold">
-                                <span className="text-gray-700">{PROMO_PRICE_PLN} zł / komplet — detektor + wskaźnik LED + 2 odbłyski</span>
+                                <span className="text-gray-700">{PROMO_PRICE_PLN} {t.contactForm.pricePerSet}</span>
                             </span>
                         </span>
                     </div>
                 </div>
 
-                {/* Success State */}
                 {isSuccess && (
                     <div className="p-6 text-center">
                         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -160,18 +154,16 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <h3 className="text-xl font-barlow font-bold text-gray-900 mb-2">Dziękujemy!</h3>
-                        <p className="text-gray-600">Twoje zamówienie zostało wysłane. Skontaktujemy się z Tobą wkrótce.</p>
+                        <h3 className="text-xl font-barlow font-bold text-gray-900 mb-2">{t.contactForm.successTitle}</h3>
+                        <p className="text-gray-600">{t.contactForm.successMessage}</p>
                     </div>
                 )}
 
-                {/* Form */}
                 {!isSuccess && (
                     <form onSubmit={handleSubmit} className="p-6 space-y-4">
-                        {/* Quantity Field */}
                         <div>
                             <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
-                                Ilość kompletów <span className="text-red-500">*</span>
+                                {t.contactForm.quantityLabel} <span className="text-red-500">{t.contactForm.required}</span>
                             </label>
                             <div className="flex items-center gap-3">
                                 <input
@@ -185,7 +177,6 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                         const inputValue = e.target.value;
                                         setQuantityInput(inputValue);
 
-                                        // Update form data only if it's a valid number
                                         if (inputValue === '') {
                                             setFormData(prev => ({ ...prev, quantity: 1 }));
                                         } else {
@@ -198,7 +189,6 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                         if (errors.quantity) setErrors(prev => ({ ...prev, quantity: '' }));
                                     }}
                                     onBlur={(e) => {
-                                        // Ensure minimum value of 1 when user leaves the field
                                         const val = parseInt(e.target.value, 10);
                                         if (!Number.isFinite(val) || val < 1) {
                                             setQuantityInput('1');
@@ -206,26 +196,24 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                         }
                                     }}
                                     className={`w-28 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.quantity ? 'border-red-500' : 'border-gray-300'}`}
-                                    placeholder="Podaj ilość"
                                     disabled={isSubmitting}
                                     inputMode="numeric"
                                     pattern="[0-9]*"
                                 />
                                 <div className="text-sm text-gray-700">
                                     <div>
-                                        Cena promocyjna: <span className="font-semibold">{PROMO_PRICE_PLN} zł</span> / komplet
+                                        {t.contactForm.promoPrice}: <span className="font-semibold">{PROMO_PRICE_PLN} zł</span>
                                     </div>
                                     <div>
-                                        Razem: <span className="font-semibold">{PROMO_PRICE_PLN} zł × {formData.quantity} = {PROMO_PRICE_PLN * (typeof formData.quantity === 'number' ? formData.quantity : 1)} zł</span>
+                                        {t.contactForm.total}: <span className="font-semibold">{PROMO_PRICE_PLN} zł × {formData.quantity} = {PROMO_PRICE_PLN * (typeof formData.quantity === 'number' ? formData.quantity : 1)} zł</span>
                                     </div>
                                 </div>
                             </div>
                             {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
                         </div>
-                        {/* Name Field */}
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                Imię <span className="text-red-500">*</span>
+                                {t.contactForm.nameLabel} <span className="text-red-500">{t.contactForm.required}</span>
                             </label>
                             <input
                                 type="text"
@@ -235,16 +223,15 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 onChange={handleChange}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.name ? 'border-red-500' : 'border-gray-300'
                                     }`}
-                                placeholder="Wpisz swoje imię"
+                                placeholder={t.contactForm.namePlaceholder}
                                 disabled={isSubmitting}
                             />
                             {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                         </div>
 
-                        {/* Email Field */}
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                Adres email <span className="text-red-500">*</span>
+                                {t.contactForm.emailLabel} <span className="text-red-500">{t.contactForm.required}</span>
                             </label>
                             <input
                                 type="email"
@@ -254,16 +241,15 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 onChange={handleChange}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.email ? 'border-red-500' : 'border-gray-300'
                                     }`}
-                                placeholder="twoj@email.com"
+                                placeholder={t.contactForm.emailPlaceholder}
                                 disabled={isSubmitting}
                             />
                             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                         </div>
 
-                        {/* Phone Field */}
                         <div>
                             <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                                Numer telefonu <span className="text-gray-400">(opcjonalne)</span>
+                                {t.contactForm.phoneLabel} <span className="text-gray-400">{t.contactForm.phoneOptional}</span>
                             </label>
                             <input
                                 type="tel"
@@ -272,15 +258,14 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 value={formData.phone}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500"
-                                placeholder="+48 123 456 789"
+                                placeholder={t.contactForm.phonePlaceholder}
                                 disabled={isSubmitting}
                             />
                         </div>
 
-                        {/* Message Field */}
                         <div>
                             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                                Uwagi do zamówienia <span className="text-gray-400">(opcjonalne)</span>
+                                {t.contactForm.messageLabel} <span className="text-gray-400">{t.contactForm.messageOptional}</span>
                             </label>
                             <textarea
                                 id="message"
@@ -290,13 +275,12 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 rows={4}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors resize-none text-gray-900 placeholder-gray-500 ${errors.message ? 'border-red-500' : 'border-gray-300'
                                     }`}
-                                placeholder="Opisz swoje pytania lub wymagania dotyczące Aimora..."
+                                placeholder={t.contactForm.messagePlaceholder}
                                 disabled={isSubmitting}
                             />
                             {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
                         </div>
 
-                        {/* Submit Button */}
                         <div className="pt-4">
                             <button
                                 type="submit"
@@ -306,21 +290,20 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 {isSubmitting ? (
                                     <div className="flex items-center justify-center">
                                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                                        Wysyłanie...
+                                        {t.contactForm.submitting}
                                     </div>
                                 ) : (
-                                    'Wyślij zamówienie'
+                                    t.contactForm.submit
                                 )}
                             </button>
                         </div>
 
-                        {/* Info */}
                         <p className="text-xs text-gray-500 text-center mt-4">
-                            Skontaktujemy się z Tobą w ciągu 24 godzin
+                            {t.contactForm.contactInfo}
                         </p>
                     </form>
                 )}
             </div>
         </div>
     );
-} 
+}

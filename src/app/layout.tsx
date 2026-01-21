@@ -1,4 +1,5 @@
 import { AOSInit } from '@/components/AOSInit';
+import { LangSetter } from '@/components/LangSetter';
 import { NavBar } from '@/components/NavBar';
 import '@fontsource/barlow-semi-condensed/index.css';
 import '@fontsource/exo-2/index.css';
@@ -19,10 +20,18 @@ export const metadata: Metadata = {
     keywords: ['strzelanie', 'trening', 'cele', 'militaria', 'technologia', 'aimora', 'ASG', 'wiatrówka', 'airsoft', 'strzelectwo', 'broń', 'cele strzeleckie', 'gong strzelecki', 'tarcze strzeleckie'],
     authors: [{ name: 'Aimora' }],
     robots: 'index, follow',
+    alternates: {
+        canonical: '/',
+        languages: {
+            'pl': '/',
+            'en': '/en',
+        },
+    },
     openGraph: {
         title: 'Aimora – Interaktywne Cele Strzeleckie z aplikacją mobilną',
         description: 'Rewolucyjny system inteligentnych detektorów trafień do treningu strzeleckiego',
         type: 'website',
+        locale: 'pl_PL',
         images: ['/images/what_is_it_mobile.png'],
     },
     twitter: {
@@ -45,7 +54,13 @@ export default function RootLayout({
 }) {
     return (
         <html lang="pl" className="font-barlow">
+            <head>
+                <link rel="alternate" hrefLang="pl" href="https://aimora.pl/" />
+                <link rel="alternate" hrefLang="en" href="https://aimora.pl/en" />
+                <link rel="alternate" hrefLang="x-default" href="https://aimora.pl/" />
+            </head>
             <body className="font-barlow antialiased">
+                <LangSetter />
                 <AOSInit />
                 <NavBar />
                 <main>{children}</main>

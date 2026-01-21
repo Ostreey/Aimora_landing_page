@@ -1,10 +1,16 @@
 'use client';
 
+import { getTranslations, Locale } from '@/lib/translations';
 import { Play, Settings, Trophy } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { DownloadButton } from './DownloadButton';
+import { DownloadButtonLocalized } from './DownloadButtonLocalized';
 
-export function MobileAppSection() {
+interface MobileAppSectionLocalizedProps {
+    locale: Locale;
+}
+
+export function MobileAppSectionLocalized({ locale }: MobileAppSectionLocalizedProps) {
+    const t = getTranslations(locale);
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -25,7 +31,6 @@ export function MobileAppSection() {
 
     return (
         <section id="mobile-app-section" className="relative w-full py-16 sm:py-20 md:py-24 bg-black overflow-hidden">
-            {/* Enhanced animated background */}
             <div className="absolute inset-0 opacity-10">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl animate-pulse"></div>
                 <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-600 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
@@ -33,28 +38,23 @@ export function MobileAppSection() {
             </div>
 
             <div className="max-w-6xl mx-auto relative z-10 px-4 sm:px-6 lg:px-8">
-                {/* Header */}
                 <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <h2 className="text-white font-barlow font-black text-4xl sm:text-5xl md:text-6xl leading-tight mb-8 bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
-                        Aplikacja mobilna
+                        {t.mobileApp.title}
                     </h2>
                     <p className="text-white/80 font-inter text-xl max-w-3xl mx-auto mb-8">
-                        Intuicyjny interfejs dla pełnej kontroli nad treningiem strzeleckim
+                        {t.mobileApp.subtitle}
                     </p>
                     <div className="w-32 h-1 bg-[#017da0] mx-auto rounded-full"></div>
                 </div>
 
-                {/* Mobile App Showcase */}
                 <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '300ms' }}>
                     <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/40 backdrop-blur-sm rounded-2xl border border-gray-700/50 p-8 hover:shadow-[0_0_40px_rgba(1,125,160,0.2)] transition-all duration-500">
                         <div className="grid lg:grid-cols-5 gap-12 items-center">
-                            {/* Left - Enhanced Phone Mockup */}
                             <div className="lg:col-span-2 relative">
-                                {/* Floating background effects */}
                                 <div className="absolute -inset-8 bg-gradient-to-r from-[#017da0]/10 to-cyan-400/5 rounded-3xl blur-2xl opacity-50 animate-pulse"></div>
                                 <div className="absolute -inset-4 bg-[#017da0]/5 rounded-2xl blur-xl"></div>
 
-                                {/* Phone container with 3D effect */}
                                 <div className="relative transform hover:scale-105 transition-all duration-700 hover:rotate-1">
                                     <div className="absolute inset-0 bg-gradient-to-br from-[#017da0]/20 to-transparent rounded-3xl blur-lg transform translate-x-2 translate-y-2"></div>
 
@@ -71,15 +71,13 @@ export function MobileAppSection() {
                                 </div>
                             </div>
 
-                            {/* Right - Enhanced App Features */}
                             <div className="lg:col-span-3 space-y-8">
                                 <div className="mb-8">
                                     <h4 className="text-white font-barlow font-bold text-2xl mb-3 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-                                        Doświadczenie użytkownika
+                                        {t.mobileApp.userExperience}
                                     </h4>
                                     <p className="text-white/80 font-inter text-lg leading-relaxed">
-                                        Zaprojektowana z myślą o maksymalnej wygodzie podczas treningu -
-                                        od szybkiego połączenia z celami po precyzyjną analizę wyników
+                                        {t.mobileApp.userExperienceDesc}
                                     </p>
                                 </div>
 
@@ -89,10 +87,9 @@ export function MobileAppSection() {
                                             <Play className="w-6 h-6 text-white" />
                                         </div>
                                         <div className="flex-1">
-                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">Różnorodne tryby treningowe</h5>
+                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">{t.mobileApp.trainingModes}</h5>
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
-                                                Gra na czas, Rewolwerowiec, Pojedynek, Shoo-off i wiele innych - każdy znajdzie coś dla siebie.
-                                                Dynamiczny licznik i wizualizacja postępów motywują do lepszych wyników
+                                                {t.mobileApp.trainingModesDesc}
                                             </p>
                                         </div>
                                     </div>
@@ -102,10 +99,9 @@ export function MobileAppSection() {
                                             <Settings className="w-6 h-6 text-white" />
                                         </div>
                                         <div className="flex-1">
-                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">Zarządzanie celami</h5>
+                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">{t.mobileApp.targetManagement}</h5>
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
-                                                Każdy szczegół pod kontrolą. Sprawdzaj stan baterii każdego czujnika, reguluj intensywność świecenia diod,
-                                                nazywaj urządzenia według własnych preferencji - &quot;Snajper&quot;, &quot;Okno&quot; czy &quot;Tarcza Alpha&quot;
+                                                {t.mobileApp.targetManagementDesc}
                                             </p>
                                         </div>
                                     </div>
@@ -115,10 +111,9 @@ export function MobileAppSection() {
                                             <Trophy className="w-6 h-6 text-white" />
                                         </div>
                                         <div className="flex-1">
-                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">Analiza i postęp</h5>
+                                            <h5 className="text-white font-barlow font-bold text-lg mb-1">{t.mobileApp.analysisProgress}</h5>
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
-                                                Szczegółowe statystyki sesji, historia treningów i porównanie wyników.
-                                                Śledź swój rozwój i wyznaczaj nowe cele treningowe
+                                                {t.mobileApp.analysisProgressDesc}
                                             </p>
                                         </div>
                                     </div>
@@ -128,16 +123,16 @@ export function MobileAppSection() {
                     </div>
                 </div>
 
-                {/* Download Section */}
                 <div className={`mt-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms' }}>
                     <div className="text-center">
                         <h3 className="text-white font-barlow font-bold text-2xl mb-6 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-                            Pobierz aplikację Aimora
+                            {t.mobileApp.downloadApp}
                         </h3>
 
                         <div className="flex justify-center">
-                            <DownloadButton
-                                playStoreUrl="https://play.google.com/store/apps/details?id=com.aimora.shootingbuddy&hl=pl"
+                            <DownloadButtonLocalized
+                                locale={locale}
+                                playStoreUrl={`https://play.google.com/store/apps/details?id=com.aimora.shootingbuddy&hl=${locale}`}
                                 className="max-w-sm"
                             />
                         </div>
@@ -146,4 +141,4 @@ export function MobileAppSection() {
             </div>
         </section>
     );
-} 
+}
