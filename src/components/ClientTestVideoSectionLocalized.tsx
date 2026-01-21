@@ -43,7 +43,7 @@ export function ClientTestVideoSectionLocalized({ locale }: ClientTestVideoSecti
 
     useEffect(() => {
         if (isAPIReady && isPlaying && !player) {
-            const newPlayer = new window.YT.Player('youtube-player', {
+            const newPlayer = new window.YT.Player('youtube-player-test', {
                 height: '100%',
                 width: '100%',
                 videoId: videoId,
@@ -147,7 +147,7 @@ export function ClientTestVideoSectionLocalized({ locale }: ClientTestVideoSecti
                             </div>
                         ) : (
                             <div
-                                id="youtube-player"
+                                id="youtube-player-test"
                                 className="w-full h-full rounded-xl"
                                 style={{ minHeight: '100%' }}
                             ></div>
