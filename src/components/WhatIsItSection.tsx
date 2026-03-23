@@ -8,7 +8,7 @@ export function WhatIsItSection() {
             <div className="absolute inset-0 w-full h-full bg-black z-0" />
             {/* Desktop image */}
             <Image
-                src="/images/What_is_it.png"
+                src="/images/what_is_it.webp"
                 alt="Jak to działa?"
                 width={1440}
                 height={1026}
@@ -17,7 +17,7 @@ export function WhatIsItSection() {
             />
             {/* Mobile image */}
             <Image
-                src="/images/what_is_it_mobile.png"
+                src="/images/what_is_it_mobile.webp"
                 alt="Jak to działa?"
                 width={1355}
                 height={1024}

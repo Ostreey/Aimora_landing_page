@@ -19,7 +19,7 @@ export function HeroLocalized({ locale }: HeroLocalizedProps) {
         <>
             <section className="relative w-full flex flex-col items-center min-h-[500px] sm:min-h-[600px] md:min-h-[768px]">
                 <Image
-                    src="/images/Hero_image.png"
+                    src="/images/Hero_image.webp"
                     alt="Aimora Hero Background"
                     width={1440}
                     height={1024}

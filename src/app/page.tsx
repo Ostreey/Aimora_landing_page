@@ -10,9 +10,29 @@ import { Roadmap } from '@/components/Roadmap';
 import { VideoSection } from '@/components/VideoSection';
 import { WhatIsItSection } from '@/components/WhatIsItSection';
 
+const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'Aimora — Interaktywny Detektor Trafień',
+    description: 'Bezprzewodowy detektor trafień z aplikacją mobilną na Androida. Zamienia stalowe cele w interaktywną grę strzelecką z trybami gry, analizą wyników i komunikacją Bluetooth.',
+    image: ['https://aimora.pl/images/Hero_image.png', 'https://aimora.pl/images/what_is_it.png'],
+    brand: { '@type': 'Brand', name: 'Aimora' },
+    offers: {
+        '@type': 'Offer',
+        price: '350',
+        priceCurrency: 'PLN',
+        availability: 'https://schema.org/InStock',
+        url: 'https://aimora.pl',
+    },
+}
+
 export default function Home() {
     return (
         <main className="min-h-screen">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+            />
             <section id="home">
                 <Hero />
             </section>

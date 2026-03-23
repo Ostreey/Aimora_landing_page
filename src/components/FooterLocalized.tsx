@@ -140,7 +140,7 @@ export function FooterLocalized({ locale }: FooterLocalizedProps) {
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="annotation-note">
-                            {t.footer.copyright}
+                            © {new Date().getFullYear()} Aimora. {locale === 'pl' ? 'Wszystkie prawa zastrzeżone.' : 'All rights reserved.'}
                         </p>
 
                         <div className="flex items-center gap-4">

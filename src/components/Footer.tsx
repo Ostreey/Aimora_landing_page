@@ -139,7 +139,7 @@ export function Footer() {
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="annotation-note">
-                            © 2024 Aimora. Wszystkie prawa zastrzeżone.
+                            © {new Date().getFullYear()} Aimora. Wszystkie prawa zastrzeżone.
                         </p>
 
                         <div className="flex items-center gap-4">

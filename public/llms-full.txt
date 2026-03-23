@@ -1,0 +1,150 @@
+# Aimora — Pełna dokumentacja produktu
+
+> Bezprzewodowy system inteligentnych detektorów trafień z aplikacją mobilną do interaktywnego treningu strzeleckiego i grywalizacji.
+
+## 1. Czym jest Aimora
+
+Aimora to interaktywny system treningowych celów strzeleckich, złożony z bezprzewodowych elektronicznych modułów wykrywających trafienia, aplikacji mobilnej na Androida oraz warstwy komunikacji Bluetooth Low Energy (BLE).
+
+W praktyce Aimora zamienia klasyczne, pasywne stalowe cele w aktywny system treningowy, który:
+- Wykrywa trafienia w czasie rzeczywistym
+- Mierzy siłę uderzenia
+- Przekazuje dane do aplikacji mobilnej
+- Pokazuje wynik i stan gry na telefonie
+- Daje natychmiastowy feedback przez diody LED RGB na celu
+
+To połączenie hardware'u i software'u do nowoczesnego treningu strzeleckiego, reakcyjnego i rekreacyjnego — działające bez kabli, pozwalające budować różne scenariusze gry i ćwiczeń.
+
+## 2. Jaki problem rozwiązuje
+
+Tradycyjne cele strzeleckie:
+- Nie dają natychmiastowej informacji zwrotnej w systemie cyfrowym
+- Nie zbierają danych o trafieniachs
+- Nie wspierają grywalizacji
+- Nie mierzą parametrów treningu
+- Trudno z nich budować nowoczesne ćwiczenia wielocelowe
+
+Aimora rozwiązuje to przez stworzenie cyfrowego ekosystemu treningowego z automatycznym zliczaniem punktów, trybami gry, analizą wyników i porównywaniem rezultatów.
+
+## 3. Specyfikacja techniczna
+
+### Moduł detektora trafień
+- Mikrokontroler: ESP32 z wbudowanym BLE
+- Czujnik: piezoelektryczny (wykrywanie uderzeń + pomiar siły)
+- Wskaźniki: 3 diody LED (niebieska, zielona, czerwona) / RGB
+- Bateria: Li-Ion 14500, 3.7V, ~750 mAh
+- Czas pracy: do 5 godzin na jednym ładowaniu
+- Ładowanie: USB-C
+- Montaż: 4 magnesy — szybki montaż na dowolnym stalowym celu
+- Obudowa: drukowana 3D, kompaktowa i wytrzymała
+- Komunikacja: Bluetooth Low Energy (BLE 5.0)
+- Aktualizacje: OTA przez Bluetooth
+- Tryb oszczędzania energii: deep sleep ze zdalnym wybudzaniem
+
+### Aplikacja mobilna
+- Platforma: Android
+- Język: Kotlin
+- UI: Jetpack Compose
+- Architektura: MVVM
+- Funkcje: skanowanie i łączenie celów, wybór trybów gry, konfiguracja parametrów, śledzenie wyników w czasie rzeczywistym, historia sesji, rankingi
+
+### Kompatybilność broni
+- ASG / airsoft
+- Wiatrówki
+- Broń palna (wymaga odpowiednich stalowych celów)
+
+## 4. Tryby gry i funkcje aplikacji
+
+Aplikacja oferuje różne tryby rozgrywki:
+- Gra na czas — ile trafień w określonym czasie
+- Tryb duel — rywalizacja dwóch graczy z kolorowymi celami (RGB LED)
+- Tryby wielocelowe — scenariusze z wieloma aktywnymi celami
+- Konfigurowalne parametry: czas rundy, progi czułości, liczba celów
+
+Podczas gry użytkownik widzi:
+- Czas
+- Liczbę trafień
+- Siłę każdego trafienia
+- Status każdego podłączonego celu
+- Poziom baterii urządzeń
+
+## 5. Grupy docelowe
+
+### Klienci indywidualni (B2C)
+- Strzelcy rekreacyjni i sportowi
+- Użytkownicy ASG / airsoft
+- Osoby korzystające z wiatrówek
+- Hobbyści szukający angażującego treningu celności
+- Rodziny — zestawy do gry w ogrodzie
+
+### Klienci biznesowi (B2B)
+- Strzelnice i obiekty treningowe
+- Organizatorzy eventów i atrakcji rekreacyjnych
+- Firmy prowadzące aktywacje eventowe
+- Centra rozrywki i parki atrakcji
+- Trenerzy i instruktorzy strzelectwa
+
+## 6. Wypożyczenie na eventy
+
+Aimora jest dostępna do wypożyczenia jako atrakcja na:
+- Imprezy firmowe i team building
+- Festyny i pikniki
+- Targi i eventy branżowe
+- Urodziny i imprezy prywatne
+
+### Co zawiera wypożyczenie
+- Zestaw interaktywnych celów Aimora
+- Profesjonalne repliki ASG
+- Okulary ochronne dla uczestników
+- Obsługę techniczną i instruktora
+- Transport i montaż
+
+### Wymagania techniczne
+- Przestrzeń: minimum 5x10 metrów
+- Zasilanie: standardowe gniazdko 230V
+- Przepustowość: ~30 osób na godzinę
+
+### FAQ — Wypożyczenie
+
+**Ile czasu przed eventem muszę zarezerwować Aimorę?**
+Rekomendujemy rezerwację na 2-3 tygodnie przed terminem, szczególnie w sezonie letnim. Warto jednak pytać o terminy last-minute.
+
+**Czy atrakcja jest bezpieczna dla dzieci?**
+Tak. Używamy profesjonalnych replik ASG strzelających plastikowymi kulkami. Wszyscy uczestnicy noszą okulary ochronne. Atrakcja jest odpowiednia od 10 roku życia.
+
+**Ile osób może grać jednocześnie?**
+Standardowy zestaw pozwala na jednoczesną grę kilku osób z płynną rotacją — około 30 osób na godzinę.
+
+**Czy potrzebujemy specjalnych pozwoleń?**
+Nie. System Aimora jest traktowany jako atrakcja rekreacyjna i nie wymaga pozwoleń na broń. Działa cicho i jest w pełni mobilny.
+
+**Jaki jest koszt wynajmu?**
+Koszt zależy od czasu trwania, liczby celów i zakresu obsługi. Każde zapytanie wyceniamy indywidualnie — skontaktuj się z nami.
+
+## 7. Cennik
+
+- Moduł detektora trafień: od 350 PLN / 85 EUR
+- Wypożyczenie na event: wycena indywidualna
+- Dostępność: InStock (w sprzedaży)
+
+## 8. Kontakt
+
+- Firma: Aimora
+- Email: biuro@aimora.pl
+- Telefon: +48 605 048 487
+- Adres: ul. Górczewska 200, 01-460 Warszawa, Polska
+- Strona: https://aimora.pl
+- Facebook: https://www.facebook.com/profile.php?id=61579315053188
+- YouTube: https://www.youtube.com/channel/UC2SS91L5WncZ48WJM1x72Qg
+
+## 9. Kluczowe wartości produktu
+
+1. **Natychmiastowy feedback** — trafienie jest rejestrowane od razu, widoczne w aplikacji i na celu
+2. **Grywalizacja** — system tworzy doświadczenie gry: czas, wynik, aktywne cele, porównanie rezultatów
+3. **Mobilność** — cele są bateryjne, bezprzewodowe i montowane magnetycznie
+4. **Skalowalność** — od jednego celu do złożonych scenariuszy wielocelowych
+5. **Własna technologia** — pełna kontrola nad hardware, firmware i aplikacją
+
+## 10. Podsumowanie
+
+Aimora to bezprzewodowy system inteligentnych celów treningowych sterowanych z aplikacji mobilnej, który łączy własny hardware, firmware i UX w produkt do interaktywnego treningu, grywalizacji i budowy nowoczesnych scenariuszy strzeleckich. System jest kompatybilny z ASG, wiatrówkami i bronią palną, dostępny do zakupu i wypożyczenia na eventy.

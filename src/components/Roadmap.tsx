@@ -48,7 +48,7 @@ export function Roadmap() {
             color: 'from-blue-500 to-blue-400'
         },
         {
-            date: '02.2026',
+            date: '04.2026',
             title: 'System kont dla strzelnic',
             description: 'Dedykowane konta klientów strzelnic z zapisywaniem statystyk gier, porównywaniem osiągnięć i rankingami dla całej strzelnicy',
             icon: Users,
@@ -56,7 +56,7 @@ export function Roadmap() {
             color: 'from-purple-500 to-purple-400'
         },
         {
-            date: '05.2026',
+            date: '07.2026',
             title: 'Zwiekszenie zasięgu oraz liczba podłączonych detektorów',
             description: 'Zwiększenie zasięgu detektorów do 200 metrów oraz możliwość podłączenia do 100 detektorów jednocześnie',
             icon: Wifi,
@@ -64,7 +64,7 @@ export function Roadmap() {
             color: 'from-green-500 to-green-400'
         },
         {
-            date: '09.2026',
+            date: '11.2026',
             title: 'Tryb turniejowy',
             description: 'Stworzenie trybu turniejowego dzięki któremu zautomatyzujesz swoje zawody strzeleckie, wszystkie statystyki i wyniki przechowasz bezpiecznie w chmurze oraz będziesz mógł konkurować z innymi organizacjami porównując swoje wyniki. Uczestnicy zawodów będą mogli śledzić na bieżąco przebieg zawodów w aplikacji na swoich telefonach',
             icon: Trophy,
@@ -72,7 +72,7 @@ export function Roadmap() {
             color: 'from-yellow-500 to-yellow-400'
         },
         {
-            date: '01.2027',
+            date: '03.2027',
             title: 'Dedykowana tarcza z precyzyjną lokalizacją',
             description: 'Zaawansowana tarcza z dokładną lokalizacją trafień wyświetlaną w czasie rzeczywistym w aplikacji. Koniec z chodzeniem do celu lub instalowaniem kamer - wszystkie szczegóły widoczne natychmiast na ekranie telefonu',
             icon: MapPin,

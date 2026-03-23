@@ -13,7 +13,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Aimora – Interactive Shooting Targets with Mobile App',
-    description: 'Revolutionary smart hit detector system for shooting training. Transform any steel target into an interactive game.',
+    description: 'Aimora — turn steel targets into interactive shooting games. Smart hit detector with mobile app, game modes and performance analytics. From 85 EUR.',
     alternates: {
         canonical: '/en',
         languages: {
@@ -23,9 +23,29 @@ export const metadata: Metadata = {
     },
 };
 
+const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'Aimora — Interactive Hit Detector',
+    description: 'Wireless hit detector with Android mobile app. Turn steel targets into interactive shooting games with game modes, performance analytics and Bluetooth communication.',
+    image: ['https://aimora.pl/images/Hero_image.png', 'https://aimora.pl/images/what_is_it.png'],
+    brand: { '@type': 'Brand', name: 'Aimora' },
+    offers: {
+        '@type': 'Offer',
+        price: '85',
+        priceCurrency: 'EUR',
+        availability: 'https://schema.org/InStock',
+        url: 'https://aimora.pl/en',
+    },
+}
+
 export default function EnglishHome() {
     return (
         <main className="min-h-screen">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+            />
             <section id="home">
                 <HeroLocalized locale="en" />
             </section>

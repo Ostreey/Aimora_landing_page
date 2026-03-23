@@ -1,0 +1,44 @@
+# Aimora
+
+> Interaktywny system celów strzeleckich z aplikacją mobilną
+
+## O produkcie
+
+Aimora to bezprzewodowy system inteligentnych detektorów trafień, który zamienia zwykłe stalowe cele w interaktywny system treningowy z grywalizacją. System składa się z elektronicznych modułów montowanych magnetycznie na celach oraz aplikacji mobilnej na Androida.
+
+- Wykrywanie trafień w czasie rzeczywistym z pomiarem siły uderzenia
+- Aplikacja Android z trybami gry, rankingami i analizą wyników
+- Komunikacja Bluetooth Low Energy (BLE 5.0)
+- Wskaźniki LED RGB do wizualizacji aktywnych celów
+- Bateria Li-Ion 750mAh, do 5h pracy, ładowanie USB-C
+- Aktualizacje firmware OTA przez Bluetooth
+- Kompatybilność: ASG/airsoft, wiatrówki, broń palna
+- Cena: od 350 PLN / 85 EUR za moduł
+
+## Dla kogo
+
+- Strzelcy rekreacyjni i sportowi
+- Użytkownicy ASG/airsoft
+- Strzelnice i centra treningowe
+- Organizatorzy eventów i imprez firmowych
+- Trenerzy strzelectwa
+
+## Wypożyczenie na eventy
+
+Aimora jest dostępna do wypożyczenia na imprezy firmowe, festyny, pikniki i eventy integracyjne. Obsługa techniczna w cenie.
+
+## Kontakt
+
+- Email: biuro@aimora.pl
+- Telefon: +48 605 048 487
+- Adres: ul. Górczewska 200, 01-460 Warszawa, Polska
+
+## Linki
+
+- Strona główna: https://aimora.pl
+- English: https://aimora.pl/en
+- Wypożyczenie: https://aimora.pl/wypozyczenie
+- Rental: https://aimora.pl/en/rental
+- Facebook: https://www.facebook.com/profile.php?id=61579315053188
+- YouTube: https://www.youtube.com/channel/UC2SS91L5WncZ48WJM1x72Qg
+- Pełna dokumentacja dla AI: https://aimora.pl/llms-full.txt
