@@ -238,7 +238,7 @@ export const translations = {
             termsOfUse: 'Warunki użytkowania',
             cookiePolicy: 'Polityka plików cookie',
             gdpr: 'RODO',
-            copyright: '© 2024 Aimora. Wszystkie prawa zastrzeżone.'
+            copyright: '© 2025 Aimora. Wszystkie prawa zastrzeżone.'
         },
         contactForm: {
             title: 'Zamów Aimora',
@@ -583,7 +583,7 @@ export const translations = {
             termsOfUse: 'Terms of Use',
             cookiePolicy: 'Cookie Policy',
             gdpr: 'GDPR',
-            copyright: '© 2024 Aimora. All rights reserved.'
+            copyright: '© 2025 Aimora. All rights reserved.'
         },
         contactForm: {
             title: 'Order Aimora',

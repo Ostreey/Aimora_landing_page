@@ -69,7 +69,7 @@ export default function RootLayout({
                                 url: 'https://aimora.pl',
                                 logo: 'https://aimora.pl/images/what_is_it_mobile.png',
                                 email: 'biuro@aimora.pl',
-                                telephone: '+48605048487',
+                                telephone: '+48 605 048 487',
                                 sameAs: [
                                     'https://www.facebook.com/profile.php?id=61579315053188',
                                     'https://www.youtube.com/channel/UC2SS91L5WncZ48WJM1x72Qg',
@@ -81,7 +81,7 @@ export default function RootLayout({
                                 name: 'Aimora',
                                 url: 'https://aimora.pl',
                                 email: 'biuro@aimora.pl',
-                                telephone: '+48605048487',
+                                telephone: '+48 605 048 487',
                                 address: {
                                     '@type': 'PostalAddress',
                                     streetAddress: 'ul. Górczewska 200',
