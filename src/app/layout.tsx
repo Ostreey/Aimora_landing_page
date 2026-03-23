@@ -1,8 +1,6 @@
 import { AOSInit } from '@/components/AOSInit';
 import { LangSetter } from '@/components/LangSetter';
 import { NavBar } from '@/components/NavBar';
-import '@fontsource/barlow-semi-condensed/index.css';
-import '@fontsource/exo-2/index.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -53,7 +51,7 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="pl" className="font-barlow">
+        <html lang="pl" className={`font-barlow ${inter.variable}`}>
             <head>
                 <link rel="alternate" hrefLang="pl" href="https://aimora.pl/" />
                 <link rel="alternate" hrefLang="en" href="https://aimora.pl/en" />

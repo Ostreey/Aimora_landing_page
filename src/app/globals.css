@@ -1,9 +1,9 @@
+@import '@fontsource/barlow-semi-condensed/index.css';
+@import '@fontsource/exo-2/index.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import '@fontsource/barlow-semi-condensed/index.css';
-@import '@fontsource/exo-2/index.css';
 
 @layer base {
     :root {
