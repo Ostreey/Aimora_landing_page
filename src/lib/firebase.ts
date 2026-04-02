@@ -209,4 +209,45 @@ export const trackFormSend = () => {
     device_type: getDeviceType(),
     event_category: 'conversion',
   });
-}; 
+};
+
+// Blog tracking functions
+export const trackBlogPostView = (slug: string, title: string, pillar: string, locale: string) => {
+  logEvent('blog_post_view', {
+    slug,
+    title,
+    pillar,
+    locale,
+    device_type: getDeviceType(),
+    event_category: 'content',
+  });
+};
+
+export const trackBlogShareClick = (platform: string, slug: string, title: string) => {
+  logEvent('blog_share_click', {
+    platform,
+    slug,
+    title,
+    device_type: getDeviceType(),
+    event_category: 'engagement',
+  });
+};
+
+export const trackBlogCTAClick = (slug: string, href: string) => {
+  logEvent('blog_cta_click', {
+    slug,
+    href,
+    device_type: getDeviceType(),
+    event_category: 'conversion',
+  });
+};
+
+export const trackBlogCardClick = (slug: string, title: string, source: 'related_posts' | 'blog_list') => {
+  logEvent('blog_card_click', {
+    slug,
+    title,
+    source,
+    device_type: getDeviceType(),
+    event_category: 'navigation',
+  });
+};

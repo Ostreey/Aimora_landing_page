@@ -19,7 +19,7 @@ export function RelatedPosts({ posts, locale }: RelatedPostsProps) {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post) => (
-          <BlogCard key={post.slug} post={post} locale={locale} />
+          <BlogCard key={post.slug} post={post} locale={locale} source="related_posts" />
         ))}
       </div>
     </section>

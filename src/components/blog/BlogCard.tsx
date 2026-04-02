@@ -1,7 +1,10 @@
+'use client';
+
 import { BlogPostMeta } from '@/lib/blog';
 import { Locale } from '@/lib/translations';
 import Image from 'next/image';
 import Link from 'next/link';
+import { trackBlogCardClick } from '@/lib/firebase';
 
 const pillarColors: Record<string, string> = {
   trening: 'bg-[#00B2E3]/20 text-[#00B2E3] border-[#00B2E3]/30',
@@ -18,14 +21,15 @@ const pillarLabels: Record<string, Record<string, string>> = {
 interface BlogCardProps {
   post: BlogPostMeta;
   locale: Locale;
+  source?: 'related_posts' | 'blog_list';
 }
 
-export function BlogCard({ post, locale }: BlogCardProps) {
+export function BlogCard({ post, locale, source = 'blog_list' }: BlogCardProps) {
   const blogPath = locale === 'en' ? `/en/blog/${post.slug}` : `/blog/${post.slug}`;
   const minReadLabel = locale === 'en' ? 'min read' : 'min czytania';
 
   return (
-    <Link href={blogPath} className="group block">
+    <Link href={blogPath} onClick={() => trackBlogCardClick(post.slug, post.title, source)} className="group block">
       <article className="bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-[#00B2E3]/50 hover:bg-white/[0.07] h-full flex flex-col">
         <div className="relative aspect-video overflow-hidden">
           <Image

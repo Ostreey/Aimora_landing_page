@@ -3,6 +3,7 @@ import { ArticleHeader } from '@/components/blog/ArticleHeader';
 import { MdxContent } from '@/components/blog/MdxContent';
 import { RelatedPosts } from '@/components/blog/RelatedPosts';
 import { ShareButtons } from '@/components/blog/ShareButtons';
+import { BlogPostTracker } from '@/components/blog/BlogPostTracker';
 import { FooterLocalized } from '@/components/FooterLocalized';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -77,6 +78,7 @@ export default async function BlogArticlePageEN({ params }: Props) {
 
     return (
         <>
+            <BlogPostTracker slug={slug} title={post.title} pillar={post.pillar} locale="en" />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
@@ -88,6 +90,7 @@ export default async function BlogArticlePageEN({ params }: Props) {
                     <ShareButtons
                         url={articleUrl}
                         title={post.title}
+                        slug={slug}
                         shareLabel="Share this article"
                         copyLabel="Copy link"
                         copiedLabel="Copied!"

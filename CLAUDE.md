@@ -38,6 +38,7 @@ npm run type-check   # TypeScript check (tsc --noEmit)
 ### Key Integrations
 
 - **Firebase** (`src/lib/firebase.ts`): analytics tracking with `trackCTAClick()`, `trackYouTubeVideoStarted()`, `trackFormSend()`, etc. Debug mode flag for development.
+  - **Rule:** When adding or modifying any feature, always add Firebase Analytics tracking for new user interactions (clicks, views, form submissions, navigation). Define tracking functions in `src/lib/firebase.ts` and call them in the relevant components. Events should include at least `device_type` and `event_category` parameters.
 - **Resend** (`src/app/api/contact/route.ts`): POST API route for contact/order forms. Env vars needed: `RESEND_API_KEY`, `CONTACT_EMAIL`.
 - **Framer Motion**, **React Spring**, **AOS**: animations throughout — scroll-triggered, physics-based, and tilt effects.
 
