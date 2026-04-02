@@ -85,7 +85,7 @@ export function NavBar({ locale: propLocale }: NavBarProps) {
             ? "text-white text-2xl font-semibold py-4 px-6 border-b-2 transition-all duration-200 font-barlow"
             : "font-semibold text-lg py-2 px-2 border-b-2 transition-all duration-200 font-barlow";
 
-        const isActive = pathname === path;
+        const isActive = pathname === path || pathname.startsWith(path + '/');
 
         if (isActive) {
             return `${baseClass} text-[#00B2E3] border-[#00B2E3]`;
@@ -131,6 +131,9 @@ export function NavBar({ locale: propLocale }: NavBarProps) {
                             <Link href={`${homePath}#jak-to-dziala`} onClick={() => scrollToSection('jak-to-dziala')} className={getNavButtonClass('jak-to-dziala')}>{t.nav.howItWorks}</Link>
                             <Link href={`${homePath}#aplikacja-mobilna`} onClick={() => scrollToSection('aplikacja-mobilna')} className={getNavButtonClass('aplikacja-mobilna')}>{t.nav.mobileApp}</Link>
                             <Link href={`${homePath}#mapa-rozwoju`} onClick={() => scrollToSection('mapa-rozwoju')} className={getNavButtonClass('mapa-rozwoju')}>{t.nav.roadmap}</Link>
+                            <Link href={`${basePath}/blog`} className={getSubpageNavClass(`${basePath}/blog`)}>
+                                {t.nav.blog}
+                            </Link>
                             <Link href={rentalPath} className={getSubpageNavClass(rentalPath)} onClick={() => trackGAEvent('clicked_rental_page')}>
                                 {t.nav.rental}
                             </Link>
@@ -174,6 +177,9 @@ export function NavBar({ locale: propLocale }: NavBarProps) {
                         </Link>
                         <Link href={`${homePath}#mapa-rozwoju`} onClick={handleMobileMenuClick} className="text-white text-2xl font-semibold py-4 px-6 border-b-2 border-transparent hover:border-[#00B2E3] hover:text-[#00B2E3] transition-all duration-200 font-barlow">
                             {t.nav.roadmap}
+                        </Link>
+                        <Link href={`${basePath}/blog`} onClick={handleMobileMenuClick} className={getSubpageNavClass(`${basePath}/blog`, true)}>
+                            {t.nav.blog}
                         </Link>
                         <Link href={rentalPath} onClick={() => { handleMobileMenuClick(); trackGAEvent('clicked_rental_page'); }} className={getSubpageNavClass(rentalPath, true)}>
                             {t.nav.rental}

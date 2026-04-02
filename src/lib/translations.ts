@@ -9,6 +9,7 @@ export const translations = {
             mobileApp: 'Aplikacja mobilna',
             roadmap: 'Roadmap',
             rental: 'Wypożyczenie',
+            blog: 'Blog',
             closeMenu: 'Zamknij menu'
         },
         hero: {
@@ -345,6 +346,21 @@ export const translations = {
                     answer: 'Koszt zależy od czasu trwania imprezy, liczby celów oraz zakresu obsługi. Każde zapytanie wyceniamy indywidualnie. Skontaktuj się z nami, a przygotujemy ofertę idealnie dopasowaną do Twojego wydarzenia.'
                 }
             ]
+        },
+        blog: {
+            title: 'Blog',
+            subtitle: 'Artykuły o treningu strzeleckim, ASG, technologii i biznesie.',
+            allPillars: 'Wszystkie',
+            pillarTrening: 'Trening',
+            pillarAsg: 'ASG',
+            pillarB2b: 'B2B',
+            pillarTech: 'Technologia',
+            readMore: 'Czytaj więcej',
+            relatedPosts: 'Powiązane artykuły',
+            shareArticle: 'Udostępnij artykuł',
+            minRead: 'min czytania',
+            copyLink: 'Kopiuj link',
+            linkCopied: 'Skopiowano!'
         }
     },
     en: {
@@ -355,6 +371,7 @@ export const translations = {
             mobileApp: 'Mobile App',
             roadmap: 'Roadmap',
             rental: 'Rental',
+            blog: 'Blog',
             closeMenu: 'Close menu'
         },
         hero: {
@@ -690,6 +707,21 @@ export const translations = {
                     answer: 'The cost depends on event duration, number of targets, and service scope. Each inquiry is priced individually. Contact us and we will prepare an offer perfectly tailored to your event.'
                 }
             ]
+        },
+        blog: {
+            title: 'Blog',
+            subtitle: 'Articles about shooting training, ASG, technology and business.',
+            allPillars: 'All',
+            pillarTrening: 'Training',
+            pillarAsg: 'ASG',
+            pillarB2b: 'B2B',
+            pillarTech: 'Technology',
+            readMore: 'Read more',
+            relatedPosts: 'Related articles',
+            shareArticle: 'Share this article',
+            minRead: 'min read',
+            copyLink: 'Copy link',
+            linkCopied: 'Copied!'
         }
     }
 } as const;

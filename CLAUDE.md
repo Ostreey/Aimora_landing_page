@@ -8,7 +8,7 @@ Aimora landing page — a bilingual (Polish/English) marketing site for interact
 
 ## What is Aimora ?
 
-Full description of what is Aimora you can find in file /Aimora_Onboarding_Manager.md
+Full description of what is Aimora you can find in file /docs/Aimora_Onboarding_Manager.md
 
 ## Commands
 
