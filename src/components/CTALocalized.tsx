@@ -5,6 +5,7 @@ import { getTranslations, Locale } from '@/lib/translations';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useState } from 'react';
+import { BuyOnAllegroButton } from './BuyOnAllegroButton';
 import { ContactFormLocalized } from './ContactFormLocalized';
 import { RippleButton } from './RippleButton';
 
@@ -63,24 +64,31 @@ export function CTALocalized({ locale }: CTALocalizedProps) {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
                             viewport={{ once: true }}
-                            className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
+                            className="flex flex-col items-center gap-4 mb-8"
                         >
-                            <RippleButton
-                                className="btn-primary flex items-center justify-center gap-2 group text-lg px-8 py-4"
-                                onClick={() => {
-                                    trackCTAClick('cta_section_order_now');
-                                    setIsContactFormOpen(true);
-                                }}
-                            >
-                                {t.cta.orderNow}
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </RippleButton>
-                            <button
-                                className="btn-secondary text-lg px-8 py-4"
-                                onClick={() => trackCTAClick('cta_section_learn_more')}
-                            >
-                                {t.cta.learnMore}
-                            </button>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <RippleButton
+                                    className="btn-primary flex items-center justify-center gap-2 group text-lg px-8 py-4"
+                                    onClick={() => {
+                                        trackCTAClick('cta_section_order_now');
+                                        setIsContactFormOpen(true);
+                                    }}
+                                >
+                                    {t.cta.orderNow}
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </RippleButton>
+                                <button
+                                    className="btn-secondary text-lg px-8 py-4"
+                                    onClick={() => trackCTAClick('cta_section_learn_more')}
+                                >
+                                    {t.cta.learnMore}
+                                </button>
+                            </div>
+                            <BuyOnAllegroButton
+                                label={t.cta.buyOnAllegro}
+                                trackingId="cta_section_buy_on_allegro"
+                                size="lg"
+                            />
                         </motion.div>
 
                         <motion.div

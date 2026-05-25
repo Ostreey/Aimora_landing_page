@@ -4,7 +4,10 @@ import { trackFormSend } from '@/lib/firebase';
 import { getTranslations, Locale } from '@/lib/translations';
 import { useState } from 'react';
 
-const PROMO_PRICE_PLN = 350;
+const PROMO_PRICE: Record<string, { value: number; currency: string }> = {
+    pl: { value: 350, currency: 'zł' },
+    en: { value: 85, currency: 'EUR' },
+};
 
 interface ContactFormData {
     name: string;
@@ -22,6 +25,7 @@ interface ContactFormLocalizedProps {
 
 export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLocalizedProps) {
     const t = getTranslations(locale);
+    const price = PROMO_PRICE[locale] ?? PROMO_PRICE.pl;
     const [formData, setFormData] = useState<ContactFormData>({
         name: '',
         email: '',
@@ -141,7 +145,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                     <div className="mt-4">
                         <span className="inline-block">
                             <span className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 border border-gray-200 shadow-sm px-4 py-2 text-sm font-semibold">
-                                <span className="text-gray-700">{PROMO_PRICE_PLN} {t.contactForm.pricePerSet}</span>
+                                <span className="text-gray-700">{price.value} {price.currency} / {t.contactForm.pricePerSet}</span>
                             </span>
                         </span>
                     </div>
@@ -202,10 +206,10 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                                 />
                                 <div className="text-sm text-gray-700">
                                     <div>
-                                        {t.contactForm.promoPrice}: <span className="font-semibold">{PROMO_PRICE_PLN} zł</span>
+                                        {t.contactForm.promoPrice}: <span className="font-semibold">{price.value} {price.currency}</span>
                                     </div>
                                     <div>
-                                        {t.contactForm.total}: <span className="font-semibold">{PROMO_PRICE_PLN} zł × {formData.quantity} = {PROMO_PRICE_PLN * (typeof formData.quantity === 'number' ? formData.quantity : 1)} zł</span>
+                                        {t.contactForm.total}: <span className="font-semibold">{price.value} {price.currency} × {formData.quantity} = {price.value * (typeof formData.quantity === 'number' ? formData.quantity : 1)} {price.currency}</span>
                                     </div>
                                 </div>
                             </div>

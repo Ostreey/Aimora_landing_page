@@ -3,6 +3,7 @@
 import { trackCTAClick } from '@/lib/firebase'
 import Image from 'next/image'
 import { useState } from 'react'
+import { BuyOnAllegroButton } from './BuyOnAllegroButton'
 import { ContactForm } from './ContactForm'
 import { RippleButton } from './RippleButton'
 
@@ -37,15 +38,22 @@ export function Hero() {
                     <p className="font-exo2 font-normal text-[36px] leading-[47px] tracking-[0.0002em] text-white/80 mb-10 max-w-2xl">
                         Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego.
                     </p>
-                    <RippleButton
-                        className="font-inter font-bold text-[24px] leading-[36px] tracking-[-0.02em] uppercase bg-orange-500 hover:bg-orange-600 text-white px-[3.9rem] py-4 rounded-full shadow-2xl transition-all duration-200 w-fit"
-                        onClick={() => {
-                            trackCTAClick('hero_section_desktop_order');
-                            setIsContactFormOpen(true);
-                        }}
-                    >
-                        ZAMÓW
-                    </RippleButton>
+                    <div className="flex flex-col items-start gap-3 w-fit">
+                        <RippleButton
+                            className="font-inter font-bold text-[24px] leading-[36px] tracking-[-0.02em] bg-[#017da0] hover:bg-[#015d78] text-white px-[3.9rem] py-4 rounded-full shadow-[0_8px_24px_rgba(1,125,160,0.45)] transition-all duration-200 w-fit"
+                            onClick={() => {
+                                trackCTAClick('hero_section_desktop_order');
+                                setIsContactFormOpen(true);
+                            }}
+                        >
+                            Zamów bezpośrednio
+                        </RippleButton>
+                        <BuyOnAllegroButton
+                            label="Kup na"
+                            trackingId="hero_section_desktop_buy_on_allegro"
+                            size="lg"
+                        />
+                    </div>
                 </div>
                 {/* Mobile content: below image */}
                 <div className="block md:hidden w-full px-4 -mt-12 pb-1 text-center relative z-30">
@@ -55,15 +63,22 @@ export function Hero() {
                     <p className="font-exo2 font-normal text-lg leading-[28px] tracking-[0.0002em] text-white/80 mb-3">
                         Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego
                     </p>
-                    <RippleButton
-                        className="font-inter font-bold text-lg leading-[28px] tracking-[-0.02em] uppercase bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full shadow-2xl transition-all duration-200 w-fit mx-auto"
-                        onClick={() => {
-                            trackCTAClick('hero_section_mobile_order');
-                            setIsContactFormOpen(true);
-                        }}
-                    >
-                        ZAMÓW
-                    </RippleButton>
+                    <div className="flex flex-col items-center gap-2 w-fit mx-auto">
+                        <RippleButton
+                            className="font-inter font-bold text-base leading-[24px] tracking-[-0.02em] bg-[#017da0] hover:bg-[#015d78] text-white px-6 py-3 rounded-full shadow-[0_6px_20px_rgba(1,125,160,0.45)] transition-all duration-200 w-fit mx-auto"
+                            onClick={() => {
+                                trackCTAClick('hero_section_mobile_order');
+                                setIsContactFormOpen(true);
+                            }}
+                        >
+                            Zamów bezpośrednio
+                        </RippleButton>
+                        <BuyOnAllegroButton
+                            label="Kup na"
+                            trackingId="hero_section_mobile_buy_on_allegro"
+                            size="md"
+                        />
+                    </div>
                 </div>
             </section>
 

@@ -75,7 +75,7 @@
     }
 
     .btn-primary {
-        @apply bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-md shadow-md transition-all duration-200;
+        @apply bg-[#017da0] hover:bg-[#015d78] text-white font-semibold px-6 py-3 rounded-md shadow-md transition-all duration-200;
     }
 
     .btn-secondary {

@@ -3,7 +3,7 @@
 import { trackScrollToRoadmap } from '@/lib/firebase';
 import { getTranslations, Locale } from '@/lib/translations';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Target, Trophy, Users, Wifi } from 'lucide-react';
+import { Calendar, MapPin, Network, Target, Trophy, Users, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface RoadmapLocalizedProps {
@@ -54,27 +54,35 @@ export function RoadmapLocalized({ locale }: RoadmapLocalizedProps) {
         },
         {
             date: '04.2026',
-            title: t.roadmap.items.rangeAccounts.title,
-            description: t.roadmap.items.rangeAccounts.description,
-            icon: Users,
-            status: 'current',
-            color: 'from-purple-500 to-purple-400'
-        },
-        {
-            date: '07.2026',
             title: t.roadmap.items.rangeIncrease.title,
             description: t.roadmap.items.rangeIncrease.description,
             icon: Wifi,
-            status: 'planned',
+            status: 'completed',
             color: 'from-green-500 to-green-400'
         },
         {
-            date: '11.2026',
+            date: '07.2026',
+            title: t.roadmap.items.rangeAccounts.title,
+            description: t.roadmap.items.rangeAccounts.description,
+            icon: Users,
+            status: 'planned',
+            color: 'from-purple-500 to-purple-400'
+        },
+        {
+            date: '09.2026',
             title: t.roadmap.items.tournamentMode.title,
             description: t.roadmap.items.tournamentMode.description,
             icon: Trophy,
             status: 'planned',
             color: 'from-yellow-500 to-yellow-400'
+        },
+        {
+            date: '12.2026',
+            title: t.roadmap.items.detectorsCount.title,
+            description: t.roadmap.items.detectorsCount.description,
+            icon: Network,
+            status: 'planned',
+            color: 'from-indigo-500 to-indigo-400'
         },
         {
             date: '03.2027',

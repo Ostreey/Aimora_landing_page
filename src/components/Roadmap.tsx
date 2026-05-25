@@ -2,7 +2,7 @@
 
 import { trackScrollToRoadmap } from '@/lib/firebase';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Target, Trophy, Users, Wifi } from 'lucide-react';
+import { Calendar, MapPin, Network, Target, Trophy, Users, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function Roadmap() {
@@ -49,27 +49,35 @@ export function Roadmap() {
         },
         {
             date: '04.2026',
-            title: 'System kont dla strzelnic',
-            description: 'Dedykowane konta klientów strzelnic z zapisywaniem statystyk gier, porównywaniem osiągnięć i rankingami dla całej strzelnicy',
-            icon: Users,
-            status: 'current',
-            color: 'from-purple-500 to-purple-400'
-        },
-        {
-            date: '07.2026',
-            title: 'Zwiekszenie zasięgu oraz liczba podłączonych detektorów',
-            description: 'Zwiększenie zasięgu detektorów do 200 metrów oraz możliwość podłączenia do 100 detektorów jednocześnie',
+            title: 'Zwiększenie zasięgu detektora do 70 m',
+            description: 'Zwiększenie zasięgu komunikacji bezprzewodowej detektorów do 70 metrów — większy teren strzelania bez utraty połączenia',
             icon: Wifi,
-            status: 'planned',
+            status: 'completed',
             color: 'from-green-500 to-green-400'
         },
         {
-            date: '11.2026',
+            date: '07.2026',
+            title: 'System kont dla strzelnic',
+            description: 'Dedykowane konta klientów strzelnic z zapisywaniem statystyk gier, porównywaniem osiągnięć i rankingami dla całej strzelnicy',
+            icon: Users,
+            status: 'planned',
+            color: 'from-purple-500 to-purple-400'
+        },
+        {
+            date: '09.2026',
             title: 'Tryb turniejowy',
             description: 'Stworzenie trybu turniejowego dzięki któremu zautomatyzujesz swoje zawody strzeleckie, wszystkie statystyki i wyniki przechowasz bezpiecznie w chmurze oraz będziesz mógł konkurować z innymi organizacjami porównując swoje wyniki. Uczestnicy zawodów będą mogli śledzić na bieżąco przebieg zawodów w aplikacji na swoich telefonach',
             icon: Trophy,
             status: 'planned',
             color: 'from-yellow-500 to-yellow-400'
+        },
+        {
+            date: '12.2026',
+            title: 'Zwiększenie liczby podłączonych detektorów',
+            description: 'Możliwość podłączenia do 100 detektorów jednocześnie — idealne rozwiązanie dla dużych strzelnic i profesjonalnych zawodów strzeleckich',
+            icon: Network,
+            status: 'planned',
+            color: 'from-indigo-500 to-indigo-400'
         },
         {
             date: '03.2027',

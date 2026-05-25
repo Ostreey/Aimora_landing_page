@@ -15,7 +15,7 @@ export const translations = {
         hero: {
             title: 'Wprowadź swój trening strzelecki w nową erę',
             subtitle: 'Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego.',
-            cta: 'ZAMÓW'
+            cta: 'Zamów bezpośrednio'
         },
         videoSection: {
             title: 'Zobacz',
@@ -59,7 +59,7 @@ export const translations = {
             effectiveAndEngaging: 'Wszystko po to, by trening był nie tylko skuteczny, ale też wciągający.',
             readyForRevolution: 'Gotowy na rewolucję w treningu?',
             transformTraining: 'Zamień nudny trening w ekscytującą grę pełną wyzwań',
-            orderAimora: 'Zamów Aimora',
+            orderAimora: 'Zamów bezpośrednio',
             accuracy: 'Dokładność',
             responseTime: 'Czas reakcji',
             workTime: 'Czas pracy',
@@ -205,12 +205,16 @@ export const translations = {
                     description: 'Dedykowane konta klientów strzelnic z zapisywaniem statystyk gier, porównywaniem osiągnięć i rankingami dla całej strzelnicy'
                 },
                 rangeIncrease: {
-                    title: 'Zwiekszenie zasięgu oraz liczba podłączonych detektorów',
-                    description: 'Zwiększenie zasięgu detektorów do 200 metrów oraz możliwość podłączenia do 100 detektorów jednocześnie'
+                    title: 'Zwiększenie zasięgu detektora do 70 m',
+                    description: 'Zwiększenie zasięgu komunikacji bezprzewodowej detektorów do 70 metrów — większy teren strzelania bez utraty połączenia'
                 },
                 tournamentMode: {
                     title: 'Tryb turniejowy',
                     description: 'Stworzenie trybu turniejowego dzięki któremu zautomatyzujesz swoje zawody strzeleckie, wszystkie statystyki i wyniki przechowasz bezpiecznie w chmurze oraz będziesz mógł konkurować z innymi organizacjami porównując swoje wyniki. Uczestnicy zawodów będą mogli śledzić na bieżąco przebieg zawodów w aplikacji na swoich telefonach'
+                },
+                detectorsCount: {
+                    title: 'Zwiększenie liczby podłączonych detektorów',
+                    description: 'Możliwość podłączenia do 100 detektorów jednocześnie — idealne rozwiązanie dla dużych strzelnic i profesjonalnych zawodów strzeleckich'
                 },
                 dedicatedTarget: {
                     title: 'Dedykowana tarcza z precyzyjną lokalizacją',
@@ -224,7 +228,8 @@ export const translations = {
             title2: '?',
             subtitle: 'Przekształć swój trening w profesjonalne doświadczenie pełne emocji.',
             pricePromo: '350 zł / komplet — detektor + wskaźnik LED + 2 odbłyski',
-            orderNow: 'Zamów teraz',
+            orderNow: 'Zamów u nas',
+            buyOnAllegro: 'Kup na',
             learnMore: 'Dowiedz się więcej',
             availableNow: 'Dostępne od zaraz',
             contactUs: 'Skontaktuj się z nami już dziś i zacznij trenować na profesjonalnym poziomie'
@@ -377,7 +382,7 @@ export const translations = {
         hero: {
             title: 'Take Your Shooting Training to the Next Level',
             subtitle: 'Transform any steel target into an interactive game and your personal shooting coach.',
-            cta: 'ORDER'
+            cta: 'Order now'
         },
         videoSection: {
             title: 'See',
@@ -420,7 +425,7 @@ export const translations = {
             effectiveAndEngaging: 'Everything designed to make training not only effective, but also engaging.',
             readyForRevolution: 'Ready for a training revolution?',
             transformTraining: 'Turn boring practice into an exciting game full of challenges',
-            orderAimora: 'Order Aimora',
+            orderAimora: 'Order now',
             accuracy: 'Accuracy',
             responseTime: 'Response Time',
             workTime: 'Battery Life',
@@ -566,12 +571,16 @@ export const translations = {
                     description: 'Dedicated accounts for range customers with game statistics storage, achievement comparison, and rankings for the entire range'
                 },
                 rangeIncrease: {
-                    title: 'Increased Range and Connected Detectors',
-                    description: 'Increasing detector range to 200 meters and ability to connect up to 100 detectors simultaneously'
+                    title: 'Extended Detector Range to 70 m',
+                    description: 'Extended wireless communication range for detectors up to 70 meters — a larger shooting area without losing connection'
                 },
                 tournamentMode: {
                     title: 'Tournament Mode',
                     description: 'Creation of tournament mode to automate your shooting competitions, securely store all statistics and results in the cloud, and compete with other organizations by comparing results. Competition participants will be able to follow the competition progress in real-time on their phones'
+                },
+                detectorsCount: {
+                    title: 'Increased Number of Connected Detectors',
+                    description: 'Ability to connect up to 100 detectors simultaneously — the perfect solution for large shooting ranges and professional shooting competitions'
                 },
                 dedicatedTarget: {
                     title: 'Dedicated Target with Precise Location',
@@ -584,8 +593,9 @@ export const translations = {
             titleHighlight: 'next level',
             title2: '?',
             subtitle: 'Transform your training into a professional experience full of excitement.',
-            pricePromo: '350 PLN / set — detector + LED indicator + 2 reflectors',
+            pricePromo: '85 EUR / set — detector + LED indicator + 2 reflectors',
             orderNow: 'Order Now',
+            buyOnAllegro: 'Buy on',
             learnMore: 'Learn More',
             availableNow: 'Available Now',
             contactUs: 'Contact us today and start training at a professional level'
@@ -605,7 +615,7 @@ export const translations = {
         contactForm: {
             title: 'Order Aimora',
             subtitle: 'Contact us',
-            pricePerSet: 'PLN / set — detector + LED indicator + 2 reflectors',
+            pricePerSet: 'EUR / set — detector + LED indicator + 2 reflectors',
             quantityLabel: 'Number of Sets',
             quantityRequired: 'Enter number of sets (min. 1)',
             nameLabel: 'Name',

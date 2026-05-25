@@ -4,6 +4,7 @@ import { trackCTAClick, trackScrollToProductDescription } from '@/lib/firebase';
 import { getTranslations, Locale } from '@/lib/translations';
 import { ArrowRight, Clock, Crosshair, Lightbulb, Magnet, Radar, Smartphone, Target, Zap } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { BuyOnAllegroButton } from './BuyOnAllegroButton';
 import { ContactFormLocalized } from './ContactFormLocalized';
 import { RippleButton } from './RippleButton';
 
@@ -225,16 +226,23 @@ export function ProductDescriptionSectionLocalized({ locale }: ProductDescriptio
                             <p className="text-white/80 font-inter text-lg mb-6 max-w-2xl mx-auto">
                                 {t.productDescription.transformTraining}
                             </p>
-                            <RippleButton
-                                className="btn-primary flex items-center justify-center gap-2 group mx-auto"
-                                onClick={() => {
-                                    trackCTAClick('product_description_section_order');
-                                    setIsContactFormOpen(true);
-                                }}
-                            >
-                                {t.productDescription.orderAimora}
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </RippleButton>
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                                <RippleButton
+                                    className="btn-primary flex items-center justify-center gap-2 group"
+                                    onClick={() => {
+                                        trackCTAClick('product_description_section_order');
+                                        setIsContactFormOpen(true);
+                                    }}
+                                >
+                                    {t.productDescription.orderAimora}
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </RippleButton>
+                                <BuyOnAllegroButton
+                                    label={t.cta.buyOnAllegro}
+                                    trackingId="product_description_section_buy_on_allegro"
+                                    size="md"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
