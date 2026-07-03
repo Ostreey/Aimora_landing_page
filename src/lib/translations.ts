@@ -15,7 +15,7 @@ export const translations = {
         hero: {
             title: 'Wprowadź swój trening strzelecki w nową erę',
             subtitle: 'Przekształć dowolny stalowy cel w interaktywną grę i osobistego trenera strzeleckiego.',
-            cta: 'Zamów bezpośrednio'
+            cta: 'ZAMÓW'
         },
         videoSection: {
             title: 'Zobacz',
@@ -59,7 +59,7 @@ export const translations = {
             effectiveAndEngaging: 'Wszystko po to, by trening był nie tylko skuteczny, ale też wciągający.',
             readyForRevolution: 'Gotowy na rewolucję w treningu?',
             transformTraining: 'Zamień nudny trening w ekscytującą grę pełną wyzwań',
-            orderAimora: 'Zamów bezpośrednio',
+            orderAimora: 'ZAMÓW',
             accuracy: 'Dokładność',
             responseTime: 'Czas reakcji',
             workTime: 'Czas pracy',
@@ -229,7 +229,6 @@ export const translations = {
             subtitle: 'Przekształć swój trening w profesjonalne doświadczenie pełne emocji.',
             pricePromo: '350 zł / komplet — detektor + wskaźnik LED + 2 odbłyski',
             orderNow: 'Zamów u nas',
-            buyOnAllegro: 'Kup na',
             learnMore: 'Dowiedz się więcej',
             availableNow: 'Dostępne od zaraz',
             contactUs: 'Skontaktuj się z nami już dziś i zacznij trenować na profesjonalnym poziomie'
@@ -382,7 +381,7 @@ export const translations = {
         hero: {
             title: 'Take Your Shooting Training to the Next Level',
             subtitle: 'Transform any steel target into an interactive game and your personal shooting coach.',
-            cta: 'Order now'
+            cta: 'ORDER'
         },
         videoSection: {
             title: 'See',
@@ -425,7 +424,7 @@ export const translations = {
             effectiveAndEngaging: 'Everything designed to make training not only effective, but also engaging.',
             readyForRevolution: 'Ready for a training revolution?',
             transformTraining: 'Turn boring practice into an exciting game full of challenges',
-            orderAimora: 'Order now',
+            orderAimora: 'ORDER',
             accuracy: 'Accuracy',
             responseTime: 'Response Time',
             workTime: 'Battery Life',
@@ -595,7 +594,6 @@ export const translations = {
             subtitle: 'Transform your training into a professional experience full of excitement.',
             pricePromo: '85 EUR / set — detector + LED indicator + 2 reflectors',
             orderNow: 'Order Now',
-            buyOnAllegro: 'Buy on',
             learnMore: 'Learn More',
             availableNow: 'Available Now',
             contactUs: 'Contact us today and start training at a professional level'

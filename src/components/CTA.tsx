@@ -4,7 +4,6 @@ import { trackCTAClick } from '@/lib/firebase';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useState } from 'react';
-import { BuyOnAllegroButton } from './BuyOnAllegroButton';
 import { ContactForm } from './ContactForm';
 import { RippleButton } from './RippleButton';
 
@@ -83,11 +82,6 @@ export function CTA() {
                                     Dowiedz się więcej
                                 </button>
                             </div>
-                            <BuyOnAllegroButton
-                                label="Kup na"
-                                trackingId="cta_section_buy_on_allegro"
-                                size="lg"
-                            />
                         </motion.div>
 
                         {/* Urgency/Availability Notice */}

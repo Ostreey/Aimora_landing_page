@@ -3,7 +3,6 @@
 import { trackCTAClick, trackScrollToProductDescription } from '@/lib/firebase';
 import { ArrowRight, Clock, Crosshair, Lightbulb, Magnet, Radar, Smartphone, Target, Zap } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { BuyOnAllegroButton } from './BuyOnAllegroButton';
 import { ContactForm } from './ContactForm';
 import { RippleButton } from './RippleButton';
 
@@ -294,14 +293,9 @@ export function ProductDescriptionSection() {
                                         setIsContactFormOpen(true);
                                     }}
                                 >
-                                    Zamów bezpośrednio
+                                    ZAMÓW
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </RippleButton>
-                                <BuyOnAllegroButton
-                                    label="Kup na"
-                                    trackingId="product_description_section_buy_on_allegro"
-                                    size="md"
-                                />
                             </div>
                         </div>
                     </div>

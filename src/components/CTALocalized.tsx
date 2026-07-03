@@ -5,7 +5,6 @@ import { getTranslations, Locale } from '@/lib/translations';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useState } from 'react';
-import { BuyOnAllegroButton } from './BuyOnAllegroButton';
 import { ContactFormLocalized } from './ContactFormLocalized';
 import { RippleButton } from './RippleButton';
 
@@ -84,11 +83,6 @@ export function CTALocalized({ locale }: CTALocalizedProps) {
                                     {t.cta.learnMore}
                                 </button>
                             </div>
-                            <BuyOnAllegroButton
-                                label={t.cta.buyOnAllegro}
-                                trackingId="cta_section_buy_on_allegro"
-                                size="lg"
-                            />
                         </motion.div>
 
                         <motion.div

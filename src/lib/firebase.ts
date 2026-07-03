@@ -101,14 +101,6 @@ export const trackCTAClick = (ctaName: string) => {
   }
 };
 
-export const trackAllegroClick = (source: string) => {
-  if (typeof window !== 'undefined') {
-    logEvent('allegro_click', {
-      source,
-    });
-  }
-};
-
 export const trackGAEvent = (eventName: string, params?: { [key: string]: any }) => {
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', eventName, params);
