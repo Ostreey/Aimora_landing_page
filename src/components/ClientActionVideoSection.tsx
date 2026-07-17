@@ -1,28 +1,22 @@
 'use client';
 
 import { trackYouTubeVideoFinished, trackYouTubeVideoProgress, trackYouTubeVideoStarted, trackYouTubeVideoStopped } from '@/lib/firebase';
-import { getTranslations, Locale } from '@/lib/translations';
 import { useYouTubeAPI } from '@/lib/useYouTubeAPI';
 import { useEffect, useState } from 'react';
 
-interface ClientCompetitionVideoSectionLocalizedProps {
-    locale: Locale;
-}
-
-export function ClientCompetitionVideoSectionLocalized({ locale }: ClientCompetitionVideoSectionLocalizedProps) {
-    const t = getTranslations(locale);
+export function ClientActionVideoSection() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [player, setPlayer] = useState<any>(null);
     const isAPIReady = useYouTubeAPI();
     const [hasStartedTracking, setHasStartedTracking] = useState(false);
     const [progressMilestones, setProgressMilestones] = useState<Set<number>>(new Set());
 
-    const videoId = 't9rCzW0eKvE';
-    const videoTitle = locale === 'en' ? 'Nonce competition - tests at our client' : 'Nonce zawody - testy u naszego klienta';
+    const videoId = 'eM-OTjLmqP4';
+    const videoTitle = 'Zamień stalowe tarcze w interaktywne cele — zobacz Aimorę w akcji';
 
     useEffect(() => {
         if (isAPIReady && isPlaying && !player) {
-            const newPlayer = new window.YT.Player('youtube-player-competition', {
+            const newPlayer = new window.YT.Player('youtube-player-action', {
                 height: '100%',
                 width: '100%',
                 videoId: videoId,
@@ -78,41 +72,41 @@ export function ClientCompetitionVideoSectionLocalized({ locale }: ClientCompeti
     };
 
     return (
-        <section className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-32">
+        <section className="bg-black pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-10 md:pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            {/* Background pattern */}
             <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-10 left-20 w-64 h-64 bg-[#017da0] rounded-full blur-3xl"></div>
-                <div className="absolute bottom-10 right-20 w-80 h-80 bg-[#017da0] rounded-full blur-3xl"></div>
+                <div className="absolute top-10 right-20 w-64 h-64 bg-[#017da0] rounded-full blur-3xl"></div>
+                <div className="absolute bottom-10 left-20 w-80 h-80 bg-[#017da0] rounded-full blur-3xl"></div>
             </div>
 
             <div className="max-w-6xl mx-auto relative z-10">
+                {/* Header */}
                 <div className="text-center mb-6 sm:mb-8 md:mb-12">
                     <h2 className="text-white font-barlow font-black text-4xl sm:text-5xl md:text-6xl leading-tight mb-4 sm:mb-6">
-                        {t.competitionVideoSection.title} <span className="text-[#017da0]">{t.competitionVideoSection.titleHighlight}</span>
+                        Zobacz <span className="text-[#017da0]">Aimora</span> w akcji
                     </h2>
                     <div className="w-32 h-1 bg-[#017da0] mx-auto mb-4 sm:mb-6 md:mb-8 rounded-full"></div>
                 </div>
 
+                {/* Video Container */}
                 <div className="relative">
                     <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black shadow-2xl">
                         {!isPlaying ? (
+                            /* YouTube Thumbnail with Play Button */
                             <div className="relative w-full h-full">
                                 <img
-                                    src="https://img.youtube.com/vi/t9rCzW0eKvE/hqdefault.jpg"
-                                    alt={t.competitionVideoSection.playCompetitionVideo}
+                                    src="/images/video_thumb_action.jpg"
+                                    alt="Zobacz Aimora w akcji"
                                     className="w-full h-full object-cover"
-                                    onError={(e) => {
-                                        const target = e.target as HTMLImageElement;
-                                        if (target.src.includes('hqdefault')) {
-                                            target.src = 'https://img.youtube.com/vi/t9rCzW0eKvE/sddefault.jpg';
-                                        }
-                                    }}
                                 />
+                                {/* Dark overlay */}
                                 <div className="absolute inset-0 bg-black/40"></div>
 
+                                {/* Play button overlay */}
                                 <button
                                     className="absolute inset-0 flex items-center justify-center group"
                                     onClick={handlePlay}
-                                    aria-label={t.competitionVideoSection.playCompetitionVideo}
+                                    aria-label="Odtwórz wideo"
                                 >
                                     <div className="w-20 h-20 bg-[#017da0] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                                         <svg
@@ -127,7 +121,7 @@ export function ClientCompetitionVideoSectionLocalized({ locale }: ClientCompeti
                             </div>
                         ) : (
                             <div
-                                id="youtube-player-competition"
+                                id="youtube-player-action"
                                 className="w-full h-full rounded-xl"
                                 style={{ minHeight: '100%' }}
                             ></div>
@@ -138,4 +132,3 @@ export function ClientCompetitionVideoSectionLocalized({ locale }: ClientCompeti
         </section>
     );
 }
-

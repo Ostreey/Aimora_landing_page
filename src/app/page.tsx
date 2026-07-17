@@ -1,5 +1,5 @@
 import { CTA } from '@/components/CTA';
-import { ClientCompetitionVideoSection } from '@/components/ClientCompetitionVideoSection';
+import { ClientActionVideoSection } from '@/components/ClientActionVideoSection';
 import { ClientTestVideoSection } from '@/components/ClientTestVideoSection';
 import { FeatureSection } from '@/components/FeatureSection';
 import { Footer } from '@/components/Footer';
@@ -7,7 +7,6 @@ import { Hero } from '@/components/Hero';
 import { MobileAppSection } from '@/components/MobileAppSection';
 import { ProductDescriptionSection } from '@/components/ProductDescriptionSection';
 import { Roadmap } from '@/components/Roadmap';
-import { VideoSection } from '@/components/VideoSection';
 import { WhatIsItSection } from '@/components/WhatIsItSection';
 
 const productJsonLd = {
@@ -19,7 +18,7 @@ const productJsonLd = {
     brand: { '@type': 'Brand', name: 'Aimora' },
     offers: {
         '@type': 'Offer',
-        price: '350',
+        price: '299',
         priceCurrency: 'PLN',
         availability: 'https://schema.org/InStock',
         url: 'https://aimora.pl',
@@ -36,14 +35,11 @@ export default function Home() {
             <section id="home">
                 <Hero />
             </section>
+            <section id="aimora-w-akcji">
+                <ClientActionVideoSection />
+            </section>
             <section id="testy-na-strzelnicy">
                 <ClientTestVideoSection />
-            </section>
-            <section id="nonce-zawody">
-                <ClientCompetitionVideoSection />
-            </section>
-            <section id="aimora-w-akcji">
-                <VideoSection />
             </section>
             <section id="jak-to-dziala">
                 <WhatIsItSection />

@@ -13,7 +13,7 @@ Aimora to bezprzewodowy system inteligentnych detektorów trafień, który zamie
 - Bateria Li-Ion 750mAh, do 5h pracy, ładowanie USB-C
 - Aktualizacje firmware OTA przez Bluetooth
 - Kompatybilność: ASG/airsoft, wiatrówki, broń palna
-- Cena: od 350 PLN / 85 EUR za moduł
+- Cena: 299 PLN / 70 EUR za zestaw (detektor + moduł LED + 2 odbłyśniki); pakiet 4 zestawów — 999 PLN / 235 EUR; pakiet 2 odbłyśników — 20 PLN / 5 EUR; darmowa dostawa
 
 ## Dla kogo
 

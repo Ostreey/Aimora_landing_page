@@ -1,18 +1,21 @@
 'use client';
 
-import { trackFormSend } from '@/lib/firebase';
+import { trackFormAbandoned, trackFormError, trackFormOpened, trackFormProductSelected, trackFormSend, trackFormStarted } from '@/lib/firebase';
 import { getTranslations, Locale } from '@/lib/translations';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const PROMO_PRICE: Record<string, { value: number; currency: string }> = {
-    pl: { value: 350, currency: 'zł' },
-    en: { value: 85, currency: 'EUR' },
+type ProductType = 'single' | 'bundle' | 'reflectors';
+
+const PRICES: Record<string, { single: number; bundle: number; reflectors: number; currency: string }> = {
+    pl: { single: 299, bundle: 999, reflectors: 20, currency: 'zł' },
+    en: { single: 70, bundle: 235, reflectors: 5, currency: 'EUR' },
 };
 
 interface ContactFormData {
     name: string;
     email: string;
     phone: string;
+    product: ProductType;
     quantity: number | string;
     message: string;
 }
@@ -23,20 +26,59 @@ interface ContactFormLocalizedProps {
     onClose: () => void;
 }
 
+const INITIAL_FORM_DATA: ContactFormData = {
+    name: '',
+    email: '',
+    phone: '',
+    product: 'single',
+    quantity: 1,
+    message: ''
+};
+
 export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLocalizedProps) {
     const t = getTranslations(locale);
-    const price = PROMO_PRICE[locale] ?? PROMO_PRICE.pl;
-    const [formData, setFormData] = useState<ContactFormData>({
-        name: '',
-        email: '',
-        phone: '',
-        quantity: 1,
-        message: ''
-    });
+    const prices = PRICES[locale] ?? PRICES.pl;
+    const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA);
     const [quantityInput, setQuantityInput] = useState<string>('1');
     const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [hasStarted, setHasStarted] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+
+    const products: Record<ProductType, { price: number; name: string; description: string }> = {
+        single: {
+            price: prices.single,
+            name: t.contactForm.productSingleName,
+            description: t.contactForm.productSingleDesc,
+        },
+        bundle: {
+            price: prices.bundle,
+            name: t.contactForm.productBundleName,
+            description: t.contactForm.productBundleDesc,
+        },
+        reflectors: {
+            price: prices.reflectors,
+            name: t.contactForm.productReflectorsName,
+            description: t.contactForm.productReflectorsDesc,
+        },
+    };
+
+    const product = products[formData.product];
+    const quantityNumber = typeof formData.quantity === 'number' ? formData.quantity : 1;
+
+    useEffect(() => {
+        if (isOpen) {
+            trackFormOpened();
+        }
+    }, [isOpen]);
+
+    const handleFieldFocus = (fieldName: string) => {
+        if (!hasStarted) {
+            trackFormStarted(fieldName);
+            setHasStarted(true);
+        }
+    };
 
     const validateForm = (): boolean => {
         const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
@@ -51,17 +93,18 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
             newErrors.email = t.contactForm.emailInvalid;
         }
 
-        if (formData.message.trim() && formData.message.trim().length < 5) {
-            newErrors.message = t.contactForm.messageMinLength;
-        }
-
         const quantity = typeof formData.quantity === 'string' ? parseInt(formData.quantity, 10) : formData.quantity;
         if (!Number.isFinite(quantity) || quantity < 1) {
             newErrors.quantity = t.contactForm.quantityRequired;
         }
 
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+
+        if (Object.keys(newErrors).length > 0) {
+            trackFormError('validation', Object.keys(newErrors).join(','));
+            return false;
+        }
+        return true;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -72,6 +115,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
         }
 
         setIsSubmitting(true);
+        setSubmitError('');
 
         try {
             const response = await fetch('/api/contact', {
@@ -85,18 +129,14 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
             if (response.ok) {
                 setIsSuccess(true);
                 trackFormSend();
-                setTimeout(() => {
-                    setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
-                    setQuantityInput('1');
-                    setIsSuccess(false);
-                    onClose();
-                }, 3000);
             } else {
-                throw new Error('Form submission error');
+                trackFormError('api', `http_${response.status}`);
+                setSubmitError(t.contactForm.errorMessage);
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-            setErrors({ message: t.contactForm.errorMessage });
+            trackFormError('api', 'network');
+            setSubmitError(t.contactForm.errorMessage);
         } finally {
             setIsSubmitting(false);
         }
@@ -111,14 +151,26 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
         }
     };
 
+    const handleProductSelect = (productType: ProductType) => {
+        setFormData(prev => ({ ...prev, product: productType }));
+        trackFormProductSelected(productType);
+        handleFieldFocus('product');
+    };
+
     const handleClose = () => {
         if (!isSubmitting) {
+            if (!isSuccess) {
+                const hadInput = hasStarted || formData.name.trim() !== '' || formData.email.trim() !== '';
+                trackFormAbandoned(hadInput);
+            }
             onClose();
             setTimeout(() => {
-                setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
+                setFormData(INITIAL_FORM_DATA);
                 setQuantityInput('1');
                 setErrors({});
                 setIsSuccess(false);
+                setHasStarted(false);
+                setSubmitError('');
             }, 300);
         }
     };
@@ -142,13 +194,6 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                             ×
                         </button>
                     </div>
-                    <div className="mt-4">
-                        <span className="inline-block">
-                            <span className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 border border-gray-200 shadow-sm px-4 py-2 text-sm font-semibold">
-                                <span className="text-gray-700">{price.value} {price.currency} / {t.contactForm.pricePerSet}</span>
-                            </span>
-                        </span>
-                    </div>
                 </div>
 
                 {isSuccess && (
@@ -160,14 +205,61 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                         </div>
                         <h3 className="text-xl font-barlow font-bold text-gray-900 mb-2">{t.contactForm.successTitle}</h3>
                         <p className="text-gray-600">{t.contactForm.successMessage}</p>
+                        <button
+                            onClick={handleClose}
+                            className="mt-6 bg-[#017da0] text-white py-2 px-8 rounded-lg font-medium hover:bg-[#0299bb] transition-colors"
+                        >
+                            {t.contactForm.close}
+                        </button>
                     </div>
                 )}
 
                 {!isSuccess && (
                     <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                        {/* Product Selection */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t.contactForm.chooseProduct} <span className="text-red-500">{t.contactForm.required}</span>
+                            </label>
+                            <div className="space-y-2">
+                                {(Object.keys(products) as ProductType[]).map((productType) => {
+                                    const p = products[productType];
+                                    const isSelected = formData.product === productType;
+                                    return (
+                                        <button
+                                            key={productType}
+                                            type="button"
+                                            onClick={() => handleProductSelect(productType)}
+                                            disabled={isSubmitting}
+                                            className={`w-full text-left p-3 rounded-lg border-2 transition-colors ${isSelected
+                                                ? 'border-[#017da0] bg-[#017da0]/5'
+                                                : 'border-gray-200 hover:border-gray-300'
+                                                }`}
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <div>
+                                                    <div className="font-semibold text-gray-900 flex items-center gap-2">
+                                                        {p.name}
+                                                        {productType === 'bundle' && (
+                                                            <span className="text-xs font-bold text-white bg-[#FF6B35] rounded-full px-2 py-0.5">
+                                                                {t.contactForm.youSave} {prices.single * 4 - prices.bundle} {prices.currency}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    <div className="text-xs text-gray-500 mt-0.5">{p.description}</div>
+                                                </div>
+                                                <div className="font-bold text-[#017da0] whitespace-nowrap ml-3">{p.price} {prices.currency}</div>
+                                            </div>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        {/* Quantity Field */}
                         <div>
                             <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
-                                {t.contactForm.quantityLabel} <span className="text-red-500">{t.contactForm.required}</span>
+                                {formData.product === 'single' ? t.contactForm.quantityLabel : t.contactForm.quantityBundleLabel} <span className="text-red-500">{t.contactForm.required}</span>
                             </label>
                             <div className="flex items-center gap-3">
                                 <input
@@ -177,6 +269,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                                     min={1}
                                     step={1}
                                     value={quantityInput}
+                                    onFocus={() => handleFieldFocus('quantity')}
                                     onChange={(e) => {
                                         const inputValue = e.target.value;
                                         setQuantityInput(inputValue);
@@ -206,14 +299,15 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                                 />
                                 <div className="text-sm text-gray-700">
                                     <div>
-                                        {t.contactForm.promoPrice}: <span className="font-semibold">{price.value} {price.currency}</span>
+                                        {t.contactForm.promoPrice}: <span className="font-semibold">{product.price} {prices.currency}</span> / {formData.product === 'single' ? t.contactForm.perSingle : t.contactForm.perBundle}
                                     </div>
                                     <div>
-                                        {t.contactForm.total}: <span className="font-semibold">{price.value} {price.currency} × {formData.quantity} = {price.value * (typeof formData.quantity === 'number' ? formData.quantity : 1)} {price.currency}</span>
+                                        {t.contactForm.total}: <span className="font-semibold">{product.price} {prices.currency} × {formData.quantity} = {product.price * quantityNumber} {prices.currency}</span>
                                     </div>
                                 </div>
                             </div>
                             {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
+                            <p className="text-sm text-[#017da0] font-medium mt-2">{t.contactForm.freeShipping}</p>
                         </div>
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -224,6 +318,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                                 id="name"
                                 name="name"
                                 value={formData.name}
+                                onFocus={() => handleFieldFocus('name')}
                                 onChange={handleChange}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.name ? 'border-red-500' : 'border-gray-300'
                                     }`}
@@ -242,6 +337,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                                 id="email"
                                 name="email"
                                 value={formData.email}
+                                onFocus={() => handleFieldFocus('email')}
                                 onChange={handleChange}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.email ? 'border-red-500' : 'border-gray-300'
                                     }`}
@@ -260,6 +356,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                                 id="phone"
                                 name="phone"
                                 value={formData.phone}
+                                onFocus={() => handleFieldFocus('phone')}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500"
                                 placeholder={t.contactForm.phonePlaceholder}
@@ -275,6 +372,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                                 id="message"
                                 name="message"
                                 value={formData.message}
+                                onFocus={() => handleFieldFocus('message')}
                                 onChange={handleChange}
                                 rows={4}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors resize-none text-gray-900 placeholder-gray-500 ${errors.message ? 'border-red-500' : 'border-gray-300'
@@ -284,6 +382,12 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                             />
                             {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
                         </div>
+
+                        {submitError && (
+                            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                                <p className="text-red-600 text-sm">{submitError}</p>
+                            </div>
+                        )}
 
                         <div className="pt-4">
                             <button

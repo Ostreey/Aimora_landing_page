@@ -1,14 +1,33 @@
 'use client';
 
-import { trackFormSend } from '@/lib/firebase';
-import { useState } from 'react';
+import { trackFormAbandoned, trackFormError, trackFormOpened, trackFormProductSelected, trackFormSend, trackFormStarted } from '@/lib/firebase';
+import { useEffect, useState } from 'react';
 
-const PROMO_PRICE_PLN = 350;
+type ProductType = 'single' | 'bundle' | 'reflectors';
+
+const PRODUCTS: Record<ProductType, { price: number; name: string; description: string }> = {
+    single: {
+        price: 299,
+        name: 'Zestaw',
+        description: 'detektor trafień + moduł LED + 2 odbłyśniki',
+    },
+    bundle: {
+        price: 999,
+        name: 'Pakiet 4 zestawów',
+        description: '4 detektory + 4 moduły LED + 16 odbłyśników (8 gratis)',
+    },
+    reflectors: {
+        price: 20,
+        name: 'Pakiet odbłyśników',
+        description: '2 odbłyśniki zapasowe',
+    },
+};
 
 interface ContactFormData {
     name: string;
     email: string;
     phone: string;
+    product: ProductType;
     quantity: number | string;
     message: string;
 }
@@ -18,18 +37,39 @@ interface ContactFormProps {
     onClose: () => void;
 }
 
+const INITIAL_FORM_DATA: ContactFormData = {
+    name: '',
+    email: '',
+    phone: '',
+    product: 'single',
+    quantity: 1,
+    message: ''
+};
+
 export function ContactForm({ isOpen, onClose }: ContactFormProps) {
-    const [formData, setFormData] = useState<ContactFormData>({
-        name: '',
-        email: '',
-        phone: '',
-        quantity: 1,
-        message: ''
-    });
+    const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA);
     const [quantityInput, setQuantityInput] = useState<string>('1');
     const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [hasStarted, setHasStarted] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+
+    const product = PRODUCTS[formData.product];
+    const quantityNumber = typeof formData.quantity === 'number' ? formData.quantity : 1;
+
+    useEffect(() => {
+        if (isOpen) {
+            trackFormOpened();
+        }
+    }, [isOpen]);
+
+    const handleFieldFocus = (fieldName: string) => {
+        if (!hasStarted) {
+            trackFormStarted(fieldName);
+            setHasStarted(true);
+        }
+    };
 
     const validateForm = (): boolean => {
         const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
@@ -44,17 +84,18 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
             newErrors.email = 'Nieprawidłowy format adresu email';
         }
 
-        if (formData.message.trim() && formData.message.trim().length < 5) {
-            newErrors.message = 'Uwagi do zamówienia muszą mieć co najmniej 5 znaków';
-        }
-
         const quantity = typeof formData.quantity === 'string' ? parseInt(formData.quantity, 10) : formData.quantity;
         if (!Number.isFinite(quantity) || quantity < 1) {
-            newErrors.quantity = 'Podaj liczbę kompletów (min. 1)';
+            newErrors.quantity = 'Podaj liczbę sztuk (min. 1)';
         }
 
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+
+        if (Object.keys(newErrors).length > 0) {
+            trackFormError('validation', Object.keys(newErrors).join(','));
+            return false;
+        }
+        return true;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -65,6 +106,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
         }
 
         setIsSubmitting(true);
+        setSubmitError('');
 
         try {
             const response = await fetch('/api/contact', {
@@ -79,19 +121,14 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 setIsSuccess(true);
                 // Track successful form submission
                 trackFormSend();
-                // Reset form after 3 seconds and close modal
-                setTimeout(() => {
-                    setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
-                    setQuantityInput('1');
-                    setIsSuccess(false);
-                    onClose();
-                }, 3000);
             } else {
-                throw new Error('Błąd podczas wysyłania formularza');
+                trackFormError('api', `http_${response.status}`);
+                setSubmitError('Nie udało się wysłać formularza. Spróbuj ponownie lub napisz do nas: biuro@aimora.pl');
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-            setErrors({ message: 'Wystąpił błąd podczas wysyłania. Spróbuj ponownie.' });
+            trackFormError('api', 'network');
+            setSubmitError('Nie udało się wysłać formularza. Spróbuj ponownie lub napisz do nas: biuro@aimora.pl');
         } finally {
             setIsSubmitting(false);
         }
@@ -107,15 +144,27 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
         }
     };
 
+    const handleProductSelect = (productType: ProductType) => {
+        setFormData(prev => ({ ...prev, product: productType }));
+        trackFormProductSelected(productType);
+        handleFieldFocus('product');
+    };
+
     const handleClose = () => {
         if (!isSubmitting) {
+            if (!isSuccess) {
+                const hadInput = hasStarted || formData.name.trim() !== '' || formData.email.trim() !== '';
+                trackFormAbandoned(hadInput);
+            }
             onClose();
             // Reset form when closing
             setTimeout(() => {
-                setFormData({ name: '', email: '', phone: '', quantity: 1, message: '' });
+                setFormData(INITIAL_FORM_DATA);
                 setQuantityInput('1');
                 setErrors({});
                 setIsSuccess(false);
+                setHasStarted(false);
+                setSubmitError('');
             }, 300);
         }
     };
@@ -129,8 +178,8 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 <div className="bg-gradient-to-r from-[#017da0] to-[#0299bb] text-white p-6 rounded-t-2xl">
                     <div className="flex justify-between items-center">
                         <div>
-                            <h2 className="text-2xl font-barlow font-bold">Zamów Aimora</h2>
-                            <p className="text-white/90 text-sm mt-1">Skontaktuj się z nami</p>
+                            <h2 className="text-2xl font-barlow font-bold">Zamów Aimorę</h2>
+                            <p className="text-white/90 text-sm mt-1">Bez płatności online i bez zobowiązań — odezwiemy się w 24 h, żeby potwierdzić szczegóły</p>
                         </div>
                         <button
                             onClick={handleClose}
@@ -139,16 +188,6 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                         >
                             ×
                         </button>
-                    </div>
-                    {/* Promo badge */}
-                    <div className="mt-4">
-                        <span className="inline-block">
-                            {/* use the same style as other sections */}
-                            {/* lightweight import avoidance: reusing markup would require importing component, but it's fine to keep here minimal */}
-                            <span className="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 border border-gray-200 shadow-sm px-4 py-2 text-sm font-semibold">
-                                <span className="text-gray-700">{PROMO_PRICE_PLN} zł / komplet — detektor + wskaźnik LED + 2 odbłyski</span>
-                            </span>
-                        </span>
                     </div>
                 </div>
 
@@ -160,18 +199,64 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <h3 className="text-xl font-barlow font-bold text-gray-900 mb-2">Dziękujemy!</h3>
-                        <p className="text-gray-600">Twoje zamówienie zostało wysłane. Skontaktujemy się z Tobą wkrótce.</p>
+                        <h3 className="text-xl font-barlow font-bold text-gray-900 mb-2">Mamy Twoje zamówienie!</h3>
+                        <p className="text-gray-600">W ciągu 24 h odezwiemy się mailowo lub telefonicznie, żeby potwierdzić szczegóły i formę płatności.</p>
+                        <button
+                            onClick={handleClose}
+                            className="mt-6 bg-[#017da0] text-white py-2 px-8 rounded-lg font-medium hover:bg-[#0299bb] transition-colors"
+                        >
+                            Zamknij
+                        </button>
                     </div>
                 )}
 
                 {/* Form */}
                 {!isSuccess && (
                     <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                        {/* Product Selection */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Wybierz produkt <span className="text-red-500">*</span>
+                            </label>
+                            <div className="space-y-2">
+                                {(Object.keys(PRODUCTS) as ProductType[]).map((productType) => {
+                                    const p = PRODUCTS[productType];
+                                    const isSelected = formData.product === productType;
+                                    return (
+                                        <button
+                                            key={productType}
+                                            type="button"
+                                            onClick={() => handleProductSelect(productType)}
+                                            disabled={isSubmitting}
+                                            className={`w-full text-left p-3 rounded-lg border-2 transition-colors ${isSelected
+                                                ? 'border-[#017da0] bg-[#017da0]/5'
+                                                : 'border-gray-200 hover:border-gray-300'
+                                                }`}
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <div>
+                                                    <div className="font-semibold text-gray-900 flex items-center gap-2">
+                                                        {p.name}
+                                                        {productType === 'bundle' && (
+                                                            <span className="text-xs font-bold text-white bg-[#FF6B35] rounded-full px-2 py-0.5">
+                                                                Oszczędzasz {PRODUCTS.single.price * 4 - PRODUCTS.bundle.price} zł
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    <div className="text-xs text-gray-500 mt-0.5">{p.description}</div>
+                                                </div>
+                                                <div className="font-bold text-[#017da0] whitespace-nowrap ml-3">{p.price} zł</div>
+                                            </div>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
                         {/* Quantity Field */}
                         <div>
                             <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
-                                Ilość kompletów <span className="text-red-500">*</span>
+                                {formData.product === 'single' ? 'Liczba zestawów' : 'Liczba pakietów'} <span className="text-red-500">*</span>
                             </label>
                             <div className="flex items-center gap-3">
                                 <input
@@ -181,6 +266,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                     min={1}
                                     step={1}
                                     value={quantityInput}
+                                    onFocus={() => handleFieldFocus('quantity')}
                                     onChange={(e) => {
                                         const inputValue = e.target.value;
                                         setQuantityInput(inputValue);
@@ -213,14 +299,15 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 />
                                 <div className="text-sm text-gray-700">
                                     <div>
-                                        Cena promocyjna: <span className="font-semibold">{PROMO_PRICE_PLN} zł</span> / komplet
+                                        Cena: <span className="font-semibold">{product.price} zł</span> / {formData.product === 'single' ? 'zestaw' : 'pakiet'}
                                     </div>
                                     <div>
-                                        Razem: <span className="font-semibold">{PROMO_PRICE_PLN} zł × {formData.quantity} = {PROMO_PRICE_PLN * (typeof formData.quantity === 'number' ? formData.quantity : 1)} zł</span>
+                                        Razem: <span className="font-semibold">{product.price} zł × {formData.quantity} = {product.price * quantityNumber} zł</span>
                                     </div>
                                 </div>
                             </div>
                             {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
+                            <p className="text-sm text-[#017da0] font-medium mt-2">🚚 Darmowa dostawa — wysyłamy w 24 h</p>
                         </div>
                         {/* Name Field */}
                         <div>
@@ -232,6 +319,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 id="name"
                                 name="name"
                                 value={formData.name}
+                                onFocus={() => handleFieldFocus('name')}
                                 onChange={handleChange}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.name ? 'border-red-500' : 'border-gray-300'
                                     }`}
@@ -251,6 +339,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 id="email"
                                 name="email"
                                 value={formData.email}
+                                onFocus={() => handleFieldFocus('email')}
                                 onChange={handleChange}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500 ${errors.email ? 'border-red-500' : 'border-gray-300'
                                     }`}
@@ -270,6 +359,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 id="phone"
                                 name="phone"
                                 value={formData.phone}
+                                onFocus={() => handleFieldFocus('phone')}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors text-gray-900 placeholder-gray-500"
                                 placeholder="+48 123 456 789"
@@ -286,15 +376,23 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 id="message"
                                 name="message"
                                 value={formData.message}
+                                onFocus={() => handleFieldFocus('message')}
                                 onChange={handleChange}
                                 rows={4}
                                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#017da0] focus:border-transparent transition-colors resize-none text-gray-900 placeholder-gray-500 ${errors.message ? 'border-red-500' : 'border-gray-300'
                                     }`}
-                                placeholder="Opisz swoje pytania lub wymagania dotyczące Aimora..."
+                                placeholder="np. potrzebuję faktury na firmę, pytanie o termin dostawy..."
                                 disabled={isSubmitting}
                             />
                             {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
                         </div>
+
+                        {/* Submit Error */}
+                        {submitError && (
+                            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                                <p className="text-red-600 text-sm">{submitError}</p>
+                            </div>
+                        )}
 
                         {/* Submit Button */}
                         <div className="pt-4">
@@ -309,18 +407,18 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                         Wysyłanie...
                                     </div>
                                 ) : (
-                                    'Wyślij zamówienie'
+                                    'Wyślij zamówienie — płatność później'
                                 )}
                             </button>
                         </div>
 
                         {/* Info */}
                         <p className="text-xs text-gray-500 text-center mt-4">
-                            Skontaktujemy się z Tobą w ciągu 24 godzin
+                            Żadnych płatności teraz — w ciągu 24 h potwierdzimy zamówienie mailowo lub telefonicznie
                         </p>
                     </form>
                 )}
             </div>
         </div>
     );
-} 
+}

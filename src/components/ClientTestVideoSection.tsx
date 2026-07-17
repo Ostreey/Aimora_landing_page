@@ -72,7 +72,7 @@ export function ClientTestVideoSection() {
     };
 
     return (
-        <section className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-32">
+        <section className="bg-black pt-8 sm:pt-10 md:pt-12 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-32">
             {/* Background pattern */}
             <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-10 left-20 w-64 h-64 bg-[#017da0] rounded-full blur-3xl"></div>

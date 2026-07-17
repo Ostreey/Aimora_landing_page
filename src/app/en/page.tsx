@@ -1,4 +1,4 @@
-import { ClientCompetitionVideoSectionLocalized } from '@/components/ClientCompetitionVideoSectionLocalized';
+import { ClientActionVideoSectionLocalized } from '@/components/ClientActionVideoSectionLocalized';
 import { ClientTestVideoSectionLocalized } from '@/components/ClientTestVideoSectionLocalized';
 import { CTALocalized } from '@/components/CTALocalized';
 import { FeatureSectionLocalized } from '@/components/FeatureSectionLocalized';
@@ -7,13 +7,12 @@ import { HeroLocalized } from '@/components/HeroLocalized';
 import { MobileAppSectionLocalized } from '@/components/MobileAppSectionLocalized';
 import { ProductDescriptionSectionLocalized } from '@/components/ProductDescriptionSectionLocalized';
 import { RoadmapLocalized } from '@/components/RoadmapLocalized';
-import { VideoSectionLocalized } from '@/components/VideoSectionLocalized';
 import { WhatIsItSection } from '@/components/WhatIsItSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Aimora – Interactive Shooting Targets with Mobile App',
-    description: 'Aimora — turn steel targets into interactive shooting games. Smart hit detector with mobile app, game modes and performance analytics. From 85 EUR.',
+    description: 'Aimora — turn steel targets into interactive shooting games. Smart hit detector with mobile app, game modes and performance analytics. From 70 EUR.',
     alternates: {
         canonical: '/en',
         languages: {
@@ -32,7 +31,7 @@ const productJsonLd = {
     brand: { '@type': 'Brand', name: 'Aimora' },
     offers: {
         '@type': 'Offer',
-        price: '85',
+        price: '70',
         priceCurrency: 'EUR',
         availability: 'https://schema.org/InStock',
         url: 'https://aimora.pl/en',
@@ -49,14 +48,11 @@ export default function EnglishHome() {
             <section id="home">
                 <HeroLocalized locale="en" />
             </section>
+            <section id="aimora-w-akcji">
+                <ClientActionVideoSectionLocalized locale="en" />
+            </section>
             <section id="testy-na-strzelnicy">
                 <ClientTestVideoSectionLocalized locale="en" />
-            </section>
-            <section id="nonce-zawody">
-                <ClientCompetitionVideoSectionLocalized locale="en" />
-            </section>
-            <section id="aimora-w-akcji">
-                <VideoSectionLocalized locale="en" />
             </section>
             <section id="jak-to-dziala">
                 <WhatIsItSection />

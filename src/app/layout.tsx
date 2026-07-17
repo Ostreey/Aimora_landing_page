@@ -14,7 +14,7 @@ const inter = Inter({
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aimora.pl'),
     title: 'Aimora – Interaktywne Cele Strzeleckie z Aplikacją',
-    description: 'Aimora — zamień stalowe cele w interaktywną grę strzelecką. Detektor trafień z aplikacją mobilną, tryby gry i analiza wyników. Od 350 zł. Sprawdź!',
+    description: 'Aimora — zamień stalowe cele w interaktywną grę strzelecką. Detektor trafień z aplikacją mobilną, tryby gry i analiza wyników. Od 299 zł. Sprawdź!',
     keywords: ['strzelanie', 'trening', 'cele', 'militaria', 'technologia', 'aimora', 'ASG', 'wiatrówka', 'airsoft', 'strzelectwo', 'broń', 'cele strzeleckie', 'gong strzelecki', 'tarcze strzeleckie', 'interaktywne cele strzeleckie', 'detektor trafień', 'trening strzelecki z aplikacją', 'cele ASG z aplikacją', 'elektroniczne cele strzeleckie'],
     authors: [{ name: 'Aimora' }],
     robots: 'index, follow',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: 'Aimora – Interaktywne Cele Strzeleckie z aplikacją mobilną',
-        description: 'Aimora — zamień stalowe cele w interaktywną grę strzelecką. Detektor trafień z aplikacją mobilną, tryby gry i analiza wyników. Od 350 zł. Sprawdź!',
+        description: 'Aimora — zamień stalowe cele w interaktywną grę strzelecką. Detektor trafień z aplikacją mobilną, tryby gry i analiza wyników. Od 299 zł. Sprawdź!',
         type: 'website',
         locale: 'pl_PL',
         images: ['/images/what_is_it_mobile.png'],
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Aimora – Interaktywne Cele Strzeleckie z aplikacją mobilną',
-        description: 'Aimora — zamień stalowe cele w interaktywną grę strzelecką. Detektor trafień z aplikacją mobilną, tryby gry i analiza wyników. Od 350 zł. Sprawdź!',
+        description: 'Aimora — zamień stalowe cele w interaktywną grę strzelecką. Detektor trafień z aplikacją mobilną, tryby gry i analiza wyników. Od 299 zł. Sprawdź!',
         images: ['/images/what_is_it_mobile.png'],
     },
 }

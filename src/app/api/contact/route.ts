@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
       message,
       // Purchase form fields
       quantity,
+      product,
       // Event form fields
       eventDate,
       eventLocation
@@ -74,7 +75,12 @@ export async function POST(request: NextRequest) {
     } else {
       // Build email for Purchase Inquiry (original logic)
       const qty = Number.isFinite(Number(quantity)) ? Math.max(1, Number(quantity)) : 1;
-      const unitPrice = 350; // PLN
+      const PRODUCT_INFO: Record<string, { unitPrice: number; label: string; unitLabel: string }> = {
+        single: { unitPrice: 299, label: 'Zestaw (detektor trafień + moduł LED + 2 odbłyśniki)', unitLabel: 'zestaw' },
+        bundle: { unitPrice: 999, label: 'Pakiet 4 zestawów (4 detektory + 4 moduły LED + 16 odbłyśników)', unitLabel: 'pakiet' },
+        reflectors: { unitPrice: 20, label: 'Pakiet odbłyśników (2 odbłyśniki zapasowe)', unitLabel: 'pakiet' },
+      };
+      const { unitPrice, label: productLabel, unitLabel } = PRODUCT_INFO[product as string] ?? PRODUCT_INFO.single;
       const total = unitPrice * qty;
 
       emailHtml = `
@@ -100,9 +106,11 @@ export async function POST(request: NextRequest) {
                     <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-top: 16px;">
                         <h2 style="color: #017da0; margin-top: 0;">Szczegóły zamówienia:</h2>
                         <div style="margin: 15px 0; color: #333;">
-                            <div><strong>Ilość kompletów:</strong> <span style="margin-left: 8px; color: #666;">${qty}</span></div>
-                            <div><strong>Cena promocyjna:</strong> <span style="margin-left: 8px; color: #666;">${unitPrice} zł / komplet</span></div>
+                            <div><strong>Produkt:</strong> <span style="margin-left: 8px; color: #666;">${productLabel}</span></div>
+                            <div><strong>Ilość:</strong> <span style="margin-left: 8px; color: #666;">${qty}</span></div>
+                            <div><strong>Cena:</strong> <span style="margin-left: 8px; color: #666;">${unitPrice} zł / ${unitLabel}</span></div>
                             <div><strong>Suma:</strong> <span style="margin-left: 8px; color: #666; font-weight: 700;">${total} zł</span></div>
+                            <div><strong>Dostawa:</strong> <span style="margin-left: 8px; color: #666;">darmowa, wysyłka w 24 h</span></div>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 25px; color: #666; font-size: 12px;">

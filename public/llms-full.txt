@@ -123,7 +123,10 @@ Koszt zależy od czasu trwania, liczby celów i zakresu obsługi. Każde zapytan
 
 ## 7. Cennik
 
-- Moduł detektora trafień: od 350 PLN / 85 EUR
+- Zestaw (detektor trafień + moduł LED + 2 odbłyśniki): 299 PLN / 70 EUR
+- Pakiet 4 zestawów (4 detektory + 4 moduły LED + 16 odbłyśników): 999 PLN / 235 EUR
+- Pakiet odbłyśników (2 odbłyśniki zapasowe): 20 PLN / 5 EUR
+- Dostawa: darmowa, wysyłka w 24 h
 - Wypożyczenie na event: wycena indywidualna
 - Dostępność: InStock (w sprzedaży)
 

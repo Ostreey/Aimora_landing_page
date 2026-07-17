@@ -211,6 +211,47 @@ export const trackFormSend = () => {
   });
 };
 
+// Contact form funnel tracking
+export const trackFormOpened = () => {
+  logEvent('form_opened', {
+    device_type: getDeviceType(),
+    event_category: 'conversion',
+  });
+};
+
+export const trackFormStarted = (firstField: string) => {
+  logEvent('form_started', {
+    first_field: firstField,
+    device_type: getDeviceType(),
+    event_category: 'conversion',
+  });
+};
+
+export const trackFormError = (errorType: 'validation' | 'api', details: string) => {
+  logEvent('form_error', {
+    error_type: errorType,
+    details,
+    device_type: getDeviceType(),
+    event_category: 'conversion',
+  });
+};
+
+export const trackFormAbandoned = (hadInput: boolean) => {
+  logEvent('form_abandoned', {
+    had_input: hadInput,
+    device_type: getDeviceType(),
+    event_category: 'conversion',
+  });
+};
+
+export const trackFormProductSelected = (product: 'single' | 'bundle' | 'reflectors') => {
+  logEvent('form_product_selected', {
+    product,
+    device_type: getDeviceType(),
+    event_category: 'conversion',
+  });
+};
+
 // Blog tracking functions
 export const trackBlogPostView = (slug: string, title: string, pillar: string, locale: string) => {
   logEvent('blog_post_view', {
