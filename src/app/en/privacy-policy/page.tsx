@@ -96,6 +96,15 @@ export default function PrivacyPolicyPage() {
                         </td>
                         <td>sent only when you use the cloud settings backup</td>
                     </tr>
+                    <tr>
+                        <td>
+                            the difference between your device clock and our server time
+                        </td>
+                        <td>
+                            recorded only when it exceeds 24 hours — used to verify the validity of
+                            Premium access and for technical support
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -148,6 +157,10 @@ export default function PrivacyPolicyPage() {
                     <tr>
                         <td>account security and abuse prevention</td>
                         <td>Art. 6(1)(f) — our legitimate interest</td>
+                    </tr>
+                    <tr>
+                        <td>verifying the validity of purchased Premium access</td>
+                        <td>Art. 6(1)(b) — performance of a contract</td>
                     </tr>
                     <tr>
                         <td>invoicing and tax obligations</td>

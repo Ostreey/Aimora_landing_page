@@ -109,9 +109,19 @@ export default function RegulaminPage() {
             <h2>6. Działanie Premium bez połączenia z internetem</h2>
             <p>
                 Aplikacja jest używana na strzelnicach, gdzie często brakuje zasięgu. Po zalogowaniu
-                zapamiętuje uprawnienia lokalnie i honoruje je <strong>przez 30 dni</strong> bez
+                zapamiętuje uprawnienia lokalnie i honoruje je <strong>przez 7 dni</strong> bez
                 połączenia z internetem. Po tym czasie do dalszego korzystania z funkcji Premium
                 konieczne jest jednorazowe połączenie z siecią.
+            </p>
+            <p>
+                Po <strong>2 dniach</strong> bez potwierdzenia aplikacja wyświetla przypomnienie
+                o połączeniu z internetem. Przypomnienie niczego nie blokuje — wszystkie funkcje
+                działają do upływu 7 dni.
+            </p>
+            <p>
+                Aplikacja porównuje zegar urządzenia z czasem naszego serwera. Ustawienie w urządzeniu
+                nieprawidłowej daty w celu obejścia weryfikacji dostępu stanowi naruszenie punktu 9
+                niniejszego regulaminu.
             </p>
 
             <h2>7. Co dzieje się po wygaśnięciu dostępu</h2>

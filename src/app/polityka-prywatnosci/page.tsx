@@ -102,6 +102,15 @@ export default function PolitykaPrywatnosciPage() {
                             wysyłane tylko wtedy, gdy korzystasz z funkcji kopii ustawień w chmurze
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            rozbieżność między zegarem Twojego urządzenia a czasem naszego serwera
+                        </td>
+                        <td>
+                            zapisywana wyłącznie wtedy, gdy przekracza dobę — służy do weryfikacji
+                            ważności dostępu Premium i do pomocy technicznej
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -153,6 +162,10 @@ export default function PolitykaPrywatnosciPage() {
                     <tr>
                         <td>bezpieczeństwo kont i przeciwdziałanie nadużyciom</td>
                         <td>art. 6 ust. 1 lit. f — nasz prawnie uzasadniony interes</td>
+                    </tr>
+                    <tr>
+                        <td>weryfikacja ważności wykupionego dostępu Premium</td>
+                        <td>art. 6 ust. 1 lit. b — wykonanie umowy</td>
                     </tr>
                     <tr>
                         <td>rozliczenia i obowiązki podatkowe</td>

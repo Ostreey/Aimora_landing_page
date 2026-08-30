@@ -104,9 +104,19 @@ export default function TermsPage() {
             <h2>6. Premium without an internet connection</h2>
             <p>
                 The app is used at shooting ranges, where coverage is often missing. After you sign in,
-                it remembers your entitlement locally and honours it for <strong>30 days</strong>{' '}
+                it remembers your entitlement locally and honours it for <strong>7 days</strong>{' '}
                 offline. After that period a single connection to the internet is required to keep
                 using Premium features.
+            </p>
+            <p>
+                After <strong>2 days</strong> without confirmation the app shows a reminder to connect
+                to the internet. The reminder blocks nothing — every feature keeps working until the
+                7 days are up.
+            </p>
+            <p>
+                The app compares the device clock with our server time. Setting an incorrect date on
+                the device in order to circumvent access verification is a breach of section 9 of these
+                terms.
             </p>
 
             <h2>7. What happens when access expires</h2>
