@@ -138,9 +138,19 @@ export function Footer() {
                     className="border-t border-white/10 pt-8"
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="annotation-note">
-                            © {new Date().getFullYear()} Aimora. Wszystkie prawa zastrzeżone.
-                        </p>
+                        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+                            <p className="annotation-note">
+                                © {new Date().getFullYear()} Aimora. Wszystkie prawa zastrzeżone.
+                            </p>
+                            <div className="flex items-center gap-4">
+                                <a href="/regulamin" className="annotation-note hover:text-[#00B2E3] transition-colors">
+                                    Regulamin
+                                </a>
+                                <a href="/polityka-prywatnosci" className="annotation-note hover:text-[#00B2E3] transition-colors">
+                                    Polityka prywatności
+                                </a>
+                            </div>
+                        </div>
 
                         <div className="flex items-center gap-4">
                             {socialLinks.map((social, index) => (

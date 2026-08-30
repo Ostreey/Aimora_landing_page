@@ -139,9 +139,19 @@ export function FooterLocalized({ locale }: FooterLocalizedProps) {
                     className="border-t border-white/10 pt-8"
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="annotation-note">
-                            © {new Date().getFullYear()} Aimora. {locale === 'pl' ? 'Wszystkie prawa zastrzeżone.' : 'All rights reserved.'}
-                        </p>
+                        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+                            <p className="annotation-note">
+                                © {new Date().getFullYear()} Aimora. {locale === 'pl' ? 'Wszystkie prawa zastrzeżone.' : 'All rights reserved.'}
+                            </p>
+                            <div className="flex items-center gap-4">
+                                <a href={locale === 'pl' ? '/regulamin' : '/en/terms'} className="annotation-note hover:text-[#00B2E3] transition-colors">
+                                    {locale === 'pl' ? 'Regulamin' : 'Terms of Service'}
+                                </a>
+                                <a href={locale === 'pl' ? '/polityka-prywatnosci' : '/en/privacy-policy'} className="annotation-note hover:text-[#00B2E3] transition-colors">
+                                    {locale === 'pl' ? 'Polityka prywatności' : 'Privacy Policy'}
+                                </a>
+                            </div>
+                        </div>
 
                         <div className="flex items-center gap-4">
                             {socialLinks.map((social, index) => (
