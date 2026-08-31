@@ -128,6 +128,13 @@ export default function PrivacyPolicyPage() {
                 device type and operating system version. This is used solely to improve the product
                 and never for profiling that produces legal effects.
             </p>
+            <p>
+                While you are signed in, we attach your account identifier and whether the account
+                has Premium to analytics events. This lets us see which features are actually used.
+                We <strong>never send your e-mail address</strong> to analytics, nor the names of
+                competitors entered into a tournament. Signing out removes the link between events
+                and your account.
+            </p>
 
             <h2>6. Purposes and legal bases</h2>
             <table>

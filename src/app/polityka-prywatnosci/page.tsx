@@ -133,6 +133,13 @@ export default function PolitykaPrywatnosciPage() {
                 urządzenia i wersję systemu. Dane te służą wyłącznie do rozwoju produktu i nie są
                 wykorzystywane do profilowania wywołującego skutki prawne.
             </p>
+            <p>
+                Jeżeli jesteś zalogowany, do zdarzeń analitycznych dołączamy identyfikator Twojego
+                konta oraz informację, czy ma ono dostęp Premium. Pozwala nam to zobaczyć, które
+                funkcje są faktycznie używane. Do analityki{" "}
+                <strong>nigdy nie trafia Twój adres e-mail</strong> ani nazwiska zawodników
+                wpisanych do turnieju. Po wylogowaniu powiązanie zdarzeń z kontem jest usuwane.
+            </p>
 
             <h2>6. Cele i podstawy prawne przetwarzania</h2>
             <table>
