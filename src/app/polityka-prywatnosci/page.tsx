@@ -104,6 +104,16 @@ export default function PolitykaPrywatnosciPage() {
                     </tr>
                     <tr>
                         <td>
+                            liczba zakończonych turniejów i data ostatniego z nich
+                        </td>
+                        <td>
+                            zliczane w aplikacji, żebyśmy widzieli, czy dostęp Premium jest
+                            faktycznie wykorzystywany; nie zapisujemy ani nazw turniejów, ani
+                            danych zawodników
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             rozbieżność między zegarem Twojego urządzenia a czasem naszego serwera
                         </td>
                         <td>

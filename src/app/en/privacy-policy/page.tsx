@@ -98,6 +98,15 @@ export default function PrivacyPolicyPage() {
                     </tr>
                     <tr>
                         <td>
+                            the number of completed tournaments and the date of the most recent one
+                        </td>
+                        <td>
+                            counted in the app so we can see whether Premium access is actually
+                            being used; we store neither tournament names nor competitor details
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             the difference between your device clock and our server time
                         </td>
                         <td>
