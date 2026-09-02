@@ -96,7 +96,8 @@ export default function PolitykaPrywatnosciPage() {
                     <tr>
                         <td>
                             ustawienia gier oraz preferencje aplikacji (domyślna liczba detektorów,
-                            ukrywanie nazwisk przy eksporcie wyników)
+                            ukrywanie nazwisk przy eksporcie wyników), zdefiniowane przez Ciebie
+                            kolory, nazwy nadane detektorom oraz szablony turniejów
                         </td>
                         <td>
                             wysyłane tylko wtedy, gdy korzystasz z funkcji kopii ustawień w chmurze
@@ -127,13 +128,19 @@ export default function PolitykaPrywatnosciPage() {
             <h3>Co zostaje wyłącznie na Twoim urządzeniu</h3>
             <p>
                 Do chmury <strong>nie trafiają</strong>: turnieje wraz z listą zawodników i wynikami,
-                historia rozegranych zawodów, szablony turniejów, nazwy nadane detektorom ani logo
-                organizatora. Te dane żyją w pamięci aplikacji i znikają wraz z jej odinstalowaniem.
+                historia rozegranych zawodów ani logo organizatora. Te dane żyją w pamięci
+                aplikacji i znikają wraz z jej odinstalowaniem.
             </p>
             <p>
                 Oznacza to, że jeżeli wpisujesz do turnieju imiona i nazwiska zawodników,
                 <strong> ich dane nie są nam przekazywane</strong>. Administratorem tych danych
                 pozostajesz Ty jako organizator zawodów.
+            </p>
+
+            <p>
+                Szablony turniejów opisują wyłącznie przebieg zawodów — kolejność konkurencji
+                i ich ustawienia. <strong>Przed wysłaniem czyścimy z nich nazwy zawodników</strong>,
+                gdyby ktoś wpisał je w konfiguracji etapu.
             </p>
 
             <h2>5. Analityka użycia</h2>

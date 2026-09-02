@@ -92,7 +92,8 @@ export default function PrivacyPolicyPage() {
                     <tr>
                         <td>
                             game settings and app preferences (default number of detectors, hiding
-                            names when exporting results)
+                            names when exporting results), the colours you define, the names you
+                            give your detectors and your tournament templates
                         </td>
                         <td>sent only when you use the cloud settings backup</td>
                     </tr>
@@ -120,14 +121,19 @@ export default function PrivacyPolicyPage() {
             <h3>What stays on your device only</h3>
             <p>
                 We do <strong>not</strong> receive: tournaments with their competitor lists and
-                results, the history of completed events, tournament templates, the names you give
-                your detectors, or the organiser logo. That data lives in the app and disappears when
-                you uninstall it.
+                results, the history of completed events, or the organiser logo. That data lives in
+                the app and disappears when you uninstall it.
             </p>
             <p>
                 This means that if you enter competitors&apos; names into a tournament,{' '}
                 <strong>that data is never sent to us</strong>. You remain the controller of it as the
                 event organiser.
+            </p>
+
+            <p>
+                Tournament templates describe only the shape of an event — the order of stages and
+                their settings. <strong>We strip competitor names from them before upload</strong>,
+                in case someone typed one into a stage configuration.
             </p>
 
             <h2>5. Usage analytics</h2>
