@@ -66,8 +66,8 @@ export default function RegulaminPage() {
                 <li>Założenie konta jest dobrowolne i wymaga podania adresu e-mail oraz hasła.</li>
                 <li>Hasło musi mieć co najmniej 8 znaków.</li>
                 <li>
-                    Po rejestracji wysyłamy na podany adres wiadomość z linkiem potwierdzającym.
-                    Z aplikacji możesz korzystać od razu, bez czekania na potwierdzenie.
+                    Adres e-mail podajesz dwa razy. To jedyna droga odzyskania hasła, więc
+                    literówka oznacza konto, do którego nie da się już wrócić.
                 </li>
                 <li>
                     Podaj adres, do którego faktycznie masz dostęp — służy on do odzyskiwania hasła

@@ -64,8 +64,8 @@ export default function TermsPage() {
                 <li>Creating an account is optional and requires an e-mail address and a password.</li>
                 <li>The password must be at least 8 characters long.</li>
                 <li>
-                    After sign-up we send a confirmation link to your address. You can use the app
-                    straight away, without waiting for confirmation.
+                    You enter your e-mail address twice. It is the only way to recover a password,
+                    so a typo means an account you can never get back into.
                 </li>
                 <li>
                     Use an address you actually have access to — it is used for password recovery and
