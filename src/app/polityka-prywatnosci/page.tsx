@@ -19,7 +19,7 @@ export default function PolitykaPrywatnosciPage() {
     return (
         <LegalLayout
             title="Polityka prywatności"
-            updatedLabel="Obowiązuje od 30 sierpnia 2026 r."
+            updatedLabel="Obowiązuje od 4 września 2026 r."
             footer={<Footer />}
         >
             <h2>1. Kto jest administratorem Twoich danych</h2>
@@ -76,17 +76,16 @@ export default function PolitykaPrywatnosciPage() {
                     <tr>
                         <td>hasło</td>
                         <td>
-                            przechowywane wyłącznie w postaci nieodwracalnego skrótu po stronie
-                            Firebase Authentication — <strong>nie znamy Twojego hasła i nie mamy do
-                            niego dostępu</strong>
+                            ustalasz je przy rejestracji; przechowujemy je w postaci, która{' '}
+                            <strong>uniemożliwia nam odczytanie jego treści</strong>
                         </td>
                     </tr>
                     <tr>
-                        <td>identyfikator konta oraz informacja, czy adres e-mail został potwierdzony</td>
-                        <td>tworzone automatycznie przy rejestracji</td>
+                        <td>identyfikator konta</td>
+                        <td>tworzony automatycznie przy rejestracji</td>
                     </tr>
                     <tr>
-                        <td>data ostatniego użycia aplikacji i numer wersji aplikacji</td>
+                        <td>data ostatniego użycia aplikacji i numer jej wersji</td>
                         <td>zapisywane automatycznie przy logowaniu</td>
                     </tr>
                     <tr>
@@ -104,22 +103,18 @@ export default function PolitykaPrywatnosciPage() {
                         </td>
                     </tr>
                     <tr>
+                        <td>licznik zakończonych zawodów i data ostatnich z nich</td>
                         <td>
-                            liczba zakończonych turniejów i data ostatniego z nich
-                        </td>
-                        <td>
-                            zliczane w aplikacji, żebyśmy widzieli, czy dostęp Premium jest
-                            faktycznie wykorzystywany; nie zapisujemy ani nazw turniejów, ani
-                            danych zawodników
+                            aktualizowane automatycznie w aplikacji; służą do obsługi konta
+                            i utrzymania wykupionego dostępu. <strong>Nie zapisujemy nazw zawodów
+                            ani danych ich uczestników</strong>
                         </td>
                     </tr>
                     <tr>
+                        <td>dane techniczne dotyczące poprawności pomiaru czasu na urządzeniu</td>
                         <td>
-                            rozbieżność między zegarem Twojego urządzenia a czasem naszego serwera
-                        </td>
-                        <td>
-                            zapisywana wyłącznie wtedy, gdy przekracza dobę — służy do weryfikacji
-                            ważności dostępu Premium i do pomocy technicznej
+                            zapisywane wyjątkowo, gdy wykryjemy nieprawidłowość; służą weryfikacji
+                            ważności dostępu Premium oraz pomocy technicznej
                         </td>
                     </tr>
                 </tbody>
@@ -136,10 +131,9 @@ export default function PolitykaPrywatnosciPage() {
                 <strong> ich dane nie są nam przekazywane</strong>. Administratorem tych danych
                 pozostajesz Ty jako organizator zawodów.
             </p>
-
             <p>
                 Szablony turniejów opisują wyłącznie przebieg zawodów — kolejność konkurencji
-                i ich ustawienia. <strong>Przed wysłaniem czyścimy z nich nazwy zawodników</strong>,
+                i ich ustawienia. <strong>Przed wysłaniem usuwamy z nich nazwy zawodników</strong>,
                 gdyby ktoś wpisał je w konfiguracji etapu.
             </p>
 
@@ -147,15 +141,19 @@ export default function PolitykaPrywatnosciPage() {
             <p>
                 Aplikacja i serwis korzystają z Google Analytics dla Firebase. Zbieramy zdarzenia
                 opisujące sposób korzystania (na przykład rozpoczęcie gry, otwarcie ekranu), typ
-                urządzenia i wersję systemu. Dane te służą wyłącznie do rozwoju produktu i nie są
-                wykorzystywane do profilowania wywołującego skutki prawne.
+                urządzenia i wersję systemu. Dane te służą wyłącznie do rozwoju produktu.
             </p>
             <p>
                 Jeżeli jesteś zalogowany, do zdarzeń analitycznych dołączamy identyfikator Twojego
                 konta oraz informację, czy ma ono dostęp Premium. Pozwala nam to zobaczyć, które
-                funkcje są faktycznie używane. Do analityki{" "}
+                funkcje są faktycznie używane. Do analityki{' '}
                 <strong>nigdy nie trafia Twój adres e-mail</strong> ani nazwiska zawodników
                 wpisanych do turnieju. Po wylogowaniu powiązanie zdarzeń z kontem jest usuwane.
+            </p>
+            <p>
+                <strong>Nie podejmujemy wobec Ciebie decyzji opartych wyłącznie na zautomatyzowanym
+                przetwarzaniu</strong>, w tym profilowaniu, które wywoływałyby wobec Ciebie skutki
+                prawne lub w podobny sposób istotnie na Ciebie wpływały.
             </p>
 
             <h2>6. Cele i podstawy prawne przetwarzania</h2>
@@ -176,6 +174,10 @@ export default function PolitykaPrywatnosciPage() {
                         <td>art. 6 ust. 1 lit. b — wykonanie umowy</td>
                     </tr>
                     <tr>
+                        <td>weryfikacja ważności wykupionego dostępu Premium</td>
+                        <td>art. 6 ust. 1 lit. b — wykonanie umowy</td>
+                    </tr>
+                    <tr>
                         <td>obsługa zapytań z formularza kontaktowego</td>
                         <td>art. 6 ust. 1 lit. f — nasz prawnie uzasadniony interes</td>
                     </tr>
@@ -188,8 +190,8 @@ export default function PolitykaPrywatnosciPage() {
                         <td>art. 6 ust. 1 lit. f — nasz prawnie uzasadniony interes</td>
                     </tr>
                     <tr>
-                        <td>weryfikacja ważności wykupionego dostępu Premium</td>
-                        <td>art. 6 ust. 1 lit. b — wykonanie umowy</td>
+                        <td>ustalenie, dochodzenie lub obrona roszczeń</td>
+                        <td>art. 6 ust. 1 lit. f — nasz prawnie uzasadniony interes</td>
                     </tr>
                     <tr>
                         <td>rozliczenia i obowiązki podatkowe</td>
@@ -206,23 +208,36 @@ export default function PolitykaPrywatnosciPage() {
             </p>
             <ul>
                 <li>
-                    <strong>Google Ireland Limited</strong> — Firebase Authentication, Cloud Firestore
-                    i Google Analytics dla Firebase (konta, kopia ustawień, analityka),
+                    <strong>Google Ireland Limited</strong> — uwierzytelnianie kont, kopia ustawień
+                    w chmurze oraz analityka,
                 </li>
                 <li><strong>Vercel Inc.</strong> — hosting serwisu aimora.pl,</li>
                 <li><strong>Resend</strong> — dostarczanie wiadomości z formularza kontaktowego.</li>
             </ul>
             <p>
                 Dane mogą być przekazywane poza Europejski Obszar Gospodarczy, w szczególności do
-                Stanów Zjednoczonych. Odbywa się to w oparciu o standardowe klauzule umowne
-                zatwierdzone przez Komisję Europejską lub decyzję o odpowiednim stopniu ochrony.
+                Stanów Zjednoczonych. Odbywa się to w oparciu o decyzję Komisji Europejskiej
+                o odpowiednim stopniu ochrony albo o standardowe klauzule umowne wraz z dodatkowymi
+                zabezpieczeniami.
             </p>
 
-            <h2>8. Jak długo przechowujemy dane</h2>
+            <h2>8. Bezpieczeństwo danych</h2>
+            <p>
+                Stosujemy środki techniczne i organizacyjne odpowiadające ryzyku, o których mowa
+                w art. 32 RODO. Dostęp do danych kont mają wyłącznie osoby, którym jest to niezbędne,
+                a transmisja między aplikacją a naszymi usługami jest szyfrowana.
+            </p>
+            <p>
+                Ze względów bezpieczeństwa nie ujawniamy szczegółów zastosowanych zabezpieczeń.
+                Jeżeli dojdzie do naruszenia ochrony danych, które może powodować wysokie ryzyko
+                naruszenia Twoich praw lub wolności, poinformujemy Cię o tym bez zbędnej zwłoki.
+            </p>
+
+            <h2>9. Jak długo przechowujemy dane</h2>
             <ul>
                 <li>
-                    <strong>Dane konta</strong> — do czasu usunięcia konta. Po usunięciu znikają wraz
-                    z kopią ustawień w chmurze i nie da się ich odtworzyć.
+                    <strong>Dane konta</strong> — do czasu usunięcia konta. Usunięcie kończymy
+                    najpóźniej w ciągu 30 dni; po tym czasie danych nie da się odtworzyć.
                 </li>
                 <li>
                     <strong>Korespondencja</strong> — przez okres potrzebny do obsługi sprawy,
@@ -230,15 +245,15 @@ export default function PolitykaPrywatnosciPage() {
                 </li>
                 <li>
                     <strong>Dokumenty rozliczeniowe</strong> — przez okres wymagany przepisami
-                    podatkowymi.
+                    podatkowymi, liczony od końca roku podatkowego, którego dotyczą.
                 </li>
                 <li>
                     <strong>Dane analityczne</strong> — zgodnie z okresem retencji ustawionym
-                    w Google Analytics dla Firebase.
+                    w Google Analytics dla Firebase, w formie niepowiązanej z Twoim kontem.
                 </li>
             </ul>
 
-            <h2>9. Twoje prawa</h2>
+            <h2>10. Twoje prawa</h2>
             <p>Przysługuje Ci prawo do:</p>
             <ul>
                 <li>dostępu do swoich danych i otrzymania ich kopii,</li>
@@ -250,43 +265,57 @@ export default function PolitykaPrywatnosciPage() {
                     wniesienia sprzeciwu wobec przetwarzania opartego na naszym prawnie uzasadnionym
                     interesie,
                 </li>
-                <li>cofnięcia zgody, jeżeli przetwarzanie odbywa się na jej podstawie,</li>
+                <li>
+                    cofnięcia zgody, jeżeli przetwarzanie odbywa się na jej podstawie — bez wpływu
+                    na zgodność z prawem przetwarzania sprzed jej cofnięcia,
+                </li>
                 <li>
                     wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych, ul. Stawki 2,
                     00-193 Warszawa.
                 </li>
             </ul>
-
-            <h3>Jak samodzielnie usunąć konto</h3>
             <p>
-                W aplikacji otwórz menu boczne, wybierz <strong>Konto</strong>, a następnie
-                <strong> Usuń konto</strong> i potwierdź hasłem. Operacja jest natychmiastowa
-                i nieodwracalna. Dane zapisane wyłącznie na urządzeniu, w tym historia turniejów,
-                pozostają nienaruszone. Możesz też napisać na{' '}
-                <a href="mailto:biuro@aimora.pl">biuro@aimora.pl</a>.
+                Wnioski realizujemy bez zbędnej zwłoki, nie później niż w terminie miesiąca od ich
+                otrzymania. W sprawach skomplikowanych termin ten może zostać przedłużony, o czym
+                Cię poinformujemy.
             </p>
 
-            <h2>10. Dobrowolność podania danych</h2>
+            <h3>Jak usunąć konto</h3>
+            <p>
+                Konto usuniesz w aplikacji: menu boczne, <strong>Konto</strong>,{' '}
+                <strong>Usuń konto</strong>, potwierdzenie hasłem. Możesz też napisać na{' '}
+                <a href="mailto:biuro@aimora.pl">biuro@aimora.pl</a>. Szczegóły — zakres usuwanych
+                danych, terminy i to, co pozostaje na urządzeniu — opisuje strona{' '}
+                <a href="/usuniecie-konta">usunięcie konta</a>.
+            </p>
+
+            <h2>11. Dobrowolność podania danych</h2>
             <p>
                 Podanie danych jest dobrowolne. Bez adresu e-mail nie jest jednak możliwe założenie
                 konta, a tym samym korzystanie z funkcji Premium i kopii ustawień w chmurze.
                 Wszystkie pozostałe funkcje aplikacji działają bez konta.
             </p>
 
-            <h2>11. Wiek użytkownika</h2>
+            <h2>12. Wiek użytkownika</h2>
             <p>
                 Konto w aplikacji mogą zakładać osoby, które ukończyły 16 lat. Osoby młodsze mogą
                 korzystać z aplikacji bez konta albo na koncie założonym przez opiekuna.
             </p>
 
-            <h2>12. Pliki cookies w serwisie</h2>
+            <h2>13. Pliki cookies i podobne technologie</h2>
             <p>
-                Serwis aimora.pl używa plików cookies niezbędnych do jego działania oraz cookies
-                analitycznych powiązanych z Google Analytics dla Firebase. Ustawienia cookies możesz
-                w każdej chwili zmienić w swojej przeglądarce.
+                Serwis aimora.pl używa plików cookies oraz podobnych technologii niezbędnych do jego
+                prawidłowego działania, a także narzędzi analitycznych opisanych w punkcie 5.
+            </p>
+            <p>
+                Cookies niezbędne stosujemy na podstawie naszego prawnie uzasadnionego interesu.
+                Zapisywanie i odczyt informacji na Twoim urządzeniu w celach innych niż niezbędne
+                wymaga Twojej zgody, którą możesz w każdej chwili wycofać. Ustawienia dotyczące
+                plików cookies zmienisz również w swojej przeglądarce; ograniczenie ich obsługi może
+                wpłynąć na działanie serwisu.
             </p>
 
-            <h2>13. Zmiany polityki</h2>
+            <h2>14. Zmiany polityki</h2>
             <p>
                 Politykę możemy aktualizować, gdy zmieni się sposób działania aplikacji lub serwisu.
                 Aktualna wersja jest zawsze dostępna pod tym adresem, a data jej obowiązywania widnieje

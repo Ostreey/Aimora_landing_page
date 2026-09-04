@@ -19,12 +19,12 @@ export default function PrivacyPolicyPage() {
     return (
         <LegalLayout
             title="Privacy Policy"
-            updatedLabel="Effective from 30 August 2026"
+            updatedLabel="Effective from 4 September 2026"
             footer={<FooterLocalized locale="en" />}
         >
             <h2>1. Who controls your data</h2>
             <p>
-                The data controller is <strong>Dawid Ostrowski, trading as „DAVOSS”</strong>,
+                The data controller is <strong>Dawid Ostrowski, trading as “DAVOSS”</strong>,
                 ul. Leszczynowa 14, 87-125 Osiek nad Wisłą, Poland, VAT ID: PL9562250675.
             </p>
             <p>
@@ -73,12 +73,12 @@ export default function PrivacyPolicyPage() {
                     <tr>
                         <td>password</td>
                         <td>
-                            stored only as an irreversible hash by Firebase Authentication —{' '}
-                            <strong>we never see or have access to your password</strong>
+                            you set it at sign-up; we store it in a form that{' '}
+                            <strong>makes its contents unreadable to us</strong>
                         </td>
                     </tr>
                     <tr>
-                        <td>account identifier and whether your e-mail has been confirmed</td>
+                        <td>account identifier</td>
                         <td>created automatically at sign-up</td>
                     </tr>
                     <tr>
@@ -98,21 +98,18 @@ export default function PrivacyPolicyPage() {
                         <td>sent only when you use the cloud settings backup</td>
                     </tr>
                     <tr>
+                        <td>a counter of completed events and the date of the most recent ones</td>
                         <td>
-                            the number of completed tournaments and the date of the most recent one
-                        </td>
-                        <td>
-                            counted in the app so we can see whether Premium access is actually
-                            being used; we store neither tournament names nor competitor details
+                            updated automatically in the app; used to service your account and
+                            maintain your purchased access. <strong>We store neither event names
+                            nor any details of their participants</strong>
                         </td>
                     </tr>
                     <tr>
+                        <td>technical data concerning the accuracy of timekeeping on your device</td>
                         <td>
-                            the difference between your device clock and our server time
-                        </td>
-                        <td>
-                            recorded only when it exceeds 24 hours — used to verify the validity of
-                            Premium access and for technical support
+                            recorded exceptionally, when we detect an irregularity; used to verify
+                            the validity of Premium access and for technical support
                         </td>
                     </tr>
                 </tbody>
@@ -129,7 +126,6 @@ export default function PrivacyPolicyPage() {
                 <strong>that data is never sent to us</strong>. You remain the controller of it as the
                 event organiser.
             </p>
-
             <p>
                 Tournament templates describe only the shape of an event — the order of stages and
                 their settings. <strong>We strip competitor names from them before upload</strong>,
@@ -140,8 +136,7 @@ export default function PrivacyPolicyPage() {
             <p>
                 The app and the website use Google Analytics for Firebase. We collect events
                 describing how the product is used (for example starting a game or opening a screen),
-                device type and operating system version. This is used solely to improve the product
-                and never for profiling that produces legal effects.
+                device type and operating system version. This is used solely to improve the product.
             </p>
             <p>
                 While you are signed in, we attach your account identifier and whether the account
@@ -149,6 +144,11 @@ export default function PrivacyPolicyPage() {
                 We <strong>never send your e-mail address</strong> to analytics, nor the names of
                 competitors entered into a tournament. Signing out removes the link between events
                 and your account.
+            </p>
+            <p>
+                <strong>We do not make decisions about you based solely on automated processing</strong>,
+                including profiling, that would produce legal effects concerning you or similarly
+                significantly affect you.
             </p>
 
             <h2>6. Purposes and legal bases</h2>
@@ -169,6 +169,10 @@ export default function PrivacyPolicyPage() {
                         <td>Art. 6(1)(b) — performance of a contract</td>
                     </tr>
                     <tr>
+                        <td>verifying the validity of purchased Premium access</td>
+                        <td>Art. 6(1)(b) — performance of a contract</td>
+                    </tr>
+                    <tr>
                         <td>answering enquiries sent through the contact form</td>
                         <td>Art. 6(1)(f) — our legitimate interest</td>
                     </tr>
@@ -181,8 +185,8 @@ export default function PrivacyPolicyPage() {
                         <td>Art. 6(1)(f) — our legitimate interest</td>
                     </tr>
                     <tr>
-                        <td>verifying the validity of purchased Premium access</td>
-                        <td>Art. 6(1)(b) — performance of a contract</td>
+                        <td>establishing, pursuing or defending legal claims</td>
+                        <td>Art. 6(1)(f) — our legitimate interest</td>
                     </tr>
                     <tr>
                         <td>invoicing and tax obligations</td>
@@ -198,36 +202,51 @@ export default function PrivacyPolicyPage() {
             </p>
             <ul>
                 <li>
-                    <strong>Google Ireland Limited</strong> — Firebase Authentication, Cloud Firestore
-                    and Google Analytics for Firebase (accounts, settings backup, analytics),
+                    <strong>Google Ireland Limited</strong> — account authentication, cloud settings
+                    backup and analytics,
                 </li>
                 <li><strong>Vercel Inc.</strong> — hosting of aimora.pl,</li>
                 <li><strong>Resend</strong> — delivery of contact form messages.</li>
             </ul>
             <p>
                 Data may be transferred outside the European Economic Area, in particular to the
-                United States. Such transfers rely on Standard Contractual Clauses approved by the
-                European Commission or on an adequacy decision.
+                United States. Such transfers rely on a European Commission adequacy decision or on
+                Standard Contractual Clauses together with additional safeguards.
             </p>
 
-            <h2>8. How long we keep data</h2>
+            <h2>8. Data security</h2>
+            <p>
+                We apply technical and organisational measures appropriate to the risk, as required
+                by Art. 32 GDPR. Access to account data is limited to those who need it, and traffic
+                between the app and our services is encrypted.
+            </p>
+            <p>
+                For security reasons we do not disclose the details of those measures. Should a
+                personal data breach occur that is likely to result in a high risk to your rights and
+                freedoms, we will inform you without undue delay.
+            </p>
+
+            <h2>9. How long we keep data</h2>
             <ul>
                 <li>
-                    <strong>Account data</strong> — until you delete your account. Deletion also
-                    removes the cloud settings backup and cannot be undone.
+                    <strong>Account data</strong> — until you delete your account. We complete
+                    deletion within 30 days at the latest; after that the data cannot be restored.
                 </li>
                 <li>
                     <strong>Correspondence</strong> — for as long as needed to handle the matter and
                     then until any related claims become time-barred.
                 </li>
-                <li><strong>Accounting records</strong> — for the period required by tax law.</li>
+                <li>
+                    <strong>Accounting records</strong> — for the period required by tax law, counted
+                    from the end of the tax year they relate to.
+                </li>
                 <li>
                     <strong>Analytics data</strong> — according to the retention period configured in
-                    Google Analytics for Firebase.
+                    Google Analytics for Firebase, in a form not linked to your account.
                 </li>
             </ul>
 
-            <h2>9. Your rights</h2>
+            <h2>10. Your rights</h2>
             <p>You have the right to:</p>
             <ul>
                 <li>access your data and receive a copy of it,</li>
@@ -236,43 +255,55 @@ export default function PrivacyPolicyPage() {
                 <li>restrict processing,</li>
                 <li>data portability,</li>
                 <li>object to processing based on our legitimate interest,</li>
-                <li>withdraw consent where processing is based on it,</li>
+                <li>
+                    withdraw consent where processing is based on it — without affecting the
+                    lawfulness of processing carried out before the withdrawal,
+                </li>
                 <li>
                     lodge a complaint with the President of the Personal Data Protection Office
                     (ul. Stawki 2, 00-193 Warsaw, Poland) or with your local supervisory authority.
                 </li>
             </ul>
-
-            <h3>Deleting your account yourself</h3>
             <p>
-                In the app open the side menu, choose <strong>Account</strong>, then{' '}
-                <strong>Delete account</strong> and confirm with your password. The change is immediate
-                and irreversible. Data stored only on the device, including tournament history, is left
-                untouched. You can also write to{' '}
-                <a href="mailto:biuro@aimora.pl">biuro@aimora.pl</a>.
+                We handle requests without undue delay and no later than one month from receipt. For
+                complex matters that period may be extended, and we will let you know if it is.
             </p>
 
-            <h2>10. Is providing data required</h2>
+            <h3>Deleting your account</h3>
+            <p>
+                In the app open the side menu, choose <strong>Account</strong>, then{' '}
+                <strong>Delete account</strong> and confirm with your password. You can also write to{' '}
+                <a href="mailto:biuro@aimora.pl">biuro@aimora.pl</a>. Our{' '}
+                <a href="/en/account-deletion">account deletion</a> page sets out exactly what is
+                erased, how long it takes and what stays on your device.
+            </p>
+
+            <h2>11. Is providing data required</h2>
             <p>
                 Providing data is voluntary. Without an e-mail address you cannot create an account,
                 and therefore cannot use Premium features or the cloud settings backup. Every other
                 feature of the app works without an account.
             </p>
 
-            <h2>11. Age</h2>
+            <h2>12. Age</h2>
             <p>
                 Accounts may be created by people aged 16 or over. Younger users can use the app
                 without an account or under an account created by a guardian.
             </p>
 
-            <h2>12. Cookies on the website</h2>
+            <h2>13. Cookies and similar technologies</h2>
             <p>
-                aimora.pl uses cookies necessary for the site to function and analytics cookies linked
-                to Google Analytics for Firebase. You can change cookie settings in your browser at any
-                time.
+                aimora.pl uses cookies and similar technologies necessary for the site to function,
+                as well as the analytics tools described in section 5.
+            </p>
+            <p>
+                Necessary cookies are used on the basis of our legitimate interest. Storing or
+                reading information on your device for purposes other than strictly necessary ones
+                requires your consent, which you may withdraw at any time. You can also manage
+                cookies in your browser; restricting them may affect how the site works.
             </p>
 
-            <h2>13. Changes to this policy</h2>
+            <h2>14. Changes to this policy</h2>
             <p>
                 We may update this policy when the app or the website changes. The current version is
                 always available at this address and its effective date is shown at the top. We will
