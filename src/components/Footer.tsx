@@ -149,6 +149,9 @@ export function Footer() {
                                 <a href="/polityka-prywatnosci" className="annotation-note hover:text-[#00B2E3] transition-colors">
                                     Polityka prywatności
                                 </a>
+                                <a href="/usuniecie-konta" className="annotation-note hover:text-[#00B2E3] transition-colors">
+                                    Usunięcie konta
+                                </a>
                             </div>
                         </div>
 

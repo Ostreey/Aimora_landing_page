@@ -42,6 +42,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     {
+      url: `${baseUrl}/usuniecie-konta`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/en/account-deletion`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
       url: `${baseUrl}/wypozyczenie`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
