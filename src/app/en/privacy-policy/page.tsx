@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage() {
             <h2>2. What this policy covers</h2>
             <ul>
                 <li><strong>aimora.pl</strong> — our website, including the contact form,</li>
-                <li><strong>the Aimora mobile app</strong> (Shooting Buddy) for Android.</li>
+                <li><strong>the Aimora mobile app</strong> for Android.</li>
             </ul>
 
             <h2>3. Using the app without an account</h2>

@@ -41,7 +41,7 @@ export default function PolitykaPrywatnosciPage() {
             <p>Polityka obejmuje dwa obszary:</p>
             <ul>
                 <li><strong>serwis aimora.pl</strong> — strona internetowa wraz z formularzem kontaktowym,</li>
-                <li><strong>aplikację mobilną Aimora</strong> (Shooting Buddy) na Androida.</li>
+                <li><strong>aplikację mobilną Aimora</strong> na Androida.</li>
             </ul>
 
             <h2>3. Korzystanie z aplikacji bez konta</h2>
