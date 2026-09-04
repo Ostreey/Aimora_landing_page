@@ -135,7 +135,27 @@ export default function PolitykaPrywatnosciPage() {
                 gdyby ktoś wpisał je w konfiguracji etapu.
             </p>
 
-            <h2>5. Analityka użycia</h2>
+            <h2>5. Dane klientów i kontrahentów</h2>
+            <p>
+                Jeżeli kupujesz od nas sprzęt albo reprezentujesz podmiot, który to robi,
+                przetwarzamy dane niezbędne do zawarcia i wykonania umowy: imię i nazwisko,
+                służbowy adres e-mail i numer telefonu, pełnioną funkcję oraz dane
+                identyfikacyjne i rozliczeniowe reprezentowanego podmiotu.
+            </p>
+            <p>
+                Gdy stroną umowy jest instytucja — strzelnica, fundacja, stowarzyszenie — dane
+                osoby kontaktowej przetwarzamy na podstawie naszego prawnie uzasadnionego
+                interesu, jakim jest bieżąca obsługa zawartej z tą instytucją umowy. Gdy stroną
+                umowy jesteś Ty osobiście, podstawą jest wykonanie umowy.
+            </p>
+            <p>
+                Dane obsługi gwarancyjnej — informacje o zakupionym sprzęcie, dacie wydania
+                i zgłoszonych wadach — przechowujemy przez okres gwarancji, a następnie do upływu
+                terminu przedawnienia roszczeń. Faktury i dokumenty księgowe przechowujemy przez
+                okres wymagany przepisami podatkowymi.
+            </p>
+
+            <h2>6. Analityka użycia</h2>
             <p>
                 Aplikacja i serwis korzystają z Google Analytics dla Firebase. Zbieramy zdarzenia
                 opisujące sposób korzystania (na przykład rozpoczęcie gry, otwarcie ekranu), typ
@@ -154,7 +174,7 @@ export default function PolitykaPrywatnosciPage() {
                 prawne lub w podobny sposób istotnie na Ciebie wpływały.
             </p>
 
-            <h2>6. Cele i podstawy prawne przetwarzania</h2>
+            <h2>7. Cele i podstawy prawne przetwarzania</h2>
             <table>
                 <thead>
                     <tr>
@@ -174,6 +194,14 @@ export default function PolitykaPrywatnosciPage() {
                     <tr>
                         <td>weryfikacja ważności wykupionego dostępu Premium</td>
                         <td>art. 6 ust. 1 lit. b — wykonanie umowy</td>
+                    </tr>
+                    <tr>
+                        <td>zawarcie i wykonanie umowy sprzedaży oraz obsługa gwarancyjna</td>
+                        <td>art. 6 ust. 1 lit. b — wykonanie umowy</td>
+                    </tr>
+                    <tr>
+                        <td>kontakt z osobami reprezentującymi klientów instytucjonalnych</td>
+                        <td>art. 6 ust. 1 lit. f — nasz prawnie uzasadniony interes</td>
                     </tr>
                     <tr>
                         <td>obsługa zapytań z formularza kontaktowego</td>
@@ -198,7 +226,7 @@ export default function PolitykaPrywatnosciPage() {
                 </tbody>
             </table>
 
-            <h2>7. Komu powierzamy dane</h2>
+            <h2>8. Komu powierzamy dane</h2>
             <p>
                 Nie sprzedajemy danych i nie udostępniamy ich do celów marketingowych podmiotów
                 trzecich. Korzystamy z następujących dostawców, którzy przetwarzają dane
@@ -219,7 +247,7 @@ export default function PolitykaPrywatnosciPage() {
                 zabezpieczeniami.
             </p>
 
-            <h2>8. Bezpieczeństwo danych</h2>
+            <h2>9. Bezpieczeństwo danych</h2>
             <p>
                 Stosujemy środki techniczne i organizacyjne odpowiadające ryzyku, o których mowa
                 w art. 32 RODO. Dostęp do danych kont mają wyłącznie osoby, którym jest to niezbędne,
@@ -231,7 +259,7 @@ export default function PolitykaPrywatnosciPage() {
                 naruszenia Twoich praw lub wolności, poinformujemy Cię o tym bez zbędnej zwłoki.
             </p>
 
-            <h2>9. Jak długo przechowujemy dane</h2>
+            <h2>10. Jak długo przechowujemy dane</h2>
             <ul>
                 <li>
                     <strong>Dane konta</strong> — do czasu usunięcia konta. Usunięcie kończymy
@@ -251,7 +279,7 @@ export default function PolitykaPrywatnosciPage() {
                 </li>
             </ul>
 
-            <h2>10. Twoje prawa</h2>
+            <h2>11. Twoje prawa</h2>
             <p>Przysługuje Ci prawo do:</p>
             <ul>
                 <li>dostępu do swoich danych i otrzymania ich kopii,</li>
@@ -287,23 +315,23 @@ export default function PolitykaPrywatnosciPage() {
                 <a href="/usuniecie-konta">usunięcie konta</a>.
             </p>
 
-            <h2>11. Dobrowolność podania danych</h2>
+            <h2>12. Dobrowolność podania danych</h2>
             <p>
                 Podanie danych jest dobrowolne. Bez adresu e-mail nie jest jednak możliwe założenie
                 konta, a tym samym korzystanie z funkcji Premium i kopii ustawień w chmurze.
                 Wszystkie pozostałe funkcje aplikacji działają bez konta.
             </p>
 
-            <h2>12. Wiek użytkownika</h2>
+            <h2>13. Wiek użytkownika</h2>
             <p>
                 Konto w aplikacji mogą zakładać osoby, które ukończyły 16 lat. Osoby młodsze mogą
                 korzystać z aplikacji bez konta albo na koncie założonym przez opiekuna.
             </p>
 
-            <h2>13. Pliki cookies i podobne technologie</h2>
+            <h2>14. Pliki cookies i podobne technologie</h2>
             <p>
                 Serwis aimora.pl używa plików cookies oraz podobnych technologii niezbędnych do jego
-                prawidłowego działania, a także narzędzi analitycznych opisanych w punkcie 5.
+                prawidłowego działania, a także narzędzi analitycznych opisanych w punkcie 6.
             </p>
             <p>
                 Cookies niezbędne stosujemy na podstawie naszego prawnie uzasadnionego interesu.
@@ -313,7 +341,7 @@ export default function PolitykaPrywatnosciPage() {
                 wpłynąć na działanie serwisu.
             </p>
 
-            <h2>14. Zmiany polityki</h2>
+            <h2>15. Zmiany polityki</h2>
             <p>
                 Politykę możemy aktualizować, gdy zmieni się sposób działania aplikacji lub serwisu.
                 Aktualna wersja jest zawsze dostępna pod tym adresem, a data jej obowiązywania widnieje

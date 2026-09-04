@@ -131,7 +131,27 @@ export default function PrivacyPolicyPage() {
                 in case someone typed one into a stage configuration.
             </p>
 
-            <h2>5. Usage analytics</h2>
+            <h2>5. Customer and business contact data</h2>
+            <p>
+                If you buy equipment from us, or represent an organisation that does, we process
+                the data needed to conclude and perform the contract: name, business e-mail
+                address and phone number, your role, and the identifying and billing details of
+                the organisation you represent.
+            </p>
+            <p>
+                Where the contracting party is an institution — a shooting range, a foundation,
+                an association — we process the contact person&apos;s data on the basis of our
+                legitimate interest in servicing the contract concluded with that institution.
+                Where you are the contracting party yourself, the basis is performance of a contract.
+            </p>
+            <p>
+                Warranty records — details of the equipment purchased, its delivery date and any
+                reported defects — are kept for the warranty period and then until any related
+                claims become time-barred. Invoices and accounting records are kept for the period
+                required by tax law.
+            </p>
+
+            <h2>6. Usage analytics</h2>
             <p>
                 The app and the website use Google Analytics for Firebase. We collect events
                 describing how the product is used (for example starting a game or opening a screen),
@@ -150,7 +170,7 @@ export default function PrivacyPolicyPage() {
                 significantly affect you.
             </p>
 
-            <h2>6. Purposes and legal bases</h2>
+            <h2>7. Purposes and legal bases</h2>
             <table>
                 <thead>
                     <tr>
@@ -170,6 +190,14 @@ export default function PrivacyPolicyPage() {
                     <tr>
                         <td>verifying the validity of purchased Premium access</td>
                         <td>Art. 6(1)(b) — performance of a contract</td>
+                    </tr>
+                    <tr>
+                        <td>concluding and performing sales contracts, and warranty handling</td>
+                        <td>Art. 6(1)(b) — performance of a contract</td>
+                    </tr>
+                    <tr>
+                        <td>contacting people who represent institutional customers</td>
+                        <td>Art. 6(1)(f) — our legitimate interest</td>
                     </tr>
                     <tr>
                         <td>answering enquiries sent through the contact form</td>
@@ -194,7 +222,7 @@ export default function PrivacyPolicyPage() {
                 </tbody>
             </table>
 
-            <h2>7. Who processes data on our behalf</h2>
+            <h2>8. Who processes data on our behalf</h2>
             <p>
                 We do not sell your data and we do not share it for third-party marketing. We rely on
                 the following processors:
@@ -213,7 +241,7 @@ export default function PrivacyPolicyPage() {
                 Standard Contractual Clauses together with additional safeguards.
             </p>
 
-            <h2>8. Data security</h2>
+            <h2>9. Data security</h2>
             <p>
                 We apply technical and organisational measures appropriate to the risk, as required
                 by Art. 32 GDPR. Access to account data is limited to those who need it, and traffic
@@ -225,7 +253,7 @@ export default function PrivacyPolicyPage() {
                 freedoms, we will inform you without undue delay.
             </p>
 
-            <h2>9. How long we keep data</h2>
+            <h2>10. How long we keep data</h2>
             <ul>
                 <li>
                     <strong>Account data</strong> — until you delete your account. We complete
@@ -245,7 +273,7 @@ export default function PrivacyPolicyPage() {
                 </li>
             </ul>
 
-            <h2>10. Your rights</h2>
+            <h2>11. Your rights</h2>
             <p>You have the right to:</p>
             <ul>
                 <li>access your data and receive a copy of it,</li>
@@ -277,23 +305,23 @@ export default function PrivacyPolicyPage() {
                 erased, how long it takes and what stays on your device.
             </p>
 
-            <h2>11. Is providing data required</h2>
+            <h2>12. Is providing data required</h2>
             <p>
                 Providing data is voluntary. Without an e-mail address you cannot create an account,
                 and therefore cannot use Premium features or the cloud settings backup. Every other
                 feature of the app works without an account.
             </p>
 
-            <h2>12. Age</h2>
+            <h2>13. Age</h2>
             <p>
                 Accounts may be created by people aged 16 or over. Younger users can use the app
                 without an account or under an account created by a guardian.
             </p>
 
-            <h2>13. Cookies and similar technologies</h2>
+            <h2>14. Cookies and similar technologies</h2>
             <p>
                 aimora.pl uses cookies and similar technologies necessary for the site to function,
-                as well as the analytics tools described in section 5.
+                as well as the analytics tools described in section 6.
             </p>
             <p>
                 Necessary cookies are used on the basis of our legitimate interest. Storing or
@@ -302,7 +330,7 @@ export default function PrivacyPolicyPage() {
                 cookies in your browser; restricting them may affect how the site works.
             </p>
 
-            <h2>14. Changes to this policy</h2>
+            <h2>15. Changes to this policy</h2>
             <p>
                 We may update this policy when the app or the website changes. The current version is
                 always available at this address and its effective date is shown at the top. We will
