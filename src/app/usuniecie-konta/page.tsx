@@ -24,8 +24,7 @@ export default function UsuniecieKontaPage() {
         >
             <p>
                 Ta strona opisuje, jak usunąć konto w aplikacji mobilnej <strong>Aimora</strong>
-                {' '}(nazwa w sklepie Google Play: Aimora, identyfikator{' '}
-                <code>com.aimora.shootingbuddy</code>) i jakie dane zostaną przy tym skasowane.
+                i jakie dane zostaną przy tym skasowane.
             </p>
             <p>
                 Konto jest w aplikacji <strong>opcjonalne</strong>. Cztery tryby gry — Trening,

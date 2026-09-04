@@ -24,8 +24,7 @@ export default function AccountDeletionPage() {
         >
             <p>
                 This page explains how to delete your account in the <strong>Aimora</strong> mobile
-                app (Google Play listing: Aimora, package{' '}
-                <code>com.aimora.shootingbuddy</code>) and what data is erased along with it.
+                app and what data is erased along with it.
             </p>
             <p>
                 An account is <strong>optional</strong>. Four game modes — Training, Time Attack,
