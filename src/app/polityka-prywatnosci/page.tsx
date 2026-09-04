@@ -24,9 +24,7 @@ export default function PolitykaPrywatnosciPage() {
         >
             <h2>1. Kto jest administratorem Twoich danych</h2>
             <p>
-                Administratorem danych osobowych jest <strong>Dawid Ostrowski prowadzący działalność
-                gospodarczą pod nazwą „DAVOSS”</strong>, ul. Leszczynowa 14, 87-125 Osiek nad Wisłą,
-                NIP: 956-22-50-675.
+                Administratorem danych osobowych jest <strong>Aimora</strong>, NIP 956-22-50-675.
             </p>
             <p>
                 Kontakt w sprawach dotyczących danych osobowych:{' '}

@@ -24,8 +24,7 @@ export default function PrivacyPolicyPage() {
         >
             <h2>1. Who controls your data</h2>
             <p>
-                The data controller is <strong>Dawid Ostrowski, trading as “DAVOSS”</strong>,
-                ul. Leszczynowa 14, 87-125 Osiek nad Wisłą, Poland, VAT ID: PL9562250675.
+                The data controller is <strong>Aimora</strong>, VAT ID PL9562250675, Poland.
             </p>
             <p>
                 For anything related to personal data, write to{' '}

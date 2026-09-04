@@ -122,8 +122,7 @@ export default function AccountDeletionPage() {
 
             <h2>7. Contact</h2>
             <p>
-                The data controller is <strong>Dawid Ostrowski, trading as “DAVOSS”</strong>,
-                ul. Leszczynowa 14, 87-125 Osiek nad Wisłą, Poland, VAT ID: 956-22-50-675.
+                The data controller is <strong>Aimora</strong>, VAT ID PL9562250675, Poland.
             </p>
             <p>
                 For anything concerning account deletion or personal data, write to{' '}
