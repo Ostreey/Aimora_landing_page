@@ -24,9 +24,8 @@ export default function RegulaminPage() {
         >
             <h2>1. Kto świadczy usługę</h2>
             <p>
-                Usługodawcą jest <strong>Dawid Ostrowski prowadzący działalność gospodarczą pod nazwą
-                „DAVOSS”</strong>, ul. Leszczynowa 14, 87-125 Osiek nad Wisłą, NIP: 956-22-50-675,
-                kontakt: <a href="mailto:biuro@aimora.pl">biuro@aimora.pl</a>.
+                Usługodawcą jest <strong>Aimora</strong>, kontakt:{' '}
+                <a href="mailto:biuro@aimora.pl">biuro@aimora.pl</a>.
             </p>
 
             <h2>2. Czego dotyczy regulamin</h2>

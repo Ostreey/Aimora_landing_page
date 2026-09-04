@@ -118,7 +118,7 @@ export default function UsuniecieKontaPage() {
 
             <h2>7. Kontakt</h2>
             <p>
-                Administratorem danych jest <strong>Aimora</strong>, NIP 956-22-50-675.
+                Administratorem danych jest <strong>Aimora</strong>.
             </p>
             <p>
                 W sprawach dotyczących usunięcia konta i danych osobowych pisz na adres{' '}

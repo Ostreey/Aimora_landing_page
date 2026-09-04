@@ -24,8 +24,7 @@ export default function TermsPage() {
         >
             <h2>1. Who provides the service</h2>
             <p>
-                The service is provided by <strong>Dawid Ostrowski, trading as „DAVOSS”</strong>,
-                ul. Leszczynowa 14, 87-125 Osiek nad Wisłą, Poland, VAT ID: PL9562250675, contact:{' '}
+                The service is provided by <strong>Aimora</strong>, Poland, contact:{' '}
                 <a href="mailto:biuro@aimora.pl">biuro@aimora.pl</a>.
             </p>
 

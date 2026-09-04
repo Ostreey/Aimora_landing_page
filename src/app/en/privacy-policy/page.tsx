@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
         >
             <h2>1. Who controls your data</h2>
             <p>
-                The data controller is <strong>Aimora</strong>, VAT ID PL9562250675, Poland.
+                The data controller is <strong>Aimora</strong>, Poland.
             </p>
             <p>
                 For anything related to personal data, write to{' '}
