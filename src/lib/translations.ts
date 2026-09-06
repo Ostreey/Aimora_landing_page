@@ -117,14 +117,12 @@ export const translations = {
                     shortDescription: 'Typy gier: single player i multiplayer, rozgrywki turniejowe typu Shoot-off, tryb turniejowy oraz czasy split trafień',
                     detailedDescription: 'Aimora oferuje szeroki wybór gier zarówno dla pojedynczych graczy jak i w trybie multiplayer, gdzie dwóch graczy może grać jednocześnie. System zawiera rozgrywki turniejowe typu Shoot-off, które mogą zautomatyzować zawody strzeleckie, eliminując potrzebę ręcznego liczenia punktów i czasów.. Dodatkowo, system oferuje pomiar czasów split trafień, pozwalając na szczegółową analizę sesji strzeleckiej pomagając w ciągłym doskonaleniu umiejętności.',
                     specs: {
-                        freeTraining: { label: 'Wolny trening', value: 'Single player' },
-                        timeAttack: { label: 'Czasówka', value: 'Single player' },
+                        freeTraining: { label: 'Luźny trening', value: 'Single player' },
+                        timeAttack: { label: 'Gra na czas', value: 'Single player' },
                         maxHits: { label: 'Max trafień', value: 'Single player' },
-                        duel: { label: 'Pojedynek', value: 'Tryb multiplayer' },
                         hostage: { label: 'Zakładnik', value: 'Single/Multiplayer' },
-                        shootOff: { label: 'Shoot-off', value: 'Tryb turniejowy' },
-                        zombie: { label: 'Zombie', value: 'Single/Multiplayer' },
-                        gunslinger: { label: 'Rewolwerowiec', value: 'Single/Multiplayer' }
+                        duel: { label: 'Pojedynek', value: 'Tryb multiplayer' },
+                        shootOff: { label: 'Shoot-Off', value: 'Tryb turniejowy' }
                     },
                     benefits: [
                         'Świetna zabawa zarówno w pojedynkę jak i rywalizując z innymi graczami',
@@ -174,15 +172,28 @@ export const translations = {
             userExperience: 'Doświadczenie użytkownika',
             userExperienceDesc: 'Zaprojektowana z myślą o maksymalnej wygodzie podczas treningu - od szybkiego połączenia z celami po precyzyjną analizę wyników',
             trainingModes: 'Różnorodne tryby treningowe',
-            trainingModesDesc: 'Gra na czas, Rewolwerowiec, Pojedynek, Shoo-off i wiele innych - każdy znajdzie coś dla siebie. Dynamiczny licznik i wizualizacja postępów motywują do lepszych wyników',
+            trainingModesDesc: 'Luźny trening, Gra na czas, Max trafień, Zakładnik, Pojedynek i Shoot-Off - każdy znajdzie coś dla siebie. Dynamiczny licznik i wizualizacja postępów motywują do lepszych wyników',
             targetManagement: 'Zarządzanie celami',
-            targetManagementDesc: 'Każdy szczegół pod kontrolą. Sprawdzaj stan baterii każdego czujnika, reguluj intensywność świecenia diod, nazywaj urządzenia według własnych preferencji',
+            targetManagementDesc: 'Każdy szczegół pod kontrolą. Sprawdzaj stan baterii każdego czujnika, reguluj intensywność świecenia diod, nazywaj urządzenia według własnych preferencji - "Snajper", "Okno" czy "Tarcza Alpha"',
             analysisProgress: 'Analiza i postęp',
             analysisProgressDesc: 'Szczegółowe statystyki sesji, historia treningów i porównanie wyników. Śledź swój rozwój i wyznaczaj nowe cele treningowe',
+            account: {
+                title: 'Aplikacja działa bez konta i bez internetu',
+                lead: 'Kupujesz cele, instalujesz aplikację, parujesz i strzelasz. Nie zakładasz konta, nie logujesz się, nie potrzebujesz zasięgu na strzelnicy.',
+                freeTitle: 'Za darmo, na zawsze',
+                freeDesc: 'Tryby Luźny trening, Gra na czas, Max trafień i Zakładnik. Parowanie celów, własne kolory i jasność diod, aktualizacje oprogramowania celów oraz wynik po każdej rozegranej grze.',
+                orgTitle: 'Konto Aimora — dla strzelnic, klubów i stowarzyszeń',
+                orgDesc: 'Tryb turniejowy z playlistą konkurencji, drużynami i eksportem wyników. Szablony zawodów do powtórzenia w kolejnym sezonie. Ustawienia gier i nazwy celów przeniesione na każdy telefon w obiekcie. Do tego tryby rywalizacji dwóch graczy: Pojedynek i Shoot-Off.',
+                howTitle: 'Jak je uzyskać',
+                howDesc: 'Konto zakładamy przy zamówieniu sprzętu. Napisz w uwagach, że prowadzisz strzelnicę lub klub — przygotujemy wycenę dopasowaną do liczby celów.',
+                link: 'Zapytaj o konto dla strzelnicy →'
+            },
             downloadApp: 'Pobierz aplikację Aimora',
             version: 'Wersja',
             size: 'Rozmiar',
             downloadButton: 'Pobierz aplikację',
+            downloadBadgeAlt: 'Pobierz z Google Play',
+            downloadBadgeAria: 'Pobierz z Google Play Store',
             downloading: 'Pobieranie...',
             downloadFailed: 'Pobieranie nie powiodło się. Spróbuj ponownie.'
         },
@@ -210,7 +221,7 @@ export const translations = {
                 },
                 tournamentMode: {
                     title: 'Tryb turniejowy',
-                    description: 'Stworzenie trybu turniejowego dzięki któremu zautomatyzujesz swoje zawody strzeleckie, wszystkie statystyki i wyniki przechowasz bezpiecznie w chmurze oraz będziesz mógł konkurować z innymi organizacjami porównując swoje wyniki. Uczestnicy zawodów będą mogli śledzić na bieżąco przebieg zawodów w aplikacji na swoich telefonach'
+                    description: 'Turniej w formule round-robin nad istniejącymi trybami gry: playlistę konkurencji rozgrywają kolejno wszyscy zawodnicy, a punkty skalują się do liczby startujących (punkty = liczba zawodników − miejsce + 1). Opcjonalnie dzielisz zawodników na drużyny o równych składach, a przy remisie na podium aplikacja proponuje dogrywkę. Wyniki eksportujesz jako gotowe grafiki — tabelę końcową 1:1 i kartę indywidualną 9:16'
                 },
                 detectorsCount: {
                     title: 'Zwiększenie liczby podłączonych detektorów',
@@ -495,14 +506,12 @@ export const translations = {
                     shortDescription: 'Game types: single player and multiplayer, Shoot-off tournament matches, tournament mode, and split time measurements',
                     detailedDescription: 'Aimora offers a wide selection of games for both single players and multiplayer mode, where two players can play simultaneously. The system includes Shoot-off tournament matches that can automate shooting competitions, eliminating the need for manual scoring. Additionally, the system offers split time measurements, allowing for detailed shooting session analysis to help with continuous skill improvement.',
                     specs: {
-                        freeTraining: { label: 'Free Training', value: 'Single player' },
-                        timeAttack: { label: 'Time Attack', value: 'Single player' },
-                        maxHits: { label: 'Max Hits', value: 'Single player' },
-                        duel: { label: 'Duel', value: 'Multiplayer mode' },
+                        freeTraining: { label: 'Free training', value: 'Single player' },
+                        timeAttack: { label: 'Time attack', value: 'Single player' },
+                        maxHits: { label: 'Max hits', value: 'Single player' },
                         hostage: { label: 'Hostage', value: 'Single/Multiplayer' },
-                        shootOff: { label: 'Shoot-off', value: 'Tournament mode' },
-                        zombie: { label: 'Zombie', value: 'Single/Multiplayer' },
-                        gunslinger: { label: 'Gunslinger', value: 'Single/Multiplayer' }
+                        duel: { label: 'Duel', value: 'Multiplayer mode' },
+                        shootOff: { label: 'Shoot-Off', value: 'Tournament mode' }
                     },
                     benefits: [
                         'Great fun both solo and competing with other players',
@@ -552,15 +561,28 @@ export const translations = {
             userExperience: 'User Experience',
             userExperienceDesc: 'Designed for maximum convenience during training - from quick target connection to precise results analysis',
             trainingModes: 'Various Training Modes',
-            trainingModesDesc: 'Time Attack, Gunslinger, Duel, Shoot-off and many more - everyone will find something for themselves. Dynamic counter and progress visualization motivate for better results',
+            trainingModesDesc: 'Free training, Time attack, Max hits, Hostage, Duel and Shoot-Off - everyone will find something for themselves. Dynamic counter and progress visualization motivate for better results',
             targetManagement: 'Target Management',
-            targetManagementDesc: 'Every detail under control. Check battery status of each sensor, adjust LED brightness, name devices according to your preferences',
+            targetManagementDesc: 'Every detail under control. Check battery status of each sensor, adjust LED brightness, name devices according to your preferences - "Sniper", "Window" or "Alpha Target"',
             analysisProgress: 'Analysis and Progress',
             analysisProgressDesc: 'Detailed session statistics, training history and result comparison. Track your development and set new training goals',
+            account: {
+                title: 'The app works without an account and without internet',
+                lead: 'You buy the targets, install the app, pair them and start shooting. No account to create, no sign-in, no mobile coverage needed at the range.',
+                freeTitle: 'Free, forever',
+                freeDesc: 'Free training, Time attack, Max hits and Hostage modes. Target pairing, your own LED colours and brightness, target firmware updates and a score after every game you play.',
+                orgTitle: 'Aimora account — for ranges, clubs and associations',
+                orgDesc: 'Tournament mode with a playlist of events, teams and exportable results. Competition templates you can reuse next season. Game settings and target names carried over to every phone at your facility. Plus the two-player modes: Duel and Shoot-Off.',
+                howTitle: 'How to get one',
+                howDesc: 'We set the account up when you order the hardware. Mention in the notes that you run a range or a club — we will prepare a quote matched to the number of targets.',
+                link: 'Ask about an account for your range →'
+            },
             downloadApp: 'Download Aimora App',
             version: 'Version',
             size: 'Size',
             downloadButton: 'Download App',
+            downloadBadgeAlt: 'Download from Google Play',
+            downloadBadgeAria: 'Download from Google Play Store',
             downloading: 'Downloading...',
             downloadFailed: 'Download failed. Please try again.'
         },
@@ -588,7 +610,7 @@ export const translations = {
                 },
                 tournamentMode: {
                     title: 'Tournament Mode',
-                    description: 'Creation of tournament mode to automate your shooting competitions, securely store all statistics and results in the cloud, and compete with other organizations by comparing results. Competition participants will be able to follow the competition progress in real-time on their phones'
+                    description: 'A round-robin tournament layered over the existing game modes: every competitor plays through the same playlist of events, and points scale with the number of entrants (points = number of competitors − place + 1). You can optionally split competitors into teams of equal size, and if there is a tie on the podium the app offers a tie-breaker. Results are exported as ready-made graphics — a 1:1 final table and a 9:16 individual card'
                 },
                 detectorsCount: {
                     title: 'Increased Number of Connected Detectors',

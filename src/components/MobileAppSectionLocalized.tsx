@@ -1,7 +1,8 @@
 'use client';
 
+import { trackRangeAccountInquiry } from '@/lib/firebase';
 import { getTranslations, Locale } from '@/lib/translations';
-import { Play, Settings, Trophy } from 'lucide-react';
+import { Play, Settings, Trophy, WifiOff } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { DownloadButtonLocalized } from './DownloadButtonLocalized';
 
@@ -115,6 +116,42 @@ export function MobileAppSectionLocalized({ locale }: MobileAppSectionLocalizedP
                                             <p className="text-white/70 font-inter text-sm leading-relaxed">
                                                 {t.mobileApp.analysisProgressDesc}
                                             </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start space-x-4 p-4 bg-gray-800/20 rounded-xl border border-gray-700/30 hover:border-[#017da0]/50 transition-all duration-300">
+                                        <div className="w-12 h-12 bg-gradient-to-br from-[#017da0] to-cyan-400 rounded-xl flex items-center justify-center shadow-lg">
+                                            <WifiOff className="w-6 h-6 text-white" />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h5 className="text-white font-barlow font-bold text-lg mb-2">{t.mobileApp.account.title}</h5>
+                                            <p className="text-white/80 font-inter text-base leading-relaxed mb-4">
+                                                {t.mobileApp.account.lead}
+                                            </p>
+                                            <ul className="space-y-3 mb-4">
+                                                <li className="text-white/80 font-inter text-base leading-relaxed">
+                                                    <span className="text-white font-semibold">{t.mobileApp.account.freeTitle}</span>
+                                                    {' — '}
+                                                    {t.mobileApp.account.freeDesc}
+                                                </li>
+                                                <li className="text-white/70 font-inter text-sm leading-relaxed">
+                                                    <span className="text-white font-semibold">{t.mobileApp.account.orgTitle}</span>
+                                                    {' — '}
+                                                    {t.mobileApp.account.orgDesc}
+                                                </li>
+                                                <li className="text-white/70 font-inter text-sm leading-relaxed">
+                                                    <span className="text-white font-semibold">{t.mobileApp.account.howTitle}</span>
+                                                    {' — '}
+                                                    {t.mobileApp.account.howDesc}
+                                                </li>
+                                            </ul>
+                                            <a
+                                                href="#cta"
+                                                onClick={() => trackRangeAccountInquiry(locale)}
+                                                className="inline-block text-[#017da0] hover:text-cyan-300 font-inter font-semibold text-sm underline underline-offset-4 transition-colors duration-300"
+                                            >
+                                                {t.mobileApp.account.link}
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

@@ -61,7 +61,15 @@ export function RoadmapLocalized({ locale }: RoadmapLocalizedProps) {
             color: 'from-green-500 to-green-400'
         },
         {
-            date: '07.2026',
+            date: '09.2026',
+            title: t.roadmap.items.tournamentMode.title,
+            description: t.roadmap.items.tournamentMode.description,
+            icon: Trophy,
+            status: 'completed',
+            color: 'from-yellow-500 to-yellow-400'
+        },
+        {
+            date: '12.2026',
             title: t.roadmap.items.rangeAccounts.title,
             description: t.roadmap.items.rangeAccounts.description,
             icon: Users,
@@ -69,15 +77,7 @@ export function RoadmapLocalized({ locale }: RoadmapLocalizedProps) {
             color: 'from-purple-500 to-purple-400'
         },
         {
-            date: '09.2026',
-            title: t.roadmap.items.tournamentMode.title,
-            description: t.roadmap.items.tournamentMode.description,
-            icon: Trophy,
-            status: 'planned',
-            color: 'from-yellow-500 to-yellow-400'
-        },
-        {
-            date: '12.2026',
+            date: '03.2027',
             title: t.roadmap.items.detectorsCount.title,
             description: t.roadmap.items.detectorsCount.description,
             icon: Network,
@@ -85,7 +85,7 @@ export function RoadmapLocalized({ locale }: RoadmapLocalizedProps) {
             color: 'from-indigo-500 to-indigo-400'
         },
         {
-            date: '03.2027',
+            date: '06.2027',
             title: t.roadmap.items.dedicatedTarget.title,
             description: t.roadmap.items.dedicatedTarget.description,
             icon: MapPin,

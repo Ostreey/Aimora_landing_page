@@ -292,3 +292,11 @@ export const trackBlogCardClick = (slug: string, title: string, source: 'related
     event_category: 'navigation',
   });
 };
+
+export const trackRangeAccountInquiry = (locale: string) => {
+  logEvent('range_account_inquiry_click', {
+    locale,
+    device_type: getDeviceType(),
+    event_category: 'conversion',
+  });
+};

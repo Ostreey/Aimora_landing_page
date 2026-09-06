@@ -1,6 +1,6 @@
 'use client';
 
-import { Locale } from '@/lib/translations';
+import { getTranslations, Locale } from '@/lib/translations';
 
 interface DownloadButtonLocalizedProps {
     locale: Locale;
@@ -13,6 +13,7 @@ export function DownloadButtonLocalized({
     playStoreUrl,
     className = ''
 }: DownloadButtonLocalizedProps) {
+    const t = getTranslations(locale);
     const getBadgeUrl = () => {
         const langMap: Record<Locale, string> = {
             pl: 'pl',
@@ -31,11 +32,11 @@ export function DownloadButtonLocalized({
             <button
                 onClick={handleClick}
                 className="relative transform hover:scale-105 transition-all duration-300 focus:outline-none"
-                aria-label="Download from Google Play Store"
+                aria-label={t.mobileApp.downloadBadgeAria}
             >
                 <img
                     src={getBadgeUrl()}
-                    alt="Download from Google Play"
+                    alt={t.mobileApp.downloadBadgeAlt}
                     className="h-14 sm:h-16 md:h-20 w-auto"
                 />
             </button>

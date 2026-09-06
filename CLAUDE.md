@@ -32,8 +32,16 @@ npm run type-check   # TypeScript check (tsc --noEmit)
 ### Component Patterns
 
 - **Localized variants**: many components have a `*Localized.tsx` counterpart (e.g., `Hero.tsx` / `HeroLocalized.tsx`) that uses `getTranslations()` for the English route
+- Some Polish components still hardcode their text; that is legacy, not the pattern. `Roadmap.tsx`, `MobileAppSection.tsx` and `FeatureSection.tsx` are now thin wrappers rendering their `*Localized` variant with `locale="pl"`, so a copy change lands in `translations.ts` once instead of twice. Prefer converting a component to a wrapper over editing two copies of the same sentence
 - Almost all components are client components (`'use client'`) due to heavy use of animations and interactivity
 - Path aliases: `@/*` → `./src/*`, `@/components/*`, `@/lib/*`
+
+### Content Rules
+
+- **Only advertise what ships.** Game modes named on the site must exist in `ActiveGames.definitions` (`Shooting_buddy/.../game_configuration/models/GameConfiguration.kt`), and their labels must match `strings.xml` (`values-pl` for PL, `values` for EN). The site used to advertise Zombie and Rewolwerowiec, which were never implemented.
+- **Roadmap:** a shipped feature belongs in `completed`, not in the future — a finished feature left on the roadmap reads as unavailable and costs sales. Dates double as React keys in the roadmap map, so they must stay unique and ascending.
+- **Premium messaging** (decision by Marta, 2026-09-05): the free/premium split lives only in the "Aplikacja mobilna" section, as a block under the feature cards. The hierarchy is fixed — first "works without an account", then the named free modes, and only last the account for ranges and clubs; the free part must outweigh the account part visually. No licence price on the site (sales are manual, after an invoice — the price lives in the PDF offer and e-mail), no free-vs-premium comparison table, no padlock icons, and none of the words "abonament", "subskrypcja", "plan", "upgrade". No second orange CTA either: `#FF6B35` stays reserved for "ZAMÓW", so the account block links to `#cta` with a plain cyan text link.
+- Facts the copy must not overrun: settings, target aliases and tournament templates sync to the cloud; **played-tournament history stays on the device**. There is no in-app purchase.
 
 ### Key Integrations
 
