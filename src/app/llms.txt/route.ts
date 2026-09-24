@@ -1,4 +1,8 @@
-# Aimora
+import { formatDualPrice } from '@/lib/pricing';
+
+export const dynamic = 'force-static';
+
+const body = `# Aimora
 
 > Interaktywny system celów strzeleckich z aplikacją mobilną
 
@@ -13,7 +17,7 @@ Aimora to bezprzewodowy system inteligentnych detektorów trafień, który zamie
 - Bateria Li-Ion 750mAh, do 5h pracy, ładowanie USB-C
 - Aktualizacje firmware OTA przez Bluetooth
 - Kompatybilność: ASG/airsoft, wiatrówki, broń palna
-- Cena: 299 PLN / 70 EUR za zestaw (detektor + moduł LED + 2 odbłyśniki); pakiet 4 zestawów — 999 PLN / 235 EUR; pakiet 2 odbłyśników — 20 PLN / 5 EUR; darmowa dostawa
+- Cena: ${formatDualPrice('single')} za zestaw (detektor + moduł LED + 2 odbłyśniki); pakiet 4 zestawów — ${formatDualPrice('bundle')}; pakiet 2 odbłyśników — ${formatDualPrice('reflectors')}
 
 ## Dla kogo
 
@@ -42,3 +46,12 @@ Aimora jest dostępna do wypożyczenia na imprezy firmowe, festyny, pikniki i ev
 - Facebook: https://www.facebook.com/profile.php?id=61579315053188
 - YouTube: https://www.youtube.com/channel/UC2SS91L5WncZ48WJM1x72Qg
 - Pełna dokumentacja dla AI: https://aimora.pl/llms-full.txt
+`;
+
+export function GET() {
+    return new Response(body, {
+        headers: {
+            'Content-Type': 'text/plain; charset=utf-8',
+        },
+    });
+}

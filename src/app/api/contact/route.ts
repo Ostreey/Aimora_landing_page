@@ -1,3 +1,4 @@
+import { calculateOrderTotal, resolvePriceLocale, type Sku } from '@/lib/pricing';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
@@ -14,6 +15,7 @@ export async function POST(request: NextRequest) {
       // Purchase form fields
       quantity,
       product,
+      locale,
       // Event form fields
       eventDate,
       eventLocation
@@ -74,14 +76,27 @@ export async function POST(request: NextRequest) {
         `;
     } else {
       // Build email for Purchase Inquiry (original logic)
-      const qty = Number.isFinite(Number(quantity)) ? Math.max(1, Number(quantity)) : 1;
-      const PRODUCT_INFO: Record<string, { unitPrice: number; label: string; unitLabel: string }> = {
-        single: { unitPrice: 299, label: 'Zestaw (detektor trafień + moduł LED + 2 odbłyśniki)', unitLabel: 'zestaw' },
-        bundle: { unitPrice: 999, label: 'Pakiet 4 zestawów (4 detektory + 4 moduły LED + 16 odbłyśników)', unitLabel: 'pakiet' },
-        reflectors: { unitPrice: 20, label: 'Pakiet odbłyśników (2 odbłyśniki zapasowe)', unitLabel: 'pakiet' },
+      const orderLocale = resolvePriceLocale(locale);
+      const order = calculateOrderTotal(product, quantity, orderLocale);
+      const qty = order.quantity;
+      const PRODUCT_LABELS: Record<Sku, { label: string; unitLabel: string }> = {
+        single: { label: 'Zestaw (detektor trafień + moduł LED + 2 odbłyśniki)', unitLabel: 'zestaw' },
+        bundle: { label: 'Pakiet 4 zestawów (4 detektory + 4 moduły LED + 16 odbłyśników)', unitLabel: 'pakiet' },
+        reflectors: { label: 'Pakiet odbłyśników (2 odbłyśniki zapasowe)', unitLabel: 'pakiet' },
       };
-      const { unitPrice, label: productLabel, unitLabel } = PRODUCT_INFO[product as string] ?? PRODUCT_INFO.single;
-      const total = unitPrice * qty;
+      const LOCALE_LABELS: Record<'pl' | 'en', string> = {
+        pl: 'polska (aimora.pl)',
+        en: 'angielska (aimora.pl/en)',
+      };
+      const SHIPPING_NOTE: Record<'pl' | 'en', string> = {
+        pl: 'darmowa, nadanie w 24 h',
+        en: 'wysyłka za granicę — do wyceny w ofercie; nadanie w 24 h',
+      };
+      const { label: productLabel, unitLabel } = PRODUCT_LABELS[order.sku];
+      const shippingNote = SHIPPING_NOTE[orderLocale];
+      const localeLabel = (locale === 'pl' || locale === 'en')
+        ? LOCALE_LABELS[orderLocale]
+        : 'NIEZNANA — formularz nie podał wersji strony; kwoty poniżej policzono wg cennika PL, potwierdź walutę i kwotę z klientem';
 
       emailHtml = `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -108,9 +123,11 @@ export async function POST(request: NextRequest) {
                         <div style="margin: 15px 0; color: #333;">
                             <div><strong>Produkt:</strong> <span style="margin-left: 8px; color: #666;">${productLabel}</span></div>
                             <div><strong>Ilość:</strong> <span style="margin-left: 8px; color: #666;">${qty}</span></div>
-                            <div><strong>Cena:</strong> <span style="margin-left: 8px; color: #666;">${unitPrice} zł / ${unitLabel}</span></div>
-                            <div><strong>Suma:</strong> <span style="margin-left: 8px; color: #666; font-weight: 700;">${total} zł</span></div>
-                            <div><strong>Dostawa:</strong> <span style="margin-left: 8px; color: #666;">darmowa, wysyłka w 24 h</span></div>
+                            <div><strong>Cena:</strong> <span style="margin-left: 8px; color: #666;">${order.unitPriceFormatted} / ${unitLabel}</span></div>
+                            ${order.isTiered ? `<div><strong>Rabat ilościowy:</strong> <span style="margin-left: 8px; color: #666;">${order.targetCount} celów = ${order.bundles} × zestaw 4 szt. + ${order.additionalTargets} × ${order.additionalTargetPriceFormatted}</span></div>` : ''}
+                            <div><strong>Suma:</strong> <span style="margin-left: 8px; color: #666; font-weight: 700;">${order.totalFormatted}</span></div>
+                            <div><strong>Dostawa:</strong> <span style="margin-left: 8px; color: #666;">${shippingNote}</span></div>
+                            <div><strong>Wersja strony:</strong> <span style="margin-left: 8px; color: #666;">${localeLabel}</span></div>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 25px; color: #666; font-size: 12px;">

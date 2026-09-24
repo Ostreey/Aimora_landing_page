@@ -2,7 +2,7 @@
 
 import { trackModalUnfold } from '@/lib/firebase';
 import { getTranslations, Locale } from '@/lib/translations';
-import { Battery, ChevronDown, ChevronUp, Gamepad2, Settings, Wifi } from 'lucide-react';
+import { Battery, ChevronDown, ChevronUp, Gamepad2, Settings, Trophy, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface FeatureSectionLocalizedProps {
@@ -24,6 +24,16 @@ export function FeatureSectionLocalized({ locale }: FeatureSectionLocalizedProps
             specs: Object.values(t.featureSection.features.battery.specs),
             benefits: t.featureSection.features.battery.benefits,
             technicalDetails: t.featureSection.features.battery.technicalDetails
+        },
+        {
+            id: 'tournament',
+            icon: Trophy,
+            title: t.featureSection.features.tournament.title,
+            shortDescription: t.featureSection.features.tournament.shortDescription,
+            detailedDescription: t.featureSection.features.tournament.detailedDescription,
+            specs: Object.values(t.featureSection.features.tournament.specs),
+            benefits: t.featureSection.features.tournament.benefits,
+            technicalDetails: t.featureSection.features.tournament.technicalDetails
         },
         {
             id: 'games-software',
@@ -182,9 +192,9 @@ export function FeatureSectionLocalized({ locale }: FeatureSectionLocalizedProps
                                                 <h4 className="text-white font-barlow font-bold text-lg mb-4">{t.featureSection.specifications}</h4>
                                                 <div className="space-y-3">
                                                     {feature.specs.map((spec, idx) => (
-                                                        <div key={idx} className="flex justify-between items-center py-2 px-3 bg-gray-800/30 rounded-lg border border-gray-700/30">
-                                                            <span className="text-white/70 font-inter font-medium text-sm">{spec.label}</span>
-                                                            <span className="text-[#017da0] font-inter font-bold text-sm">{spec.value}</span>
+                                                        <div key={idx} className="flex flex-col gap-1 py-2 px-3 bg-gray-800/30 rounded-lg border border-gray-700/30">
+                                                            <span className="text-white/70 font-inter font-medium text-sm break-words">{spec.label}</span>
+                                                            <span className="text-[#017da0] font-inter font-bold text-sm break-words">{spec.value}</span>
                                                         </div>
                                                     ))}
                                                 </div>

@@ -129,19 +129,12 @@ export function MobileAppSectionLocalized({ locale }: MobileAppSectionLocalizedP
                                                 {t.mobileApp.account.lead}
                                             </p>
                                             <ul className="space-y-3 mb-4">
-                                                <li className="text-white/80 font-inter text-base leading-relaxed">
-                                                    <span className="text-white font-semibold">{t.mobileApp.account.freeTitle}</span>
-                                                    {' — '}
-                                                    {t.mobileApp.account.freeDesc}
-                                                </li>
                                                 <li className="text-white/70 font-inter text-sm leading-relaxed">
                                                     <span className="text-white font-semibold">{t.mobileApp.account.orgTitle}</span>
                                                     {' — '}
                                                     {t.mobileApp.account.orgDesc}
                                                 </li>
                                                 <li className="text-white/70 font-inter text-sm leading-relaxed">
-                                                    <span className="text-white font-semibold">{t.mobileApp.account.howTitle}</span>
-                                                    {' — '}
                                                     {t.mobileApp.account.howDesc}
                                                 </li>
                                             </ul>

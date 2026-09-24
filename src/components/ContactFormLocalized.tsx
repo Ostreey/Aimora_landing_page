@@ -1,15 +1,11 @@
 'use client';
 
 import { trackFormAbandoned, trackFormError, trackFormOpened, trackFormProductSelected, trackFormSend, trackFormStarted } from '@/lib/firebase';
-import { getTranslations, Locale } from '@/lib/translations';
+import { calculateOrderTotal, formatAmount, formatPrice, getPricing } from '@/lib/pricing';
+import { getTranslations, Locale, translations } from '@/lib/translations';
 import { useEffect, useState } from 'react';
 
 type ProductType = 'single' | 'bundle' | 'reflectors';
-
-const PRICES: Record<string, { single: number; bundle: number; reflectors: number; currency: string }> = {
-    pl: { single: 299, bundle: 999, reflectors: 20, currency: 'zł' },
-    en: { single: 70, bundle: 235, reflectors: 5, currency: 'EUR' },
-};
 
 interface ContactFormData {
     name: string;
@@ -37,7 +33,9 @@ const INITIAL_FORM_DATA: ContactFormData = {
 
 export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLocalizedProps) {
     const t = getTranslations(locale);
-    const prices = PRICES[locale] ?? PRICES.pl;
+    const pricing = getPricing(locale);
+    const prices = { ...pricing.amounts, currency: pricing.currency };
+    const isEnglish = locale === 'en';
     const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA);
     const [quantityInput, setQuantityInput] = useState<string>('1');
     const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
@@ -66,6 +64,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
 
     const product = products[formData.product];
     const quantityNumber = typeof formData.quantity === 'number' ? formData.quantity : 1;
+    const orderTotal = calculateOrderTotal(formData.product, quantityNumber, locale);
 
     useEffect(() => {
         if (isOpen) {
@@ -123,7 +122,7 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, locale }),
             });
 
             if (response.ok) {
@@ -242,13 +241,13 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                                                         {p.name}
                                                         {productType === 'bundle' && (
                                                             <span className="text-xs font-bold text-white bg-[#FF6B35] rounded-full px-2 py-0.5">
-                                                                {t.contactForm.youSave} {prices.single * 4 - prices.bundle} {prices.currency}
+                                                                {t.contactForm.youSave} {formatPrice(prices.single * 4 - prices.bundle, locale)}
                                                             </span>
                                                         )}
                                                     </div>
                                                     <div className="text-xs text-gray-500 mt-0.5">{p.description}</div>
                                                 </div>
-                                                <div className="font-bold text-[#017da0] whitespace-nowrap ml-3">{p.price} {prices.currency}</div>
+                                                <div className="font-bold text-[#017da0] whitespace-nowrap ml-3">{formatPrice(p.price, locale)}</div>
                                             </div>
                                         </button>
                                     );
@@ -299,11 +298,25 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                                 />
                                 <div className="text-sm text-gray-700">
                                     <div>
-                                        {t.contactForm.promoPrice}: <span className="font-semibold">{product.price} {prices.currency}</span> / {formData.product === 'single' ? t.contactForm.perSingle : t.contactForm.perBundle}
+                                        {t.contactForm.promoPrice}: <span className="font-semibold">{formatPrice(product.price, locale)}</span> / {formData.product === 'single' ? t.contactForm.perSingle : t.contactForm.perBundle}
                                     </div>
+                                    {orderTotal.isTiered && (
+                                        <div>
+                                            {t.contactForm.additionalTargetPrice}: <span className="font-semibold">{orderTotal.additionalTargetPriceFormatted}</span>
+                                        </div>
+                                    )}
                                     <div>
-                                        {t.contactForm.total}: <span className="font-semibold">{product.price} {prices.currency} × {formData.quantity} = {product.price * quantityNumber} {prices.currency}</span>
+                                        {t.contactForm.total}: <span className="font-semibold">
+                                            {orderTotal.isTiered
+                                                ? orderTotal.totalFormatted
+                                                : `${formatPrice(product.price, locale)} × ${formatAmount(quantityNumber)} = ${orderTotal.totalFormatted}`}
+                                        </span>
                                     </div>
+                                    {isEnglish && (
+                                        <div className="text-xs text-gray-700 mt-1">
+                                            {translations.en.contactForm.shippingNotIncluded}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
@@ -368,6 +381,11 @@ export function ContactFormLocalized({ locale, isOpen, onClose }: ContactFormLoc
                             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                                 {t.contactForm.messageLabel} <span className="text-gray-400">{t.contactForm.messageOptional}</span>
                             </label>
+                            {isEnglish && (
+                                <p className="text-xs text-gray-700 mb-1">
+                                    {translations.en.contactForm.messageShippingHint}
+                                </p>
+                            )}
                             <textarea
                                 id="message"
                                 name="message"

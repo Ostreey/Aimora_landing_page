@@ -1,6 +1,8 @@
 'use client';
 
 import { trackCTAClick } from '@/lib/firebase';
+import { withPrices } from '@/lib/pricing';
+import { translations } from '@/lib/translations';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useState } from 'react';
@@ -51,7 +53,7 @@ export function CTA() {
                             className="mb-6"
                         >
                             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full text-lg font-semibold">
-                                <span>299 zł / zestaw lub pakiet 4 zestawów za 999 zł • darmowa dostawa</span>
+                                <span>{withPrices(translations.pl.cta.pricePromo, 'pl')}</span>
                             </div>
                         </motion.div>
 

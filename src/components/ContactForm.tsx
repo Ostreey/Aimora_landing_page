@@ -1,23 +1,24 @@
 'use client';
 
 import { trackFormAbandoned, trackFormError, trackFormOpened, trackFormProductSelected, trackFormSend, trackFormStarted } from '@/lib/firebase';
+import { calculateOrderTotal, formatAmount, formatPrice, getPrice } from '@/lib/pricing';
 import { useEffect, useState } from 'react';
 
 type ProductType = 'single' | 'bundle' | 'reflectors';
 
 const PRODUCTS: Record<ProductType, { price: number; name: string; description: string }> = {
     single: {
-        price: 299,
+        price: getPrice('single', 'pl'),
         name: 'Zestaw',
         description: 'detektor trafień + moduł LED + 2 odbłyśniki',
     },
     bundle: {
-        price: 999,
+        price: getPrice('bundle', 'pl'),
         name: 'Pakiet 4 zestawów',
         description: '4 detektory + 4 moduły LED + 16 odbłyśników (8 gratis)',
     },
     reflectors: {
-        price: 20,
+        price: getPrice('reflectors', 'pl'),
         name: 'Pakiet odbłyśników',
         description: '2 odbłyśniki zapasowe',
     },
@@ -57,6 +58,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
 
     const product = PRODUCTS[formData.product];
     const quantityNumber = typeof formData.quantity === 'number' ? formData.quantity : 1;
+    const orderTotal = calculateOrderTotal(formData.product, quantityNumber, 'pl');
 
     useEffect(() => {
         if (isOpen) {
@@ -114,7 +116,7 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, locale: 'pl' }),
             });
 
             if (response.ok) {
@@ -239,13 +241,13 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                                         {p.name}
                                                         {productType === 'bundle' && (
                                                             <span className="text-xs font-bold text-white bg-[#FF6B35] rounded-full px-2 py-0.5">
-                                                                Oszczędzasz {PRODUCTS.single.price * 4 - PRODUCTS.bundle.price} zł
+                                                                Oszczędzasz {formatPrice(PRODUCTS.single.price * 4 - PRODUCTS.bundle.price, 'pl')}
                                                             </span>
                                                         )}
                                                     </div>
                                                     <div className="text-xs text-gray-500 mt-0.5">{p.description}</div>
                                                 </div>
-                                                <div className="font-bold text-[#017da0] whitespace-nowrap ml-3">{p.price} zł</div>
+                                                <div className="font-bold text-[#017da0] whitespace-nowrap ml-3">{formatPrice(p.price, 'pl')}</div>
                                             </div>
                                         </button>
                                     );
@@ -299,10 +301,19 @@ export function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 />
                                 <div className="text-sm text-gray-700">
                                     <div>
-                                        Cena: <span className="font-semibold">{product.price} zł</span> / {formData.product === 'single' ? 'zestaw' : 'pakiet'}
+                                        Cena: <span className="font-semibold">{formatPrice(product.price, 'pl')}</span> / {formData.product === 'single' ? 'zestaw' : 'pakiet'}
                                     </div>
+                                    {orderTotal.isTiered && (
+                                        <div>
+                                            Każdy cel ponad zestaw 4 sztuk: <span className="font-semibold">{orderTotal.additionalTargetPriceFormatted}</span>
+                                        </div>
+                                    )}
                                     <div>
-                                        Razem: <span className="font-semibold">{product.price} zł × {formData.quantity} = {product.price * quantityNumber} zł</span>
+                                        Razem: <span className="font-semibold">
+                                            {orderTotal.isTiered
+                                                ? orderTotal.totalFormatted
+                                                : `${formatPrice(product.price, 'pl')} × ${formatAmount(quantityNumber)} = ${orderTotal.totalFormatted}`}
+                                        </span>
                                     </div>
                                 </div>
                             </div>

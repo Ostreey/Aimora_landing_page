@@ -8,6 +8,7 @@ import { MobileAppSection } from '@/components/MobileAppSection';
 import { ProductDescriptionSection } from '@/components/ProductDescriptionSection';
 import { Roadmap } from '@/components/Roadmap';
 import { WhatIsItSection } from '@/components/WhatIsItSection';
+import { getOfferPricing } from '@/lib/pricing';
 
 const productJsonLd = {
     '@context': 'https://schema.org',
@@ -18,8 +19,7 @@ const productJsonLd = {
     brand: { '@type': 'Brand', name: 'Aimora' },
     offers: {
         '@type': 'Offer',
-        price: '299',
-        priceCurrency: 'PLN',
+        ...getOfferPricing('single', 'pl'),
         availability: 'https://schema.org/InStock',
         url: 'https://aimora.pl',
     },

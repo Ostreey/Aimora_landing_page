@@ -8,11 +8,12 @@ import { MobileAppSectionLocalized } from '@/components/MobileAppSectionLocalize
 import { ProductDescriptionSectionLocalized } from '@/components/ProductDescriptionSectionLocalized';
 import { RoadmapLocalized } from '@/components/RoadmapLocalized';
 import { WhatIsItSection } from '@/components/WhatIsItSection';
+import { formatSkuPrice, getOfferPricing } from '@/lib/pricing';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Aimora – Interactive Shooting Targets with Mobile App',
-    description: 'Aimora — turn steel targets into interactive shooting games. Smart hit detector with mobile app, game modes and performance analytics. From 70 EUR.',
+    description: `Aimora — turn steel targets into interactive shooting games. Smart hit detector with mobile app, game modes and performance analytics. From ${formatSkuPrice('single', 'en')}.`,
     alternates: {
         canonical: '/en',
         languages: {
@@ -31,8 +32,7 @@ const productJsonLd = {
     brand: { '@type': 'Brand', name: 'Aimora' },
     offers: {
         '@type': 'Offer',
-        price: '70',
-        priceCurrency: 'EUR',
+        ...getOfferPricing('single', 'en'),
         availability: 'https://schema.org/InStock',
         url: 'https://aimora.pl/en',
     },

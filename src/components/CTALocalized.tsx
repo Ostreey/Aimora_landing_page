@@ -1,6 +1,7 @@
 'use client';
 
 import { trackCTAClick } from '@/lib/firebase';
+import { withPrices } from '@/lib/pricing';
 import { getTranslations, Locale } from '@/lib/translations';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
@@ -54,7 +55,7 @@ export function CTALocalized({ locale }: CTALocalizedProps) {
                             className="mb-6"
                         >
                             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full text-lg font-semibold">
-                                <span>{t.cta.pricePromo}</span>
+                                <span>{withPrices(t.cta.pricePromo, locale)}</span>
                             </div>
                         </motion.div>
 

@@ -19,7 +19,7 @@ export default function RegulaminPage() {
     return (
         <LegalLayout
             title="Regulamin aplikacji Aimora"
-            updatedLabel="Obowiązuje od 30 sierpnia 2026 r."
+            updatedLabel="Obowiązuje od 23 września 2026 r."
             footer={<Footer />}
         >
             <h2>1. Kto świadczy usługę</h2>
@@ -40,7 +40,7 @@ export default function RegulaminPage() {
                 Aplikacja działa <strong>bez konta i bez opłat</strong>. Bez konta dostępne są:
             </p>
             <ul>
-                <li>tryby gry: Łatwy Trening, Time Attack, Max Hits oraz Zakładnik,</li>
+                <li>podstawowe tryby treningowe i pomiarowe dla pojedynczego strzelca,</li>
                 <li>
                     pełna obsługa sprzętu: łączenie detektorów, nadawanie im nazw, kalibracja
                     czujnika, ustawienia oświetlenia i aktualizacja oprogramowania detektorów,
@@ -52,13 +52,36 @@ export default function RegulaminPage() {
                     po wygaśnięciu dostępu Premium.
                 </li>
             </ul>
-            <p><strong>Wersja Premium</strong> dodatkowo odblokowuje:</p>
-            <ul>
-                <li>tryby gry Pojedynek oraz Shoot-Off,</li>
-                <li>tworzenie i prowadzenie turniejów wraz z szablonami zawodów,</li>
-                <li>eksport wyników turnieju w postaci grafiki,</li>
-                <li>kopię ustawień w chmurze i ich przenoszenie między urządzeniami.</li>
-            </ul>
+            <p>
+                <strong>Wersja Premium</strong> obejmuje funkcje przeznaczone do rywalizacji i pracy
+                z grupą, w szczególności tryby dla wielu strzelców, tworzenie i prowadzenie turniejów
+                wraz z szablonami zawodów, eksport wyników oraz kopię ustawień w chmurze i ich
+                przenoszenie między urządzeniami.
+            </p>
+            <p>
+                <strong>Szczegółowy wykaz funkcji</strong> objętych każdą z wersji prezentujemy
+                w aplikacji na ekranie <strong>Premium</strong>, a w przypadku zakupu — w ofercie albo
+                potwierdzeniu zamówienia przekazanym przed zawarciem umowy. Wykaz przekazany przed
+                zawarciem umowy określa zakres świadczenia dla tej umowy.
+            </p>
+            <p>
+                <strong>Zmiana zakresu.</strong> Zakres wersji Premium może zmieniać się wraz
+                z rozwojem aplikacji. Dla użytkownika, który wykupił dostęp Premium,{' '}
+                <strong>
+                    zakres funkcji Premium obowiązujący w dniu rozpoczęcia dostępu nie zostanie
+                    zawężony przez cały opłacony okres
+                </strong>
+                . Funkcje dodane w tym czasie do wersji Premium udostępniamy bez dopłaty.
+                Udostępnienie funkcji Premium wszystkim użytkownikom nieodpłatnie nie stanowi
+                zawężenia zakresu.
+            </p>
+            <p>
+                Jeżeli mimo powyższego zmiana istotnie i negatywnie wpłynie na dostęp do funkcji
+                Premium, poinformujemy o niej na adres e-mail przypisany do konta z co najmniej
+                14-dniowym wyprzedzeniem. Użytkownikowi będącemu konsumentem albo przedsiębiorcą
+                na prawach konsumenta przysługuje wtedy prawo wypowiedzenia umowy w terminie 30 dni
+                od poinformowania, ze zwrotem opłaty za niewykorzystany okres.
+            </p>
 
             <h2>4. Konto</h2>
             <ol>
@@ -126,9 +149,8 @@ export default function RegulaminPage() {
             <h2>7. Co dzieje się po wygaśnięciu dostępu</h2>
             <p>
                 Po wygaśnięciu Premium <strong>zachowujesz dostęp do historii rozegranych turniejów
-                i tabel generalnych</strong>. Blokowane jest tworzenie i prowadzenie nowych turniejów,
-                eksport grafik oraz tryby Pojedynek i Shoot-Off. Dane zapisane na urządzeniu nie są
-                usuwane.
+                i tabel generalnych</strong>. Funkcje objęte wersją Premium przestają być dostępne.
+                Dane zapisane na urządzeniu nie są usuwane.
             </p>
 
             <h2>8. Wymagania techniczne</h2>

@@ -112,17 +112,34 @@ export const translations = {
                     ],
                     technicalDetails: 'Akumulator wykorzystuje zaawansowane algorytmy zarządzania energią, które automatycznie dostosowują pobór mocy w zależności od intensywności użytkowania. System deep sleep redukuje zużycie energii do minimum podczas bezczynności.'
                 },
+                tournament: {
+                    title: 'Zawody, które poprowadzisz sam',
+                    shortDescription: 'Cały dzień zawodów prowadzi jedna osoba z telefonu: aplikacja liczy punkty, prowadzi klasyfikację indywidualną i drużynową, a na koniec wypuszcza gotowe grafiki z wynikami.',
+                    detailedDescription: 'Tryb turniejowy zamienia zwykły dzień na strzelnicy w wydarzenie, które obiekt poprowadzi własnymi siłami. Zawodnicy przechodzą kolejno przez zestaw konkurencji opartych na trybach gry, a punktacja i klasyfikacja liczą się same — bez sędziego z kartką i bez arkusza w Excelu. Po ostatniej serii wyniki są od razu gotowe: tabela końcowa i karta każdego zawodnika, do wrzucenia na stronę albo Facebooka obiektu. Ten sam format zawodów zapisujesz i powtarzasz w kolejnym miesiącu i w kolejnym sezonie.',
+                    specs: {
+                        running: { label: 'Prowadzenie', value: 'jedna osoba z telefonu' },
+                        standings: { label: 'Klasyfikacja', value: 'indywidualna i drużynowa' },
+                        repeatable: { label: 'Powtarzalność', value: 'zapisany format zawodów' }
+                    },
+                    benefits: [
+                        'Zawody prowadzi jedna osoba z telefonu — bez dodatkowego personelu i przeszkolonego sędziego',
+                        'Punkty i klasyfikacja liczą się same, wyniki są znane od razu po ostatniej serii',
+                        'Gotowe grafiki z wynikami do publikacji — materiał na social media po każdej imprezie',
+                        'Ten sam format zawodów powtarzalny w kolejnym sezonie, indywidualnie lub w drużynach'
+                    ],
+                    technicalDetails: 'Klasyfikację i przebieg zawodów liczy aplikacja na telefonie prowadzącego. Historia rozegranych zawodów zostaje na tym urządzeniu.'
+                },
                 gamesSoftware: {
                     title: 'Rozbudowane gry i funkcje',
-                    shortDescription: 'Typy gier: single player i multiplayer, rozgrywki turniejowe typu Shoot-off, tryb turniejowy oraz czasy split trafień',
-                    detailedDescription: 'Aimora oferuje szeroki wybór gier zarówno dla pojedynczych graczy jak i w trybie multiplayer, gdzie dwóch graczy może grać jednocześnie. System zawiera rozgrywki turniejowe typu Shoot-off, które mogą zautomatyzować zawody strzeleckie, eliminując potrzebę ręcznego liczenia punktów i czasów.. Dodatkowo, system oferuje pomiar czasów split trafień, pozwalając na szczegółową analizę sesji strzeleckiej pomagając w ciągłym doskonaleniu umiejętności.',
+                    shortDescription: 'Typy gier: single player i multiplayer, tryb rywalizacyjny Shoot-Off oraz pomiar czasów split trafień',
+                    detailedDescription: 'Aimora oferuje szeroki wybór gier — zarówno dla pojedynczych graczy, jak i w trybie multiplayer, gdzie dwóch graczy może grać jednocześnie. Osobną pozycją jest rywalizacyjny Shoot-Off. System mierzy też czasy split trafień, co pozwala szczegółowo przeanalizować sesję strzelecką i systematycznie poprawiać wyniki.',
                     specs: {
                         freeTraining: { label: 'Luźny trening', value: 'Single player' },
                         timeAttack: { label: 'Gra na czas', value: 'Single player' },
                         maxHits: { label: 'Max trafień', value: 'Single player' },
                         hostage: { label: 'Zakładnik', value: 'Single/Multiplayer' },
                         duel: { label: 'Pojedynek', value: 'Tryb multiplayer' },
-                        shootOff: { label: 'Shoot-Off', value: 'Tryb turniejowy' }
+                        shootOff: { label: 'Shoot-Off', value: 'Single/Multiplayer' }
                     },
                     benefits: [
                         'Świetna zabawa zarówno w pojedynkę jak i rywalizując z innymi graczami',
@@ -130,7 +147,7 @@ export const translations = {
                         'Możliwość doskonalenia umiejętności dzięki statystykom i analizie sesji',
                         'Automatyczne zliczanie wyników i rankingi'
                     ],
-                    technicalDetails: 'Oprogramowanie wykorzystuje zaawansowane algorytmy do analizy trafień i czasu reakcji. System automatycznie rejestruje każdy strzał z dokładnością do milisekundy, umożliwiając precyzyjny pomiar czasów split. Tryb turniejowy integruje się z systemem rankingowym, automatycznie generując wyniki i klasyfikacje. Rozgrywki ShootOff są w pełni zautomatyzowane, eliminując błędy ludzkie i zapewniając sprawiedliwe warunki dla wszystkich uczestników. Oprogramowanie oferuje szczegółowe statystyki, wizualizacje i raporty, które pomagają graczom w identyfikacji obszarów do poprawy.'
+                    technicalDetails: 'Oprogramowanie wykorzystuje zaawansowane algorytmy do analizy trafień i czasu reakcji. System automatycznie rejestruje każdy strzał z dokładnością do milisekundy, umożliwiając precyzyjny pomiar czasów split. Oprogramowanie oferuje szczegółowe statystyki, wizualizacje i raporty, które pomagają graczom w identyfikacji obszarów do poprawy.'
                 },
                 firmwareUpdates: {
                     title: 'Aktualizacje oprogramowania',
@@ -179,14 +196,11 @@ export const translations = {
             analysisProgressDesc: 'Szczegółowe statystyki sesji, historia treningów i porównanie wyników. Śledź swój rozwój i wyznaczaj nowe cele treningowe',
             account: {
                 title: 'Aplikacja działa bez konta i bez internetu',
-                lead: 'Kupujesz cele, instalujesz aplikację, parujesz i strzelasz. Nie zakładasz konta, nie logujesz się, nie potrzebujesz zasięgu na strzelnicy.',
-                freeTitle: 'Za darmo, na zawsze',
-                freeDesc: 'Tryby Luźny trening, Gra na czas, Max trafień i Zakładnik. Parowanie celów, własne kolory i jasność diod, aktualizacje oprogramowania celów oraz wynik po każdej rozegranej grze.',
+                lead: 'Wyjmujesz cele z pudełka, włączasz aplikację i strzelasz. Nie musisz zakładać konta, logować się ani mieć zasięgu na strzelnicy. Podstawowe gry działają od razu, oprogramowanie celów zaktualizujesz z telefonu, a w aplikacji nie ma żadnych opłat ani subskrypcji. Ta część zostaje darmowa na zawsze.',
                 orgTitle: 'Konto Aimora — dla strzelnic, klubów i stowarzyszeń',
-                orgDesc: 'Tryb turniejowy z playlistą konkurencji, drużynami i eksportem wyników. Szablony zawodów do powtórzenia w kolejnym sezonie. Ustawienia gier i nazwy celów przeniesione na każdy telefon w obiekcie. Do tego tryby rywalizacji dwóch graczy: Pojedynek i Shoot-Off.',
-                howTitle: 'Jak je uzyskać',
-                howDesc: 'Konto zakładamy przy zamówieniu sprzętu. Napisz w uwagach, że prowadzisz strzelnicę lub klub — przygotujemy wycenę dopasowaną do liczby celów.',
-                link: 'Zapytaj o konto dla strzelnicy →'
+                orgDesc: 'Konto przydaje się na kilka sposobów. Masz moduł turniejów, w którym poprowadzisz zawody dla całej grupy. Dostajesz dodatkowe gry, a nowe dokładamy na bieżąco. Ustawienia — kolory celów, nazwy, szablony turniejów — trzymają się w chmurze, więc po zmianie telefonu nie robisz wszystkiego od nowa.',
+                howDesc: 'Konto zakładamy przy zamówieniu sprzętu — napisz w uwagach, ilu celów potrzebujesz.',
+                link: 'Zapytaj o konto →'
             },
             downloadApp: 'Pobierz aplikację Aimora',
             version: 'Wersja',
@@ -221,7 +235,7 @@ export const translations = {
                 },
                 tournamentMode: {
                     title: 'Tryb turniejowy',
-                    description: 'Turniej w formule round-robin nad istniejącymi trybami gry: playlistę konkurencji rozgrywają kolejno wszyscy zawodnicy, a punkty skalują się do liczby startujących (punkty = liczba zawodników − miejsce + 1). Opcjonalnie dzielisz zawodników na drużyny o równych składach, a przy remisie na podium aplikacja proponuje dogrywkę. Wyniki eksportujesz jako gotowe grafiki — tabelę końcową 1:1 i kartę indywidualną 9:16'
+                    description: 'Zawody dla grupy zawodników prowadzone z jednego telefonu — aplikacja pilnuje kolejności startów i sama prowadzi klasyfikację, indywidualną i drużynową. Wyniki eksportujesz jako gotowe grafiki do publikacji.'
                 },
                 detectorsCount: {
                     title: 'Zwiększenie liczby podłączonych detektorów',
@@ -238,7 +252,7 @@ export const translations = {
             titleHighlight: 'następny poziom',
             title2: '?',
             subtitle: 'Przekształć swój trening w profesjonalne doświadczenie pełne emocji.',
-            pricePromo: '299 zł / zestaw lub pakiet 4 zestawów za 999 zł • darmowa dostawa',
+            pricePromo: '{price:single} / zestaw lub pakiet 4 zestawów za {price:bundle} • darmowa dostawa',
             orderNow: 'Zamów u nas',
             learnMore: 'Dowiedz się więcej',
             availableNow: 'Dostępne od zaraz',
@@ -273,6 +287,7 @@ export const translations = {
             quantityLabel: 'Liczba zestawów',
             quantityBundleLabel: 'Liczba pakietów',
             quantityRequired: 'Podaj liczbę sztuk (min. 1)',
+            additionalTargetPrice: 'Każdy cel ponad zestaw 4 sztuk',
             freeShipping: '🚚 Darmowa dostawa — wysyłamy w 24 h',
             nameLabel: 'Imię',
             nameRequired: 'Imię jest wymagane',
@@ -405,7 +420,8 @@ export const translations = {
         hero: {
             title: 'Take Your Shooting Training to the Next Level',
             subtitle: 'Transform any steel target into an interactive game and your personal shooting coach.',
-            cta: 'ORDER'
+            cta: 'ORDER',
+            shippingBadge: 'International shipping available'
         },
         videoSection: {
             title: 'See',
@@ -501,17 +517,34 @@ export const translations = {
                     ],
                     technicalDetails: 'The battery uses advanced power management algorithms that automatically adjust power consumption based on usage intensity. Deep sleep mode reduces energy consumption to minimum during idle periods.'
                 },
+                tournament: {
+                    title: 'Competitions you run yourself',
+                    shortDescription: 'One person runs the whole competition day from a phone: the app scores it, keeps both the individual and the team standings, and hands you finished result graphics at the end.',
+                    detailedDescription: 'Tournament Mode turns an ordinary day at the range into an event your venue can run on its own. Competitors work through a set of events built on the game modes, and the scoring and standings take care of themselves — no marshal with a clipboard, no spreadsheet afterwards. As soon as the last string is shot the results are ready: a final table and a card for each competitor, ready for your website or your Facebook page. Save the format and run exactly the same competition again next month and next season.',
+                    specs: {
+                        running: { label: 'Run by', value: 'one person, one phone' },
+                        standings: { label: 'Standings', value: 'individual and team' },
+                        repeatable: { label: 'Repeatable', value: 'saved competition format' }
+                    },
+                    benefits: [
+                        'One person runs the competition from a phone — no extra staff, no trained marshal',
+                        'Scoring and standings are automatic, results are final the moment the last string ends',
+                        'Finished result graphics ready to publish — social media content from every event you host',
+                        'The same competition format repeats next season, individually or in teams'
+                    ],
+                    technicalDetails: 'Scoring and the run of the competition are handled by the app on the organiser\'s phone. The history of completed competitions stays on that device.'
+                },
                 gamesSoftware: {
                     title: 'Extensive Games and Features',
-                    shortDescription: 'Game types: single player and multiplayer, Shoot-off tournament matches, tournament mode, and split time measurements',
-                    detailedDescription: 'Aimora offers a wide selection of games for both single players and multiplayer mode, where two players can play simultaneously. The system includes Shoot-off tournament matches that can automate shooting competitions, eliminating the need for manual scoring. Additionally, the system offers split time measurements, allowing for detailed shooting session analysis to help with continuous skill improvement.',
+                    shortDescription: 'Game types: single player and multiplayer, the Shoot-Off competitive mode, and split time measurements',
+                    detailedDescription: 'Aimora offers a wide selection of games — both for single players and in multiplayer mode, where two players can play simultaneously. The competitive Shoot-Off is a separate mode of its own. The system also measures split times between hits, so you can analyse a shooting session in detail and improve your results over time.',
                     specs: {
                         freeTraining: { label: 'Free training', value: 'Single player' },
                         timeAttack: { label: 'Time attack', value: 'Single player' },
                         maxHits: { label: 'Max hits', value: 'Single player' },
                         hostage: { label: 'Hostage', value: 'Single/Multiplayer' },
                         duel: { label: 'Duel', value: 'Multiplayer mode' },
-                        shootOff: { label: 'Shoot-Off', value: 'Tournament mode' }
+                        shootOff: { label: 'Shoot-Off', value: 'Single/Multiplayer' }
                     },
                     benefits: [
                         'Great fun both solo and competing with other players',
@@ -519,7 +552,7 @@ export const translations = {
                         'Skill improvement through statistics and session analysis',
                         'Automatic scoring and rankings'
                     ],
-                    technicalDetails: 'The software uses advanced algorithms for hit analysis and reaction time measurement. The system automatically records every shot with millisecond precision, enabling accurate split time measurements. Tournament mode integrates with the ranking system, automatically generating results and classifications. ShootOff matches are fully automated, eliminating human error and ensuring fair conditions for all participants. The software offers detailed statistics, visualizations, and reports to help players identify areas for improvement.'
+                    technicalDetails: 'The software uses advanced algorithms for hit analysis and reaction time measurement. The system automatically records every shot with millisecond precision, enabling accurate split time measurements. The software offers detailed statistics, visualizations, and reports to help players identify areas for improvement.'
                 },
                 firmwareUpdates: {
                     title: 'Software Updates',
@@ -568,14 +601,11 @@ export const translations = {
             analysisProgressDesc: 'Detailed session statistics, training history and result comparison. Track your development and set new training goals',
             account: {
                 title: 'The app works without an account and without internet',
-                lead: 'You buy the targets, install the app, pair them and start shooting. No account to create, no sign-in, no mobile coverage needed at the range.',
-                freeTitle: 'Free, forever',
-                freeDesc: 'Free training, Time attack, Max hits and Hostage modes. Target pairing, your own LED colours and brightness, target firmware updates and a score after every game you play.',
+                lead: 'Take the targets out of the box, open the app and start shooting. You don\'t have to create an account, sign in, or have any signal at the range. The basic games work right away, you update the targets from your phone, and there is nothing to pay for inside the app. That part stays free, for good.',
                 orgTitle: 'Aimora account — for ranges, clubs and associations',
-                orgDesc: 'Tournament mode with a playlist of events, teams and exportable results. Competition templates you can reuse next season. Game settings and target names carried over to every phone at your facility. Plus the two-player modes: Duel and Shoot-Off.',
-                howTitle: 'How to get one',
-                howDesc: 'We set the account up when you order the hardware. Mention in the notes that you run a range or a club — we will prepare a quote matched to the number of targets.',
-                link: 'Ask about an account for your range →'
+                orgDesc: 'An account does a few things for you. You get the tournament module, so you can run a competition for the whole group. You get extra games, and we keep adding new ones. Your settings — target colours, names, tournament templates — are kept in the cloud, so a new phone doesn\'t mean setting everything up again.',
+                howDesc: 'We set the account up with your hardware order — just tell us how many targets you need.',
+                link: 'Ask about an account →'
             },
             downloadApp: 'Download Aimora App',
             version: 'Version',
@@ -610,7 +640,7 @@ export const translations = {
                 },
                 tournamentMode: {
                     title: 'Tournament Mode',
-                    description: 'A round-robin tournament layered over the existing game modes: every competitor plays through the same playlist of events, and points scale with the number of entrants (points = number of competitors − place + 1). You can optionally split competitors into teams of equal size, and if there is a tie on the podium the app offers a tie-breaker. Results are exported as ready-made graphics — a 1:1 final table and a 9:16 individual card'
+                    description: 'A competition for a group of shooters, run from a single phone — the app keeps the running order and does the scoring for you, individually and by team. Results export as ready-made graphics you can publish.'
                 },
                 detectorsCount: {
                     title: 'Increased Number of Connected Detectors',
@@ -627,7 +657,7 @@ export const translations = {
             titleHighlight: 'next level',
             title2: '?',
             subtitle: 'Transform your training into a professional experience full of excitement.',
-            pricePromo: '70 EUR / set or 4-set bundle for 235 EUR • free shipping',
+            pricePromo: '{price:single} / set or 4-set bundle for {price:bundle}',
             orderNow: 'Order Now',
             learnMore: 'Learn More',
             availableNow: 'Available Now',
@@ -662,7 +692,10 @@ export const translations = {
             quantityLabel: 'Number of Sets',
             quantityBundleLabel: 'Number of Bundles',
             quantityRequired: 'Enter quantity (min. 1)',
-            freeShipping: '🚚 Free shipping — dispatched within 24 h',
+            additionalTargetPrice: 'Each target beyond the set of 4',
+            freeShipping: '🚚 Dispatched within 24 h',
+            shippingNotIncluded: 'Shipping is not included yet — we\'ll add it to your quote by email.',
+            messageShippingHint: 'Let us know where you\'re ordering from, so we can price shipping.',
             nameLabel: 'Name',
             nameRequired: 'Name is required',
             namePlaceholder: 'Enter your name',

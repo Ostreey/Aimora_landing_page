@@ -19,7 +19,7 @@ export default function TermsPage() {
     return (
         <LegalLayout
             title="Aimora App Terms of Service"
-            updatedLabel="Effective from 30 August 2026"
+            updatedLabel="Effective from 23 September 2026"
             footer={<FooterLocalized locale="en" />}
         >
             <h2>1. Who provides the service</h2>
@@ -38,7 +38,7 @@ export default function TermsPage() {
             <h2>3. Free version and Premium</h2>
             <p>The app works <strong>without an account and free of charge</strong>. Without an account you get:</p>
             <ul>
-                <li>game modes: Easy Training, Time Attack, Max Hits and Hostage,</li>
+                <li>basic training and measurement modes for a single shooter,</li>
                 <li>
                     full hardware handling: connecting detectors, naming them, sensor calibration,
                     lighting settings and detector firmware updates,
@@ -50,13 +50,36 @@ export default function TermsPage() {
                     standings — including after Premium access has expired.
                 </li>
             </ul>
-            <p><strong>Premium</strong> additionally unlocks:</p>
-            <ul>
-                <li>the Duel and Shoot-Off game modes,</li>
-                <li>creating and running tournaments, including event templates,</li>
-                <li>exporting tournament results as an image,</li>
-                <li>cloud settings backup and moving settings between devices.</li>
-            </ul>
+            <p>
+                <strong>Premium</strong> covers features intended for competition and group work,
+                in particular multi-shooter game modes, creating and running tournaments including
+                event templates, exporting results, and cloud settings backup and transfer between
+                devices.
+            </p>
+            <p>
+                A <strong>detailed list of features</strong> in each version is shown in the app on
+                the <strong>Premium</strong> screen and, where Premium is purchased, in the offer or
+                order confirmation provided before the contract is concluded. The list provided
+                before the contract is concluded defines the scope of the service for that contract.
+            </p>
+            <p>
+                <strong>Changes of scope.</strong> The scope of Premium may change as the app
+                develops. For a user who has purchased Premium,{' '}
+                <strong>
+                    the scope of Premium features in force on the day access starts will not be
+                    narrowed for the whole paid period.
+                </strong>{' '}
+                Features added to Premium during that period are provided at no extra charge. Making
+                a Premium feature available to all users free of charge is not a narrowing of scope.
+            </p>
+            <p>
+                If, despite the above, a change materially and adversely affects your access to
+                Premium features, we will notify you at the e-mail address linked to your account
+                at least <strong>14 days</strong> in advance. A user who is a consumer, or a sole
+                trader treated as a consumer, may then terminate the contract within{' '}
+                <strong>30 days</strong> of being notified, with a refund of the fee for the unused
+                period.
+            </p>
 
             <h2>4. Your account</h2>
             <ol>
@@ -121,9 +144,8 @@ export default function TermsPage() {
             <h2>7. What happens when access expires</h2>
             <p>
                 When Premium expires you <strong>keep access to the history of completed tournaments
-                and their overall standings</strong>. Creating and running new tournaments, exporting
-                images and the Duel and Shoot-Off modes become unavailable. Data stored on your device
-                is not deleted.
+                and their overall standings</strong>. Features covered by Premium become unavailable.
+                Data stored on your device is not deleted.
             </p>
 
             <h2>8. Technical requirements</h2>

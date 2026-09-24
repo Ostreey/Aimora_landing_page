@@ -1,4 +1,8 @@
-# Aimora — Pełna dokumentacja produktu
+import { formatDualPrice } from '@/lib/pricing';
+
+export const dynamic = 'force-static';
+
+const body = `# Aimora — Pełna dokumentacja produktu
 
 > Bezprzewodowy system inteligentnych detektorów trafień z aplikacją mobilną do interaktywnego treningu strzeleckiego i grywalizacji.
 
@@ -123,10 +127,11 @@ Koszt zależy od czasu trwania, liczby celów i zakresu obsługi. Każde zapytan
 
 ## 7. Cennik
 
-- Zestaw (detektor trafień + moduł LED + 2 odbłyśniki): 299 PLN / 70 EUR
-- Pakiet 4 zestawów (4 detektory + 4 moduły LED + 16 odbłyśników): 999 PLN / 235 EUR
-- Pakiet odbłyśników (2 odbłyśniki zapasowe): 20 PLN / 5 EUR
-- Dostawa: darmowa, wysyłka w 24 h
+- Zestaw (detektor trafień + moduł LED + 2 odbłyśniki): ${formatDualPrice('single')}
+- Pakiet 4 zestawów (4 detektory + 4 moduły LED + 16 odbłyśników): ${formatDualPrice('bundle')}
+- Pakiet odbłyśników (2 odbłyśniki zapasowe): ${formatDualPrice('reflectors')}
+- Dostawa: w Polsce darmowa; wysyłka za granicę wyceniana indywidualnie w ofercie. Nadanie w 24 h.
+- Shipping: free within Poland; international shipping quoted individually. Dispatched within 24 h.
 - Wypożyczenie na event: wycena indywidualna
 - Dostępność: InStock (w sprzedaży)
 
@@ -151,3 +156,12 @@ Koszt zależy od czasu trwania, liczby celów i zakresu obsługi. Każde zapytan
 ## 10. Podsumowanie
 
 Aimora to bezprzewodowy system inteligentnych celów treningowych sterowanych z aplikacji mobilnej, który łączy własny hardware, firmware i UX w produkt do interaktywnego treningu, grywalizacji i budowy nowoczesnych scenariuszy strzeleckich. System jest kompatybilny z ASG, wiatrówkami i bronią palną, dostępny do zakupu i wypożyczenia na eventy.
+`;
+
+export function GET() {
+    return new Response(body, {
+        headers: {
+            'Content-Type': 'text/plain; charset=utf-8',
+        },
+    });
+}

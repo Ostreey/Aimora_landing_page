@@ -1,7 +1,8 @@
 'use client'
 
 import { trackCTAClick } from '@/lib/firebase'
-import { getTranslations, Locale } from '@/lib/translations'
+import { getTranslations, Locale, translations } from '@/lib/translations'
+import { Globe } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 import { ContactFormLocalized } from './ContactFormLocalized'
@@ -14,6 +15,7 @@ interface HeroLocalizedProps {
 export function HeroLocalized({ locale }: HeroLocalizedProps) {
     const [isContactFormOpen, setIsContactFormOpen] = useState(false);
     const t = getTranslations(locale);
+    const shippingBadge = locale === 'en' ? translations.en.hero.shippingBadge : null;
 
     return (
         <>
@@ -49,6 +51,12 @@ export function HeroLocalized({ locale }: HeroLocalizedProps) {
                         >
                             {t.hero.cta}
                         </RippleButton>
+                        {shippingBadge && (
+                            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 px-5 py-2 rounded-full font-inter text-base font-medium">
+                                <Globe className="w-4 h-4 text-[#00B2E3]" aria-hidden="true" />
+                                {shippingBadge}
+                            </span>
+                        )}
                     </div>
                 </div>
                 <div className="block md:hidden w-full px-4 -mt-12 pb-1 text-center relative z-30">
@@ -68,6 +76,12 @@ export function HeroLocalized({ locale }: HeroLocalizedProps) {
                         >
                             {t.hero.cta}
                         </RippleButton>
+                        {shippingBadge && (
+                            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 px-4 py-1.5 rounded-full font-inter text-sm font-medium">
+                                <Globe className="w-3.5 h-3.5 text-[#00B2E3]" aria-hidden="true" />
+                                {shippingBadge}
+                            </span>
+                        )}
                     </div>
                 </div>
             </section>
